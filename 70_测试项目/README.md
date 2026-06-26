@@ -5,14 +5,10 @@
 ## 当前项目
 
 ```text
-TP-001_CleanHarness_IR_Runtime/     # 引擎测试壳（空 IR）
-TP-002_修士死后都会变成秘境/        # 真实小说生产项目
+TP-001_CleanHarness_IR_Runtime/
 ```
 
-入口：
-
-- 测试壳：`TP-001_CleanHarness_IR_Runtime/00_项目说明.md`
-- 生产项目：`TP-002_修士死后都会变成秘境/00_项目说明.md`
+入口：`TP-001_CleanHarness_IR_Runtime/00_项目说明.md`
 
 ## 规则
 
