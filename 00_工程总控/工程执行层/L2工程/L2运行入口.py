@@ -25,7 +25,7 @@ from 能力规则加载 import L2能力规则路径, 加载能力规则
 from 路由规则加载 import 加载路由规则
 from 回流校验 import 校验
 from 退出码 import ExitCode
-from 运行状态 import 状态说明, 已完成, 已阻断, 结构无效
+from 运行状态 import 状态说明, 已完成, 已阻断, 结构无效, 部分阻断, 模型阻断
 from 标准加载器 import 候选试验模式, 生产模式
 from 生产资格 import 判定结果转标准字段, 要求生产资格
 from 工程异常 import 工程错误
@@ -123,14 +123,19 @@ def main() -> int:
     forms, generation_errors = 生成(items, judgements, rules)
     blocked = 检查(judgements)
     recheck_targets = [item for item in judgements if item.最终状态 == "派生复验"]
-    standard_errors: list[str] = list(generation_errors)
+    model_errors: list[str] = list(generation_errors)
     return_errors = 校验(forms)
+    standard_errors: list[str] = []
     if blocked and not forms:
         status = 已阻断
         exit_code = ExitCode.BLOCKED
-    elif standard_errors or return_errors:
+    elif return_errors:
         status = 结构无效
         exit_code = ExitCode.SCHEMA_INVALID
+        standard_errors = list(return_errors)
+    elif model_errors:
+        status = 部分阻断 if forms else 模型阻断
+        exit_code = ExitCode.BLOCKED
     else:
         status = 已完成
         exit_code = ExitCode.OK
@@ -150,6 +155,7 @@ def main() -> int:
         stage_run_id=stage_run_id or f"{pipeline_run_id}-L2" if pipeline_run_id else run_id,
         status=status,
         状态说明=状态说明[status],
+        extensions={"model_errors": model_errors},
     )
     md_path, json_path = 写报告(result, out_dir)
     standard_fields = 判定结果转标准字段(mode_decision)
@@ -163,6 +169,7 @@ def main() -> int:
                 "blocked_count": len(blocked),
                 "recheck_target_count": len(recheck_targets),
                 "standard_error_count": len(standard_errors),
+                "model_error_count": len(model_errors),
                 "return_error_count": len(return_errors),
                 "report_md": str(md_path),
                 "report_json": str(json_path),

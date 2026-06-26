@@ -16,6 +16,7 @@
   "abnormal_states": [
     "VALIDATION_FAILED",
     "BLOCKED",
+    "CANDIDATE_FAILED",
     "EXECUTION_FAILED",
     "ROLLED_BACK"
   ],
@@ -28,8 +29,16 @@
       "TASK_PLANNED"
     ],
     "TASK_PLANNED": [
+      "CANDIDATE_CREATED",
+      "CANDIDATE_FAILED",
       "TASK_PACKAGE_CREATED",
       "BLOCKED"
+    ],
+    "CANDIDATE_CREATED": [
+      "TASK_PACKAGE_CREATED"
+    ],
+    "CANDIDATE_FAILED": [
+      "TASK_PACKAGE_CREATED"
     ],
     "TASK_PACKAGE_CREATED": [
       "AWAITING_EXECUTOR"

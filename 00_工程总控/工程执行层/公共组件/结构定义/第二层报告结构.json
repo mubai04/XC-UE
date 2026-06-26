@@ -36,7 +36,9 @@
       "enum": [
         "COMPLETED",
         "BLOCKED",
-        "SCHEMA_INVALID"
+        "SCHEMA_INVALID",
+        "PARTIAL_BLOCKED",
+        "MODEL_BLOCKED"
       ]
     },
     "状态说明": {

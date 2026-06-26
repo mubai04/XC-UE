@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from DeepSeek客户端 import DeepSeekClient, DeepSeekResult, default_client
+from DeepSeek客户端 import DeepSeekClient, create_client
 from L3模型 import L3执行任务
 from 原子写入 import 原子写文本
 
@@ -110,7 +110,7 @@ def 生成候选正文(
             source = ch.read_text(encoding="utf-8")
             break
 
-    api = client or default_client()
+    api = client or create_client("L3")
     result = api.chat_json(_构建生成提示(task, ir_texts, source))
     if not result.ok or not result.parsed:
         return 候选生成结果(ok=False, error=result.error, error_kind=result.error_kind or "API_ERROR")

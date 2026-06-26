@@ -30,7 +30,7 @@ from IR输入映射校验 import 校验IR存在
 from ProjectHarness运行校验 import 发现Harness, 确保Harness目录
 from 协议规则加载 import L3协议规则路径, 加载协议规则
 from 退出码 import ExitCode
-from 运行状态 import 状态说明, 已完成, 已阻断, 结构无效, 等待执行器
+from 运行状态 import 状态说明, 已完成, 已阻断, 结构无效, 等待执行器, L3可执行L2状态, L3禁止L2状态, 候选失败
 from 标准加载器 import 候选试验模式, 生产模式
 from 生产资格 import 判定结果转标准字段, 要求生产资格
 from 工程异常 import 工程错误
@@ -111,8 +111,24 @@ def main() -> int:
         打印错误信封(exc, stage="L3", run_id=run_id, path=source)
         return int(exc.exit_code)
     l2_meta = validated_l2.data
-    if l2_meta.get("status") == "BLOCKED":
-        print(json.dumps({"error": "L2 报告已阻断，L3 不生成任务包", "path": str(source)}, ensure_ascii=False), file=sys.stderr)
+    l2_status = str(l2_meta.get("status", ""))
+    if l2_status in L3禁止L2状态:
+        print(
+            json.dumps(
+                {"error": f"L2 报告状态 {l2_status} 不允许进入 L3", "path": str(source), "status": l2_status},
+                ensure_ascii=False,
+            ),
+            file=sys.stderr,
+        )
+        return int(ExitCode.BLOCKED)
+    if l2_status not in L3可执行L2状态:
+        print(
+            json.dumps(
+                {"error": f"L2 报告状态 {l2_status} 未明确允许 L3 执行", "path": str(source), "status": l2_status},
+                ensure_ascii=False,
+            ),
+            file=sys.stderr,
+        )
         return int(ExitCode.BLOCKED)
 
     try:
@@ -160,9 +176,18 @@ def main() -> int:
     outputs = [生成输出(task, ROOT, harness_root=harness) for task in tasks]
     blocked = [task for task in tasks if task.校验问题]
     created_outputs = [output for output in outputs if output.task_package_created]
+    candidate_created_outputs = [output for output in outputs if output.candidate_created]
+    candidate_failed_outputs = [
+        output
+        for output in outputs
+        if output.执行状态 in {"CANDIDATE_FAILED", "BLOCKED"} and output.断点记录
+    ]
     if standard_errors:
         status = 结构无效
         exit_code = ExitCode.SCHEMA_INVALID
+    elif candidate_failed_outputs:
+        status = 候选失败
+        exit_code = ExitCode.BLOCKED
     elif blocked and not created_outputs:
         status = 已阻断
         exit_code = ExitCode.BLOCKED
@@ -194,6 +219,7 @@ def main() -> int:
         status=status,
         状态说明=状态说明[status],
         task_package_created=bool(created_outputs),
+        candidate_created=bool(candidate_created_outputs),
     )
     md_path, json_path = 写报告(result, out_dir)
     standard_fields = 判定结果转标准字段(mode_decision)
@@ -206,6 +232,8 @@ def main() -> int:
                 "task_count": len(tasks),
                 "blocked_count": len(blocked),
                 "task_package_created_count": len(created_outputs),
+                "candidate_created_count": len(candidate_created_outputs),
+                "candidate_failed_count": len(candidate_failed_outputs),
                 "standard_error_count": len(standard_errors),
                 "report_md": str(md_path),
                 "report_json": str(json_path),

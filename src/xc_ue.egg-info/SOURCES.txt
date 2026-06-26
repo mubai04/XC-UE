@@ -8,3 +8,9 @@ src/xc_ue.egg-info/dependency_links.txt
 src/xc_ue.egg-info/entry_points.txt
 src/xc_ue.egg-info/requires.txt
 src/xc_ue.egg-info/top_level.txt
+tests/test_deepseek_client.py
+tests/test_e2e_pipeline.py
+tests/test_l1_semantic_audit.py
+tests/test_l2_01_batch.py
+tests/test_l3_candidate.py
+tests/test_semantic_evidence.py

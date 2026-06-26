@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import uuid
 
-from DeepSeek客户端 import DeepSeekClient
+from DeepSeek客户端 import create_client
 from L2模型 import 失败输入, 证据
 from L2_01_叙事结构能力 import 安全生成修复单
 from L2_99_接口判断 import 判断
@@ -36,14 +36,15 @@ def test_l2_01_diagnosis_generates_fix_form(repo_root):
         "acceptance_criteria": ["读者能判断当前最重要问题只有一个"],
         "needs_reroute": False,
     }
-    client = DeepSeekClient(api_key="k", transport=make_mock_transport(payload))
-    form, warn = 安全生成修复单(_failure_item(seed), ability, client=client)
+    client = create_client("L2", api_key="k", transport=make_mock_transport(payload))
+    form, err = 安全生成修复单(_failure_item(seed), ability, client=client)
     assert form is not None
     assert "主行动线" in form.修复动作
-    assert warn is None
+    assert err is None
 
 
-def test_l2_01_api_failure_falls_back_without_clearing_batch(repo_root):
+def test_l2_01_api_failure_no_fallback_keeps_batch(repo_root, monkeypatch):
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     seed = uuid.uuid4().hex[:8]
     rules = 加载能力规则(repo_root / "00_工程总控" / "工程执行层" / "L2工程" / "ability_rules.json")
     items = [
@@ -63,5 +64,6 @@ def test_l2_01_api_failure_falls_back_without_clearing_batch(repo_root):
     ]
     judgements = [判断(item, rules) for item in items]
     forms, errors = 生成(items, judgements, rules)
-    assert len(forms) == 2
-    assert len(errors) >= 0
+    assert len(forms) == 1
+    assert forms[0].接收模块 == "L2-05"
+    assert any("L2-01" in e for e in errors)

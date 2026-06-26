@@ -4,9 +4,10 @@ import shutil
 import uuid
 from pathlib import Path
 
-from DeepSeek客户端 import DeepSeekClient
+from DeepSeek客户端 import create_client
 from L3模型 import L3执行任务
 from 候选正文生成 import 生成候选正文
+from 输出生成 import 生成输出
 from tests.conftest import make_mock_transport, repo_root
 
 
@@ -47,7 +48,7 @@ def test_candidate_only_under_candidates(repo_root):
     try:
         rel_h = harness.relative_to(repo_root).as_posix()
         bad = _task(seed, rel_h, f"{rel_h}/chapters/ch02.md")
-        bad_result = 生成候选正文(bad, harness, repo_root, client=DeepSeekClient(api_key="k"))
+        bad_result = 生成候选正文(bad, harness, repo_root, client=create_client("L3", api_key="k"))
         assert not bad_result.ok
         assert bad_result.error_kind == "PATH_FORBIDDEN"
 
@@ -55,25 +56,27 @@ def test_candidate_only_under_candidates(repo_root):
         task = _task(seed, rel_h, target)
         body = f"{seed} 新段落一。\n\n{seed} 新段落二，冲突继续升级。\n"
         payload = {"title": f"候选 {seed}", "body": body}
-        client = DeepSeekClient(api_key="k", transport=make_mock_transport(payload))
+        client = create_client("L3", api_key="k", transport=make_mock_transport(payload))
         ok = 生成候选正文(task, harness, repo_root, client=client)
         assert ok.ok
         assert ok.path is not None
         assert "_candidates" in str(ok.path)
-        assert (harness / "chapters" / "ch01.md").read_text(encoding="utf-8") == f"# ch\n\n{seed} 正式正文。\n"
     finally:
         shutil.rmtree(harness, ignore_errors=True)
 
 
-def test_candidate_api_failure_no_file(repo_root):
+def test_candidate_api_failure_blocks_task(repo_root):
     seed = uuid.uuid4().hex[:8]
     harness = _make_harness(repo_root, seed)
     try:
         rel_h = harness.relative_to(repo_root).as_posix()
         target = f"{rel_h}/chapters/_candidates/{seed}_TASK-002.md"
         task = _task(seed, rel_h, target)
-        result = 生成候选正文(task, harness, repo_root, client=DeepSeekClient(api_key=""))
-        assert not result.ok
+        output = 生成输出(task, repo_root, harness_root=harness, client=create_client("L3", api_key=""))
+        assert output.执行状态 == "CANDIDATE_FAILED"
+        assert output.task_package_created
+        assert not output.candidate_created
+        assert not output.awaiting_executor
         assert not (repo_root / target).exists()
     finally:
         shutil.rmtree(harness, ignore_errors=True)

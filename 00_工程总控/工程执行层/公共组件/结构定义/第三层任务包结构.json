@@ -42,7 +42,8 @@
         "AWAITING_EXECUTOR",
         "BLOCKED",
         "SCHEMA_INVALID",
-        "COMPLETED"
+        "COMPLETED",
+        "CANDIDATE_FAILED"
       ]
     },
     "状态说明": {

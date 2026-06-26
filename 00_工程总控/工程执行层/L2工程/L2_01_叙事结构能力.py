@@ -3,10 +3,10 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from DeepSeek客户端 import DeepSeekClient, DeepSeekResult, default_client
+from DeepSeek客户端 import DeepSeekClient, create_client
 from L2模型 import 失败输入, 修复单
 from 能力标准解析 import 能力规则
-from 能力修复单 import 生成标准修复单, 选择失败规则
+from 能力修复单 import 选择失败规则
 
 
 class 叙事结构诊断错误(Exception):
@@ -46,22 +46,18 @@ def _构建诊断提示(item: 失败输入, rules: 能力规则) -> list[dict[st
     ]
 
 
-def _fallback修复单(item: 失败输入, rules: 能力规则) -> 修复单:
-    return 生成标准修复单(item, rules)
-
-
 def _诊断转修复单(item: 失败输入, rules: 能力规则, parsed: dict[str, Any]) -> 修复单:
     rule = 选择失败规则(item, rules)
     actions = parsed.get("fix_actions") or []
     acceptance = parsed.get("acceptance_criteria") or []
     if not isinstance(actions, list) or not actions:
-        raise 叙事结构诊断错误("fix_actions 为空")
+        raise 叙事结构诊断错误("fix_actions 为空", kind="INVALID_JSON")
     if not isinstance(acceptance, list) or not acceptance:
-        raise 叙事结构诊断错误("acceptance_criteria 为空")
+        raise 叙事结构诊断错误("acceptance_criteria 为空", kind="INVALID_JSON")
     actions = [str(a).strip() for a in actions if str(a).strip()][:4]
     acceptance = [str(a).strip() for a in acceptance if str(a).strip()][:4]
     if not actions:
-        raise 叙事结构诊断错误("fix_actions 无有效项")
+        raise 叙事结构诊断错误("fix_actions 无有效项", kind="INVALID_JSON")
     root_cause = str(parsed.get("root_cause", "")).strip() or item.说明
     reroute = "是" if parsed.get("needs_reroute") else "否"
     return 修复单(
@@ -94,7 +90,7 @@ def 生成修复单(
     *,
     client: DeepSeekClient | None = None,
 ) -> 修复单:
-    api = client or default_client()
+    api = client or create_client("L2")
     result = api.chat_json(_构建诊断提示(item, rules))
     if not result.ok or not result.parsed:
         raise 叙事结构诊断错误(result.error or "API 失败", kind=result.error_kind or "API_ERROR")
@@ -115,7 +111,4 @@ def 安全生成修复单(
     try:
         return 生成修复单(item, rules, client=client), None
     except 叙事结构诊断错误 as exc:
-        try:
-            return _fallback修复单(item, rules), f"语义诊断失败，已降级规则修复单：{exc}"
-        except Exception as fallback_exc:
-            return None, f"叙事结构修复单生成失败：{exc}; 降级也失败：{fallback_exc}"
+        return None, f"L2-01 {exc.kind}: {exc}"

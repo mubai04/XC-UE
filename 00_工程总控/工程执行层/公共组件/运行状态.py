@@ -11,6 +11,12 @@ from __future__ import annotations
 结构无效 = "SCHEMA_INVALID"
 任务规划模式 = "TASK_PLANNING_ONLY"
 等待执行器 = "AWAITING_EXECUTOR"
+部分阻断 = "PARTIAL_BLOCKED"
+模型阻断 = "MODEL_BLOCKED"
+候选失败 = "CANDIDATE_FAILED"
+
+L3可执行L2状态 = frozenset({已完成})
+L3禁止L2状态 = frozenset({已阻断, 结构无效, 部分阻断, 模型阻断})
 
 
 状态说明 = {
@@ -24,4 +30,7 @@ from __future__ import annotations
     结构无效: "结构无效",
     任务规划模式: "任务规划模式",
     等待执行器: "等待执行器",
+    部分阻断: "部分修复单生成成功，但存在模型/API 阻断项",
+    模型阻断: "模型/API 阻断，未生成任何修复单",
+    候选失败: "候选正文生成失败",
 }

@@ -1,6 +1,5 @@
 ﻿from __future__ import annotations
 
-import json
 import re
 import sys
 from pathlib import Path
@@ -122,16 +121,25 @@ def 生成输出(
             待复验问题=task.输入材料,
             断点记录="；".join(task.校验问题),
             task_package_created=False,
+            candidate_created=False,
+            awaiting_executor=False,
         )
+
+    if task.执行状态 == "RECEIVED":
+        追加状态(task, "INPUT_VALIDATED", "任务输入校验通过", "L3工程.输出生成", task.来源文件)
+    if task.执行状态 == "INPUT_VALIDATED":
+        追加状态(task, "TASK_PLANNED", "任务规划完成", "L3工程.输出生成", task.来源文件)
 
     candidate_rel = ""
     candidate_error = ""
     prose_modified = False
+    candidate_created = False
     if _应生成候选(task) and harness_root is not None:
         gen = 生成候选正文(task, harness_root, root, client=client)
         if gen.ok and gen.path:
             candidate_rel = _相对或原路径(root, gen.path)
             prose_modified = True
+            candidate_created = True
             追加状态(task, "CANDIDATE_CREATED", "候选正文写入完成", "L3工程.候选正文生成", candidate_rel)
         else:
             candidate_error = f"{gen.error_kind}: {gen.error}"
@@ -141,11 +149,17 @@ def 生成输出(
     after = _candidate_text(task, _ir_summaries(root, task), note)
     原子写文本(target, after)
     追加状态(task, "TASK_PACKAGE_CREATED", "任务包写入完成", "L3工程.输出生成", task_rel)
-    追加状态(task, "AWAITING_EXECUTOR", "等待人工或后续执行器", "L3工程.输出生成", task_rel)
+    if candidate_error:
+        exec_status = "CANDIDATE_FAILED"
+        awaiting = False
+    else:
+        追加状态(task, "AWAITING_EXECUTOR", "等待人工或后续执行器", "L3工程.输出生成", task_rel)
+        exec_status = "AWAITING_EXECUTOR"
+        awaiting = True
 
     return L3执行输出(
         执行编号=task.执行编号,
-        执行状态="AWAITING_EXECUTOR" if not candidate_error else "AWAITING_EXECUTOR",
+        执行状态=exec_status,
         实际读取文件=[task.来源文件, *task.IR输入],
         任务包文件=task_rel,
         分项任务文件=task_rel,
@@ -156,8 +170,9 @@ def 生成输出(
         复验入口=task.回流验收位置,
         待复验问题=task.输入材料,
         断点记录=candidate_error,
-        execution_mode="CANDIDATE_GENERATION" if prose_modified else "TASK_PLANNING_ONLY",
+        execution_mode="CANDIDATE_GENERATION" if candidate_created else "TASK_PLANNING_ONLY",
         prose_modified=prose_modified,
         task_package_created=True,
-        awaiting_executor=True,
+        candidate_created=candidate_created,
+        awaiting_executor=awaiting,
     )

@@ -24,10 +24,15 @@ def repo_root() -> Path:
     return ROOT
 
 
-def make_mock_transport(response_body: dict, *, status: int = 200) -> callable:
+def make_mock_transport(response_body: dict, *, status: int = 200, finish_reason: str = "stop") -> callable:
     def transport(url: str, headers: dict[str, str], body: bytes, timeout: float) -> tuple[int, str]:
         envelope = {
-            "choices": [{"message": {"content": json.dumps(response_body, ensure_ascii=False)}}],
+            "choices": [
+                {
+                    "message": {"content": json.dumps(response_body, ensure_ascii=False)},
+                    "finish_reason": finish_reason,
+                }
+            ],
         }
         return status, json.dumps(envelope, ensure_ascii=False)
 
@@ -60,3 +65,25 @@ def sample_chapter_text(seed: str) -> str:
         f"段落八：远处钟声敲响，意味着审查即将开始，而他还没有准备好面对真正的提问者。",
     ]
     return f"# 测试章节 {seed}\n\n" + "\n\n".join(blocks) + "\n"
+
+
+def semantic_audit_payload(quote: str, *, overall: str = "REVIEW") -> dict:
+    dims = ("因果", "动机", "冲突", "读者收益", "认知成本", "章末追读")
+    dimensions = []
+    for name in dims:
+        if overall == "PASS":
+            verdict = "PASS"
+        elif overall == "FAIL":
+            verdict = "FAIL"
+        else:
+            verdict = "REVIEW" if name != "因果" else "PASS"
+        dimensions.append(
+            {
+                "name": name,
+                "verdict": verdict,
+                "score": 3,
+                "explanation": f"{name} 信号",
+                "evidence_quotes": [{"paragraph": 1, "quote": quote}],
+            }
+        )
+    return {"overall": overall, "dimensions": dimensions}

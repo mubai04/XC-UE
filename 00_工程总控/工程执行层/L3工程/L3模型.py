@@ -11,7 +11,9 @@ from 退出码 import ExitCode
 默认允许状态跳转 = {
     "RECEIVED": {"INPUT_VALIDATED", "VALIDATION_FAILED"},
     "INPUT_VALIDATED": {"TASK_PLANNED"},
-    "TASK_PLANNED": {"TASK_PACKAGE_CREATED", "BLOCKED"},
+    "TASK_PLANNED": {"CANDIDATE_CREATED", "CANDIDATE_FAILED", "TASK_PACKAGE_CREATED", "BLOCKED"},
+    "CANDIDATE_CREATED": {"TASK_PACKAGE_CREATED"},
+    "CANDIDATE_FAILED": {"TASK_PACKAGE_CREATED"},
     "TASK_PACKAGE_CREATED": {"AWAITING_EXECUTOR"},
     "AWAITING_EXECUTOR": {"EXECUTION_STARTED"},
     "EXECUTION_STARTED": {"EXECUTION_FAILED", "EXECUTION_COMPLETED"},
@@ -127,6 +129,7 @@ class L3执行输出:
     execution_mode: str = "TASK_PLANNING_ONLY"
     prose_modified: bool = False
     task_package_created: bool = False
+    candidate_created: bool = False
     awaiting_executor: bool = True
 
 
@@ -150,6 +153,7 @@ class L3报告:
     execution_mode: str = "TASK_PLANNING_ONLY"
     prose_modified: bool = False
     task_package_created: bool = False
+    candidate_created: bool = False
     awaiting_executor: bool = True
     input_artifacts: list[dict[str, Any]] = field(default_factory=list)
     output_artifacts: list[dict[str, Any]] = field(default_factory=list)
