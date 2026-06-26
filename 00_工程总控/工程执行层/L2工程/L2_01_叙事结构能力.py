@@ -28,7 +28,8 @@ def _构建诊断提示(
     matched = 选择失败规则(item, rules)
     corpus, payload = 诊断输入摘要(item, rules, matched, chapter_path, repo_root=repo_root)
     schema = {
-        "root_cause": "必须基于 chapter_context 与 failure_evidence 的一句话根因，并引用 evidence_quotes",
+        "root_cause": "基于 chapter_context 与 failure_evidence 的一句话根因（可概括，不必逐字包含摘句）",
+        "root_cause_evidence_indices": [0],
         "fix_actions": ["可执行修复动作1", "可执行修复动作2"],
         "acceptance_criteria": ["验收标准1"],
         "evidence_quotes": [{"paragraph": 1, "quote": "必须逐字存在于 chapter_context 或 failure_evidence"}],
@@ -41,6 +42,7 @@ def _构建诊断提示(
                 "你是 L2-01 叙事结构诊断器。只输出 JSON。"
                 "根因必须来自输入中的 chapter_context 与 failure_evidence，不得只重复 failure_type 或 repair_direction。"
                 "evidence_quotes 必须非空，且每条 quote 必须能在输入正文中逐字找到。"
+                "root_cause_evidence_indices 必须列出 root_cause 所依据的 evidence_quotes 下标（从 0 开始）。"
                 "fix_actions 与 acceptance_criteria 必须具体可执行。"
             ),
         },
@@ -119,7 +121,13 @@ def 生成修复单(
     if not result.ok or not result.parsed:
         raise 叙事结构诊断错误(result.error or "API 失败", kind=result.error_kind or "API_ERROR")
 
-    validated_quotes, errors = 校验诊断响应(result.parsed, corpus)
+    validated_quotes, errors = 校验诊断响应(
+        result.parsed,
+        corpus,
+        failure_type=item.失败类型,
+        description=item.说明,
+        repair_direction=item.修复方向,
+    )
     if errors:
         raise 叙事结构诊断错误("；".join(errors[:5]), kind="EVIDENCE_INVALID")
 

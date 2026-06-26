@@ -123,6 +123,7 @@ def _l2_payload(quote: str, *, root_cause: str | None = None) -> dict:
     cause = root_cause or f"{quote} 导致结构链无法识别"
     return {
         "root_cause": cause,
+        "root_cause_evidence_indices": [0],
         "fix_actions": ["只保留一条主行动线", "合并冗余段落"],
         "acceptance_criteria": ["读者能判断当前最重要问题只有一个"],
         "evidence_quotes": [{"paragraph": 1, "quote": quote}],

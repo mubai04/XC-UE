@@ -9,7 +9,14 @@ def 摘句在语料中(quote: str, corpus: str) -> bool:
     return quote in corpus
 
 
-def 校验诊断响应(parsed: dict[str, Any], corpus: str) -> tuple[list[dict[str, Any]], list[str]]:
+def 校验诊断响应(
+    parsed: dict[str, Any],
+    corpus: str,
+    *,
+    failure_type: str = "",
+    description: str = "",
+    repair_direction: str = "",
+) -> tuple[list[dict[str, Any]], list[str]]:
     errors: list[str] = []
 
     root_cause = parsed.get("root_cause")
@@ -17,6 +24,9 @@ def 校验诊断响应(parsed: dict[str, Any], corpus: str) -> tuple[list[dict[s
         errors.append("root_cause 必须是非空字符串")
     else:
         root_cause = root_cause.strip()
+        forbidden = {value.strip() for value in (failure_type, description, repair_direction) if value and value.strip()}
+        if root_cause in forbidden:
+            errors.append("root_cause 不得仅等于 failure_type、description 或 repair_direction")
 
     fix_actions = parsed.get("fix_actions")
     if not isinstance(fix_actions, list) or not fix_actions:
@@ -65,7 +75,28 @@ def 校验诊断响应(parsed: dict[str, Any], corpus: str) -> tuple[list[dict[s
     if errors:
         return validated, errors
 
-    if isinstance(root_cause, str) and validated and not any(entry["quote"] in root_cause for entry in validated):
-        errors.append("root_cause 必须引用至少一条已校验 evidence_quotes 摘句")
+    indices_raw = parsed.get("root_cause_evidence_indices")
+    if not isinstance(indices_raw, list) or not indices_raw:
+        errors.append("root_cause_evidence_indices 必须是非空整数数组")
+        return validated, errors
+
+    indices: list[int] = []
+    for idx, value in enumerate(indices_raw):
+        if isinstance(value, bool) or not isinstance(value, int):
+            errors.append(f"root_cause_evidence_indices[{idx}] 必须是整数")
+            continue
+        if value < 0:
+            errors.append(f"root_cause_evidence_indices[{idx}] 不能为负数")
+            continue
+        if value >= len(validated):
+            errors.append(f"root_cause_evidence_indices[{idx}] 越界")
+            continue
+        indices.append(value)
+
+    if len(indices) != len(indices_raw):
+        return validated, errors
+
+    if len(set(indices)) != len(indices):
+        errors.append("root_cause_evidence_indices 不允许重复索引")
 
     return validated, errors
