@@ -147,6 +147,27 @@
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
     },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "段落",
+        "摘句"
+      ],
+      "properties": {
+        "段落": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "摘句": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
     "interface_judgement": {
       "type": "object",
       "additionalProperties": false,
@@ -318,6 +339,13 @@
         },
         "rule_version": {
           "$ref": "#/$defs/short_text"
+        },
+        "诊断证据": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
         }
       }
     },

@@ -130,10 +130,11 @@ class DeepSeekClient:
         payload: dict[str, Any] = {
             "model": self._model,
             "messages": messages,
-            "temperature": temperature,
             "response_format": {"type": "json_object"},
             **_stage_payload_options(self._stage),
         }
+        if self._stage == "L1":
+            payload["temperature"] = temperature
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         headers = {
             "Content-Type": "application/json",

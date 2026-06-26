@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 from pathlib import Path
 import sys
 
@@ -51,12 +52,14 @@ def 最新L1失败包(root: Path) -> Path:
     raise RuntimeError("P0 后生产路径禁止按修改时间读取最新 L1 失败包；请显式传入 --failure-packet。")
 
 
-def 读失败包(path: Path) -> list[失败输入]:
-    raw = json.loads(读文本(path))
-    if isinstance(raw, dict):
-        raw = raw.get("items", [])
+@dataclass
+class 失败包元数据:
+    chapter_path: str = ""
+
+
+def _解析失败项(raw_items: list) -> list[失败输入]:
     items: list[失败输入] = []
-    for item in raw:
+    for item in raw_items:
         evidence = [证据(e.get("段落"), e.get("摘句", "")) for e in item.get("证据", [])]
         items.append(
             失败输入(
@@ -72,4 +75,19 @@ def 读失败包(path: Path) -> list[失败输入]:
                 修复方向=item.get("修复方向", ""),
             )
         )
+    return items
+
+
+def 读失败包完整(path: Path) -> tuple[list[失败输入], 失败包元数据]:
+    raw = json.loads(读文本(path))
+    if isinstance(raw, list):
+        return _解析失败项(raw), 失败包元数据()
+    items = _解析失败项(raw.get("items", []))
+    extensions = raw.get("extensions") or {}
+    chapter_path = str(extensions.get("chapter_path", "")).strip()
+    return items, 失败包元数据(chapter_path=chapter_path)
+
+
+def 读失败包(path: Path) -> list[失败输入]:
+    items, _meta = 读失败包完整(path)
     return items

@@ -17,7 +17,7 @@ if str(公共组件) not in sys.path:
 
 from L2报告 import 写报告, 拒绝覆盖既有报告
 from L2模型 import L2报告
-from L2读取 import L2路由规则路径, 读失败包
+from L2读取 import L2路由规则路径, 读失败包完整
 from L2_99_接口判断 import 判断
 from 修复单生成 import 生成
 from L2禁止项检查 import 检查
@@ -118,9 +118,16 @@ def main() -> int:
     except 工程错误 as exc:
         打印错误信封(exc, stage="L2", run_id=run_id, path=locals().get("ability_rules_path", ""))
         return int(exc.exit_code)
-    items = 读失败包(packet_path)
+    items, packet_meta = 读失败包完整(packet_path)
+    chapter_path = packet_meta.chapter_path
     judgements = [判断(item, rules) for item in items]
-    forms, generation_errors = 生成(items, judgements, rules)
+    forms, generation_errors = 生成(
+        items,
+        judgements,
+        rules,
+        chapter_path=chapter_path,
+        repo_root=ROOT,
+    )
     blocked = 检查(judgements)
     recheck_targets = [item for item in judgements if item.最终状态 == "派生复验"]
     model_errors: list[str] = list(generation_errors)

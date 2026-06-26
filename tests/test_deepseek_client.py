@@ -56,6 +56,8 @@ def test_l1_thinking_disabled_l3_enabled(monkeypatch):
     assert captured[0]["thinking"] == {"type": "disabled"}
     assert captured[1]["thinking"] == {"type": "enabled"}
     assert captured[1]["reasoning_effort"] == "high"
+    assert "temperature" in captured[0]
+    assert "temperature" not in captured[1]
 
 
 def test_http_error():

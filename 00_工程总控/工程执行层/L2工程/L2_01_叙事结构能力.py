@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any
 
 from DeepSeek客户端 import DeepSeekClient, create_client
-from L2模型 import 失败输入, 修复单
+from L2_01_诊断上下文 import 格式化诊断输入, 诊断输入摘要
+from L2_01_证据校验 import 校验诊断响应
+from L2模型 import 失败输入, 修复单, 证据
 from 能力标准解析 import 能力规则
 from 能力修复单 import 选择失败规则
 
@@ -15,51 +18,62 @@ class 叙事结构诊断错误(Exception):
         self.kind = kind
 
 
-def _构建诊断提示(item: 失败输入, rules: 能力规则) -> list[dict[str, str]]:
-    rule = 选择失败规则(item, rules)
-    context = {
-        "failure_type": item.失败类型,
-        "description": item.说明,
-        "repair_direction": item.修复方向,
-        "matched_rule": rule.编号 if rule else "",
-        "ability_scope": rules.输入关键词[:3] if rules.输入关键词 else [],
-    }
+def _构建诊断提示(
+    item: 失败输入,
+    rules: 能力规则,
+    *,
+    chapter_path: Path,
+    repo_root: Path | None = None,
+) -> tuple[str, list[dict[str, str]]]:
+    matched = 选择失败规则(item, rules)
+    corpus, payload = 诊断输入摘要(item, rules, matched, chapter_path, repo_root=repo_root)
     schema = {
-        "root_cause": "一句话根因",
+        "root_cause": "必须基于 chapter_context 与 failure_evidence 的一句话根因，并引用 evidence_quotes",
         "fix_actions": ["可执行修复动作1", "可执行修复动作2"],
         "acceptance_criteria": ["验收标准1"],
-        "evidence_quotes": [{"quote": "若引用失败包说明中的原文片段则必须逐字匹配"}],
+        "evidence_quotes": [{"paragraph": 1, "quote": "必须逐字存在于 chapter_context 或 failure_evidence"}],
         "needs_reroute": False,
     }
-    return [
+    messages = [
         {
             "role": "system",
-            "content": "你是 L2-01 叙事结构诊断器。只输出 JSON。修复动作必须可执行且具体。",
+            "content": (
+                "你是 L2-01 叙事结构诊断器。只输出 JSON。"
+                "根因必须来自输入中的 chapter_context 与 failure_evidence，不得只重复 failure_type 或 repair_direction。"
+                "evidence_quotes 必须非空，且每条 quote 必须能在输入正文中逐字找到。"
+                "fix_actions 与 acceptance_criteria 必须具体可执行。"
+            ),
         },
         {
             "role": "user",
             "content": (
-                f"失败包上下文：\n{json.dumps(context, ensure_ascii=False)}\n\n"
-                f"输出 JSON：\n{json.dumps(schema, ensure_ascii=False)}"
+                "诊断输入：\n"
+                f"{格式化诊断输入(payload)}\n\n"
+                f"输出 JSON 结构：\n{json.dumps(schema, ensure_ascii=False)}"
             ),
         },
     ]
+    return corpus, messages
 
 
-def _诊断转修复单(item: 失败输入, rules: 能力规则, parsed: dict[str, Any]) -> 修复单:
+def _诊断转修复单(
+    item: 失败输入,
+    rules: 能力规则,
+    parsed: dict[str, Any],
+    validated_quotes: list[dict[str, Any]],
+) -> 修复单:
     rule = 选择失败规则(item, rules)
-    actions = parsed.get("fix_actions") or []
-    acceptance = parsed.get("acceptance_criteria") or []
-    if not isinstance(actions, list) or not actions:
-        raise 叙事结构诊断错误("fix_actions 为空", kind="INVALID_JSON")
-    if not isinstance(acceptance, list) or not acceptance:
-        raise 叙事结构诊断错误("acceptance_criteria 为空", kind="INVALID_JSON")
-    actions = [str(a).strip() for a in actions if str(a).strip()][:4]
-    acceptance = [str(a).strip() for a in acceptance if str(a).strip()][:4]
-    if not actions:
-        raise 叙事结构诊断错误("fix_actions 无有效项", kind="INVALID_JSON")
-    root_cause = str(parsed.get("root_cause", "")).strip() or item.说明
+    actions = [str(a).strip() for a in parsed.get("fix_actions") or [] if str(a).strip()][:4]
+    acceptance = [str(a).strip() for a in parsed.get("acceptance_criteria") or [] if str(a).strip()][:4]
+    root_cause = str(parsed.get("root_cause", "")).strip()
     reroute = "是" if parsed.get("needs_reroute") else "否"
+    diagnostic_evidence = [
+        证据(
+            int(entry["paragraph"]) if isinstance(entry.get("paragraph"), int) else None,
+            str(entry["quote"]),
+        )
+        for entry in validated_quotes
+    ]
     return 修复单(
         修复单类型="L2 叙事结构修复单",
         来源闸门=item.来源闸门,
@@ -81,6 +95,7 @@ def _诊断转修复单(item: 失败输入, rules: 能力规则, parsed: dict[st
         标准验收=acceptance,
         rule_id=f"{rules.模块}:{rule.编号}" if rule else f"{rules.模块}:semantic",
         rule_version=rule.规则版本 if rule else rules.规则版本,
+        诊断证据=diagnostic_evidence,
     )
 
 
@@ -88,14 +103,28 @@ def 生成修复单(
     item: 失败输入,
     rules: 能力规则,
     *,
+    chapter_path: Path | None = None,
+    repo_root: Path | None = None,
     client: DeepSeekClient | None = None,
 ) -> 修复单:
+    if chapter_path is None:
+        raise 叙事结构诊断错误("缺少章节路径，无法读取正文上下文", kind="CHAPTER_PATH_MISSING")
+    resolved = chapter_path if chapter_path.is_absolute() else (repo_root / chapter_path if repo_root else chapter_path)
+    if not Path(resolved).exists():
+        raise 叙事结构诊断错误(f"章节正文不存在：{resolved}", kind="CHAPTER_PATH_MISSING")
+
     api = client or create_client("L2")
-    result = api.chat_json(_构建诊断提示(item, rules))
+    corpus, messages = _构建诊断提示(item, rules, chapter_path=Path(resolved), repo_root=repo_root)
+    result = api.chat_json(messages)
     if not result.ok or not result.parsed:
         raise 叙事结构诊断错误(result.error or "API 失败", kind=result.error_kind or "API_ERROR")
+
+    validated_quotes, errors = 校验诊断响应(result.parsed, corpus)
+    if errors:
+        raise 叙事结构诊断错误("；".join(errors[:5]), kind="EVIDENCE_INVALID")
+
     try:
-        return _诊断转修复单(item, rules, result.parsed)
+        return _诊断转修复单(item, rules, result.parsed, validated_quotes)
     except 叙事结构诊断错误:
         raise
     except Exception as exc:
@@ -106,9 +135,20 @@ def 安全生成修复单(
     item: 失败输入,
     rules: 能力规则,
     *,
+    chapter_path: Path | None = None,
+    repo_root: Path | None = None,
     client: DeepSeekClient | None = None,
 ) -> tuple[修复单 | None, str | None]:
     try:
-        return 生成修复单(item, rules, client=client), None
+        return (
+            生成修复单(
+                item,
+                rules,
+                chapter_path=chapter_path,
+                repo_root=repo_root,
+                client=client,
+            ),
+            None,
+        )
     except 叙事结构诊断错误 as exc:
         return None, f"L2-01 {exc.kind}: {exc}"

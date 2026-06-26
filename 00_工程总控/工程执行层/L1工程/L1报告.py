@@ -80,6 +80,9 @@ def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Pa
         "status": result.status,
         "failure_count": len(result.失败包),
         "items": [item.__dict__ | {"证据": [e.__dict__ for e in item.证据]} for item in result.失败包],
+        "extensions": {
+            "chapter_path": result.章节路径,
+        },
     }
     原子写文本(
         packet_path,

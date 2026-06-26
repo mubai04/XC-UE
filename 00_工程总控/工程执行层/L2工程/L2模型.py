@@ -66,6 +66,7 @@ class 修复单:
     标准验收: list[str] = field(default_factory=list)
     rule_id: str = ""
     rule_version: str = ""
+    诊断证据: list[证据] = field(default_factory=list)
 
 
 @dataclass
