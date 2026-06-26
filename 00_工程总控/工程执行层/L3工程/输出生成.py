@@ -6,12 +6,15 @@ import sys
 from pathlib import Path
 
 from L3模型 import L3执行任务, L3执行输出, 追加状态
+from 候选正文生成 import 生成候选正文
 
 公共组件 = Path(__file__).resolve().parents[1] / "公共组件"
 if str(公共组件) not in sys.path:
     sys.path.insert(0, str(公共组件))
 
 from 原子写入 import 原子写文本
+from DeepSeek客户端 import DeepSeekClient
+
 
 def _abs(root: Path, rel: str) -> Path:
     return (root / rel).resolve()
@@ -23,12 +26,13 @@ def _read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def _candidate_text(task: L3执行任务, ir_summaries: list[str]) -> str:
+def _candidate_text(task: L3执行任务, ir_summaries: list[str], candidate_note: str = "") -> str:
+    note = candidate_note or "本文件由 L3 工程生成，只承载正文修复任务说明；候选正文见同目录候选文件。"
     return "\n".join(
         [
             f"# L3 正文修复任务包 {task.执行编号}",
             "",
-            "> 本文件由 L3 工程生成，只承载正文修复任务说明；不生成候选正文，不自动覆盖正式正文。",
+            f"> {note}",
             "",
             f"- 来源层：{task.来源层}",
             f"- 任务类型：{task.任务类型}",
@@ -51,7 +55,7 @@ def _candidate_text(task: L3执行任务, ir_summaries: list[str]) -> str:
             "",
             "- 不修改正式正文。",
             "- 不修改 L0-L3 / L1.5 真源。",
-            "- 本文件等待人工或后续执行器处理，不代表正文已修复。",
+            "- 候选正文仅写入 chapters/_candidates/。",
             "",
         ]
     )
@@ -85,7 +89,20 @@ def _相对或原路径(root: Path, path: Path) -> str:
         return str(path)
 
 
-def 生成输出(task: L3执行任务, root: Path) -> L3执行输出:
+def _应生成候选(task: L3执行任务) -> bool:
+    if task.校验问题:
+        return False
+    keywords = ("正文", "修复", "扩写", "改写")
+    return any(k in task.任务类型 for k in keywords)
+
+
+def 生成输出(
+    task: L3执行任务,
+    root: Path,
+    *,
+    harness_root: Path | None = None,
+    client: DeepSeekClient | None = None,
+) -> L3执行输出:
     blocked = bool(task.校验问题)
     task_dir = _任务目录(root, task)
     target = task_dir / f"{_安全文件名(task.执行编号)}.md"
@@ -107,23 +124,40 @@ def 生成输出(task: L3执行任务, root: Path) -> L3执行输出:
             task_package_created=False,
         )
 
-    after = _candidate_text(task, _ir_summaries(root, task))
+    candidate_rel = ""
+    candidate_error = ""
+    prose_modified = False
+    if _应生成候选(task) and harness_root is not None:
+        gen = 生成候选正文(task, harness_root, root, client=client)
+        if gen.ok and gen.path:
+            candidate_rel = _相对或原路径(root, gen.path)
+            prose_modified = True
+            追加状态(task, "CANDIDATE_CREATED", "候选正文写入完成", "L3工程.候选正文生成", candidate_rel)
+        else:
+            candidate_error = f"{gen.error_kind}: {gen.error}"
+            追加状态(task, "CANDIDATE_FAILED", candidate_error, "L3工程.候选正文生成", task.目标文件)
+
+    note = f"候选正文：{candidate_rel}" if candidate_rel else (candidate_error or "")
+    after = _candidate_text(task, _ir_summaries(root, task), note)
     原子写文本(target, after)
     追加状态(task, "TASK_PACKAGE_CREATED", "任务包写入完成", "L3工程.输出生成", task_rel)
     追加状态(task, "AWAITING_EXECUTOR", "等待人工或后续执行器", "L3工程.输出生成", task_rel)
 
     return L3执行输出(
         执行编号=task.执行编号,
-        执行状态="AWAITING_EXECUTOR",
+        执行状态="AWAITING_EXECUTOR" if not candidate_error else "AWAITING_EXECUTOR",
         实际读取文件=[task.来源文件, *task.IR输入],
         任务包文件=task_rel,
         分项任务文件=task_rel,
         任务依赖=task.IR输入,
         约束=task.禁止修改文件,
-        目标文件引用=task.目标文件,
+        目标文件引用=candidate_rel or task.目标文件,
         修复产物=task.修复产物要求,
         复验入口=task.回流验收位置,
         待复验问题=task.输入材料,
-        断点记录="",
+        断点记录=candidate_error,
+        execution_mode="CANDIDATE_GENERATION" if prose_modified else "TASK_PLANNING_ONLY",
+        prose_modified=prose_modified,
         task_package_created=True,
+        awaiting_executor=True,
     )

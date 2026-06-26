@@ -157,7 +157,7 @@ def main() -> int:
             追加状态(task, "INPUT_VALIDATED", "任务输入校验通过", "L3工程.运行", str(source))
             追加状态(task, "TASK_PLANNED", "任务规划完成", "L3工程.运行", str(source))
 
-    outputs = [生成输出(task, ROOT) for task in tasks]
+    outputs = [生成输出(task, ROOT, harness_root=harness) for task in tasks]
     blocked = [task for task in tasks if task.校验问题]
     created_outputs = [output for output in outputs if output.task_package_created]
     if standard_errors:
@@ -173,7 +173,7 @@ def main() -> int:
         run_id=run_id,
         输入文件=str(source),
         输入修复单数量=len(forms),
-        方法声明=f"L3工程仅生成受约束的正文修复任务包；不修改正文、不生成候选正文、不声明回填完成。Project Harness：{harness}",
+        方法声明=f"L3工程生成受约束任务包与 DeepSeek 候选正文；候选正文仅写入 chapters/_candidates/，不修改正式正文。Project Harness：{harness}",
         标准校验问题=standard_errors,
         协议规则摘要={
             "状态机步骤数": len(rules.状态机),

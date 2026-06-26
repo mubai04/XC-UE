@@ -31,6 +31,7 @@ import L1_00_闸门接口校验
 import L1_01_内部创作检测
 import L1_02_读者投入检测
 import L1_03_发布锁检测
+import L1_语义审计
 from 退出码 import ExitCode
 from 工程异常 import 工程错误
 from 运行状态 import 状态说明, 机器初筛通过, 机器初筛退回, 需要人工复核
@@ -168,7 +169,9 @@ def main() -> int:
     gates = [l101, l102, l103]
     l100 = L1_00_闸门接口校验.检测(gates)
     guard_items = L1_前置质量护栏.检测(paragraphs)
+    semantic = L1_语义审计.审计(paragraphs, title, body)
     l100.检测项.extend(guard_items)
+    l100.检测项.extend(semantic.检测项列表)
     if guard_items:
         l100.失败类型.extend([item.失败类型 for item in guard_items if item.失败类型])
         l100.失败位置.extend([e for item in guard_items for e in item.证据])
@@ -179,6 +182,17 @@ def main() -> int:
         else:
             l100.判断结果 = "HUMAN_REVIEW_REQUIRED"
         l100.最终状态 = l100.判断结果
+    semantic_failures = [item for item in semantic.检测项列表 if item.严重级别 in {"error", "warning"}]
+    if semantic_failures:
+        l100.失败类型.extend([item.失败类型 for item in semantic_failures if item.失败类型])
+        l100.失败位置.extend([e for item in semantic_failures for e in item.证据])
+        l100.是否进入L15 = "是"
+        if any(item.严重级别 == "error" for item in semantic_failures):
+            l100.判断结果 = "SCREENING_REJECT"
+            l100.最终状态 = "SCREENING_REJECT"
+        elif l100.判断结果 not in {"SCREENING_REJECT"}:
+            l100.判断结果 = "HUMAN_REVIEW_REQUIRED"
+            l100.最终状态 = "HUMAN_REVIEW_REQUIRED"
     gates = [l100, *gates]
     failure_packet = 生成失败包(gates)
     routes = 生成路由建议(failure_packet, rules.L15路由)
@@ -201,7 +215,7 @@ def main() -> int:
         章节标题=title,
         当前字数=word_count,
         段落数=len(paragraphs),
-        方法声明="自动检测只做未验证的启发式风险筛查：按结构化 L1 闸门规则提取可证据化的正文风险；Markdown 仅作解释材料，不能冒充最终文学判断、读者投入判断或发布授权。",
+        方法声明="自动检测结合结构化 L1 闸门规则与 DeepSeek 语义审计：启发式筛查保留；语义核心（因果、动机、冲突、读者收益、认知成本、章末追读）由 API 完成；API 不可用或证据无效时不得 PASS。",
         闸门结果=gates,
         失败包=failure_packet,
         路由建议=routes,

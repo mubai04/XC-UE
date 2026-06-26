@@ -26,6 +26,7 @@ include = ["xc_ue*"]
 [tool.pytest.ini_options]
 python_files = ["测试*.py", "test_*.py", "*_test.py"]
 python_functions = ["测试*", "test_*"]
+testpaths = ["tests"]
 markers = [
   "unit: fast isolated unit tests",
   "integration: multi-module integration tests",

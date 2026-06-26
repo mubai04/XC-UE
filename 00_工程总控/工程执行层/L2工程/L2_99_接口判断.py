@@ -131,23 +131,6 @@ def 判断(item: 失败输入, rules: L2规则 | None = None) -> 接口判断:
             route_rule_version=route_rule_version or route_set_version,
         )
 
-    if module == "L2-01":
-        return 接口判断(
-            来源闸门=item.来源闸门,
-            输入来源模式="直接闸门输入",
-            输入问题=item.说明,
-            初步归属="L2-01",
-            主候选模块="L2-01",
-            接口失败类型="IF-P10",
-            判断依据="L2-01 标准仍存在，但对应 Python 能力模块已删除；该能力尚未实现。",
-            建议动作=["阻断当前执行；不得生成修复单"],
-            回流验收位置=item.回流验收位置 or item.来源闸门,
-            最终状态="回L1.5",
-            备注="该能力尚未实现",
-            route_rule_id=route_rule_id or "CANDIDATE_MODULE",
-            route_rule_version=route_rule_version or route_set_version,
-        )
-
     forbidden = _命中禁止项(item, rules, module)
     if forbidden:
         return 接口判断(

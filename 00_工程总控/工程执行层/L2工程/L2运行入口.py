@@ -120,14 +120,10 @@ def main() -> int:
         return int(exc.exit_code)
     items = 读失败包(packet_path)
     judgements = [判断(item, rules) for item in items]
-    l2_01_unimplemented = any(
-        item.主候选模块 == "L2-01" and item.接口失败类型 == "IF-P10"
-        for item in judgements
-    )
-    forms = [] if l2_01_unimplemented else 生成(items, judgements, rules)
+    forms, generation_errors = 生成(items, judgements, rules)
     blocked = 检查(judgements)
     recheck_targets = [item for item in judgements if item.最终状态 == "派生复验"]
-    standard_errors: list[str] = []
+    standard_errors: list[str] = list(generation_errors)
     return_errors = 校验(forms)
     if blocked and not forms:
         status = 已阻断
