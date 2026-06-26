@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/l3-patch-audit/2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "execution_mode",
+    "status",
+    "run_id",
+    "task_id",
+    "project_id",
+    "chapter_source",
+    "source_sha256",
+    "candidate_sha256",
+    "patch_sha256",
+    "diff_sha256",
+    "backup_path",
+    "backup_sha256",
+    "applied_sha256",
+    "rollback_sha256",
+    "final_source_sha256",
+    "last_complete_artifact_sha256",
+    "last_successful_stage",
+    "rollback_attempted",
+    "rollback_succeeded",
+    "error_code",
+    "error_reason",
+    "started_at",
+    "finished_at",
+    "final_status",
+    "approval",
+    "final_decision",
+    "revalidation",
+    "lineage",
+    "正式正文保持不变",
+    "是否尝试回滚",
+    "回滚是否成功"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l3-patch-audit/2.0"
+    },
+    "execution_mode": {
+      "const": "PATCH_EXECUTION"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PENDING_APPROVAL",
+        "PRECONDITION_CHECKED",
+        "EXECUTED_IN_SANDBOX",
+        "READY_FOR_ACCEPTANCE",
+        "REJECTED",
+        "APPLIED",
+        "ROLLED_BACK",
+        "EXECUTION_FAILED",
+        "REVALIDATION_FAILED",
+        "APPLY_FAILED",
+        "ROLLBACK_FAILED",
+        "ABORTED"
+      ]
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "chapter_source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "source_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "candidate_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "patch_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "diff_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "backup_path": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "backup_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "applied_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "rollback_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "final_source_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "last_complete_artifact_sha256": {
+      "$ref": "#/$defs/optional_sha256"
+    },
+    "last_successful_stage": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "rollback_attempted": {
+      "type": "boolean"
+    },
+    "rollback_succeeded": {
+      "type": "boolean"
+    },
+    "error_code": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "error_reason": {
+      "type": "string",
+      "maxLength": 2048
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "final_status": {
+      "type": "string",
+      "enum": [
+        "",
+        "APPLIED",
+        "REJECTED",
+        "ROLLED_BACK",
+        "APPLY_FAILED",
+        "ROLLBACK_FAILED",
+        "ABORTED",
+        "EXECUTION_FAILED",
+        "REVALIDATION_FAILED"
+      ]
+    },
+    "approval": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "final_decision": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "revalidation": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "",
+        "REPLACE",
+        "APPEND"
+      ]
+    },
+    "anchor": {
+      "type": "string"
+    },
+    "expected_text": {
+      "type": "string"
+    },
+    "replacement_text": {
+      "type": "string"
+    },
+    "append_text": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "acceptance_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "候选正文": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "unified_diff": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "正式正文保持不变": {
+      "type": "boolean"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "",
+        "apply",
+        "reject"
+      ]
+    },
+    "decision_reason": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "approver": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "approval_time": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "复验结果": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "正式复验结果": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "是否尝试回滚": {
+      "type": "boolean"
+    },
+    "回滚是否成功": {
+      "type": "boolean"
+    },
+    "terminal_state_conflict": {
+      "type": "boolean"
+    },
+    "emergency_audit": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "final_status": {
+            "const": "APPLIED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rollback_attempted": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "final_status": {
+            "const": "REJECTED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "applied_sha256": {
+            "const": ""
+          },
+          "rollback_attempted": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "final_status": {
+            "const": "ROLLED_BACK"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rollback_attempted": {
+            "const": true
+          },
+          "rollback_succeeded": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "final_status": {
+            "const": "ROLLBACK_FAILED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rollback_attempted": {
+            "const": true
+          },
+          "rollback_succeeded": {
+            "const": false
+          }
+        },
+        "required": [
+          "error_code",
+          "error_reason",
+          "final_source_sha256"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "optional_sha256": {
+      "type": "string",
+      "pattern": "^$|^[a-f0-9]{64}$"
+    }
+  }
+}
