@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/l2-report/1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "stage_run_id",
+    "status",
+    "run_id",
+    "输入文件",
+    "输入数量",
+    "方法声明",
+    "标准校验问题",
+    "回流校验问题",
+    "接口判断",
+    "修复单",
+    "阻断项"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l2-report/1.0"
+    },
+    "pipeline_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "stage_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "BLOCKED",
+        "SCHEMA_INVALID"
+      ]
+    },
+    "状态说明": {
+      "$ref": "#/$defs/text"
+    },
+    "输入文件": {
+      "$ref": "#/$defs/path_text"
+    },
+    "输入数量": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "方法声明": {
+      "$ref": "#/$defs/text"
+    },
+    "标准校验问题": {
+      "$ref": "#/$defs/text_array"
+    },
+    "回流校验问题": {
+      "$ref": "#/$defs/text_array"
+    },
+    "接口判断": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/interface_judgement"
+      }
+    },
+    "修复单": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/fix_form"
+      }
+    },
+    "阻断项": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/interface_judgement"
+      }
+    },
+    "复验目标": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/interface_judgement"
+      }
+    },
+    "input_artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "output_artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "short_text": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "path_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "\\.\\."
+          },
+          {
+            "pattern": "^[\\\\/]{2}"
+          }
+        ]
+      }
+    },
+    "yes_no": {
+      "type": "string",
+      "enum": [
+        "是",
+        "否"
+      ]
+    },
+    "text_array": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "interface_judgement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "来源闸门",
+        "输入来源模式",
+        "输入问题",
+        "初步归属",
+        "主候选模块",
+        "次候选模块",
+        "接口失败类型",
+        "判断依据",
+        "是否混合问题",
+        "是否越界",
+        "建议动作",
+        "回流验收位置",
+        "最终状态",
+        "备注",
+        "route_rule_id",
+        "route_rule_version"
+      ],
+      "properties": {
+        "来源闸门": {
+          "$ref": "#/$defs/short_text"
+        },
+        "输入来源模式": {
+          "$ref": "#/$defs/short_text"
+        },
+        "输入问题": {
+          "$ref": "#/$defs/text"
+        },
+        "初步归属": {
+          "$ref": "#/$defs/short_text"
+        },
+        "主候选模块": {
+          "$ref": "#/$defs/short_text"
+        },
+        "次候选模块": {
+          "$ref": "#/$defs/short_text"
+        },
+        "接口失败类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "判断依据": {
+          "$ref": "#/$defs/text"
+        },
+        "是否混合问题": {
+          "$ref": "#/$defs/yes_no"
+        },
+        "是否越界": {
+          "$ref": "#/$defs/yes_no"
+        },
+        "建议动作": {
+          "$ref": "#/$defs/text_array"
+        },
+        "回流验收位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "最终状态": {
+          "type": "string",
+          "enum": [
+            "接口明确",
+            "派生复验",
+            "回L1.5",
+            "进入L3"
+          ]
+        },
+        "备注": {
+          "$ref": "#/$defs/text"
+        },
+        "route_rule_id": {
+          "$ref": "#/$defs/short_text"
+        },
+        "route_rule_version": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "fix_form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "修复单类型",
+        "来源闸门",
+        "接收模块",
+        "输入问题",
+        "主失败类型",
+        "次失败类型",
+        "修复动作",
+        "修复产物",
+        "验收问题",
+        "回流位置",
+        "是否需要其他L2辅助",
+        "是否需要回L15重路由",
+        "最终状态",
+        "rule_id",
+        "rule_version"
+      ],
+      "properties": {
+        "修复单类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "来源闸门": {
+          "$ref": "#/$defs/short_text"
+        },
+        "接收模块": {
+          "type": "string",
+          "enum": [
+            "L2-01",
+            "L2-02",
+            "L2-03",
+            "L2-04",
+            "L2-05",
+            "L2-06"
+          ]
+        },
+        "输入问题": {
+          "$ref": "#/$defs/text"
+        },
+        "主失败类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "次失败类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "修复动作": {
+          "$ref": "#/$defs/text"
+        },
+        "修复产物": {
+          "$ref": "#/$defs/short_text"
+        },
+        "验收问题": {
+          "$ref": "#/$defs/text"
+        },
+        "回流位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "是否需要其他L2辅助": {
+          "$ref": "#/$defs/yes_no"
+        },
+        "是否需要回L15重路由": {
+          "$ref": "#/$defs/yes_no"
+        },
+        "最终状态": {
+          "type": "string",
+          "enum": [
+            "回原闸门复验",
+            "回L1.5",
+            "进入L3"
+          ]
+        },
+        "标准来源": {
+          "$ref": "#/$defs/short_text"
+        },
+        "规则编号": {
+          "$ref": "#/$defs/short_text"
+        },
+        "规则依据": {
+          "$ref": "#/$defs/text"
+        },
+        "标准动作": {
+          "$ref": "#/$defs/text_array"
+        },
+        "标准验收": {
+          "$ref": "#/$defs/text_array"
+        },
+        "rule_id": {
+          "$ref": "#/$defs/short_text"
+        },
+        "rule_version": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256",
+        "producer_stage",
+        "producer_run_id"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/short_text"
+        },
+        "path": {
+          "$ref": "#/$defs/path_text"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "producer_stage": {
+          "type": "string",
+          "enum": [
+            "INPUT",
+            "L1",
+            "L2",
+            "L3",
+            "PIPELINE"
+          ]
+        },
+        "producer_run_id": {
+          "$ref": "#/$defs/run_id"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

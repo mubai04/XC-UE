@@ -1,0 +1,448 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/l1-report/1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "stage_run_id",
+    "status",
+    "publish_authority",
+    "human_review_required",
+    "validation_status",
+    "decision_scope",
+    "run_id",
+    "项目",
+    "章节路径",
+    "章节标题",
+    "当前字数",
+    "段落数",
+    "方法声明",
+    "闸门结果",
+    "失败包",
+    "路由建议"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l1-report/1.0"
+    },
+    "pipeline_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "stage_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SCREENING_PASS",
+        "SCREENING_REJECT",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "状态说明": {
+      "$ref": "#/$defs/text"
+    },
+    "publish_authority": {
+      "const": false
+    },
+    "human_review_required": {
+      "type": "boolean"
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": [
+        "UNVALIDATED",
+        "VALIDATED"
+      ]
+    },
+    "decision_scope": {
+      "type": "string",
+      "enum": [
+        "HEURISTIC_SCREENING"
+      ]
+    },
+    "项目": {
+      "$ref": "#/$defs/short_text"
+    },
+    "章节路径": {
+      "$ref": "#/$defs/path_text"
+    },
+    "章节标题": {
+      "$ref": "#/$defs/short_text"
+    },
+    "当前字数": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "段落数": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000
+    },
+    "方法声明": {
+      "$ref": "#/$defs/text"
+    },
+    "heuristic": {
+      "type": "boolean"
+    },
+    "rule_version": {
+      "$ref": "#/$defs/short_text"
+    },
+    "rule_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "signal_strength": {
+      "$ref": "#/$defs/short_text"
+    },
+    "confidence": {
+      "$ref": "#/$defs/short_text"
+    },
+    "known_limitations": {
+      "$ref": "#/$defs/text_array"
+    },
+    "human_review_reasons": {
+      "$ref": "#/$defs/text_array"
+    },
+    "forbidden_extrapolations": {
+      "$ref": "#/$defs/text_array"
+    },
+    "闸门结果": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "$ref": "#/$defs/gate_result"
+      }
+    },
+    "失败包": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/failure_item"
+      }
+    },
+    "路由建议": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/route"
+      }
+    },
+    "input_artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "output_artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "short_text": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "path_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "\\.\\."
+          },
+          {
+            "pattern": "^[\\\\/]{2}"
+          }
+        ]
+      }
+    },
+    "text_array": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "段落",
+        "摘句"
+      ],
+      "properties": {
+        "段落": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "摘句": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "failure_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "闸门",
+        "名称",
+        "状态",
+        "说明",
+        "证据",
+        "严重级别",
+        "失败类型",
+        "候选模块",
+        "回流验收位置",
+        "修复方向"
+      ],
+      "properties": {
+        "闸门": {
+          "$ref": "#/$defs/short_text"
+        },
+        "名称": {
+          "$ref": "#/$defs/short_text"
+        },
+        "状态": {
+          "type": "string",
+          "enum": [
+            "成立",
+            "通过",
+            "失败",
+            "风险",
+            "阻断",
+            "检测到接口信号",
+            "检测到代理信号"
+          ]
+        },
+        "说明": {
+          "$ref": "#/$defs/text"
+        },
+        "证据": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "严重级别": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "失败类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "候选模块": {
+          "$ref": "#/$defs/short_text"
+        },
+        "回流验收位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "修复方向": {
+          "$ref": "#/$defs/text"
+        },
+        "heuristic": {
+          "type": "boolean"
+        },
+        "signal_strength": {
+          "$ref": "#/$defs/short_text"
+        },
+        "confidence": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "gate_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "闸门",
+        "判断结果",
+        "输入材料",
+        "失败类型",
+        "失败位置",
+        "是否进入L15",
+        "调用方向",
+        "回流验收位置",
+        "最终状态",
+        "检测项",
+        "规则摘要"
+      ],
+      "properties": {
+        "闸门": {
+          "$ref": "#/$defs/short_text"
+        },
+        "判断结果": {
+          "type": "string",
+          "enum": [
+            "SCREENING_PASS",
+            "SCREENING_REJECT",
+            "REVIEW_REQUIRED",
+            "STRUCTURE_SIGNAL_PRESENT",
+            "INTERFACE_SIGNAL_PRESENT",
+            "接口成立",
+            "需要派单修复",
+            "需要补输入"
+          ]
+        },
+        "输入材料": {
+          "$ref": "#/$defs/text_array"
+        },
+        "失败类型": {
+          "$ref": "#/$defs/text_array"
+        },
+        "失败位置": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "是否进入L15": {
+          "type": "string",
+          "enum": [
+            "是",
+            "否"
+          ]
+        },
+        "调用方向": {
+          "$ref": "#/$defs/text_array"
+        },
+        "回流验收位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "最终状态": {
+          "$ref": "#/$defs/short_text"
+        },
+        "检测项": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "$ref": "#/$defs/failure_item"
+          }
+        },
+        "规则摘要": {
+          "type": "object",
+          "additionalProperties": true,
+          "maxProperties": 100
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "路由编号",
+        "来源闸门",
+        "主失败类型",
+        "失败位置",
+        "建议修复方向",
+        "接口候选模块",
+        "回流验收位置",
+        "最终状态"
+      ],
+      "properties": {
+        "路由编号": {
+          "$ref": "#/$defs/short_text"
+        },
+        "来源闸门": {
+          "$ref": "#/$defs/short_text"
+        },
+        "主失败类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "失败位置": {
+          "$ref": "#/$defs/text"
+        },
+        "作业场景": {
+          "$ref": "#/$defs/short_text"
+        },
+        "建议修复方向": {
+          "$ref": "#/$defs/text"
+        },
+        "接口候选模块": {
+          "$ref": "#/$defs/short_text"
+        },
+        "回流验收位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "最终状态": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256",
+        "producer_stage",
+        "producer_run_id"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/short_text"
+        },
+        "path": {
+          "$ref": "#/$defs/path_text"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "producer_stage": {
+          "type": "string",
+          "enum": [
+            "INPUT",
+            "L1",
+            "L2",
+            "L3",
+            "PIPELINE"
+          ]
+        },
+        "producer_run_id": {
+          "$ref": "#/$defs/run_id"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

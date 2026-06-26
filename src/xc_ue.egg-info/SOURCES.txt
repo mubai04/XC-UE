@@ -1,0 +1,10 @@
+pyproject.toml
+src/xc_ue/__init__.py
+src/xc_ue/__main__.py
+src/xc_ue/cli.py
+src/xc_ue.egg-info/PKG-INFO
+src/xc_ue.egg-info/SOURCES.txt
+src/xc_ue.egg-info/dependency_links.txt
+src/xc_ue.egg-info/entry_points.txt
+src/xc_ue.egg-info/requires.txt
+src/xc_ue.egg-info/top_level.txt

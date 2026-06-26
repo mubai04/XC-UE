@@ -1,0 +1,9 @@
+# XC-UE — Cursor 索引排除 v0.1
+# 首读：README_XC-UE_当前结构与真源边界.md
+# 目的：阻止默认索引归档、旧输入、候选正文、压缩包
+
+99_归档_不要索引/
+**/_legacy_root_inputs/
+**/chapters/_candidates/
+*.zip
+*.docx

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/failure-packet/1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "stage_run_id",
+    "status",
+    "failure_count",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.failure-packet/1.0"
+    },
+    "pipeline_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "stage_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "status": {
+      "$ref": "#/$defs/l1_status"
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/failure_item"
+      }
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "l1_status": {
+      "type": "string",
+      "enum": [
+        "SCREENING_PASS",
+        "SCREENING_REJECT",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "error"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "short_text": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "段落",
+        "摘句"
+      ],
+      "properties": {
+        "段落": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "摘句": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "failure_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "闸门",
+        "名称",
+        "状态",
+        "说明",
+        "证据",
+        "严重级别",
+        "失败类型",
+        "候选模块",
+        "回流验收位置",
+        "修复方向"
+      ],
+      "properties": {
+        "闸门": {
+          "$ref": "#/$defs/short_text"
+        },
+        "名称": {
+          "$ref": "#/$defs/short_text"
+        },
+        "状态": {
+          "type": "string",
+          "enum": [
+            "成立",
+            "通过",
+            "失败",
+            "风险",
+            "阻断",
+            "检测到接口信号",
+            "检测到代理信号"
+          ]
+        },
+        "说明": {
+          "$ref": "#/$defs/text"
+        },
+        "证据": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "严重级别": {
+          "$ref": "#/$defs/severity"
+        },
+        "失败类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "候选模块": {
+          "$ref": "#/$defs/short_text"
+        },
+        "回流验收位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "修复方向": {
+          "$ref": "#/$defs/text"
+        },
+        "heuristic": {
+          "type": "boolean"
+        },
+        "signal_strength": {
+          "$ref": "#/$defs/short_text"
+        },
+        "confidence": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

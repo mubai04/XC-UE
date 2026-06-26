@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/artifact-record/1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "path",
+    "sha256",
+    "producer_stage",
+    "producer_run_id"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "path": {
+      "$ref": "#/$defs/relative_path"
+    },
+    "sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "producer_stage": {
+      "type": "string",
+      "enum": [
+        "INPUT",
+        "L1",
+        "L2",
+        "L3",
+        "PIPELINE"
+      ]
+    },
+    "producer_run_id": {
+      "$ref": "#/$defs/run_id"
+    }
+  },
+  "$defs": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "relative_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "\\.\\."
+          },
+          {
+            "pattern": "^[A-Za-z]:"
+          },
+          {
+            "pattern": "^[\\\\/]{2}"
+          }
+        ]
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

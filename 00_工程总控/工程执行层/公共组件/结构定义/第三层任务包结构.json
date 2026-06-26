@@ -1,0 +1,463 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/l3-task-bundle/1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "stage_run_id",
+    "status",
+    "run_id",
+    "输入文件",
+    "输入修复单数量",
+    "方法声明",
+    "标准校验问题",
+    "协议规则摘要",
+    "protocol_rule_version",
+    "任务单",
+    "执行输出",
+    "阻断任务",
+    "execution_mode",
+    "prose_modified",
+    "task_package_created",
+    "awaiting_executor"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l3-task-bundle/1.0"
+    },
+    "pipeline_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "stage_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "AWAITING_EXECUTOR",
+        "BLOCKED",
+        "SCHEMA_INVALID",
+        "COMPLETED"
+      ]
+    },
+    "状态说明": {
+      "$ref": "#/$defs/text"
+    },
+    "输入文件": {
+      "$ref": "#/$defs/path_text"
+    },
+    "输入修复单数量": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "方法声明": {
+      "$ref": "#/$defs/text"
+    },
+    "标准校验问题": {
+      "$ref": "#/$defs/text_array"
+    },
+    "协议规则摘要": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 100
+    },
+    "protocol_rule_version": {
+      "$ref": "#/$defs/short_text"
+    },
+    "任务单": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/task"
+      }
+    },
+    "执行输出": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/output"
+      }
+    },
+    "阻断任务": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/task"
+      }
+    },
+    "execution_mode": {
+      "const": "TASK_PLANNING_ONLY"
+    },
+    "prose_modified": {
+      "const": false
+    },
+    "task_package_created": {
+      "type": "boolean"
+    },
+    "awaiting_executor": {
+      "type": "boolean"
+    },
+    "input_artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "output_artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "short_text": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "path_text": {
+      "type": "string",
+      "maxLength": 512,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "\\.\\."
+          },
+          {
+            "pattern": "^[\\\\/]{2}"
+          }
+        ]
+      }
+    },
+    "required_path": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/path_text"
+        },
+        {
+          "minLength": 1
+        }
+      ]
+    },
+    "yes_no_or_na": {
+      "type": "string",
+      "enum": [
+        "是",
+        "否",
+        "不适用"
+      ]
+    },
+    "text_array": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "task_state": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "INPUT_VALIDATED",
+        "TASK_PLANNED",
+        "TASK_PACKAGE_CREATED",
+        "AWAITING_EXECUTOR",
+        "VALIDATION_FAILED",
+        "BLOCKED"
+      ]
+    },
+    "state_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "前状态",
+        "后状态",
+        "触发事件",
+        "时间",
+        "执行组件",
+        "证据文件"
+      ],
+      "properties": {
+        "前状态": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "后状态": {
+          "$ref": "#/$defs/task_state"
+        },
+        "触发事件": {
+          "$ref": "#/$defs/text"
+        },
+        "时间": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "执行组件": {
+          "$ref": "#/$defs/short_text"
+        },
+        "证据文件": {
+          "$ref": "#/$defs/path_text"
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "执行编号",
+        "来源层",
+        "来源文件",
+        "ProjectHarness根",
+        "任务类型",
+        "输入材料",
+        "IR输入",
+        "目标文件",
+        "禁止修改文件",
+        "修复方向",
+        "修复产物要求",
+        "回流验收位置",
+        "是否允许改正式正文",
+        "是否需要备份",
+        "执行状态",
+        "校验问题",
+        "状态历史"
+      ],
+      "properties": {
+        "执行编号": {
+          "$ref": "#/$defs/short_text"
+        },
+        "来源层": {
+          "type": "string",
+          "enum": [
+            "L2-01",
+            "L2-02",
+            "L2-03",
+            "L2-04",
+            "L2-05",
+            "L2-06"
+          ]
+        },
+        "来源文件": {
+          "$ref": "#/$defs/required_path"
+        },
+        "ProjectHarness根": {
+          "$ref": "#/$defs/required_path"
+        },
+        "任务类型": {
+          "$ref": "#/$defs/short_text"
+        },
+        "输入材料": {
+          "$ref": "#/$defs/text"
+        },
+        "IR输入": {
+          "$ref": "#/$defs/text_array"
+        },
+        "目标文件": {
+          "$ref": "#/$defs/required_path"
+        },
+        "禁止修改文件": {
+          "$ref": "#/$defs/text_array"
+        },
+        "修复方向": {
+          "$ref": "#/$defs/text"
+        },
+        "修复产物要求": {
+          "$ref": "#/$defs/text"
+        },
+        "回流验收位置": {
+          "$ref": "#/$defs/short_text"
+        },
+        "是否允许改正式正文": {
+          "type": "string",
+          "enum": [
+            "否"
+          ]
+        },
+        "是否需要备份": {
+          "$ref": "#/$defs/yes_no_or_na"
+        },
+        "执行状态": {
+          "$ref": "#/$defs/task_state"
+        },
+        "校验问题": {
+          "$ref": "#/$defs/text_array"
+        },
+        "状态历史": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/state_change"
+          }
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "执行编号",
+        "执行状态",
+        "实际读取文件",
+        "任务包文件",
+        "分项任务文件",
+        "任务依赖",
+        "约束",
+        "目标文件引用",
+        "修复产物",
+        "复验入口",
+        "待复验问题",
+        "断点记录",
+        "execution_mode",
+        "prose_modified",
+        "task_package_created",
+        "awaiting_executor"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "实际修改文件"
+            ]
+          },
+          {
+            "required": [
+              "候选产物"
+            ]
+          },
+          {
+            "required": [
+              "备份文件"
+            ]
+          },
+          {
+            "required": [
+              "diff摘要文件"
+            ]
+          },
+          {
+            "required": [
+              "回填位置"
+            ]
+          },
+          {
+            "required": [
+              "待复验闸门"
+            ]
+          }
+        ]
+      },
+      "properties": {
+        "执行编号": {
+          "$ref": "#/$defs/short_text"
+        },
+        "执行状态": {
+          "$ref": "#/$defs/task_state"
+        },
+        "实际读取文件": {
+          "$ref": "#/$defs/text_array"
+        },
+        "任务包文件": {
+          "$ref": "#/$defs/path_text"
+        },
+        "分项任务文件": {
+          "$ref": "#/$defs/path_text"
+        },
+        "任务依赖": {
+          "$ref": "#/$defs/text_array"
+        },
+        "约束": {
+          "$ref": "#/$defs/text_array"
+        },
+        "目标文件引用": {
+          "$ref": "#/$defs/path_text"
+        },
+        "修复产物": {
+          "$ref": "#/$defs/text"
+        },
+        "复验入口": {
+          "$ref": "#/$defs/short_text"
+        },
+        "待复验问题": {
+          "$ref": "#/$defs/text"
+        },
+        "断点记录": {
+          "$ref": "#/$defs/text"
+        },
+        "execution_mode": {
+          "const": "TASK_PLANNING_ONLY"
+        },
+        "prose_modified": {
+          "const": false
+        },
+        "task_package_created": {
+          "type": "boolean"
+        },
+        "awaiting_executor": {
+          "type": "boolean"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256",
+        "producer_stage",
+        "producer_run_id"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/short_text"
+        },
+        "path": {
+          "$ref": "#/$defs/required_path"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "producer_stage": {
+          "type": "string",
+          "enum": [
+            "INPUT",
+            "L1",
+            "L2",
+            "L3",
+            "PIPELINE"
+          ]
+        },
+        "producer_run_id": {
+          "$ref": "#/$defs/run_id"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

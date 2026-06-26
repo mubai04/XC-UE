@@ -1,0 +1,50 @@
+{
+  "schema_version": "xcue.l2-routes/1.0",
+  "version": "2026-06-23.m3-01",
+  "status": "active",
+  "routes": [
+    {
+      "rule_id": "L2-ROUTE-001",
+      "keywords": ["叙事失败", "字数不足", "章末弱", "章末追读弱"],
+      "target": "L2-01",
+      "source": "migrated_from_python_fallback"
+    },
+    {
+      "rule_id": "L2-ROUTE-002",
+      "keywords": ["文风失败", "AI味失败", "认知成本过高"],
+      "target": "L2-02",
+      "source": "migrated_from_python_fallback"
+    },
+    {
+      "rule_id": "L2-ROUTE-003",
+      "keywords": ["角色失败"],
+      "target": "L2-03",
+      "source": "migrated_from_python_fallback"
+    },
+    {
+      "rule_id": "L2-ROUTE-004",
+      "keywords": ["创意设定失败"],
+      "target": "L2-04",
+      "source": "migrated_from_python_fallback"
+    },
+    {
+      "rule_id": "L2-ROUTE-005",
+      "keywords": [
+        "入口弱",
+        "E低：即时情绪反馈弱",
+        "V低：未来价值预期弱",
+        "C高：认知成本过高",
+        "弃读点明显",
+        "投入意愿不足"
+      ],
+      "target": "L2-05",
+      "source": "migrated_from_python_fallback"
+    },
+    {
+      "rule_id": "L2-ROUTE-006",
+      "keywords": ["技术护栏失败"],
+      "target": "L2-06",
+      "source": "migrated_from_python_fallback"
+    }
+  ]
+}

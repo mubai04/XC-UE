@@ -1,0 +1,36 @@
+[project]
+name = "xc-ue"
+version = "0.0.0"
+description = "XC-UE local engineering workspace"
+requires-python = ">=3.11"
+dependencies = [
+  "pytest",
+  "PyYAML",
+  "jsonschema",
+]
+
+[project.scripts]
+xcue = "xc_ue.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["xc_ue*"]
+
+[tool.pytest.ini_options]
+python_files = ["测试*.py", "test_*.py", "*_test.py"]
+python_functions = ["测试*", "test_*"]
+markers = [
+  "unit: fast isolated unit tests",
+  "integration: multi-module integration tests",
+  "governance: Markdown governance and source manifest tests",
+  "security: path, input, and boundary security tests",
+  "adversarial: adversarial samples and negative behavior tests",
+  "slow: tests excluded from the default not-slow suite",
+]
