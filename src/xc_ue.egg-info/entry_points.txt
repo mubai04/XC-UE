@@ -1,0 +1,2 @@
+[console_scripts]
+xcue = xc_ue.cli:main

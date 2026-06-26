@@ -1,0 +1,489 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.schema/pipeline-manifest/1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "created_at",
+    "status",
+    "input",
+    "project",
+    "standards",
+    "stages",
+    "final_status",
+    "final_exit_code"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.pipeline-manifest/1.0"
+    },
+    "pipeline_run_id": {
+      "$ref": "#/$defs/run_id"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "status": {
+      "$ref": "#/$defs/pipeline_status"
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_path",
+        "snapshot_path",
+        "sha256"
+      ],
+      "properties": {
+        "original_path": {
+          "$ref": "#/$defs/path_text"
+        },
+        "snapshot_path": {
+          "$ref": "#/$defs/path_text"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "project": {
+      "$ref": "#/$defs/project_context"
+    },
+    "standards": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "combined_sha256",
+        "standard_mode",
+        "experimental_standard",
+        "production_eligibility",
+        "records",
+        "error"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "Markdown Front Matter"
+          ]
+        },
+        "combined_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "standard_mode": {
+          "type": "string",
+          "enum": [
+            "PRODUCTION",
+            "CANDIDATE_TEST"
+          ]
+        },
+        "experimental_standard": {
+          "type": "boolean"
+        },
+        "production_eligibility": {
+          "$ref": "#/$defs/production_eligibility"
+        },
+        "records": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/standard_record"
+          }
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "$ref": "#/$defs/stage_record"
+      }
+    },
+    "final_status": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/final_status"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "final_exit_code": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 255
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
+    },
+    "path_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "\\.\\."
+          },
+          {
+            "pattern": "^[\\\\/]{2}"
+          }
+        ]
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "pipeline_status": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "COMPLETED",
+        "COMPLETED_WITH_BUSINESS_FAILURE",
+        "FAILED",
+        "FAILED_INTERNAL",
+        "FAILED_SCHEMA",
+        "FAILED_HASH",
+        "FAILED_LINEAGE",
+        "BLOCKED",
+        "GATE_REJECTED",
+        "REVIEW_REQUIRED",
+        "L1_OUTPUT_MISSING",
+        "L2_OUTPUT_MISSING",
+        "L3_OUTPUT_MISSING",
+        "L1_STAGE_FAILED",
+        "L2_STAGE_FAILED",
+        "L3_STAGE_FAILED",
+        "NO_PRODUCTION_RULESET",
+        "PRODUCTION_MODE_NOT_ELIGIBLE",
+        "RULE_PARSE_FAILED",
+        "STANDARD_PRECHECK_FAILED"
+      ]
+    },
+    "final_status": {
+      "type": "string",
+      "enum": [
+        "SCREENING_PASS",
+        "FAILED_INTERNAL",
+        "FAILED_SCHEMA",
+        "RULE_PARSE_FAILED",
+        "FAILED_HASH",
+        "FAILED_LINEAGE",
+        "NO_PRODUCTION_RULESET",
+        "PRODUCTION_MODE_NOT_ELIGIBLE",
+        "BLOCKED",
+        "GATE_REJECTED",
+        "REVIEW_REQUIRED",
+        "L1_OUTPUT_MISSING",
+        "L2_OUTPUT_MISSING",
+        "L3_OUTPUT_MISSING",
+        "L1_STAGE_FAILED",
+        "L2_STAGE_FAILED",
+        "L3_STAGE_FAILED",
+        "STANDARD_PRECHECK_FAILED"
+      ]
+    },
+    "standard_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "名称",
+        "文档编号",
+        "路径",
+        "状态",
+        "版本",
+        "sha256",
+        "模式"
+      ],
+      "properties": {
+        "名称": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "文档编号": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "路径": {
+          "$ref": "#/$defs/path_text"
+        },
+        "状态": {
+          "type": "string",
+          "enum": [
+            "CANDIDATE",
+            "ACTIVE",
+            "FROZEN"
+          ]
+        },
+        "版本": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "模式": {
+          "type": "string",
+          "enum": [
+            "PRODUCTION",
+            "CANDIDATE_TEST"
+          ]
+        }
+      }
+    },
+    "production_eligibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested_mode",
+        "effective_mode",
+        "eligible",
+        "reason",
+        "rule_source",
+        "entrypoint",
+        "rules_status",
+        "schema_version",
+        "production_eligible",
+        "experimental_standard",
+        "project_identity"
+      ],
+      "properties": {
+        "requested_mode": {
+          "type": "string",
+          "enum": [
+            "PRODUCTION",
+            "CANDIDATE_TEST"
+          ]
+        },
+        "effective_mode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "PRODUCTION",
+            "CANDIDATE_TEST",
+            null
+          ]
+        },
+        "eligible": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "rule_source": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "entrypoint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "rules_status": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "schema_version": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "production_eligible": {
+          "type": "boolean"
+        },
+        "experimental_standard": {
+          "type": "boolean"
+        },
+        "project_identity": {
+          "type": "string",
+          "maxLength": 128
+        }
+      }
+    },
+    "project_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_id",
+        "project_root",
+        "project_manifest",
+        "content_root",
+        "chapter_source",
+        "entrypoint",
+        "entrypoint_type",
+        "source_scope"
+      ],
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "project_root": {
+          "$ref": "#/$defs/path_text"
+        },
+        "project_manifest": {
+          "$ref": "#/$defs/path_text"
+        },
+        "content_root": {
+          "$ref": "#/$defs/path_text"
+        },
+        "chapter_source": {
+          "$ref": "#/$defs/path_text"
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/path_text"
+        },
+        "entrypoint_type": {
+          "type": "string",
+          "enum": [
+            "project",
+            "shared"
+          ]
+        },
+        "source_scope": {
+          "type": "string",
+          "enum": [
+            "repository",
+            "external",
+            "explicit_path"
+          ]
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256",
+        "producer_stage",
+        "producer_run_id"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "path": {
+          "$ref": "#/$defs/path_text"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "producer_stage": {
+          "type": "string",
+          "enum": [
+            "INPUT",
+            "L1",
+            "L2",
+            "L3",
+            "PIPELINE"
+          ]
+        },
+        "producer_run_id": {
+          "$ref": "#/$defs/run_id"
+        }
+      }
+    },
+    "stage_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "stage_run_id",
+        "status",
+        "exit_code",
+        "input_artifacts",
+        "output_artifacts",
+        "stdout",
+        "stderr"
+      ],
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        "stage_run_id": {
+          "$ref": "#/$defs/run_id"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMPLETED",
+            "FAILED_TIMEOUT",
+            "NONZERO_EXIT",
+            "SKIPPED"
+          ]
+        },
+        "exit_code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "input_artifacts": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "output_artifacts": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "stdout": {
+          "type": "string",
+          "maxLength": 200000
+        },
+        "stderr": {
+          "type": "string",
+          "maxLength": 200000
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

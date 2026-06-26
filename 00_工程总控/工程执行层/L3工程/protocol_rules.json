@@ -1,0 +1,236 @@
+{
+  "schema_version": "xcue.l3-protocol-rules/1.0",
+  "version": "2026-06-24.b2-finalization-01",
+  "status": "active",
+  "scope": "L3协议运行规则",
+  "state_machine": [
+    "INPUT_VALIDATED",
+    "TASK_PLANNED",
+    "TASK_PACKAGE_CREATED",
+    "AWAITING_EXECUTOR",
+    "EXECUTION_STARTED",
+    "EXECUTION_COMPLETED",
+    "ACCEPTANCE_PENDING",
+    "ACCEPTED"
+  ],
+  "abnormal_states": [
+    "VALIDATION_FAILED",
+    "BLOCKED",
+    "EXECUTION_FAILED",
+    "ROLLED_BACK"
+  ],
+  "state_transitions": {
+    "RECEIVED": [
+      "INPUT_VALIDATED",
+      "VALIDATION_FAILED"
+    ],
+    "INPUT_VALIDATED": [
+      "TASK_PLANNED"
+    ],
+    "TASK_PLANNED": [
+      "TASK_PACKAGE_CREATED",
+      "BLOCKED"
+    ],
+    "TASK_PACKAGE_CREATED": [
+      "AWAITING_EXECUTOR"
+    ],
+    "AWAITING_EXECUTOR": [
+      "EXECUTION_STARTED"
+    ],
+    "EXECUTION_STARTED": [
+      "EXECUTION_FAILED",
+      "EXECUTION_COMPLETED"
+    ],
+    "EXECUTION_FAILED": [
+      "ROLLED_BACK"
+    ],
+    "EXECUTION_COMPLETED": [
+      "ACCEPTANCE_PENDING"
+    ],
+    "ACCEPTANCE_PENDING": [
+      "ACCEPTED",
+      "ROLLED_BACK"
+    ],
+    "VALIDATION_FAILED": [
+      "BLOCKED"
+    ],
+    "BLOCKED": [],
+    "ACCEPTED": [],
+    "ROLLED_BACK": []
+  },
+  "permission_matrix": {
+    "L0-L3 协议层": {
+      "默认权限": "只读",
+      "说明": "L3 运行时不得修改协议真源"
+    },
+    "Project Harness IR": {
+      "默认权限": "只读",
+      "说明": "作为正文修复任务输入"
+    },
+    "正式正文 chapters/ch*.md": {
+      "默认权限": "TASK_PLANNING_ONLY 只读；L3_PATCH approved_runtime_only 可写",
+      "说明": "默认 L3 任务规划不得修改正文；B2 L3_PATCH 仅在结构化规则、审批、哈希、备份、原子写、复验和回滚要求全部满足时可正式应用"
+    },
+    "任务包输出目录": {
+      "默认权限": "可新增",
+      "说明": "只允许新增任务包与报告"
+    }
+  },
+  "task_fields": [
+    "来源层",
+    "来源文件",
+    "ProjectHarness根",
+    "任务类型",
+    "输入材料",
+    "IR输入",
+    "目标文件",
+    "禁止修改文件",
+    "修复方向",
+    "修复产物要求",
+    "回流验收位置",
+    "是否允许改正式正文",
+    "是否需要备份"
+  ],
+  "output_fields": [
+    "执行编号",
+    "执行状态",
+    "实际读取文件",
+    "任务包文件",
+    "分项任务文件",
+    "任务依赖",
+    "约束",
+    "目标文件引用",
+    "修复产物",
+    "复验入口",
+    "待复验问题",
+    "断点记录"
+  ],
+  "execution_order": [
+    "校验 L2 修复单",
+    "加载 Project Harness",
+    "映射 IR 输入",
+    "生成 L3 任务包",
+    "等待人工或后续执行器",
+    "回流 L1 / L1.5 复验"
+  ],
+  "ir_recommended_files": [
+    "IR-00_项目索引.md",
+    "IR-01_立项卡.md",
+    "IR-02_世界约束.md",
+    "IR-03_角色动机表.md",
+    "IR-04_事件链.md",
+    "IR-05_章节目标表.md",
+    "IR-06_读者预期表.md",
+    "IR-08_状态快照.md"
+  ],
+  "candidate_required_dirs": [
+    "chapters/_candidates",
+    "logs"
+  ],
+  "ir_mapping": {
+    "L2-01": [
+      "IR-04_事件链.md",
+      "IR-05_章节目标表.md"
+    ],
+    "L2-02": [
+      "IR-01_立项卡.md",
+      "IR-05_章节目标表.md"
+    ],
+    "L2-03": [
+      "IR-03_角色动机表.md"
+    ],
+    "L2-04": [
+      "IR-02_世界约束.md"
+    ],
+    "L2-05": [
+      "IR-06_读者预期表.md",
+      "IR-05_章节目标表.md"
+    ],
+    "L2-06": [
+      "IR-08_状态快照.md"
+    ],
+    "*": [
+      "IR-00_项目索引.md"
+    ]
+  },
+  "task_type_rules": [
+    {
+      "match": {
+        "main_failure_type": "字数不足"
+      },
+      "task_type": "正文扩写任务规划"
+    },
+    {
+      "match": {
+        "receiver_modules": [
+          "L2-05",
+          "L2-02"
+        ]
+      },
+      "task_type": "正文局部修复任务规划"
+    },
+    {
+      "match": {
+        "receiver_modules": [
+          "*"
+        ]
+      },
+      "task_type": "正文改写任务规划"
+    }
+  ],
+  "formal_chapter_glob": "ch*.md",
+  "candidate_target_pattern": "chapters/_candidates/{run_id}_TASK-{index:03d}.md",
+  "default_forbidden_targets": [
+    "20_L1_闸门层/*",
+    "30_L1.5_路由矩阵层/*",
+    "40_L2_正式能力层/*",
+    "50_L3_执行协议层/*"
+  ],
+  "formal_prose_modification": "否",
+  "backup_requirement": "不适用",
+  "patch_execution": {
+    "enabled": true,
+    "allowed_projects": [
+      "TP-001"
+    ],
+    "allowed_sources": [
+      "L2-01"
+    ],
+    "allowed_operations": [
+      "REPLACE",
+      "APPEND"
+    ],
+    "requires_candidate_approval": true,
+    "requires_final_decision": true,
+    "requires_backup": true,
+    "requires_atomic_write": true,
+    "requires_post_apply_revalidation": true,
+    "rollback_on_any_post_apply_failure": true,
+    "formal_text_write": "approved_runtime_only",
+    "terminal_states": [
+      "APPLIED",
+      "REJECTED",
+      "ROLLED_BACK",
+      "APPLY_FAILED",
+      "ROLLBACK_FAILED",
+      "ABORTED",
+      "EXECUTION_FAILED",
+      "REVALIDATION_FAILED"
+    ]
+  },
+  "valid_return_positions": [
+    "L1-00",
+    "L1-01",
+    "L1-02",
+    "L1-03",
+    "L1.5"
+  ],
+  "forbidden": [
+    "禁止删除文件",
+    "禁止候选正文自动覆盖正式正文",
+    "禁止用图片覆盖 Markdown",
+    "禁止 L3 判断作品好坏",
+    "禁止修改 L0-L3 协议层",
+    "禁止修改 L1/L1.5/L2 能力层"
+  ]
+}
