@@ -48,6 +48,19 @@ python "00_工程总控\工程执行层\统一运行入口.py" --target L1 --cha
 - `human_review_required=true`
 - `validation_status=UNVALIDATED`
 
+## Phase 1 决策权边界（2026-06-26）
+
+| 角色 | 来源 | blocking | 终态影响 |
+|---|---|---|---|
+| DIAGNOSTIC | L1-01 / L1-02 / L1-03 词面闸门 | false | 仅诊断，不进入 failure packet |
+| HARD_GUARD | L1_前置质量护栏（含 gate_rules function_floor 字数硬阈） | true | SCREENING_REJECT |
+| CONTENT_DECISION | L1-SEM DeepSeek 语义审计维度 | true（FAIL/REVIEW） | REJECT 或 REVIEW_REQUIRED |
+| AUDIT_BLOCKER | API 不可用、证据无效、L1-00 输入损坏 | true | AUDIT_BLOCKED |
+
+- L1-03 不再承担字数硬阈裁决；硬阈仅在前置质量护栏读取 `gate_rules.json` 的 `function_floor`。
+- 终态由 `L1决策角色.聚合终态()` 统一聚合，不再按词面闸门 severity 直接裁决。
+- 报告写出前经 JSON Schema 校验，`validation_status=VALIDATED`。
+
 ## 边界
 
 - 自动检测只做工程化初筛，不冒充最终文学判断。

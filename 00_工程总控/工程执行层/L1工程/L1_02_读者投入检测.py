@@ -3,6 +3,7 @@
 import re
 
 from 正文切分 import 找证据
+from L1决策角色 import 完成诊断闸门
 from L1模型 import 检测项, 段落, 闸门结果
 from L15交接 import 补路由
 from 闸门标准解析 import L102规则, L15路由规则
@@ -161,7 +162,13 @@ def _投入项(e_score: int, v_score: int, c_score: int, rules: L102规则, ev_e
     return items
 
 
-def 检测(paragraphs: list[段落], rules: L102规则, l101_passed: bool, routes: dict[str, L15路由规则]) -> 闸门结果:
+def 检测(
+    paragraphs: list[段落],
+    rules: L102规则,
+    l101_passed: bool,  # deprecated: 不参与决策，保留兼容签名
+    routes: dict[str, L15路由规则],
+) -> 闸门结果:
+    _ = l101_passed
     items: list[检测项] = []
 
     entrance_ev = 找证据(paragraphs[:8], ENTRANCE_PATTERNS, 4)
@@ -212,40 +219,18 @@ def 检测(paragraphs: list[段落], rules: L102规则, l101_passed: bool, route
         )
 
     failures = [补路由(i, routes) for i in items if i.严重级别 in {"error", "warning"}]
-    if not l101_passed:
-        failures.insert(
-            0,
-            补路由(
-                检测项(
-                    "L1-02",
-                    "前置闸门",
-                    "阻断",
-                    "L1-01 未检测到足够结构代理信号时，L1-02 不允许提升自动结论。",
-                    [],
-                    "warning",
-                    "L1-01未通过",
-                    候选模块="回L1-01",
-                    回流验收位置="L1-01",
-                    修复方向="先处理内部创作信号检测问题",
-                ),
-                routes,
-            ),
-        )
-
     allowed_types = set(rules.失败类型)
     failures = [i for i in failures if not allowed_types or i.失败类型 in allowed_types]
-    hard = [i for i in failures if i.严重级别 == "error"]
-    result = "SCREENING_REJECT" if hard else ("HUMAN_REVIEW_REQUIRED" if failures else "STRUCTURE_SIGNAL_PRESENT")
-    return 闸门结果(
+    gate = 闸门结果(
         闸门="L1-02",
-        判断结果=result,
+        判断结果="",
         输入材料=["章节正文", "L1-02 Markdown标准", "L1-01输出结果", "E/V/C公式与阈值"],
-        失败类型=[i.失败类型 for i in failures if i.失败类型],
-        失败位置=[e for i in failures for e in i.证据],
-        是否进入L15="是" if failures else "否",
-        调用方向=[i.候选模块 for i in failures if i.候选模块],
+        失败类型=[],
+        失败位置=[],
+        是否进入L15="否",
+        调用方向=[],
         回流验收位置="L1-02",
-        最终状态=result,
+        最终状态="",
         检测项=items,
         规则摘要={
             "公式": rules.公式,
@@ -257,5 +242,7 @@ def 检测(paragraphs: list[段落], rules: L102规则, l101_passed: bool, route
             "I": e_score * v_score - c_score,
             "失败类型": rules.失败类型,
             "启发式信号标准": rules.通过标准,
+            "诊断失败类型": [i.失败类型 for i in failures if i.失败类型],
         },
     )
+    return 完成诊断闸门(gate)

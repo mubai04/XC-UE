@@ -10,14 +10,21 @@ from L1模型 import 正文检测结果
 if str(公共组件) not in sys.path:
     sys.path.insert(0, str(公共组件))
 
-from 工程异常 import 输入错误
+from 工程异常 import 输入错误, 结构错误
 from 原子写入 import 原子写文本
+from 结构校验 import 按结构文件校验
+
+SCHEMA_DIR = 公共组件 / "结构定义"
+L1_REPORT_SCHEMA = SCHEMA_DIR / "第一层报告结构.json"
+FAILURE_PACKET_SCHEMA = SCHEMA_DIR / "失败包结构.json"
+AUDIT_BLOCKERS_SCHEMA = SCHEMA_DIR / "审计阻断项结构.json"
 
 
 状态显示 = {
-    "SCREENING_PASS": "未命中已配置的启发式硬风险",
-    "SCREENING_REJECT": "命中已配置的启发式硬风险",
+    "SCREENING_PASS": "语义审计通过且未命中阻断项",
+    "SCREENING_REJECT": "命中硬护栏或语义审计失败",
     "REVIEW_REQUIRED": "需要人工复核",
+    "AUDIT_BLOCKED": "语义审计或输入上下文阻断，未对正文作通过/拒绝裁决",
     "HUMAN_REVIEW_REQUIRED": "需要人工复核",
     "STRUCTURE_SIGNAL_PRESENT": "检测到结构代理信号",
     "INTERFACE_SIGNAL_PRESENT": "检测到接口代理信号",
@@ -48,16 +55,18 @@ def _列表(value: list[str]) -> str:
     return "；".join(value) if value else "无"
 
 
-def 报告路径(run_id: str, out_dir: Path) -> tuple[Path, Path, Path]:
+def 报告路径(run_id: str, out_dir: Path) -> tuple[Path, Path, Path, Path]:
     if out_dir.name == "第一层":
         json_path = out_dir / "检测报告.json"
         md_path = out_dir / "检测报告.md"
         packet_path = out_dir / "失败包.json"
+        audit_path = out_dir / "审计阻断项.json"
     else:
         json_path = out_dir / f"{run_id}.json"
         md_path = out_dir / f"{run_id}.md"
         packet_path = out_dir / f"{run_id}_failure_packet.json"
-    return md_path, json_path, packet_path
+        audit_path = out_dir / f"{run_id}_audit_blockers.json"
+    return md_path, json_path, packet_path, audit_path
 
 
 def 拒绝覆盖既有报告(run_id: str, out_dir: Path) -> None:
@@ -67,26 +76,65 @@ def 拒绝覆盖既有报告(run_id: str, out_dir: Path) -> None:
         raise 输入错误(f"L1 输出已存在，拒绝覆盖：{joined}")
 
 
-def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Path]:
-    out_dir.mkdir(parents=True, exist_ok=True)
-    md_path, json_path, packet_path = 报告路径(result.run_id, out_dir)
-    拒绝覆盖既有报告(result.run_id, out_dir)
+def _检测项字典(item) -> dict[str, object]:
+    return item.__dict__ | {"证据": [e.__dict__ for e in item.证据]}
 
-    原子写文本(json_path, json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
-    packet_payload = {
+
+def _失败包载荷(result: 正文检测结果) -> dict[str, object]:
+    return {
         "schema_version": "xcue.failure-packet/1.0",
         "pipeline_run_id": result.pipeline_run_id,
         "stage_run_id": result.stage_run_id,
         "status": result.status,
         "failure_count": len(result.失败包),
-        "items": [item.__dict__ | {"证据": [e.__dict__ for e in item.证据]} for item in result.失败包],
+        "items": [_检测项字典(item) for item in result.失败包],
+        "extensions": {
+            "chapter_path": result.章节路径,
+            "audit_reason_type": result.audit_reason_type,
+        },
+    }
+
+
+def _审计阻断载荷(result: 正文检测结果) -> dict[str, object]:
+    return {
+        "schema_version": "xcue.audit-blockers/1.0",
+        "pipeline_run_id": result.pipeline_run_id,
+        "stage_run_id": result.stage_run_id,
+        "status": result.status,
+        "semantic_audit_status": result.semantic_audit_status or ("PASS" if not result.审计阻断项 else "AUDIT_BLOCKED"),
+        "audit_reason_type": result.audit_reason_type,
+        "blocker_count": len(result.审计阻断项),
+        "items": [_检测项字典(item) for item in result.审计阻断项],
         "extensions": {
             "chapter_path": result.章节路径,
         },
     }
+
+
+def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Path, Path]:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    md_path, json_path, packet_path, audit_path = 报告路径(result.run_id, out_dir)
+    拒绝覆盖既有报告(result.run_id, out_dir)
+
+    result.validation_status = "VALIDATED"
+    report_payload = result.to_dict()
+    packet_payload = _失败包载荷(result)
+    audit_payload = _审计阻断载荷(result)
+    try:
+        按结构文件校验(report_payload, L1_REPORT_SCHEMA, "L1 报告")
+        按结构文件校验(packet_payload, FAILURE_PACKET_SCHEMA, "L1 失败包")
+        按结构文件校验(audit_payload, AUDIT_BLOCKERS_SCHEMA, "L1 审计阻断项")
+    except 结构错误 as exc:
+        raise 输入错误(str(exc)) from exc
+
+    原子写文本(json_path, json.dumps(report_payload, ensure_ascii=False, indent=2))
     原子写文本(
         packet_path,
         json.dumps(packet_payload, ensure_ascii=False, indent=2),
+    )
+    原子写文本(
+        audit_path,
+        json.dumps(audit_payload, ensure_ascii=False, indent=2),
     )
 
     lines = [
@@ -94,6 +142,8 @@ def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Pa
         "",
         f"- 机器状态：{result.status}",
         f"- 状态说明：{_显示状态(result.status)}；{result.状态说明}",
+        f"- 语义审计状态：{result.semantic_audit_status or '无'}",
+        f"- 审计阻断原因：{result.audit_reason_type or '无'}",
         f"- 启发式结果：{str(result.heuristic).lower()}",
         f"- 发布权限：{str(result.publish_authority).lower()}",
         f"- 需要人工复核：{str(result.human_review_required).lower()}",
@@ -128,13 +178,18 @@ def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Pa
                 f"- 回流验收位置：{gate.回流验收位置}",
                 f"- 规则摘要：`{json.dumps(gate.规则摘要, ensure_ascii=False)}`",
                 "",
-                "| 检测项 | 状态 | 级别 | 说明 | 证据 |",
-                "|---|---|---|---|---|",
+                "| 检测项 | 状态 | 级别 | 说明 | 证据 | 决策角色 | 阻断 |",
+                "|---|---|---|---|---|---|---|",
             ]
         )
         for item in gate.检测项:
             ev = "<br>".join(f"P{e.段落}：{e.摘句}" for e in item.证据) or "无"
-            lines.append(f"| {item.名称} | {_显示检测项状态(item.状态)} | {item.严重级别} | {item.说明} | {ev} |")
+            role = getattr(item, "decision_role", "")
+            blocking = getattr(item, "blocking", False)
+            lines.append(
+                f"| {item.名称} | {_显示检测项状态(item.状态)} | {item.严重级别} | "
+                f"{item.说明} | {ev} | {role} | {str(blocking).lower()} |"
+            )
 
     lines.extend(["", "## 失败包"])
     if not result.失败包:
@@ -150,8 +205,29 @@ def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Pa
                     f"- 失败位置：{evidence}",
                     f"- 影响：{item.说明}",
                     f"- 候选模块：{item.候选模块 or '回L1.5/人工复核'}",
+                    f"- 决策角色：{getattr(item, 'decision_role', '')}",
+                    f"- 阻断：{str(getattr(item, 'blocking', False)).lower()}",
+                    f"- 原因类型：{getattr(item, 'reason_type', '') or '无'}",
                     f"- 修复方向：{item.修复方向 or '人工复核'}",
                     f"- 回流验收位置：{item.回流验收位置 or item.闸门}",
+                ]
+            )
+
+    lines.extend(["", "## 审计阻断项"])
+    if not result.审计阻断项:
+        lines.append("无。")
+    else:
+        for idx, item in enumerate(result.审计阻断项, start=1):
+            evidence = "；".join(f"P{e.段落}：{e.摘句}" for e in item.证据) or "无"
+            lines.extend(
+                [
+                    "",
+                    f"### AB-{idx:03d} {item.名称}",
+                    f"- 来源闸门：{item.闸门}",
+                    f"- 失败位置：{evidence}",
+                    f"- 影响：{item.说明}",
+                    f"- 原因类型：{getattr(item, 'reason_type', '') or '无'}",
+                    f"- 说明：不得路由到 L1.5/L2 修复正文",
                 ]
             )
 
@@ -172,4 +248,4 @@ def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Pa
         )
 
     原子写文本(md_path, "\n".join(lines) + "\n")
-    return md_path, json_path, packet_path
+    return md_path, json_path, packet_path, audit_path

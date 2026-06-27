@@ -41,7 +41,28 @@
       "enum": [
         "SCREENING_PASS",
         "SCREENING_REJECT",
-        "REVIEW_REQUIRED"
+        "REVIEW_REQUIRED",
+        "AUDIT_BLOCKED"
+      ]
+    },
+    "audit_reason_type": {
+      "type": "string",
+      "enum": [
+        "",
+        "INPUT_INVALID",
+        "API_UNAVAILABLE",
+        "EVIDENCE_INVALID",
+        "SCHEMA_INVALID"
+      ]
+    },
+    "semantic_audit_status": {
+      "type": "string",
+      "enum": [
+        "",
+        "PASS",
+        "FAIL",
+        "REVIEW",
+        "AUDIT_BLOCKED"
       ]
     },
     "状态说明": {
@@ -63,7 +84,9 @@
     "decision_scope": {
       "type": "string",
       "enum": [
-        "HEURISTIC_SCREENING"
+        "HEURISTIC_SCREENING",
+        "SEMANTIC_SCREENING",
+        "AUDIT_BLOCKED"
       ]
     },
     "项目": {
@@ -124,7 +147,14 @@
       "type": "array",
       "maxItems": 1000,
       "items": {
-        "$ref": "#/$defs/failure_item"
+        "$ref": "#/$defs/routable_failure_item"
+      }
+    },
+    "审计阻断项": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/audit_blocker_item"
       }
     },
     "路由建议": {
@@ -215,7 +245,9 @@
         "失败类型",
         "候选模块",
         "回流验收位置",
-        "修复方向"
+        "修复方向",
+        "decision_role",
+        "blocking"
       ],
       "properties": {
         "闸门": {
@@ -274,8 +306,74 @@
         },
         "confidence": {
           "$ref": "#/$defs/short_text"
+        },
+        "decision_role": {
+          "type": "string",
+          "enum": [
+            "DIAGNOSTIC",
+            "HARD_GUARD",
+            "CONTENT_DECISION",
+            "AUDIT_BLOCKER"
+          ]
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "reason_type": {
+          "type": "string",
+          "enum": [
+            "",
+            "INPUT_INVALID",
+            "API_UNAVAILABLE",
+            "EVIDENCE_INVALID",
+            "SCHEMA_INVALID"
+          ]
         }
       }
+    },
+    "routable_failure_item": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/failure_item"
+        },
+        {
+          "properties": {
+            "decision_role": {
+              "type": "string",
+              "enum": [
+                "HARD_GUARD",
+                "CONTENT_DECISION"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "audit_blocker_item": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/failure_item"
+        },
+        {
+          "properties": {
+            "decision_role": {
+              "const": "AUDIT_BLOCKER"
+            },
+            "blocking": {
+              "const": true
+            },
+            "reason_type": {
+              "type": "string",
+              "enum": [
+                "INPUT_INVALID",
+                "API_UNAVAILABLE",
+                "EVIDENCE_INVALID",
+                "SCHEMA_INVALID"
+              ]
+            }
+          }
+        }
+      ]
     },
     "gate_result": {
       "type": "object",
@@ -304,6 +402,7 @@
             "SCREENING_REJECT",
             "REVIEW_REQUIRED",
             "STRUCTURE_SIGNAL_PRESENT",
+            "HEURISTIC_DIAGNOSTIC",
             "INTERFACE_SIGNAL_PRESENT",
             "接口成立",
             "需要派单修复",

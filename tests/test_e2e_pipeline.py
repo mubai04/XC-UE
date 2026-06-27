@@ -12,6 +12,7 @@ from pathlib import Path
 import pytest
 
 from DeepSeek客户端 import create_client
+from 退出码 import ExitCode
 from L1_语义审计 import 审计
 from 正文切分 import 切段, 清理正文
 from tests.conftest import ROOT, make_mock_transport, sample_chapter_text, semantic_audit_payload
@@ -167,30 +168,48 @@ def test_l1_entry_semantic_unavailable_rejects(external_io_token, tmp_path, repo
     workspace = _e2e_workspace(repo_root, seed)
     project_root = workspace / "project"
     _write_minimal_project(project_root)
-    chapter = workspace / f"{seed}.md"
-    chapter.write_text(sample_chapter_text(seed), encoding="utf-8")
+    chapter = tmp_path / f"{seed}.md"
+    chapter.write_text(
+        "\n\n".join(
+            f"第{i}段：{seed} 在仓库{i}核对批次，记录线索{i}，推进冲突{i}，焦点问题{i}。"
+            for i in range(1, 80)
+        ),
+        encoding="utf-8",
+    )
     run_id = f"E2E-L1-{seed}"
-    env = os.environ.copy()
-    env.pop("DEEPSEEK_API_KEY", None)
-    cmd = [
-        sys.executable,
-        str(ROOT / "00_工程总控" / "工程执行层" / "L1工程" / "L1运行入口.py"),
-        "--run-id",
-        run_id,
-        "--chapter",
-        str(chapter),
-        "--out-dir",
-        str(workspace / "l1"),
-        "--project-root",
-        str(project_root),
-        "--project",
-        "pytest-mini",
-    ]
-    result = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True, encoding="utf-8", env=env)
-    assert result.returncode != 0, result.stdout + result.stderr
-    payload = _load_subprocess_json(result)
-    assert payload.get("status") != "SCREENING_PASS"
-    assert payload.get("exit_code", result.returncode) != 0
+    out_dir = tmp_path / "l1-blocked"
+    import L1运行入口
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("L1_前置质量护栏.检测", lambda paragraphs, l103=None: [])
+    monkeypatch.setattr(
+        "L1_语义审计.create_client",
+        lambda stage, **kwargs: create_client(stage, api_key="", **{k: v for k, v in kwargs.items() if k != "api_key"}),
+    )
+    try:
+        code, payload = _run_entry(
+            L1运行入口.main,
+            [
+                "L1运行入口.py",
+                "--run-id",
+                run_id,
+                "--chapter",
+                str(chapter),
+                "--out-dir",
+                str(out_dir),
+                "--project-root",
+                str(project_root),
+                "--project",
+                "pytest-mini",
+            ],
+        )
+    finally:
+        monkeypatch.undo()
+    assert code == int(ExitCode.BLOCKED)
+    assert payload.get("status") == "AUDIT_BLOCKED"
+    assert payload.get("audit_reason_type") == "API_UNAVAILABLE"
+    assert payload.get("audit_blocker_count", 0) >= 1
+    assert payload.get("failure_count", 0) == 0
 
 
 def test_l1_inprocess_semantic_mock_passes():
@@ -251,7 +270,7 @@ def test_l1_l2_l3_entry_mock_pipeline(monkeypatch, repo_root):
     focused_items = [
         item
         for item in packet.get("items", [])
-        if item.get("失败类型") == "叙事失败" and item.get("候选模块") == "L2-01"
+        if item.get("候选模块") == "L2-01"
     ]
     assert focused_items, "L1 未产出 L2-01 可路由失败项"
     packet["items"] = focused_items[:1]
@@ -348,6 +367,9 @@ def test_l2_fictional_evidence_blocks_l3_entry(monkeypatch, repo_root):
                 "候选模块": "L2-01",
                 "回流验收位置": "L1-01",
                 "修复方向": "压缩主行动线",
+                "decision_role": "CONTENT_DECISION",
+                "blocking": True,
+                "reason_type": "",
             }
         ],
     }

@@ -25,7 +25,7 @@ from L1模型 import 正文检测结果
 from L1读取 import 读文本
 from 闸门规则加载 import L1闸门规则路径, 加载闸门规则
 from L15交接 import 生成路由建议
-from 失败包生成 import 生成失败包
+from 失败包生成 import 分拆阻断项
 import L1_前置质量护栏
 import L1_00_闸门接口校验
 import L1_01_内部创作检测
@@ -34,7 +34,8 @@ import L1_03_发布锁检测
 import L1_语义审计
 from 退出码 import ExitCode
 from 工程异常 import 工程错误
-from 运行状态 import 状态说明, 机器初筛通过, 机器初筛退回, 需要人工复核
+from 运行状态 import 状态说明, 审计阻断
+from L1决策角色 import 聚合终态
 from 标准加载器 import 候选试验模式, 生产模式
 from 生产资格 import 判定结果转标准字段, 要求生产资格
 from 安全路径 import resolve_inside_root, safe_id
@@ -161,52 +162,23 @@ def main() -> int:
     word_count = 正文字数(paragraphs)
 
     l101 = L1_01_内部创作检测.检测(paragraphs, rules.L101, rules.L15路由)
-    l101_passed = l101.判断结果 == "STRUCTURE_SIGNAL_PRESENT"
-    l102 = L1_02_读者投入检测.检测(paragraphs, rules.L102, l101_passed, rules.L15路由)
-    l102_passed = l102.判断结果 == "STRUCTURE_SIGNAL_PRESENT"
-    l103 = L1_03_发布锁检测.检测(paragraphs, word_count, rules.L103, l102_passed, rules.L15路由)
+    l102 = L1_02_读者投入检测.检测(paragraphs, rules.L102, True, rules.L15路由)
+    l103 = L1_03_发布锁检测.检测(paragraphs, word_count, rules.L103, True, rules.L15路由)
 
     gates = [l101, l102, l103]
     l100 = L1_00_闸门接口校验.检测(gates)
-    guard_items = L1_前置质量护栏.检测(paragraphs)
+    guard_items = L1_前置质量护栏.检测(paragraphs, l103=rules.L103)
     semantic = L1_语义审计.审计(paragraphs, title, body)
     l100.检测项.extend(guard_items)
     l100.检测项.extend(semantic.检测项列表)
-    if guard_items:
-        l100.失败类型.extend([item.失败类型 for item in guard_items if item.失败类型])
-        l100.失败位置.extend([e for item in guard_items for e in item.证据])
-        l100.是否进入L15 = "是"
-        l100.调用方向.extend([item.候选模块 for item in guard_items if item.候选模块])
-        if any(item.严重级别 == "error" for item in guard_items):
-            l100.判断结果 = "SCREENING_REJECT"
-        else:
-            l100.判断结果 = "HUMAN_REVIEW_REQUIRED"
-        l100.最终状态 = l100.判断结果
-    semantic_failures = [item for item in semantic.检测项列表 if item.严重级别 in {"error", "warning"}]
-    if semantic_failures:
-        l100.失败类型.extend([item.失败类型 for item in semantic_failures if item.失败类型])
-        l100.失败位置.extend([e for item in semantic_failures for e in item.证据])
-        l100.是否进入L15 = "是"
-        if any(item.严重级别 == "error" for item in semantic_failures):
-            l100.判断结果 = "SCREENING_REJECT"
-            l100.最终状态 = "SCREENING_REJECT"
-        elif l100.判断结果 not in {"SCREENING_REJECT"}:
-            l100.判断结果 = "HUMAN_REVIEW_REQUIRED"
-            l100.最终状态 = "HUMAN_REVIEW_REQUIRED"
     gates = [l100, *gates]
-    failure_packet = 生成失败包(gates)
-    routes = 生成路由建议(failure_packet, rules.L15路由)
-    has_error = any(item.严重级别 == "error" for item in failure_packet)
-    has_warning = any(item.严重级别 == "warning" for item in failure_packet)
-    if has_error:
-        status = 机器初筛退回
-        exit_code = ExitCode.GATE_REJECTED
-    elif has_warning:
-        status = 需要人工复核
-        exit_code = ExitCode.REVIEW_REQUIRED
-    else:
-        status = 机器初筛通过
-        exit_code = ExitCode.OK
+    split = 分拆阻断项(gates)
+    failure_packet = split.失败包
+    audit_blockers = split.审计阻断项
+    routes = 生成路由建议(failure_packet, rules.L15路由) if failure_packet else []
+    final = 聚合终态(semantic, failure_packet, audit_blockers)
+    status = final.status
+    exit_code = final.exit_code
 
     result = 正文检测结果(
         run_id=run_id,
@@ -215,19 +187,25 @@ def main() -> int:
         章节标题=title,
         当前字数=word_count,
         段落数=len(paragraphs),
-        方法声明="自动检测结合结构化 L1 闸门规则与 DeepSeek 语义审计：启发式筛查保留；语义核心（因果、动机、冲突、读者收益、认知成本、章末追读）由 API 完成；API 不可用或证据无效时不得 PASS。",
+        方法声明="L1 词面闸门仅输出 DIAGNOSTIC 诊断信号；客观硬护栏与 L1-SEM DeepSeek 语义审计承担裁决；API 不可用或证据无效时输出 AUDIT_BLOCKED，不回退词面结论。",
         闸门结果=gates,
         失败包=failure_packet,
+        审计阻断项=audit_blockers,
         路由建议=routes,
         pipeline_run_id=pipeline_run_id,
         stage_run_id=stage_run_id or f"{pipeline_run_id}-L1",
         status=status,
-        状态说明=状态说明[status],
+        状态说明=状态说明.get(status, 状态说明[审计阻断]),
+        audit_reason_type=final.audit_reason_type,
+        semantic_audit_status=final.semantic_audit_status,
+        validation_status="UNVALIDATED",
+        human_review_required=final.human_review_required,
+        decision_scope="SEMANTIC_SCREENING" if status != 审计阻断 else "AUDIT_BLOCKED",
         rule_version=gate_rule_version,
     )
 
     try:
-        md_path, json_path, packet_path = 写报告(result, out_dir)
+        md_path, json_path, packet_path, audit_path = 写报告(result, out_dir)
     except 工程错误 as exc:
         打印错误信封(exc, stage="L1", run_id=run_id, path=out_dir)
         return int(exc.exit_code)
@@ -242,9 +220,13 @@ def main() -> int:
                 "report_md": str(md_path),
                 "report_json": str(json_path),
                 "failure_packet": str(packet_path),
+                "audit_blockers": str(audit_path),
                 "gate_results": {gate.闸门: gate.判断结果 for gate in gates},
                 "failure_count": len(failure_packet),
                 "status": status,
+                "audit_reason_type": result.audit_reason_type,
+                "semantic_audit_status": result.semantic_audit_status,
+                "audit_blocker_count": len(audit_blockers),
                 "heuristic": result.heuristic,
                 "publish_authority": result.publish_authority,
                 "human_review_required": result.human_review_required,

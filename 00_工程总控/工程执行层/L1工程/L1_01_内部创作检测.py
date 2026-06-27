@@ -3,6 +3,7 @@
 import re
 
 from 正文切分 import 找证据
+from L1决策角色 import 完成诊断闸门
 from L1模型 import 检测项, 段落, 证据, 闸门结果
 from L15交接 import 补路由
 from 闸门标准解析 import L101规则, L15路由规则
@@ -148,18 +149,17 @@ def 检测(paragraphs: list[段落], rules: L101规则, routes: dict[str, L15路
     failures = [补路由(i, routes) for i in items if i.严重级别 in {"error", "warning"}]
     allowed_types = set(rules.失败类型)
     failures = [i for i in failures if not allowed_types or i.失败类型 in allowed_types]
-    hard = [i for i in failures if i.严重级别 == "error"]
-    result = "SCREENING_REJECT" if hard else ("HUMAN_REVIEW_REQUIRED" if failures else "STRUCTURE_SIGNAL_PRESENT")
-    return 闸门结果(
+    gate = 闸门结果(
         闸门="L1-01",
-        判断结果=result,
+        判断结果="",
         输入材料=["章节正文", "L1-01 Markdown标准", "L1-01失败类型", "L1-01启发式信号标准"],
-        失败类型=[i.失败类型 for i in failures if i.失败类型],
-        失败位置=[e for i in failures for e in i.证据],
-        是否进入L15="是" if failures else "否",
-        调用方向=[i.候选模块 for i in failures if i.候选模块],
+        失败类型=[],
+        失败位置=[],
+        是否进入L15="否",
+        调用方向=[],
         回流验收位置="L1-01",
-        最终状态=result,
+        最终状态="",
         检测项=items,
-        规则摘要={"失败类型": rules.失败类型, "启发式信号标准": rules.通过标准},
+        规则摘要={"失败类型": rules.失败类型, "启发式信号标准": rules.通过标准, "诊断失败类型": [i.失败类型 for i in failures if i.失败类型]},
     )
+    return 完成诊断闸门(gate)

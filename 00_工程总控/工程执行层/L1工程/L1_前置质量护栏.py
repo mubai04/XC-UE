@@ -3,7 +3,9 @@
 import re
 from collections import Counter
 
+from L1决策角色 import 标记诊断项, 硬护栏角色
 from L1模型 import 检测项, 段落, 证据
+from 闸门标准解析 import L103规则
 
 
 触发词 = [
@@ -103,55 +105,82 @@ def _触发词依赖度(paragraphs: list[段落]) -> float:
     return 1.0 if remaining_signal == 0 else max(0.0, 1.0 - remaining_signal / max(1, original_hits))
 
 
-def _证据(名称: str, value: float, severity: str, failure_type: str, description: str) -> 检测项:
+def _硬护栏(名称: str, value: float, failure_type: str, description: str) -> 检测项:
     return 检测项(
         "L1-00",
         名称,
-        "风险" if severity == "warning" else "失败",
+        "失败",
         f"{description} 当前值：{value:.3f}。",
         [证据(None, f"{名称}={value:.3f}")],
-        severity,
+        "error",
         failure_type,
-        候选模块="人工复核" if severity == "warning" else "回L1",
+        候选模块="回L1",
         回流验收位置="L1-00",
-        修复方向="先处理文本重复、低信息或触发词堆砌风险，再进入 L1 初筛。",
+        修复方向="先处理文本重复、低信息或字数硬阈风险，再进入 L1 语义审计。",
+        heuristic=False,
+        decision_role=硬护栏角色,
+        blocking=True,
+        reason_type="",
     )
 
 
-def 检测(paragraphs: list[段落]) -> list[检测项]:
+def _诊断(名称: str, value: float, description: str) -> 检测项:
+    return 标记诊断项(
+        检测项(
+            "L1-00",
+            名称,
+            "风险",
+            f"{description} 当前值：{value:.3f}。",
+            [证据(None, f"{名称}={value:.3f}")],
+            "info",
+            "",
+        )
+    )
+
+
+def 检测(paragraphs: list[段落], *, l103: L103规则 | None = None) -> list[检测项]:
     items: list[检测项] = []
     body_paragraphs = [p for p in paragraphs if not p.文本.startswith("#")]
     total_chars = sum(p.字数 for p in body_paragraphs)
-    if total_chars < 300:
-        items.append(_证据("TOO_SHORT_INPUT", float(total_chars), "error", "极短输入", "正文有效字数低于 P0 阻断阈值 300。"))
+    function_floor = l103.功能稿下限 if l103 else 2000
+
+    if total_chars < function_floor:
+        items.append(
+            _硬护栏(
+                "WORD_COUNT_BELOW_FUNCTION_FLOOR",
+                float(total_chars),
+                "字数不足",
+                f"正文有效字数低于 gate_rules 功能稿下限 {function_floor}。",
+            )
+        )
     if total_chars > 20000:
-        items.append(_证据("TOO_LONG_INPUT", float(total_chars), "warning", "超长输入", "正文有效字数超过 P0 人工复核阈值 20000。"))
+        items.append(_诊断("TOO_LONG_INPUT", float(total_chars), "正文有效字数超过人工复核阈值 20000。"))
 
     repeat_ratio = _重复段落比例(paragraphs)
     if repeat_ratio > 0.15:
-        items.append(_证据("HIGH_REPETITION", repeat_ratio, "error", "高重复正文", "重复段落比例超过 P0 阻断阈值 0.15。"))
+        items.append(_硬护栏("HIGH_REPETITION", repeat_ratio, "高重复正文", "重复段落比例超过阻断阈值 0.15。"))
 
     unique_ratio = _句子唯一率(paragraphs)
     if unique_ratio < 0.70:
-        items.append(_证据("LOW_SENTENCE_UNIQUENESS", unique_ratio, "error", "低信息重复正文", "句子唯一率低于 P0 阻断阈值 0.70。"))
+        items.append(_硬护栏("LOW_SENTENCE_UNIQUENESS", unique_ratio, "低信息重复正文", "句子唯一率低于阻断阈值 0.70。"))
 
     ngram_ratio = _重复窗口比例(paragraphs)
     if ngram_ratio > 0.40:
-        items.append(_证据("REPEATED_NGRAM", ngram_ratio, "error", "重复窗口过高", "四字窗口重复比例超过 P0 阻断阈值 0.40。"))
+        items.append(_硬护栏("REPEATED_NGRAM", ngram_ratio, "重复窗口过高", "四字窗口重复比例超过阻断阈值 0.40。"))
     elif ngram_ratio > 0.25:
-        items.append(_证据("REPEATED_NGRAM", ngram_ratio, "warning", "重复窗口风险", "四字窗口重复比例超过 P0 人工复核阈值 0.25。"))
+        items.append(_诊断("REPEATED_NGRAM", ngram_ratio, "四字窗口重复比例超过人工复核阈值 0.25。"))
 
     trigger_concentration = _触发词集中度(paragraphs)
     if trigger_concentration > 0.65:
-        items.append(_证据("TRIGGER_CONCENTRATION", trigger_concentration, "warning", "触发词集中风险", "命中触发词集中在少数段落。"))
+        items.append(_诊断("TRIGGER_CONCENTRATION", trigger_concentration, "命中触发词集中在少数段落。"))
 
     trigger_span = _触发词段落跨度(paragraphs)
     if trigger_span and trigger_span < 0.35:
-        items.append(_证据("INSUFFICIENT_EVIDENCE_INDEPENDENCE", trigger_span, "warning", "证据独立性不足", "触发词证据分布跨度低于 P0 人工复核阈值 0.35。"))
+        items.append(_诊断("INSUFFICIENT_EVIDENCE_INDEPENDENCE", trigger_span, "触发词证据分布跨度偏低。"))
 
     trigger_dependency = _触发词依赖度(paragraphs)
-    dependency_context_risky = trigger_concentration > 0.45 or unique_ratio < 0.75 or repeat_ratio > 0.10 or total_chars < 1200
+    dependency_context_risky = trigger_concentration > 0.45 or unique_ratio < 0.75 or repeat_ratio > 0.10 or total_chars < function_floor
     if trigger_dependency > 0.80 and dependency_context_risky:
-        items.append(_证据("TRIGGER_DEPENDENCY", trigger_dependency, "warning", "触发词依赖风险", "删除监控触发词后，剩余基础结构信号明显不足。"))
+        items.append(_诊断("TRIGGER_DEPENDENCY", trigger_dependency, "删除监控触发词后，剩余基础结构信号明显不足。"))
 
     return items

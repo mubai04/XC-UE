@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "xcue.schema/failure-packet/1.0",
+  "$id": "xcue.schema/audit-blockers/1.0",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -8,12 +8,14 @@
     "pipeline_run_id",
     "stage_run_id",
     "status",
-    "failure_count",
+    "semantic_audit_status",
+    "audit_reason_type",
+    "blocker_count",
     "items"
   ],
   "properties": {
     "schema_version": {
-      "const": "xcue.failure-packet/1.0"
+      "const": "xcue.audit-blockers/1.0"
     },
     "pipeline_run_id": {
       "$ref": "#/$defs/run_id"
@@ -22,9 +24,36 @@
       "$ref": "#/$defs/run_id"
     },
     "status": {
-      "$ref": "#/$defs/l1_status"
+      "type": "string",
+      "enum": [
+        "AUDIT_BLOCKED",
+        "SCREENING_REJECT",
+        "SCREENING_PASS",
+        "REVIEW_REQUIRED"
+      ]
     },
-    "failure_count": {
+    "semantic_audit_status": {
+      "type": "string",
+      "enum": [
+        "AUDIT_BLOCKED",
+        "PASS",
+        "FAIL",
+        "REVIEW",
+        "UNAVAILABLE",
+        "INVALID"
+      ]
+    },
+    "audit_reason_type": {
+      "type": "string",
+      "enum": [
+        "",
+        "INPUT_INVALID",
+        "API_UNAVAILABLE",
+        "EVIDENCE_INVALID",
+        "SCHEMA_INVALID"
+      ]
+    },
+    "blocker_count": {
       "type": "integer",
       "minimum": 0,
       "maximum": 1000
@@ -33,11 +62,13 @@
       "type": "array",
       "maxItems": 1000,
       "items": {
-        "$ref": "#/$defs/failure_item"
+        "$ref": "#/$defs/audit_blocker_item"
       }
     },
     "extensions": {
-      "$ref": "#/$defs/extensions"
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
     }
   },
   "$defs": {
@@ -46,23 +77,6 @@
       "minLength": 1,
       "maxLength": 64,
       "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$"
-    },
-    "l1_status": {
-      "type": "string",
-      "enum": [
-        "SCREENING_PASS",
-        "SCREENING_REJECT",
-        "REVIEW_REQUIRED",
-        "AUDIT_BLOCKED"
-      ]
-    },
-    "severity": {
-      "type": "string",
-      "enum": [
-        "info",
-        "warning",
-        "error"
-      ]
     },
     "text": {
       "type": "string",
@@ -93,7 +107,7 @@
         }
       }
     },
-    "failure_item": {
+    "audit_blocker_item": {
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -108,7 +122,8 @@
         "回流验收位置",
         "修复方向",
         "decision_role",
-        "blocking"
+        "blocking",
+        "reason_type"
       ],
       "properties": {
         "闸门": {
@@ -140,7 +155,12 @@
           }
         },
         "严重级别": {
-          "$ref": "#/$defs/severity"
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
         },
         "失败类型": {
           "$ref": "#/$defs/short_text"
@@ -164,19 +184,14 @@
           "$ref": "#/$defs/short_text"
         },
         "decision_role": {
-          "type": "string",
-          "enum": [
-            "HARD_GUARD",
-            "CONTENT_DECISION"
-          ]
+          "const": "AUDIT_BLOCKER"
         },
         "blocking": {
-          "type": "boolean"
+          "const": true
         },
         "reason_type": {
           "type": "string",
           "enum": [
-            "",
             "INPUT_INVALID",
             "API_UNAVAILABLE",
             "EVIDENCE_INVALID",
@@ -184,11 +199,6 @@
           ]
         }
       }
-    },
-    "extensions": {
-      "type": "object",
-      "additionalProperties": true,
-      "maxProperties": 50
     }
   }
 }
