@@ -229,6 +229,37 @@
         },
         "摘句": {
           "$ref": "#/$defs/text"
+        },
+        "段落ID": {
+          "$ref": "#/$defs/short_text"
+        },
+        "source_scope": {
+          "type": "string",
+          "enum": [
+            "CURRENT_CHAPTER",
+            "PRIOR_CHAPTER"
+          ]
+        },
+        "start_offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "end_offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "occurrence_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
         }
       }
     },

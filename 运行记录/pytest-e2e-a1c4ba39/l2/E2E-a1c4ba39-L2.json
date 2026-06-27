@@ -1,0 +1,45 @@
+{
+  "run_id": "E2E-a1c4ba39-L2",
+  "输入文件": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-a1c4ba39\\a1c4ba39_failure_packet.json",
+  "输入数量": 1,
+  "方法声明": "L2工程只做接口判断与修复单生成，不写正文、不替 L1.5 裁决；运行真源为结构化能力规则 JSON 与结构化路由规则 JSON，Markdown 仅作解释材料。",
+  "标准校验问题": [],
+  "回流校验问题": [],
+  "接口判断": [
+    {
+      "来源闸门": "L1-01",
+      "输入来源模式": "直接闸门输入",
+      "输入问题": "a1c4ba39 结构链断",
+      "初步归属": "L2-01",
+      "主候选模块": "L2-01",
+      "次候选模块": "",
+      "接口失败类型": "",
+      "判断依据": "结构化路由规则 L2-ROUTE-001 将“叙事失败”匹配到 L2-01。",
+      "是否混合问题": "否",
+      "是否越界": "否",
+      "建议动作": [
+        "进入对应 L2"
+      ],
+      "回流验收位置": "L1-01",
+      "最终状态": "接口明确",
+      "备注": "",
+      "route_rule_id": "L2-ROUTE-001",
+      "route_rule_version": "2026-06-23.m3-01"
+    }
+  ],
+  "修复单": [],
+  "阻断项": [],
+  "复验目标": [],
+  "schema_version": "xcue.l2-report/1.0",
+  "pipeline_run_id": "E2E-a1c4ba39",
+  "stage_run_id": "E2E-a1c4ba39-L2",
+  "status": "MODEL_BLOCKED",
+  "状态说明": "模型/API 阻断，未生成任何修复单",
+  "input_artifacts": [],
+  "output_artifacts": [],
+  "extensions": {
+    "model_errors": [
+      "L2-01 EVIDENCE_INVALID: evidence_quotes[0] 摘句无法在正文上下文或失败证据中逐字找到"
+    ]
+  }
+}

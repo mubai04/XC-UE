@@ -1,0 +1,36 @@
+{
+  "run_id": "E2E-1374e445-L1-L15",
+  "pipeline_run_id": "E2E-1374e445-L1",
+  "stage_run_id": "E2E-1374e445-L1-L15",
+  "source_failure_packet": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-1374e445\\1374e445_l2_input.json",
+  "primary_failure": {
+    "闸门": "L1-00",
+    "名称": "WORD_COUNT_BELOW_FUNCTION_FLOOR",
+    "失败类型": "字数不足",
+    "说明": "正文有效字数低于 gate_rules 功能稿下限 2000。 当前值：17.000。",
+    "状态": "失败",
+    "严重级别": "error",
+    "候选模块": "L2-01",
+    "回流验收位置": "L1-03",
+    "修复方向": "发布稿扩写版",
+    "证据": [
+      {
+        "段落": null,
+        "摘句": "WORD_COUNT_BELOW_FUNCTION_FLOOR=17.000"
+      }
+    ]
+  },
+  "secondary_failures": [],
+  "target_module": "L2-01",
+  "repair_product": "发布稿扩写版",
+  "return_gate": "L1-03",
+  "route_rule_id": "L15-字数不足",
+  "route_rule_version": "gate_rules.l15_routes",
+  "final_status": "ROUTED",
+  "blockers": [],
+  "routing_basis": "主失败 字数不足 → L2-01；次级 0 项仅记录不并行执行。",
+  "schema_version": "xcue.l15-route-report/1.0",
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-1374e445\\project\\chapters\\1374e445.md"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "xcue.audit-blockers/1.0",
+  "pipeline_run_id": "E2E-de33266a-L1",
+  "stage_run_id": "E2E-de33266a-L1-L1",
+  "status": "SCREENING_REJECT",
+  "semantic_audit_status": "PASS",
+  "audit_reason_type": "",
+  "blocker_count": 0,
+  "items": [],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-de33266a\\project\\chapters\\de33266a.md"
+  }
+}

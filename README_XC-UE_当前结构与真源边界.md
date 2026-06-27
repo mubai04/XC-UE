@@ -1,44 +1,59 @@
-# README — XC-UE 当前结构与真源边界 v0.1
+# README — XC-UE 当前结构与真源边界 v0.2
 
 > **Cursor 请先读本文件。**
 >
-> 当前阶段：**不是重建系统**，而是 **目录治理 + 真实项目压测准备**。  
-> 状态：目录治理 v0.1 / 2026-06-16
+> 当前阶段：**R0–R3 基础整改 / Phase 2A 候选集成**  
+> 动态状态见：`00_工程总控/CURRENT_SYSTEM_STATUS.generated.md`
 
 ---
 
 ## 0. 当前阶段声明
 
 ```text
-已完成：L0 / L1 / L1.5 / L2 / L3 系统层 + Project Harness 壳
-当前做：目录治理（DG-01 ~ DG-09）
-下一步：填 70_测试项目/TP-001_CleanHarness_IR_Runtime/IR/
-禁止做：重建 L0-L3 / 建 L4 / 画 SRN-U / 写 ch01 / 跑 L1
+已完成：L0–L3 系统层 + Project Harness + L1 Phase 2A 候选评估链
+当前做：R0–R3 整改（默认项目闭环 / workspace-only / 评估可信度）
+状态：INTEGRATED_CANDIDATE_WITH_BLOCKERS（非生产）
+禁止做：第三次全量真实 API / 修改 golden v1 标签追校准 / 进入 R4 扩功能
 ```
 
 ---
 
-## 1. Cursor 读取顺序
+## 1. 运行形态（Workspace-Only）
+
+`pip install -e ".[dev,runtime]"` 仅安装 **workspace stub**（`xcue` CLI）与开发/运行时 extras。  
+**真实 L1/L2/L3 引擎不在 wheel 内**，必须在仓库根目录执行：
+
+```bash
+pip install -e ".[dev,runtime]"
+python 00_工程总控/工程执行层/统一运行入口.py --help
+python 00_工程总控/工程执行层/统一运行入口.py --target L1 --project TP-001 --chapter 70_测试项目/TP-001_CleanHarness_IR_Runtime/chapters/ch01.md
+```
+
+- `xcue` 无参数 → **exit 2**（非成功）
+- wheel **不是**产品交付物
+- 默认项目 `TP-001` 需存在 [`project.json`](70_测试项目/TP-001_CleanHarness_IR_Runtime/project.json)
+
+---
+
+## 2. Cursor 读取顺序
 
 ```text
 1. README_XC-UE_当前结构与真源边界.md     ← 本文件
-2. INDEX.md                               ← 该读什么、不该读什么
-3. 00_工程总控/CURRENT_SYSTEM_STATUS.md   ← 防误判「L2/L3 未建」
-4. 10_L0_总图层/L0_XC-UE_终极工程总图.md
-5. 按任务再读 L1 / L1.5 / L2 / L3 / TP-001
+2. INDEX.md
+3. 00_工程总控/CURRENT_SYSTEM_STATUS.generated.md   ← 机器生成动态状态
+4. 审计纠偏_2026-06-26/AUDIT_BASELINE.json          ← R0 整改前基线（只读）
+5. 按任务再读 L1 / L2 / L3 / TP-001
 ```
-
-**禁止**在未读边界声明前，读取归档区或旧输入并写入系统层。
 
 ---
 
-## 2. 目标根目录
+## 3. 目标根目录
 
 ```text
 XC-UE/
 ├── README_XC-UE_当前结构与真源边界.md
 ├── INDEX.md
-├── .cursorignore
+├── pyproject.toml
 ├── 00_工程总控/
 ├── 10_L0_总图层/
 ├── 20_L1_闸门层/
@@ -47,61 +62,41 @@ XC-UE/
 ├── 50_L3_执行协议层/
 ├── 70_测试项目/
 │   └── TP-001_CleanHarness_IR_Runtime/
-└── 99_归档_不要索引/
+│       └── project.json
+├── tests/fixtures/l1_semantic_golden/   ← golden v1（R0 冻结）
+└── 审计纠偏_2026-06-26/
 ```
 
 ---
 
-## 3. 三层边界
+## 4. 三层边界
 
 | 类型 | 路径 | 性质 |
 |---|---|---|
 | 系统层 | `10_L0` ~ `50_L3` | XC-UE 架构真源（Markdown） |
-| 项目运行时 | `70_测试项目/TP-001_*` | 压测壳，非系统真源 |
-| 归档区 | `99_归档_不要索引/` | 禁止索引、禁止反向写入 |
+| 项目运行时 | `70_测试项目/TP-001_*` | Harness + `project.json` |
+| 评估语料 | `tests/fixtures/l1_semantic_golden/` | golden v1（冻结）；v2 规划中 |
 
 TP-001 正式输入只认 `IR/`。  
-`_legacy_root_inputs/`、`chapters/_candidates/` **不是**正式输入。
+`chapters/_candidates/` **不是**正式输入。
 
 ---
 
-## 4. 真源规则
+## 5. 真源规则
 
 ```text
-Markdown > 图片
-活跃工程 > 99_归档_不要索引/
-系统层 > 测试项目层
+运行真源：00_工程总控/工程执行层/（非 pip 包）
+动态状态：CURRENT_SYSTEM_STATUS.generated.md（非手写 CURRENT_SYSTEM_STATUS.md）
+golden v1 冻结：FREEZE_RECORD.json + AUDIT_BASELINE.json
 ```
 
 ---
 
-## 5. 当前禁止
-
-```text
-不填真实小说 IR（DG 完成后、人工确认后才开始）
-不写 ch01 / 不跑 L1
-不建 L4 / 不画新图 / 不扩 L2 内容
-不做 SRN-U / Xuke·Chuangjie
-不从归档区反向覆盖活跃工程
-```
-
----
-
-## 6. 动作序列
-
-```text
-DG-01 ~ DG-09  目录治理
-P4             填 TP-001 IR  ← DG 完成后
-P5             写 ch01
-P6             跑 L1-01/02/03
-```
-
----
-
-## 7. 相关文档
+## 6. 相关文档
 
 | 文件 | 用途 |
 |---|---|
 | `INDEX.md` | 根目录导航 |
-| `00_工程总控/CURRENT_SYSTEM_STATUS.md` | 各层状态 |
+| `00_工程总控/CURRENT_SYSTEM_STATUS.generated.md` | 各层动态状态 |
+| `00_工程总控/CURRENT_SYSTEM_STATUS.md` | **已废弃**，见 generated |
 | `00_工程总控/SOURCE_POLICY_外部资料接入规则.md` | 外部资料规则 |

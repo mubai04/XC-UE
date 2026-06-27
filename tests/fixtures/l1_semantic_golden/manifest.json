@@ -1,0 +1,45 @@
+{
+  "schema_version": "xcue.l1-golden-manifest/1.0",
+  "phase": "2A",
+  "status": "LABELS_READY_PROTOCOL_FIX_APPLIED",
+  "expected_overall_draft": {
+    "GS-001": "REVIEW",
+    "GS-002": "PASS",
+    "GS-003": "PASS",
+    "GS-004": "PASS",
+    "GS-005": "FAIL"
+  },
+  "notes": "paragraph_id 必须使用 paragraph_maps/*.paragraph_map.json 中 L1 切段 ID，不得使用正文内嵌 [P0001] 序号。标签就绪前勿运行 eval。",
+  "chapters": [
+    {
+      "chapter_id": "GS-001",
+      "chapter_path": "chapters/GS-001.md",
+      "label_path": "labels/GS-001.labels.json",
+      "scenario_tag": null
+    },
+    {
+      "chapter_id": "GS-002",
+      "chapter_path": "chapters/GS-002.md",
+      "label_path": "labels/GS-002.labels.json",
+      "scenario_tag": null
+    },
+    {
+      "chapter_id": "GS-003",
+      "chapter_path": "chapters/GS-003.md",
+      "label_path": "labels/GS-003.labels.json",
+      "scenario_tag": null
+    },
+    {
+      "chapter_id": "GS-004",
+      "chapter_path": "chapters/GS-004.md",
+      "label_path": "labels/GS-004.labels.json",
+      "scenario_tag": null
+    },
+    {
+      "chapter_id": "GS-005",
+      "chapter_path": "chapters/GS-005.md",
+      "label_path": "labels/GS-005.labels.json",
+      "scenario_tag": null
+    }
+  ]
+}

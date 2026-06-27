@@ -1,0 +1,1743 @@
+{
+  "generated_at": "2026-06-27T12:58:11",
+  "phase": "2A",
+  "evaluation_kind": "REAL_API_RUN",
+  "pilot_status": "PILOT_REJECTED",
+  "pilot_reasons": [
+    "GS-001: REVIEW 章超出 acceptance_range（实际 PASS）",
+    "GS-005: 明确 FAIL 章不得 PASS（实际 PASS）"
+  ],
+  "metrics": {
+    "first_pass_evidence_valid_rate": 1.0,
+    "eventual_evidence_valid_rate": 1.0,
+    "evidence_retry_rate": 0.0,
+    "transport_retry_rate": 0.0,
+    "format_retry_rate": 0.0,
+    "audit_blocked_rate": 0.0,
+    "overall_agreement": 0.6,
+    "dimension_agreement": 0.9
+  },
+  "chapter_results": [
+    {
+      "chapter_id": "GS-001",
+      "scenario_tag": "debatable_review",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "debatable_review"
+      ],
+      "expected_overall": "REVIEW",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": true,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 0,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": false,
+      "dimension_agreement": 0.8333333333333334,
+      "hard_pass": false,
+      "hard_fail": false,
+      "review_ok": false,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "动机",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "冲突",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "REVIEW"
+          ],
+          "agreement": false
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [],
+      "warnings": [
+        "因果: PARAGRAPH_ID_REPAIRED P0003 -> P0002",
+        "章末追读: PARAGRAPH_ID_REPAIRED P0102 -> P0101"
+      ],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章清晰交代了秦婀娜来渝州城收徒的起因，以及李子夜因无武道天赋而需要拜师的因果链。谣言传播与李子夜的真实情况形成对比，因果逻辑完整。",
+            "evidence": [
+              {
+                "paragraph_id": "P0003",
+                "exact_text": "“秦仙子要来渝州城了！”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "李子夜拜师的动机明确：他无法习武，希望通过秦婀娜找到脱胎换骨的方法。李百万的愧疚和剑痴的提示强化了这一动机。",
+            "evidence": [
+              {
+                "paragraph_id": "P0080",
+                "exact_text": "“老张，你活得久见得多，这世间有没有什么逆天的功法或者丹药，可以让人脱胎换骨，变成武道天才。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章构建了多重冲突：李子夜无武道天赋与外界传言的绝世天才之间的反差；李子夜渴望习武却无法实现的内心冲突；以及李百万用财富弥补儿子缺陷的无奈。",
+            "evidence": [
+              {
+                "paragraph_id": "P0077",
+                "exact_text": "“老张，你说我这儿子真的没有武道的天赋吗？”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "本章提供了丰富的信息：世界观设定（大商皇朝、剑仙、天才排名）、主角背景（富商之子、无天赋）、以及悬念（秦婀娜是否会收徒）。读者获得了对故事背景和主角困境的清晰认知。",
+            "evidence": [
+              {
+                "paragraph_id": "P0014",
+                "exact_text": "“在这九州之上，要说年轻一代的绝代天骄，有五人不得不提，那便是佛门的佛子三藏，神殿的神子燕小鱼，朱雀宗的圣女火麟儿，还有我大商皇朝的四皇子慕白，可惜，这四位都已经有了师承。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章信息密度适中，通过说书人对话、谣言传播、李府场景切换等手法自然展开，没有复杂术语或跳跃叙事，读者容易理解。",
+            "evidence": [
+              {
+                "paragraph_id": "P0044",
+                "exact_text": "一人造谣,三人成狼,五人成虎，短短三个月，由渝州城为中心蔓延开来的谣言，越传越离谱，从李子夜有剑仙之姿，传到李子夜马上就要举霞飞升，唬得不知情的群众们一愣一愣的。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末以李子夜提议用金钱打动秦婀娜收尾，既呼应了前文李百万的财富设定，又制造了悬念：秦婀娜是否会为金钱所动？读者有动力继续阅读下一章。",
+            "evidence": [
+              {
+                "paragraph_id": "P0102",
+                "exact_text": "“老爹，不怪你。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 0,
+        "warnings": [
+          "因果: PARAGRAPH_ID_REPAIRED P0003 -> P0002",
+          "章末追读: PARAGRAPH_ID_REPAIRED P0102 -> P0101"
+        ],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "本章清晰交代了秦婀娜来渝州城收徒的起因，以及李子夜因无武道天赋而需要拜师的因果链。谣言传播与李子夜的真实情况形成对比，因果逻辑完整。（警告：因果: PARAGRAPH_ID_REPAIRED P0003 -> P0002）",
+          "证据": [
+            {
+              "段落": 2,
+              "摘句": "“秦仙子要来渝州城了！”",
+              "段落ID": "P0002",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 12,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "李子夜拜师的动机明确：他无法习武，希望通过秦婀娜找到脱胎换骨的方法。李百万的愧疚和剑痴的提示强化了这一动机。",
+          "证据": [
+            {
+              "段落": 80,
+              "摘句": "“老张，你活得久见得多，这世间有没有什么逆天的功法或者丹药，可以让人脱胎换骨，变成武道天才。”",
+              "段落ID": "P0080",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 34,
+              "end_offset": 81,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "本章构建了多重冲突：李子夜无武道天赋与外界传言的绝世天才之间的反差；李子夜渴望习武却无法实现的内心冲突；以及李百万用财富弥补儿子缺陷的无奈。",
+          "证据": [
+            {
+              "段落": 77,
+              "摘句": "“老张，你说我这儿子真的没有武道的天赋吗？”",
+              "段落ID": "P0077",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 26,
+              "end_offset": 48,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "本章提供了丰富的信息：世界观设定（大商皇朝、剑仙、天才排名）、主角背景（富商之子、无天赋）、以及悬念（秦婀娜是否会收徒）。读者获得了对故事背景和主角困境的清晰认知。",
+          "证据": [
+            {
+              "段落": 14,
+              "摘句": "“在这九州之上，要说年轻一代的绝代天骄，有五人不得不提，那便是佛门的佛子三藏，神殿的神子燕小鱼，朱雀宗的圣女火麟儿，还有我大商皇朝的四皇子慕白，可惜，这四位都已经有了师承。”",
+              "段落ID": "P0014",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 87,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "本章信息密度适中，通过说书人对话、谣言传播、李府场景切换等手法自然展开，没有复杂术语或跳跃叙事，读者容易理解。",
+          "证据": [
+            {
+              "段落": 44,
+              "摘句": "一人造谣,三人成狼,五人成虎，短短三个月，由渝州城为中心蔓延开来的谣言，越传越离谱，从李子夜有剑仙之姿，传到李子夜马上就要举霞飞升，唬得不知情的群众们一愣一愣的。",
+              "段落ID": "P0044",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 81,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "章末以李子夜提议用金钱打动秦婀娜收尾，既呼应了前文李百万的财富设定，又制造了悬念：秦婀娜是否会为金钱所动？读者有动力继续阅读下一章。（警告：章末追读: PARAGRAPH_ID_REPAIRED P0102 -> P0101）",
+          "证据": [
+            {
+              "段落": 101,
+              "摘句": "“老爹，不怪你。”",
+              "段落ID": "P0101",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 9,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-002",
+      "scenario_tag": "clear_pass",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "clear_pass"
+      ],
+      "expected_overall": "PASS",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": true,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 0,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": true,
+      "dimension_agreement": 1.0,
+      "hard_pass": true,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "动机",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "冲突",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章清晰展示了乾元子因需要人血喂养青铜蛤蟆而杀死猴七的因果链，以及李十五因梦见神仙而受乾元子信任的因果。",
+            "evidence": [
+              {
+                "paragraph_id": "P0098",
+                "exact_text": "还有就是，这荒郊野岭的，可找不到人血喂棺老爷，就先拿你抵数吧。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "乾元子的动机明确：寻找种仙观以种仙成仙；李十五的动机是生存和寻找逃脱机会。",
+            "evidence": [
+              {
+                "paragraph_id": "P0028",
+                "exact_text": "只要为师找到那种仙观，再把自己当成一颗‘种子’种进土里，就能成仙，成仙啊！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章存在多重冲突：乾元子与弟子间的压迫与反抗（猴七被杀）、李十五内心对乾元子的恐惧与伪装、以及弟子间对乾元子行为的认知差异。",
+            "evidence": [
+              {
+                "paragraph_id": "P0095",
+                "exact_text": "随着刀光一闪，没有丝毫征兆的，猴七眼神凝固，血腥味瞬间扑鼻。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得了关于世界观（种仙观、青铜蛤蟆）、主角处境（穿越者、被胁迫）以及乾元子残暴性格的新信息，增强了阅读兴趣。",
+            "evidence": [
+              {
+                "paragraph_id": "P0054",
+                "exact_text": "事实上，他并不算这方世界原住民，至少灵魂不算。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章信息密度适中，情节线性推进，人物关系清晰，没有复杂术语或跳跃叙事，读者容易理解。",
+            "evidence": [
+              {
+                "paragraph_id": "P0004",
+                "exact_text": "李十五一身破烂道袍，打着双赤脚，脚踝处上了副磨得蹭光的铁链子，双目无神，满身疲气。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末以道观若隐若现的悬念收尾，暗示种仙观即将出现，强烈激发读者继续阅读下一章的欲望。",
+            "evidence": [
+              {
+                "paragraph_id": "P0102",
+                "exact_text": "在这如墨泼洒般的夜中，几里之外，一座模糊不清道观，好似介于真实和虚幻之间。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 0,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "本章清晰展示了乾元子因需要人血喂养青铜蛤蟆而杀死猴七的因果链，以及李十五因梦见神仙而受乾元子信任的因果。",
+          "证据": [
+            {
+              "段落": 98,
+              "摘句": "还有就是，这荒郊野岭的，可找不到人血喂棺老爷，就先拿你抵数吧。",
+              "段落ID": "P0098",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 1,
+              "end_offset": 32,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "乾元子的动机明确：寻找种仙观以种仙成仙；李十五的动机是生存和寻找逃脱机会。",
+          "证据": [
+            {
+              "段落": 28,
+              "摘句": "只要为师找到那种仙观，再把自己当成一颗‘种子’种进土里，就能成仙，成仙啊！",
+              "段落ID": "P0028",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 1,
+              "end_offset": 38,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "本章存在多重冲突：乾元子与弟子间的压迫与反抗（猴七被杀）、李十五内心对乾元子的恐惧与伪装、以及弟子间对乾元子行为的认知差异。",
+          "证据": [
+            {
+              "段落": 95,
+              "摘句": "随着刀光一闪，没有丝毫征兆的，猴七眼神凝固，血腥味瞬间扑鼻。",
+              "段落ID": "P0095",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 30,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "读者获得了关于世界观（种仙观、青铜蛤蟆）、主角处境（穿越者、被胁迫）以及乾元子残暴性格的新信息，增强了阅读兴趣。",
+          "证据": [
+            {
+              "段落": 54,
+              "摘句": "事实上，他并不算这方世界原住民，至少灵魂不算。",
+              "段落ID": "P0054",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 23,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "本章信息密度适中，情节线性推进，人物关系清晰，没有复杂术语或跳跃叙事，读者容易理解。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "李十五一身破烂道袍，打着双赤脚，脚踝处上了副磨得蹭光的铁链子，双目无神，满身疲气。",
+              "段落ID": "P0004",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 41,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "章末以道观若隐若现的悬念收尾，暗示种仙观即将出现，强烈激发读者继续阅读下一章的欲望。",
+          "证据": [
+            {
+              "段落": 102,
+              "摘句": "在这如墨泼洒般的夜中，几里之外，一座模糊不清道观，好似介于真实和虚幻之间。",
+              "段落ID": "P0102",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 37,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-003",
+      "scenario_tag": "clear_pass",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "clear_pass"
+      ],
+      "expected_overall": "PASS",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": true,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 0,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": true,
+      "dimension_agreement": 1.0,
+      "hard_pass": true,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "动机",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "冲突",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章事件有明确的因果链：林恩因系统发布任务而行动，完成任务获得奖励，且行为后果（如投喂小宝贝导致好感度下降）清晰。",
+            "evidence": [
+              {
+                "paragraph_id": "P0016",
+                "exact_text": "【叮！您的老师血锯狂人向你发布任务：开门营业，将魂灯挂在门口，完成任务奖励：骷髅币x10，基础经验x5，纯净的人血x100毫升。】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "林恩的行动动机明确：为了生存和完成任务，他必须服从老师命令并保持镇静。系统任务进一步强化了行为动机。",
+            "evidence": [
+              {
+                "paragraph_id": "P0020",
+                "exact_text": "不过他没有立刻研究，因为他知道，如果不按照他老师的命令立刻行动，他就会死。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章存在外部冲突：林恩与黑暗中的危险（如人皮拾荒者）的互动，以及内部冲突：对系统突然出现的惊讶与谨慎。",
+            "evidence": [
+              {
+                "paragraph_id": "P0046",
+                "exact_text": "但就在这个时候，黑暗里传来了一个低沉而阴森的笑声。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得了世界观设定（诡秘异世界、生存准则）和系统金手指的引入，信息量丰富，满足好奇心和期待。",
+            "evidence": [
+              {
+                "paragraph_id": "P0003",
+                "exact_text": "【吸血鬼，狼人，科技，魔药，鬼怪，生化人，占卜，傀儡，只要是你能想到的所有的可怖元素，这个世界都有。】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章设定和情节清晰易懂，没有复杂术语或跳跃逻辑，读者容易理解。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "破旧的桌子前，林恩拿着羽毛笔，就着灯火。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末以系统面板出现结束，留下悬念，激发读者继续阅读下一章了解系统功能。",
+            "evidence": [
+              {
+                "paragraph_id": "P0098",
+                "exact_text": "而也就是在下一刻，林恩的眼前倏然出现了一个面板。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 0,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "本章事件有明确的因果链：林恩因系统发布任务而行动，完成任务获得奖励，且行为后果（如投喂小宝贝导致好感度下降）清晰。",
+          "证据": [
+            {
+              "段落": 16,
+              "摘句": "【叮！您的老师血锯狂人向你发布任务：开门营业，将魂灯挂在门口，完成任务奖励：骷髅币x10，基础经验x5，纯净的人血x100毫升。】",
+              "段落ID": "P0016",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 65,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "林恩的行动动机明确：为了生存和完成任务，他必须服从老师命令并保持镇静。系统任务进一步强化了行为动机。",
+          "证据": [
+            {
+              "段落": 20,
+              "摘句": "不过他没有立刻研究，因为他知道，如果不按照他老师的命令立刻行动，他就会死。",
+              "段落ID": "P0020",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 37,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "本章存在外部冲突：林恩与黑暗中的危险（如人皮拾荒者）的互动，以及内部冲突：对系统突然出现的惊讶与谨慎。",
+          "证据": [
+            {
+              "段落": 46,
+              "摘句": "但就在这个时候，黑暗里传来了一个低沉而阴森的笑声。",
+              "段落ID": "P0046",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 25,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "读者获得了世界观设定（诡秘异世界、生存准则）和系统金手指的引入，信息量丰富，满足好奇心和期待。",
+          "证据": [
+            {
+              "段落": 3,
+              "摘句": "【吸血鬼，狼人，科技，魔药，鬼怪，生化人，占卜，傀儡，只要是你能想到的所有的可怖元素，这个世界都有。】",
+              "段落ID": "P0003",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 51,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "本章设定和情节清晰易懂，没有复杂术语或跳跃逻辑，读者容易理解。",
+          "证据": [
+            {
+              "段落": 9,
+              "摘句": "破旧的桌子前，林恩拿着羽毛笔，就着灯火。",
+              "段落ID": "P0009",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 20,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "章末以系统面板出现结束，留下悬念，激发读者继续阅读下一章了解系统功能。",
+          "证据": [
+            {
+              "段落": 98,
+              "摘句": "而也就是在下一刻，林恩的眼前倏然出现了一个面板。",
+              "段落ID": "P0098",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 24,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-004",
+      "scenario_tag": "low_lexical_good_narrative",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "low_lexical_good_narrative"
+      ],
+      "expected_overall": "PASS",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": true,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 0,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": true,
+      "dimension_agreement": 1.0,
+      "hard_pass": true,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "动机",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "冲突",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [],
+      "warnings": [
+        "动机: PARAGRAPH_ID_REPAIRED P0012 -> P0013"
+      ],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章展示了清晰的因果链：许临渊因灵石不足面临扣粮危机，通过灰线能力影响秤杆，最终成功过秤，但付出疼痛代价。因果逻辑完整，无断裂。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "少半块。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "许临渊的动机明确：避免被扣灵石（一枚灵石可熬三个月），因此冒险使用灰线能力。动机与行动一致。",
+            "evidence": [
+              {
+                "paragraph_id": "P0012",
+                "exact_text": "一枚灵石足够他在灶房熬三个月。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章存在多重冲突：许临渊与马执事之间的权力冲突（灵石不足 vs 规则执行），以及许临渊内在的生存与代价冲突。冲突具体且紧张。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "马执事看了他一眼：“少半块。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得多重收益：了解灰线能力的代价与效果，感受底层弟子的生存压力，以及主角机智应对困境的爽感。",
+            "evidence": [
+              {
+                "paragraph_id": "P0016",
+                "exact_text": "灰从指腹落下，很细，贴着铜盘爬向秤杆。没有风，灰却沿着刻度向前移了半格。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章信息密度适中，灰线能力通过具体场景展现，无需额外解释。读者能自然理解其运作与代价。",
+            "evidence": [
+              {
+                "paragraph_id": "P0014",
+                "exact_text": "那道灰线是昨夜留下的。灶房的铁锁锈死时，他摸过锁舌，指尖落下一层灰，锁舌轻了半钱。片刻后，胸口疼了整整一夜。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末留下强烈悬念：灰线变长并弯成小钩，暗示能力在成长或积累代价；同时许临渊意识到‘少掉的半块挪到了别处’，引发读者对后续发展的好奇。",
+            "evidence": [
+              {
+                "paragraph_id": "P0031",
+                "exact_text": "许临渊知道，今日少掉的半块并没有凭空补齐。它只是从秤上挪到了别处。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 0,
+        "warnings": [
+          "动机: PARAGRAPH_ID_REPAIRED P0012 -> P0013"
+        ],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "本章展示了清晰的因果链：许临渊因灵石不足面临扣粮危机，通过灰线能力影响秤杆，最终成功过秤，但付出疼痛代价。因果逻辑完整，无断裂。",
+          "证据": [
+            {
+              "段落": 9,
+              "摘句": "少半块。",
+              "段落ID": "P0009",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 10,
+              "end_offset": 14,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "许临渊的动机明确：避免被扣灵石（一枚灵石可熬三个月），因此冒险使用灰线能力。动机与行动一致。（警告：动机: PARAGRAPH_ID_REPAIRED P0012 -> P0013）",
+          "证据": [
+            {
+              "段落": 13,
+              "摘句": "一枚灵石足够他在灶房熬三个月。",
+              "段落ID": "P0013",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 15,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "本章存在多重冲突：许临渊与马执事之间的权力冲突（灵石不足 vs 规则执行），以及许临渊内在的生存与代价冲突。冲突具体且紧张。",
+          "证据": [
+            {
+              "段落": 9,
+              "摘句": "马执事看了他一眼：“少半块。”",
+              "段落ID": "P0009",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 15,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "读者获得多重收益：了解灰线能力的代价与效果，感受底层弟子的生存压力，以及主角机智应对困境的爽感。",
+          "证据": [
+            {
+              "段落": 16,
+              "摘句": "灰从指腹落下，很细，贴着铜盘爬向秤杆。没有风，灰却沿着刻度向前移了半格。",
+              "段落ID": "P0016",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 36,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "本章信息密度适中，灰线能力通过具体场景展现，无需额外解释。读者能自然理解其运作与代价。",
+          "证据": [
+            {
+              "段落": 14,
+              "摘句": "那道灰线是昨夜留下的。灶房的铁锁锈死时，他摸过锁舌，指尖落下一层灰，锁舌轻了半钱。片刻后，胸口疼了整整一夜。",
+              "段落ID": "P0014",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 54,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "章末留下强烈悬念：灰线变长并弯成小钩，暗示能力在成长或积累代价；同时许临渊意识到‘少掉的半块挪到了别处’，引发读者对后续发展的好奇。",
+          "证据": [
+            {
+              "段落": 31,
+              "摘句": "许临渊知道，今日少掉的半块并没有凭空补齐。它只是从秤上挪到了别处。",
+              "段落ID": "P0031",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 33,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-005",
+      "scenario_tag": "high_lexical_bad_narrative",
+      "secondary_scenario_tags": [
+        "clear_fail"
+      ],
+      "scenario_tags": [
+        "clear_fail",
+        "high_lexical_bad_narrative"
+      ],
+      "expected_overall": "FAIL",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": true,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 0,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": false,
+      "dimension_agreement": 0.6666666666666666,
+      "hard_pass": false,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "动机",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "冲突",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "FAIL",
+          "actual": "PASS",
+          "allowed": [
+            "FAIL",
+            "REVIEW"
+          ],
+          "agreement": false
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "FAIL",
+          "actual": "PASS",
+          "allowed": [
+            "FAIL"
+          ],
+          "agreement": false
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章事件因果链完整：路满因摊位被王磊举报而前来借运，贺按指导其填写偿还方为王磊，借运生效后王磊出现绕圈等异常行为，路满生意好转。后续电话咨询、便利店小哥玩笑等均符合借运规则。",
+            "evidence": [
+              {
+                "paragraph_id": "P0004",
+                "exact_text": "门帘外拳头砸木板，震得灰往下掉。开门！我炒粉摊被人掀了！我要借运！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "路满动机明确：因王磊举报其摊位，欲借运让王磊倒霉。贺按动机清晰：作为当铺老板，按规则办理借运业务，并强调偿还方必须签字。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "对面王磊找城管封我摊。我要借一天运。让他倒霉。你先写名字。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章冲突集中：路满与王磊的摊位纠纷、路满与贺按在借运规则上的短暂争执（如写城管被拒）、王磊绕圈引发的混乱，以及贺按与外部环境的轻微摩擦（如旺铺出租条）。",
+            "evidence": [
+              {
+                "paragraph_id": "P0010",
+                "exact_text": "贺按把卷帘又拉高，城管来没来？来了！王磊先举报我油烟！我举报他占道！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得新奇体验：借运当铺的独特设定、借运规则（偿还方签字、二十四小时）、王磊绕圈的荒诞场景，以及贺按冷静应对的个性展示。同时埋下伏笔（贺按自身待核状态、霉账规则）。",
+            "evidence": [
+              {
+                "paragraph_id": "P0019",
+                "exact_text": "同一秒，门外王磊声音变调：我队列呢？！贺按开门缝，夜市排队区。王磊举号码牌狂奔。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章设定清晰，借运规则通过对话逐步揭示，无复杂术语或跳跃逻辑。读者可轻松理解借运流程、偿还方概念及贺按的谨慎态度。",
+            "evidence": [
+              {
+                "paragraph_id": "P0016",
+                "exact_text": "你坑我？我坑你？贺按把印泥拍桌，你坑王磊，签字。按。好运二十四小时归你。霉运按合同走。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末留下多个悬念：贺按自身待核状态、霉账每日×1.5的规则、路人回头望门楣的细节，以及计算器显示的+8分。这些元素激发读者对后续发展的好奇。",
+            "evidence": [
+              {
+                "paragraph_id": "P0096",
+                "exact_text": "计算器角落浮一行绿字，绿得短，短得像第一口赢。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 0,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "本章事件因果链完整：路满因摊位被王磊举报而前来借运，贺按指导其填写偿还方为王磊，借运生效后王磊出现绕圈等异常行为，路满生意好转。后续电话咨询、便利店小哥玩笑等均符合借运规则。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "门帘外拳头砸木板，震得灰往下掉。开门！我炒粉摊被人掀了！我要借运！",
+              "段落ID": "P0004",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 33,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "路满动机明确：因王磊举报其摊位，欲借运让王磊倒霉。贺按动机清晰：作为当铺老板，按规则办理借运业务，并强调偿还方必须签字。",
+          "证据": [
+            {
+              "段落": 9,
+              "摘句": "对面王磊找城管封我摊。我要借一天运。让他倒霉。你先写名字。",
+              "段落ID": "P0009",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 29,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "本章冲突集中：路满与王磊的摊位纠纷、路满与贺按在借运规则上的短暂争执（如写城管被拒）、王磊绕圈引发的混乱，以及贺按与外部环境的轻微摩擦（如旺铺出租条）。",
+          "证据": [
+            {
+              "段落": 10,
+              "摘句": "贺按把卷帘又拉高，城管来没来？来了！王磊先举报我油烟！我举报他占道！",
+              "段落ID": "P0010",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 34,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "读者获得新奇体验：借运当铺的独特设定、借运规则（偿还方签字、二十四小时）、王磊绕圈的荒诞场景，以及贺按冷静应对的个性展示。同时埋下伏笔（贺按自身待核状态、霉账规则）。",
+          "证据": [
+            {
+              "段落": 19,
+              "摘句": "同一秒，门外王磊声音变调：我队列呢？！贺按开门缝，夜市排队区。王磊举号码牌狂奔。",
+              "段落ID": "P0019",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 40,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "本章设定清晰，借运规则通过对话逐步揭示，无复杂术语或跳跃逻辑。读者可轻松理解借运流程、偿还方概念及贺按的谨慎态度。",
+          "证据": [
+            {
+              "段落": 16,
+              "摘句": "你坑我？我坑你？贺按把印泥拍桌，你坑王磊，签字。按。好运二十四小时归你。霉运按合同走。",
+              "段落ID": "P0016",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 43,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "章末留下多个悬念：贺按自身待核状态、霉账每日×1.5的规则、路人回头望门楣的细节，以及计算器显示的+8分。这些元素激发读者对后续发展的好奇。",
+          "证据": [
+            {
+              "段落": 96,
+              "摘句": "计算器角落浮一行绿字，绿得短，短得像第一口赢。",
+              "段落ID": "P0096",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 23,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    }
+  ],
+  "scenario_tags_present": [
+    "clear_fail",
+    "clear_pass",
+    "debatable_review",
+    "high_lexical_bad_narrative",
+    "low_lexical_good_narrative"
+  ],
+  "run_id": "L1_Phase2A_PROTOCOL_FIX_20260627"
+}

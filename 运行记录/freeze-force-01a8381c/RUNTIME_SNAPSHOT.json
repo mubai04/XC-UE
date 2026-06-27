@@ -1,0 +1,10 @@
+{
+  "schema_version": "xcue.runtime-snapshot/1.0",
+  "baseline_ref": "运行记录/freeze-force-01a8381c/AUDIT_BASELINE.json",
+  "baseline_digest": "be1ab2aeb093665184667b620e8c0adfe487feb82be0ff0586ab46ec67ef3f18",
+  "observed_at": "2026-06-27T10:38:41.348313+00:00",
+  "pytest_collection_raw": {
+    "exit_code": 0,
+    "stderr": null
+  }
+}

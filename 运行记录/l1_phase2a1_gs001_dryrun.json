@@ -1,0 +1,506 @@
+﻿{
+  "generated_at": "2026-06-27T13:07:27",
+  "phase": "2A.1",
+  "evaluation_kind": "SINGLE_CHAPTER_CALIBRATION",
+  "pilot_status": "MODEL_CALIBRATION_REJECTED",
+  "pilot_reasons": [
+    "GS-001: overall 模型=PASS 不在 acceptance_range=['REVIEW']",
+    "GS-001/认知成本: 模型=PASS 人工=REVIEW；模型理由=全章主体切换清晰：从酒楼说书到李府对话，无主体不清或规则重复。；人工理由=开篇集中投放多名天骄、势力、传闻与商业背景，读者需要较长时间才抵达主角核心困境。"
+  ],
+  "metrics": {
+    "first_pass_evidence_valid_rate": 1.0,
+    "eventual_evidence_valid_rate": 1.0,
+    "evidence_retry_rate": 0.0,
+    "transport_retry_rate": 0.0,
+    "format_retry_rate": 0.0,
+    "audit_blocked_rate": 0.0,
+    "overall_agreement": 0.0,
+    "dimension_agreement": 0.8333333333333334
+  },
+  "chapter_results": [
+    {
+      "chapter_id": "GS-001",
+      "scenario_tag": "debatable_review",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "debatable_review"
+      ],
+      "expected_overall": "REVIEW",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": true,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 0,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": false,
+      "dimension_agreement": 0.8333333333333334,
+      "hard_pass": false,
+      "hard_fail": false,
+      "review_ok": false,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "秦仙子收徒、李家造势、主角缺乏武道天赋与准备拜师之间存在可追踪关系，但前半段主要通过传闻间接展开。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "起因（谣言传播）→行动（李百万与剑痴对话、李子夜钓鱼）→结果（秦婀娜将至）链条完整。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章事件增量明确：起因（谣言制造）→行动（李百万与剑痴合谋、李子夜钓鱼）→结果（秦婀娜将至），无断点或跳切。",
+          "evidence_rationale": "支持起因：谣言引发秦婀娜将至的消息，启动全章因果链。"
+        },
+        {
+          "dimension": "动机",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "李百万希望解决儿子无法习武的问题；李子夜希望借秦婀娜改变自身处境。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "李子夜因无武道天赋而忧愁，李百万为子造势，动机清晰。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章动机一致：李子夜目标（拜师习武）与李百万行动（造谣、请剑痴）匹配，无目标漂移。",
+          "evidence_rationale": "支持李子夜动机：因无法习武而忧愁，驱动后续拜师行动。"
+        },
+        {
+          "dimension": "冲突",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "传闻中的绝世天才与真实的无武道天赋形成反差，但本章主要冲突尚未正面爆发。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "李子夜无武道天赋与拜师愿望的内在冲突贯穿全章。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章冲突持续：李子夜无天赋（P0077-P0079）与拜师目标矛盾，李百万造谣制造外部压力，无重复空转。",
+          "evidence_rationale": "支持冲突：李百万确认儿子无天赋，强化内在矛盾。"
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "完成世界、人物反差与拜师目标的揭示，但主角正式出场较晚，前段信息铺陈偏长。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "全章信息增量持续：谣言→主角登场→李百万计划→剑痴参与。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章事件增量充足：从谣言到主角登场、李百万与剑痴合谋，中后段无重复已兑现内容。",
+          "evidence_rationale": "支持读者收益：揭示剑痴参与造势，提供新人物关系信息。"
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "REVIEW"
+          ],
+          "verdict_agreement": false,
+          "human_rationale": "开篇集中投放多名天骄、势力、传闻与商业背景，读者需要较长时间才抵达主角核心困境。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "人物（说书人、李百万、李子夜、剑痴）和场景（酒楼、李府）切换清晰。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章主体切换清晰：从酒楼说书到李府对话，无主体不清或规则重复。",
+          "evidence_rationale": "支持认知成本：场景和人物明确，便于读者定位。"
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "秦婀娜将至，主角准备依靠财富争取拜师，下一步行动明确。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "章末提出“拿金山银山砸”的悬念，驱动追读。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "章末最后20%段落（P0099-P0102）形成新问题：李百万计划用钱打动秦婀娜，与前文造势自然衔接。",
+          "evidence_rationale": "支持章末追读：李子夜安慰后李百万提出用钱砸，制造悬念。"
+        }
+      ],
+      "errors": [],
+      "warnings": [
+        "章末追读: PARAGRAPH_ID_REPAIRED P0102 -> P0101"
+      ],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章事件链条清晰，从谣言传播到主角登场、动机揭示，因果连贯。主要风险：局部段落（P0038-P0043）为谣言重复，但未破坏主线。最终选择PASS因为起因（谣言制造）→行动（李百万与剑痴合谋、李子夜钓鱼）→结果（秦婀娜将至）完整可追踪。",
+            "strength_summary": "起因（谣言传播）→行动（李百万与剑痴对话、李子夜钓鱼）→结果（秦婀娜将至）链条完整。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章事件增量明确：起因（谣言制造）→行动（李百万与剑痴合谋、李子夜钓鱼）→结果（秦婀娜将至），无断点或跳切。",
+            "evidence": [
+              {
+                "paragraph_id": "P0002",
+                "exact_text": "“秦仙子要来渝州城了！”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持起因：谣言引发秦婀娜将至的消息，启动全章因果链。"
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：李子夜想习武但无天赋，李百万为子造势，动机一致。主要风险：剑痴动机（为酒撒谎）稍显随意，但未影响主线。最终选择PASS因为主要人物目标（李子夜拜师、李百万造势）在全章保持一致且可理解。",
+            "strength_summary": "李子夜因无武道天赋而忧愁，李百万为子造势，动机清晰。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章动机一致：李子夜目标（拜师习武）与李百万行动（造谣、请剑痴）匹配，无目标漂移。",
+            "evidence": [
+              {
+                "paragraph_id": "P0058",
+                "exact_text": "甚至有些忧愁。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持李子夜动机：因无法习武而忧愁，驱动后续拜师行动。"
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：李子夜无天赋与拜师愿望形成内在冲突，谣言与真实差距构成外部张力。主要风险：冲突强度中等，但持续推动段落。最终选择PASS因为全章存在清晰持续的阻力（无天赋、需骗过秦婀娜）。",
+            "strength_summary": "李子夜无武道天赋与拜师愿望的内在冲突贯穿全章。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章冲突持续：李子夜无天赋（P0077-P0079）与拜师目标矛盾，李百万造谣制造外部压力，无重复空转。",
+            "evidence": [
+              {
+                "paragraph_id": "P0077",
+                "exact_text": "“老张，你说我这儿子真的没有武道的天赋吗？”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持冲突：李百万确认儿子无天赋，强化内在矛盾。"
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章持续提供新信息（谣言、主角登场、李百万计划、剑痴参与）。主要风险：中段谣言重复（P0038-P0043）略拖沓，但未大面积重复。最终选择PASS因为核心事件（造势）与人物认识（李子夜无天赋）持续兑现，中后段无空转。",
+            "strength_summary": "全章信息增量持续：谣言→主角登场→李百万计划→剑痴参与。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章事件增量充足：从谣言到主角登场、李百万与剑痴合谋，中后段无重复已兑现内容。",
+            "evidence": [
+              {
+                "paragraph_id": "P0063",
+                "exact_text": "“老李，你答应的十坛醉花酿不会食言吧？”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持读者收益：揭示剑痴参与造势，提供新人物关系信息。"
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：人物、场景、对话主体清晰，信息层级稳定。主要风险：谣言段落（P0038-P0043）重复但易理解。最终选择PASS因为全章主体切换明确，无回读需求。",
+            "strength_summary": "人物（说书人、李百万、李子夜、剑痴）和场景（酒楼、李府）切换清晰。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章主体切换清晰：从酒楼说书到李府对话，无主体不清或规则重复。",
+            "evidence": [
+              {
+                "paragraph_id": "P0015",
+                "exact_text": "渝州城，最大的酒楼内，一位手拿折扇的说书先生唾沫横飞",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持认知成本：场景和人物明确，便于读者定位。"
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：章末形成明确新问题（秦婀娜是否会被骗收徒）。主要风险：无。最终选择PASS因为章末提出“拿金山银山砸”的悬念，自然衔接下一章。",
+            "strength_summary": "章末提出“拿金山银山砸”的悬念，驱动追读。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "章末最后20%段落（P0099-P0102）形成新问题：李百万计划用钱打动秦婀娜，与前文造势自然衔接。",
+            "evidence": [
+              {
+                "paragraph_id": "P0102",
+                "exact_text": "“老爹，不怪你。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持章末追读：李子夜安慰后李百万提出用钱砸，制造悬念。"
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 0,
+        "warnings": [
+          "章末追读: PARAGRAPH_ID_REPAIRED P0102 -> P0101"
+        ],
+        "context_quality": "NONE"
+      },
+      "dimension_reports": [
+        {
+          "dimension": "因果",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "起因（谣言传播）→行动（李百万与剑痴对话、李子夜钓鱼）→结果（秦婀娜将至）链条完整。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章事件增量明确：起因（谣言制造）→行动（李百万与剑痴合谋、李子夜钓鱼）→结果（秦婀娜将至），无断点或跳切。",
+          "evidence_rationale": "支持起因：谣言引发秦婀娜将至的消息，启动全章因果链。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "动机",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "李子夜因无武道天赋而忧愁，李百万为子造势，动机清晰。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章动机一致：李子夜目标（拜师习武）与李百万行动（造谣、请剑痴）匹配，无目标漂移。",
+          "evidence_rationale": "支持李子夜动机：因无法习武而忧愁，驱动后续拜师行动。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "冲突",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "李子夜无武道天赋与拜师愿望的内在冲突贯穿全章。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章冲突持续：李子夜无天赋（P0077-P0079）与拜师目标矛盾，李百万造谣制造外部压力，无重复空转。",
+          "evidence_rationale": "支持冲突：李百万确认儿子无天赋，强化内在矛盾。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "读者收益",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "全章信息增量持续：谣言→主角登场→李百万计划→剑痴参与。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章事件增量充足：从谣言到主角登场、李百万与剑痴合谋，中后段无重复已兑现内容。",
+          "evidence_rationale": "支持读者收益：揭示剑痴参与造势，提供新人物关系信息。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "认知成本",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "人物（说书人、李百万、李子夜、剑痴）和场景（酒楼、李府）切换清晰。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "全章主体切换清晰：从酒楼说书到李府对话，无主体不清或规则重复。",
+          "evidence_rationale": "支持认知成本：场景和人物明确，便于读者定位。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "章末追读",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "章末提出“拿金山银山砸”的悬念，驱动追读。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "章末最后20%段落（P0099-P0102）形成新问题：李百万计划用钱打动秦婀娜，与前文造势自然衔接。",
+          "evidence_rationale": "支持章末追读：李子夜安慰后李百万提出用钱砸，制造悬念。",
+          "verdict": "PASS"
+        }
+      ],
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "主要优点：全章事件链条清晰，从谣言传播到主角登场、动机揭示，因果连贯。主要风险：局部段落（P0038-P0043）为谣言重复，但未破坏主线。最终选择PASS因为起因（谣言制造）→行动（李百万与剑痴合谋、李子夜钓鱼）→结果（秦婀娜将至）完整可追踪。",
+          "证据": [
+            {
+              "段落": 2,
+              "摘句": "“秦仙子要来渝州城了！”",
+              "段落ID": "P0002",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 12,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "主要优点：李子夜想习武但无天赋，李百万为子造势，动机一致。主要风险：剑痴动机（为酒撒谎）稍显随意，但未影响主线。最终选择PASS因为主要人物目标（李子夜拜师、李百万造势）在全章保持一致且可理解。",
+          "证据": [
+            {
+              "段落": 58,
+              "摘句": "甚至有些忧愁。",
+              "段落ID": "P0058",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 7,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "主要优点：李子夜无天赋与拜师愿望形成内在冲突，谣言与真实差距构成外部张力。主要风险：冲突强度中等，但持续推动段落。最终选择PASS因为全章存在清晰持续的阻力（无天赋、需骗过秦婀娜）。",
+          "证据": [
+            {
+              "段落": 77,
+              "摘句": "“老张，你说我这儿子真的没有武道的天赋吗？”",
+              "段落ID": "P0077",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 26,
+              "end_offset": 48,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "主要优点：全章持续提供新信息（谣言、主角登场、李百万计划、剑痴参与）。主要风险：中段谣言重复（P0038-P0043）略拖沓，但未大面积重复。最终选择PASS因为核心事件（造势）与人物认识（李子夜无天赋）持续兑现，中后段无空转。",
+          "证据": [
+            {
+              "段落": 63,
+              "摘句": "“老李，你答应的十坛醉花酿不会食言吧？”",
+              "段落ID": "P0063",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 20,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "主要优点：人物、场景、对话主体清晰，信息层级稳定。主要风险：谣言段落（P0038-P0043）重复但易理解。最终选择PASS因为全章主体切换明确，无回读需求。",
+          "证据": [
+            {
+              "段落": 15,
+              "摘句": "渝州城，最大的酒楼内，一位手拿折扇的说书先生唾沫横飞",
+              "段落ID": "P0015",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 26,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "主要优点：章末形成明确新问题（秦婀娜是否会被骗收徒）。主要风险：无。最终选择PASS因为章末提出“拿金山银山砸”的悬念，自然衔接下一章。（警告：章末追读: PARAGRAPH_ID_REPAIRED P0102 -> P0101）",
+          "证据": [
+            {
+              "段落": 101,
+              "摘句": "“老爹，不怪你。”",
+              "段落ID": "P0101",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 9,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    }
+  ],
+  "scenario_tags_present": [
+    "debatable_review"
+  ]
+}
+{
+  "chapter_id": "GS-001",
+  "pilot_status": "MODEL_CALIBRATION_REJECTED",
+  "eventual_evidence_valid": true,
+  "audit_blocked": false,
+  "evidence_retry_count": 0,
+  "overall_agreement": false
+}

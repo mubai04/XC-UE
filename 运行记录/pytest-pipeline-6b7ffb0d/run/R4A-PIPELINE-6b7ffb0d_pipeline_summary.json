@@ -1,0 +1,15 @@
+{
+  "run_id": "R4A-PIPELINE-6b7ffb0d",
+  "pipeline_run_id": "R4A-PIPE-6b7ffb0d",
+  "stages": [
+    {
+      "stage": "L1.5",
+      "exit_code": 20,
+      "input": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-pipeline-6b7ffb0d\\packet.json",
+      "output_json": "",
+      "status": ""
+    }
+  ],
+  "final_status": "STOPPED_AT_L15",
+  "exit_code": 20
+}

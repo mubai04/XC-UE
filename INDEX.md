@@ -1,7 +1,7 @@
-# XC-UE 工程索引 v0.1
+# XC-UE 工程索引 v0.2
 
 > **Cursor 请先读：** `README_XC-UE_当前结构与真源边界.md`  
-> 本文件：根目录导航 — 规定该读什么、不该读什么。
+> 动态状态：`00_工程总控/CURRENT_SYSTEM_STATUS.generated.md`
 
 ---
 
@@ -9,15 +9,13 @@
 
 | 优先级 | 路径 | 用途 |
 |---|---|---|
-| 1 | `README_XC-UE_当前结构与真源边界.md` | 阶段与边界 |
-| 2 | `00_工程总控/CURRENT_SYSTEM_STATUS.md` | L0–L3 / Harness 状态 |
-| 3 | `10_L0_总图层/L0_XC-UE_终极工程总图.md` | 系统总图 |
-| 4 | `20_L1_闸门层/` | 闸门 |
-| 5 | `30_L1.5_路由矩阵层/L1.5_Routing_Matrix.md` | 路由 |
-| 6 | `40_L2_正式能力层/L2-00_*.md` → 各 L2 模块 | 能力层 |
-| 7 | `50_L3_执行协议层/L3-00_*.md` | 执行协议 |
-| 8 | `70_测试项目/TP-001_*/00_项目说明.md` | 测试项目入口 |
-| 9 | `70_测试项目/TP-001_*/IR/` | 项目正式输入（P4 后） |
+| 1 | `README_XC-UE_当前结构与真源边界.md` | 阶段、运行形态、边界 |
+| 2 | `00_工程总控/CURRENT_SYSTEM_STATUS.generated.md` | L0–L3 / Harness 动态状态 |
+| 3 | `审计纠偏_2026-06-26/AUDIT_BASELINE.json` | R0 整改前基线 |
+| 4 | `10_L0_总图层/L0_XC-UE_终极工程总图.md` | 系统总图 |
+| 5 | `20_L1_闸门层/` ~ `50_L3_执行协议层/` | 各层 Markdown 真源 |
+| 6 | `70_测试项目/TP-001_*/project.json` | 默认项目清单 |
+| 7 | `tests/fixtures/l1_semantic_golden/` | golden v1（冻结） |
 
 ---
 
@@ -25,12 +23,11 @@
 
 | 路径 | 原因 |
 |---|---|
-| `99_归档_不要索引/` | 旧工程 / docx / 历史 png |
-| `**/_legacy_root_inputs/` | 旧根目录输入 |
 | `**/chapters/_candidates/` | 候选正文 |
 | `*.zip` / `*.docx` | 压缩包与外部原文 |
+| 历史 API 归档（除非做评估审计） | 只读证据 |
 
-以上已在 `.cursorignore` 中排除。
+以上部分已在 `.cursorignore` 中排除。
 
 ---
 
@@ -40,7 +37,7 @@
 XC-UE/
 ├── README_XC-UE_当前结构与真源边界.md
 ├── INDEX.md
-├── .cursorignore
+├── pyproject.toml
 ├── 00_工程总控/
 ├── 10_L0_总图层/
 ├── 20_L1_闸门层/
@@ -48,45 +45,24 @@ XC-UE/
 ├── 40_L2_正式能力层/
 ├── 50_L3_执行协议层/
 ├── 70_测试项目/
-└── 99_归档_不要索引/
+├── tests/
+└── 审计纠偏_2026-06-26/
 ```
 
 ---
 
-## 4. L2 / L3 速查
-
-**L2**（均已建，均为候选真源 / 未定版）：
+## 4. 当前阶段
 
 ```text
-L2-00 ~ L2-06, L2-99  →  40_L2_正式能力层/*.md
-```
-
-**L3**（v0.1.2，顶层目录无版本号）：
-
-```text
-50_L3_执行协议层/L3-00_执行协议总表_v0.1.2.md  ← 入口
-```
-
-**TP-001**：
-
-```text
-70_测试项目/TP-001_CleanHarness_IR_Runtime/
+R0  证据冻结（AUDIT_BASELINE.json）
+R1  默认项目 TP-001 可加载
+R2  workspace-only 运行形态
+R3  评估可信度 / golden v2 脚手架
 ```
 
 ---
 
-## 5. 当前阶段
+## 5. 相关文档
 
-```text
-DG-01 ~ DG-09  目录治理
-P4             填 IR（DG 完成后）
-P5             ch01
-P6             L1 压测
-```
-
----
-
-## 6. 相关文档
-
-- `00_工程总控/CURRENT_SYSTEM_STATUS.md`
+- `00_工程总控/CURRENT_SYSTEM_STATUS.generated.md`
 - `00_工程总控/SOURCE_POLICY_外部资料接入规则.md`

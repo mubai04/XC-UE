@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue.l1-semantic-audit-response/2.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dimensions"],
+  "properties": {
+    "dimensions": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "verdict",
+          "analysis_summary",
+          "strength_summary",
+          "risk_summary",
+          "final_reason",
+          "evidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["因果", "动机", "冲突", "读者收益", "认知成本", "章末追读"]
+          },
+          "verdict": {
+            "type": "string",
+            "enum": ["PASS", "FAIL", "REVIEW"]
+          },
+          "analysis_summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "strength_summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "risk_summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "final_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "paragraph_id",
+                "exact_text",
+                "source_scope",
+                "occurrence_index",
+                "evidence_rationale"
+              ],
+              "properties": {
+                "paragraph_id": {
+                  "type": "string",
+                  "pattern": "^P\\d{4}$"
+                },
+                "exact_text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_scope": {
+                  "type": "string",
+                  "enum": ["CURRENT_CHAPTER", "PRIOR_CHAPTER"]
+                },
+                "occurrence_index": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "evidence_rationale": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

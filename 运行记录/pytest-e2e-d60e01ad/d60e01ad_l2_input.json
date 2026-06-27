@@ -1,0 +1,41 @@
+{
+  "schema_version": "xcue.failure-packet/1.0",
+  "pipeline_run_id": "E2E-d60e01ad-L1",
+  "stage_run_id": "E2E-d60e01ad-L1-L1",
+  "status": "SCREENING_REJECT",
+  "failure_count": 1,
+  "items": [
+    {
+      "闸门": "L1-00",
+      "名称": "WORD_COUNT_BELOW_FUNCTION_FLOOR",
+      "状态": "失败",
+      "说明": "正文有效字数低于 gate_rules 功能稿下限 2000。 当前值：17.000。",
+      "证据": [
+        {
+          "段落": null,
+          "摘句": "WORD_COUNT_BELOW_FUNCTION_FLOOR=17.000",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "字数不足",
+      "候选模块": "L2-01",
+      "回流验收位置": "L1-03",
+      "修复方向": "发布稿扩写版",
+      "heuristic": false,
+      "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+      "confidence": "UNVALIDATED",
+      "decision_role": "HARD_GUARD",
+      "blocking": true,
+      "reason_type": ""
+    }
+  ],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-d60e01ad\\project\\chapters\\d60e01ad.md",
+    "audit_reason_type": ""
+  }
+}

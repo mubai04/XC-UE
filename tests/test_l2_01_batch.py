@@ -147,6 +147,7 @@ def test_l2_01_api_failure_no_fallback_keeps_batch(repo_root, tmp_path, monkeypa
     seed = uuid.uuid4().hex[:8]
     chapter, quote = _chapter_file(tmp_path, seed)
     rules = 加载能力规则(repo_root / "00_工程总控" / "工程执行层" / "L2工程" / "ability_rules.json")
+    e_quote = quote
     items = [
         _failure_item(seed, quote),
         失败输入(
@@ -154,7 +155,7 @@ def test_l2_01_api_failure_no_fallback_keeps_batch(repo_root, tmp_path, monkeypa
             名称="E 即时情绪反馈",
             状态="失败",
             说明=f"{seed} E低",
-            证据=[证据(2, seed)],
+            证据=[证据(2, e_quote)],
             严重级别="error",
             失败类型="E低：即时情绪反馈弱",
             候选模块="L2-05",
@@ -163,6 +164,31 @@ def test_l2_01_api_failure_no_fallback_keeps_batch(repo_root, tmp_path, monkeypa
         ),
     ]
     judgements = [判断(item, rules) for item in items]
+
+    def factory(stage, **kwargs):
+        if stage == "L2":
+            return create_client(
+                "L2",
+                api_key="k",
+                transport=make_mock_transport(
+                    {
+                        "root_cause": "即时收益弱",
+                        "experience_risks": [
+                            {"risk_type": "弃读", "location_quote": e_quote, "modification_target": "前置冲突"}
+                        ],
+                        "fix_actions": ["前置冲突"],
+                        "acceptance_criteria": ["首段有收益"],
+                        "evidence_quotes": [{"paragraph": 2, "quote": e_quote}],
+                        "root_cause_evidence_indices": [0],
+                        "needs_reroute": False,
+                    }
+                ),
+            )
+        raise AssertionError(stage)
+
+    monkeypatch.setattr("DeepSeek客户端.create_client", factory)
+    monkeypatch.setattr("模型调用.create_client", factory)
+
     forms, errors = 生成(
         items,
         judgements,

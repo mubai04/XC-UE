@@ -1,0 +1,46 @@
+{
+  "run_id": "E2E-ca8049b1-L2",
+  "输入文件": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-ca8049b1\\l15\\E2E-ca8049b1-L15.json",
+  "输入数量": 1,
+  "方法声明": "L2 正式输入为 L1.5 路由报告：只执行 target_module，不再重新裁决 L1 失败项。",
+  "标准校验问题": [],
+  "回流校验问题": [],
+  "接口判断": [
+    {
+      "来源闸门": "L1-01",
+      "输入来源模式": "L1.5路由报告",
+      "输入问题": "ca8049b1 结构链断",
+      "初步归属": "L2-01",
+      "主候选模块": "L2-01",
+      "次候选模块": "",
+      "接口失败类型": "",
+      "判断依据": "L1.5 已分配唯一主路由 L2-01，L2 不再重新裁决。",
+      "是否混合问题": "否",
+      "是否越界": "否",
+      "建议动作": [
+        "执行 L2-01"
+      ],
+      "回流验收位置": "L1-01",
+      "最终状态": "接口明确",
+      "备注": "",
+      "route_rule_id": "L15-叙事失败",
+      "route_rule_version": "gate_rules.l15_routes"
+    }
+  ],
+  "修复单": [],
+  "阻断项": [],
+  "复验目标": [],
+  "schema_version": "xcue.l2-report/1.0",
+  "pipeline_run_id": "E2E-ca8049b1",
+  "stage_run_id": "E2E-ca8049b1-L2",
+  "status": "MODEL_BLOCKED",
+  "状态说明": "模型/API 阻断，未生成任何修复单",
+  "input_artifacts": [],
+  "output_artifacts": [],
+  "extensions": {
+    "model_errors": [
+      "L2-01 EVIDENCE_INVALID: evidence_quotes[0] 摘句无法在正文上下文或失败证据中逐字找到"
+    ],
+    "deprecated_failure_packet": false
+  }
+}

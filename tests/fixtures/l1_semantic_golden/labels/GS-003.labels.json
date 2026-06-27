@@ -1,0 +1,125 @@
+{
+  "scenario_tag": "clear_pass",
+  "expected_overall": "PASS",
+  "acceptance_range": {
+    "overall": [
+      "PASS"
+    ],
+    "dimensions": {
+      "因果": [
+        "PASS"
+      ],
+      "动机": [
+        "PASS"
+      ],
+      "冲突": [
+        "PASS"
+      ],
+      "读者收益": [
+        "PASS"
+      ],
+      "认知成本": [
+        "PASS",
+        "REVIEW"
+      ],
+      "章末追读": [
+        "PASS",
+        "REVIEW"
+      ]
+    }
+  },
+  "expected_dimensions": {
+    "因果": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "老师下令、系统生成任务、主角执行、获得奖励，再处理后院任务，行动链完整。"
+    },
+    "动机": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "主角遵守命令和规则的直接动机是活下去。"
+    },
+    "冲突": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "黑暗环境、危险顾客、老师和后院怪物共同形成持续威胁。"
+    },
+    "读者收益": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "本章展示世界规则、系统机制、主角生存方式和一个完整交易事件。"
+    },
+    "认知成本": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "规则与系统提示密集，但大部分都嵌入连续行动，没有完全阻断理解。"
+    },
+    "章末追读": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "系统面板正式出现，后续能力展开目标清楚。"
+    }
+  },
+  "human_evidence": [
+    {
+      "dimension": "动机",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0020",
+      "exact_text": "如果不按照他老师的命令立刻行动，他就会死。",
+      "occurrence_index": 0,
+      "rationale": "主角服从命令的生存动机。"
+    },
+    {
+      "dimension": "因果",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0042",
+      "exact_text": "他保持镇静，将油灯挂在门柱之上",
+      "occurrence_index": 0,
+      "rationale": "接受任务后执行明确动作。"
+    },
+    {
+      "dimension": "冲突",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0075",
+      "exact_text": "永远不要试图得罪黑暗中的行走者。",
+      "occurrence_index": 0,
+      "rationale": "世界风险被具体事件验证。"
+    },
+    {
+      "dimension": "读者收益",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0094",
+      "exact_text": "每天早上所要进行的日常任务。",
+      "occurrence_index": 0,
+      "rationale": "读者理解主角日常生存模式。"
+    },
+    {
+      "dimension": "章末追读",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0098",
+      "exact_text": "林恩的眼前倏然出现了一个面板。",
+      "occurrence_index": 0,
+      "rationale": "系统能力进入下一阶段。"
+    }
+  ],
+  "unacceptable_misjudgments": [
+    "只因规则词、怪物名和系统提示密集就判FAIL",
+    "忽略主角行为均受明确生存风险驱动",
+    "把连续任务链误判为相互无关的设定堆砌"
+  ],
+  "chapter_id": "GS-003"
+}

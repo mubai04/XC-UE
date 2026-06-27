@@ -1,0 +1,20 @@
+{
+  "schema_version": "xcue.l1-golden-manifest/2.0",
+  "dataset_id": "l1_semantic_golden_v2",
+  "status": "PLANNED_EMPTY_SHELL",
+  "minimum_chapters": 10,
+  "recommended_chapters": 12,
+  "chapters": [],
+  "scenario_coverage_target": {
+    "clear_pass": 2,
+    "clear_fail": 2,
+    "debatable_review": 2,
+    "low_lexical_good_narrative": 2,
+    "high_lexical_bad_narrative": 2
+  },
+  "extra_chapters_11_12": {
+    "chapter_11": "独立 clear_fail 负例（不复用 GS-005）",
+    "chapter_12": "BORDERLINE 双盲复核槽位 / 对抗扩展"
+  },
+  "notes": "Corpus collection is a follow-up milestone. Do not edit v1."
+}

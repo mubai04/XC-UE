@@ -1,0 +1,42 @@
+{
+  "schema_version": "xcue.audit-blockers/1.0",
+  "pipeline_run_id": "R0R3-FINAL-SMOKE",
+  "stage_run_id": "R0R3-FINAL-SMOKE-L1",
+  "status": "SCREENING_REJECT",
+  "semantic_audit_status": "AUDIT_BLOCKED",
+  "audit_reason_type": "API_UNAVAILABLE",
+  "blocker_count": 1,
+  "items": [
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计服务",
+      "状态": "失败",
+      "说明": "DeepSeek 语义审计不可用：MISSING_API_KEY 缺少 DEEPSEEK_API_KEY",
+      "证据": [
+        {
+          "段落": null,
+          "摘句": "MISSING_API_KEY",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计不可用",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_UNAVAILABLE",
+      "confidence": "NONE",
+      "decision_role": "AUDIT_BLOCKER",
+      "blocking": true,
+      "reason_type": "API_UNAVAILABLE"
+    }
+  ],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\70_测试项目\\TP-001_CleanHarness_IR_Runtime\\chapters\\ch01.md"
+  }
+}

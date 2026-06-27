@@ -1,0 +1,15 @@
+{
+  "run_id": "R4A-BLOCK-b9e66fdf",
+  "pipeline_run_id": "R4A-BLOCK-b9e66fdf",
+  "stages": [
+    {
+      "stage": "L1.5",
+      "exit_code": 20,
+      "input": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-pipeline-b9e66fdf\\blocked.json",
+      "output_json": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-pipeline-b9e66fdf\\blocked-run\\l15\\R4A-BLOCK-b9e66fdf-L15.json",
+      "status": "INPUT_REQUIRED"
+    }
+  ],
+  "final_status": "STOPPED_AT_L15",
+  "exit_code": 20
+}

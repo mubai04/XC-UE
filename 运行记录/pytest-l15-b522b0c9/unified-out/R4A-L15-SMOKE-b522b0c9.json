@@ -1,0 +1,36 @@
+{
+  "run_id": "R4A-L15-SMOKE-b522b0c9",
+  "pipeline_run_id": "R4A-b522b0c9",
+  "stage_run_id": "R4A-b522b0c9-L15",
+  "source_failure_packet": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-l15-b522b0c9\\unified.json",
+  "primary_failure": {
+    "闸门": "L1-01",
+    "名称": "测试项",
+    "失败类型": "文风失败",
+    "说明": "b522b0c9 主失败 文风失败",
+    "状态": "失败",
+    "严重级别": "error",
+    "候选模块": "L2-02",
+    "回流验收位置": "L1-01",
+    "修复方向": "文风语言修复单",
+    "证据": [
+      {
+        "段落": 1,
+        "摘句": "段落一：b522b0c9 忽然察觉异常，"
+      }
+    ]
+  },
+  "secondary_failures": [],
+  "target_module": "L2-02",
+  "repair_product": "文风语言修复单",
+  "return_gate": "L1-01",
+  "route_rule_id": "L15-文风失败",
+  "route_rule_version": "gate_rules.l15_routes",
+  "final_status": "ROUTED",
+  "blockers": [],
+  "routing_basis": "主失败 文风失败 → L2-02；次级 0 项仅记录不并行执行。",
+  "schema_version": "xcue.l15-route-report/1.0",
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-l15-b522b0c9\\chapter.md"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "scenario_tag": "clear_pass",
+  "expected_overall": "PASS",
+  "acceptance_range": {
+    "overall": [
+      "PASS"
+    ],
+    "dimensions": {
+      "因果": [
+        "PASS"
+      ],
+      "动机": [
+        "PASS"
+      ],
+      "冲突": [
+        "PASS"
+      ],
+      "读者收益": [
+        "PASS"
+      ],
+      "认知成本": [
+        "PASS",
+        "REVIEW"
+      ],
+      "章末追读": [
+        "PASS"
+      ]
+    }
+  },
+  "expected_dimensions": {
+    "因果": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "十年寻仙源于乾元子寻找种仙观的执念；徒弟受控、猴七被杀与道观显现形成连续事件链。"
+    },
+    "动机": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "乾元子求仙，李十五求生并避免激怒师父，人物行为目的明确。"
+    },
+    "冲突": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "脚镣、棺老爷、师父杀人和无法逃脱构成持续且可见的生存压力。"
+    },
+    "读者收益": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "本章揭示种仙观、主角来历、师徒关系和师父危险性，并完成一次不可逆事件。"
+    },
+    "认知成本": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "设定有一定数量，但都服务于同一条寻观与求生主线。"
+    },
+    "章末追读": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "传说中的种仙观在附近显现，直接推进下一章核心事件。"
+    }
+  },
+  "human_evidence": [
+    {
+      "dimension": "因果",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0023",
+      "exact_text": "否则为师，为何带你们翻山越岭十年？",
+      "occurrence_index": 0,
+      "rationale": "十年行动与寻找种仙观的目的相连。"
+    },
+    {
+      "dimension": "动机",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0028",
+      "exact_text": "再把自己当成一颗‘种子’种进土里，就能成仙",
+      "occurrence_index": 0,
+      "rationale": "乾元子的核心欲望明确。"
+    },
+    {
+      "dimension": "冲突",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0058",
+      "exact_text": "三十名师兄弟，走到如今，也只剩下区区五人。",
+      "occurrence_index": 0,
+      "rationale": "长期生存压力和死亡后果明确。"
+    },
+    {
+      "dimension": "读者收益",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0095",
+      "exact_text": "没有丝毫征兆的，猴七眼神凝固，血腥味瞬间扑鼻。",
+      "occurrence_index": 0,
+      "rationale": "不可逆事件证明乾元子的危险性。"
+    },
+    {
+      "dimension": "章末追读",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0102",
+      "exact_text": "一座模糊不清道观，好似介于真实和虚幻之间。",
+      "occurrence_index": 0,
+      "rationale": "核心目标在章末出现。"
+    }
+  ],
+  "unacceptable_misjudgments": [
+    "把本章误判为只有设定介绍而没有事件推进",
+    "忽略猴七死亡带来的不可逆后果",
+    "忽略章末道观显现与十年寻观目标之间的承接"
+  ],
+  "chapter_id": "GS-002"
+}

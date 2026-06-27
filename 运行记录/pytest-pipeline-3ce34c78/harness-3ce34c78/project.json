@@ -1,0 +1,11 @@
+{
+  "schema_version": "xcue.project-manifest/1.0",
+  "project_id": "harness-3ce34c78",
+  "content_root": "chapters",
+  "default_chapter": "chapters/ch01.md",
+  "entrypoint": "chapters/ch01.md",
+  "entrypoint_type": "project",
+  "required_dirs": [
+    "IR"
+  ]
+}

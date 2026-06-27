@@ -32,6 +32,7 @@ import L1_01_内部创作检测
 import L1_02_读者投入检测
 import L1_03_发布锁检测
 import L1_语义审计
+from L1_语义上下文 import 构建语义上下文
 from 退出码 import ExitCode
 from 工程异常 import 工程错误
 from 运行状态 import 状态说明, 审计阻断
@@ -168,7 +169,14 @@ def main() -> int:
     gates = [l101, l102, l103]
     l100 = L1_00_闸门接口校验.检测(gates)
     guard_items = L1_前置质量护栏.检测(paragraphs, l103=rules.L103)
-    semantic = L1_语义审计.审计(paragraphs, title, body)
+    semantic_ctx = 构建语义上下文(
+        chapter_path=chapter_path,
+        title=title,
+        body=body,
+        paragraphs=paragraphs,
+        project=project_context,
+    )
+    semantic = L1_语义审计.审计(semantic_ctx)
     l100.检测项.extend(guard_items)
     l100.检测项.extend(semantic.检测项列表)
     gates = [l100, *gates]

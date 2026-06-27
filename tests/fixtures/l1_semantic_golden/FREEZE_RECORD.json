@@ -1,0 +1,8 @@
+{
+  "schema_version": "xcue.l1-golden-freeze-record/1.0",
+  "frozen": true,
+  "baseline_ref": "审计纠偏_2026-06-26/AUDIT_BASELINE.json",
+  "frozen_at": "2026-06-27T05:54:09.317048+00:00",
+  "freeze_policy_ref": "AUDIT_BASELINE.json.freeze_policy",
+  "notes": "Do not add frozen/baseline_ref to manifest.json. This file is not hashed into golden_v1_hashes (no self-reference)."
+}

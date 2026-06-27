@@ -1,0 +1,141 @@
+{
+  "scenario_tag": "high_lexical_bad_narrative",
+  "secondary_scenario_tags": [
+    "clear_fail"
+  ],
+  "expected_overall": "FAIL",
+  "acceptance_range": {
+    "overall": [
+      "FAIL"
+    ],
+    "dimensions": {
+      "因果": [
+        "PASS",
+        "REVIEW"
+      ],
+      "动机": [
+        "PASS",
+        "REVIEW"
+      ],
+      "冲突": [
+        "PASS"
+      ],
+      "读者收益": [
+        "FAIL",
+        "REVIEW"
+      ],
+      "认知成本": [
+        "FAIL"
+      ],
+      "章末追读": [
+        "PASS",
+        "REVIEW"
+      ]
+    }
+  },
+  "expected_dimensions": {
+    "因果": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "借运、签字、生效和王磊受影响存在基本链条，但后半章重复与旁支不断削弱主线。"
+    },
+    "动机": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "路满求生意、贺按维持店铺运行的动机可辨，但主角自身本章核心目标被大量即时插曲稀释。"
+    },
+    "冲突": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "路满与王磊、合同规则、报警风险和霉账共同提供持续压力。"
+    },
+    "读者收益": {
+      "expected_verdict": "FAIL",
+      "acceptance_range": [
+        "FAIL",
+        "REVIEW"
+      ],
+      "rationale": "核心机制前段已经完成展示，后续多次重复同类规则笑点、评论和问答，新信息效率显著下降。"
+    },
+    "认知成本": {
+      "expected_verdict": "FAIL",
+      "acceptance_range": [
+        "FAIL"
+      ],
+      "rationale": "大量无引号对话、短句跳转、评论、来电、系统文字和街头反馈连续混排，主体边界不稳定。"
+    },
+    "章末追读": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "待核·贺按具有后续价值，但此前出现多次近似收尾，最终钩子被稀释。"
+    }
+  },
+  "human_evidence": [
+    {
+      "dimension": "冲突",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0004",
+      "exact_text": "我炒粉摊被人掀了！我要借运！",
+      "occurrence_index": 0,
+      "rationale": "开篇存在直接诉求和冲突。"
+    },
+    {
+      "dimension": "因果",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0018",
+      "exact_text": "借运生效·24h。",
+      "occurrence_index": 0,
+      "rationale": "机制在签字后生效。"
+    },
+    {
+      "dimension": "读者收益",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0035",
+      "exact_text": "连续关门。霉账每日×1.5。",
+      "occurrence_index": 0,
+      "rationale": "又一条规则在核心机制已展示后加入。"
+    },
+    {
+      "dimension": "认知成本",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0053",
+      "exact_text": "偿还方写前夫行不行？",
+      "occurrence_index": 0,
+      "rationale": "电话支线突然切入，与前一场景并列。"
+    },
+    {
+      "dimension": "认知成本",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0068",
+      "exact_text": "对空店问了一句，谁还要借。",
+      "occurrence_index": 0,
+      "rationale": "章节已出现一次近似收束，之后仍继续扩展。"
+    },
+    {
+      "dimension": "章末追读",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0086",
+      "exact_text": "待核·贺按？",
+      "occurrence_index": 0,
+      "rationale": "真正与主角长期风险相关的钩子出现较晚。"
+    }
+  ],
+  "unacceptable_misjudgments": [
+    "因借运、规则、倒霉、签字、报警等词面信号丰富而直接判PASS",
+    "把存在基本因果链误解为整体质量必然合格",
+    "忽略无引号对话、支线切换和重复规则造成的认知成本",
+    "忽略主角长期钩子出现过晚且被多次近似收尾稀释"
+  ],
+  "chapter_id": "GS-005"
+}

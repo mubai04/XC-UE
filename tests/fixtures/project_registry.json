@@ -1,0 +1,17 @@
+{
+  "schema_version": "xcue.project-registry/1.0",
+  "default_project": "TP-001",
+  "projects": {
+    "TP-001": {
+      "project_root": "70_测试项目/TP-001_CleanHarness_IR_Runtime"
+    },
+    "pytest": {
+      "project_id": "TP-001",
+      "project_root": "70_测试项目/TP-001_CleanHarness_IR_Runtime"
+    },
+    "pytest-M0": {
+      "project_id": "TP-001",
+      "project_root": "70_测试项目/TP-001_CleanHarness_IR_Runtime"
+    }
+  }
+}

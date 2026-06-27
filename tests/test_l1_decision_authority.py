@@ -18,7 +18,7 @@ from 失败包生成 import 分拆阻断项, 生成失败包
 from 正文切分 import 切段, 正文字数, 清理正文
 from 退出码 import ExitCode
 from 运行状态 import 审计阻断, 机器初筛通过, 机器初筛退回, 需要人工复核
-from tests.conftest import ROOT, make_mock_transport, sample_chapter_text, semantic_audit_payload
+from tests.conftest import ROOT, make_mock_transport, make_semantic_context, sample_chapter_text, semantic_audit_payload
 
 
 def _padded_chapter(seed: str, *, min_chars: int = 2100) -> str:
@@ -66,14 +66,23 @@ def _run_l1_entry(
 ) -> tuple[int, dict]:
     title, body = 清理正文(chapter_path.read_text(encoding="utf-8"))
     paragraphs = 切段(body)
-    quote = paragraphs[0].文本[:20] if paragraphs else run_id
+    quote_para = next((p for p in reversed(paragraphs) if not p.文本.startswith("#")), paragraphs[-1])
+    quote = quote_para.文本[: min(20, len(quote_para.文本))]
+    paragraph_id = quote_para.段落ID
 
     def factory(stage, **kwargs):
         if api_key:
             return create_client(
                 stage,
                 api_key=api_key,
-                transport=make_mock_transport(semantic_audit_payload(quote, overall=semantic_overall)),
+                transport=make_mock_transport(
+                    semantic_audit_payload(
+                        quote,
+                        target_overall=semantic_overall,
+                        paragraph_id=paragraph_id,
+                        chapter_text=chapter_path.read_text(encoding="utf-8"),
+                    )
+                ),
                 **{k: v for k, v in kwargs.items() if k != "api_key"},
             )
         return create_client(stage, api_key="", **{k: v for k, v in kwargs.items() if k != "api_key"})
@@ -364,10 +373,8 @@ def test_split_failure_packet_excludes_audit_blockers():
 
 def test_semantic_api_failure_tags_audit_blocker():
     seed = uuid.uuid4().hex[:8]
-    text = sample_chapter_text(seed)
-    title, body = 清理正文(text)
-    paragraphs = 切段(body)
-    result = 审计(paragraphs, title, body, client=create_client("L1", api_key=""))
+    context = make_semantic_context(sample_chapter_text(seed))
+    result = 审计(context, client=create_client("L1", api_key=""))
     assert not result.可用
     assert result.检测项列表[0].decision_role == "AUDIT_BLOCKER"
 

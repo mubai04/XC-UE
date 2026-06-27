@@ -15,7 +15,7 @@ from DeepSeek客户端 import create_client
 from 退出码 import ExitCode
 from L1_语义审计 import 审计
 from 正文切分 import 切段, 清理正文
-from tests.conftest import ROOT, make_mock_transport, sample_chapter_text, semantic_audit_payload
+from tests.conftest import ROOT, find_chapter_evidence, make_mock_transport, make_semantic_context, sample_chapter_text, semantic_audit_payload
 
 
 @pytest.fixture
@@ -61,6 +61,36 @@ def _load_entry_json(stdout: str, stderr: str = "") -> dict:
                     except json.JSONDecodeError:
                         continue
     raise AssertionError(f"no JSON payload: stdout={stdout!r} stderr={stderr!r}")
+
+
+def _import_l15_main():
+    import importlib.util
+
+    entry = ROOT / "00_工程总控" / "工程执行层" / "L1.5工程" / "L1.5运行入口.py"
+    spec = importlib.util.spec_from_file_location("L15运行入口", entry)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+    return mod.main
+
+
+def _run_l15_on_packet(packet_path: Path, workspace: Path, pipeline_run_id: str) -> tuple[int, dict]:
+    l15_out = workspace / "l15"
+    l15_run = f"{pipeline_run_id}-L15"
+    return _run_entry(
+        _import_l15_main(),
+        [
+            "L1.5运行入口.py",
+            "--failure-packet",
+            str(packet_path),
+            "--run-id",
+            l15_run,
+            "--out-dir",
+            str(l15_out),
+            "--pipeline-run-id",
+            pipeline_run_id,
+        ],
+    )
 
 
 def _run_entry(main_fn, argv: list[str]) -> tuple[int, dict]:
@@ -113,6 +143,16 @@ def _setup_harness(root: Path, seed: str) -> Path:
         "IR-05_章节目标表.md",
     ):
         (harness / "IR" / name).write_text(f"# {name}\n", encoding="utf-8")
+    manifest = {
+        "schema_version": "xcue.project-manifest/1.0",
+        "project_id": f"harness-{seed}",
+        "content_root": "chapters",
+        "default_chapter": "chapters/ch01.md",
+        "entrypoint": "chapters/ch01.md",
+        "entrypoint_type": "project",
+        "required_dirs": ["IR"],
+    }
+    (harness / "project.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     return harness
 
 
@@ -132,13 +172,28 @@ def _l2_payload(quote: str, *, root_cause: str | None = None) -> dict:
     }
 
 
-def _patch_create_client(monkeypatch, *, l1_quote: str, l2_quote: str, l3_body: str):
+def _patch_create_client(
+    monkeypatch,
+    *,
+    l1_quote: str,
+    l1_paragraph_id: str,
+    l1_chapter_text: str,
+    l2_quote: str,
+    l3_body: str,
+):
     def factory(stage, **kwargs):
         if stage == "L1":
             return create_client(
                 "L1",
                 api_key="k",
-                transport=make_mock_transport(semantic_audit_payload(l1_quote, overall="PASS")),
+                transport=make_mock_transport(
+                    semantic_audit_payload(
+                        l1_quote,
+                        target_overall="PASS",
+                        paragraph_id=l1_paragraph_id,
+                        chapter_text=l1_chapter_text,
+                    )
+                ),
                 **{k: v for k, v in kwargs.items() if k != "api_key"},
             )
         if stage == "L2":
@@ -160,6 +215,7 @@ def _patch_create_client(monkeypatch, *, l1_quote: str, l2_quote: str, l3_body: 
     monkeypatch.setattr("DeepSeek客户端.create_client", factory)
     monkeypatch.setattr("L1_语义审计.create_client", factory)
     monkeypatch.setattr("L2_01_叙事结构能力.create_client", factory)
+    monkeypatch.setattr("模型调用.create_client", factory)
     monkeypatch.setattr("候选正文生成.create_client", factory)
 
 
@@ -215,11 +271,19 @@ def test_l1_entry_semantic_unavailable_rejects(external_io_token, tmp_path, repo
 def test_l1_inprocess_semantic_mock_passes():
     seed = uuid.uuid4().hex[:8]
     text = sample_chapter_text(seed)
-    title, body = 清理正文(text)
-    paragraphs = 切段(body)
+    context = make_semantic_context(text)
     quote = f"{seed} 忽然察觉异常"
-    client = create_client("L1", api_key="k", transport=make_mock_transport(semantic_audit_payload(quote, overall="PASS")))
-    result = 审计(paragraphs, title, body, client=client)
+    paragraph_id, _ = find_chapter_evidence(text, quote)
+    client = create_client(
+        "L1",
+        api_key="k",
+        transport=make_mock_transport(
+            semantic_audit_payload(
+                quote, target_overall="PASS", paragraph_id=paragraph_id, chapter_text=text
+            )
+        ),
+    )
+    result = 审计(context, client=client)
     assert result.可用
     assert result.整体结论 == "PASS"
 
@@ -231,9 +295,18 @@ def test_l1_l2_l3_entry_mock_pipeline(monkeypatch, repo_root):
     _write_minimal_project(project_root)
     chapter = project_root / "chapters" / f"{seed}.md"
     chapter.write_text(_failure_chapter(seed), encoding="utf-8")
+    chapter_text = chapter.read_text(encoding="utf-8")
     l2_quote = f"{seed} 只有一句无关内容"
+    l1_paragraph_id, _ = find_chapter_evidence(chapter_text, l2_quote)
     l3_body = f"{seed} 候选段落一。\n\n{seed} 候选段落二，冲突继续升级。\n"
-    _patch_create_client(monkeypatch, l1_quote=l2_quote, l2_quote=l2_quote, l3_body=l3_body)
+    _patch_create_client(
+        monkeypatch,
+        l1_quote=l2_quote,
+        l1_paragraph_id=l1_paragraph_id,
+        l1_chapter_text=chapter_text,
+        l2_quote=l2_quote,
+        l3_body=l3_body,
+    )
 
     harness = _setup_harness(workspace, seed)
     formal_path = harness / "chapters" / "ch01.md"
@@ -278,6 +351,10 @@ def test_l1_l2_l3_entry_mock_pipeline(monkeypatch, repo_root):
     filtered_packet_path = workspace / f"{seed}_l2_input.json"
     filtered_packet_path.write_text(json.dumps(packet, ensure_ascii=False, indent=2), encoding="utf-8")
 
+    l15_code, l15_payload = _run_l15_on_packet(filtered_packet_path, workspace, l1_run)
+    assert l15_code == 0, l15_payload
+    assert l15_payload.get("final_status") == "ROUTED"
+
     l2_out = workspace / "l2"
     l2_run = f"E2E-{seed}-L2"
     import L2运行入口
@@ -286,8 +363,8 @@ def test_l1_l2_l3_entry_mock_pipeline(monkeypatch, repo_root):
         L2运行入口.main,
         [
             "L2运行入口.py",
-            "--failure-packet",
-            str(filtered_packet_path),
+            "--l15-report",
+            l15_payload["report_json"],
             "--run-id",
             l2_run,
             "--out-dir",
@@ -347,6 +424,7 @@ def test_l2_fictional_evidence_blocks_l3_entry(monkeypatch, repo_root):
 
     monkeypatch.setattr("DeepSeek客户端.create_client", factory)
     monkeypatch.setattr("L2_01_叙事结构能力.create_client", factory)
+    monkeypatch.setattr("模型调用.create_client", factory)
 
     packet = {
         "schema_version": "xcue.failure-packet/1.0",
@@ -376,20 +454,24 @@ def test_l2_fictional_evidence_blocks_l3_entry(monkeypatch, repo_root):
     packet_path = workspace / f"{seed}_failure_packet.json"
     packet_path.write_text(json.dumps(packet, ensure_ascii=False, indent=2), encoding="utf-8")
 
+    pipeline_id = f"E2E-{seed}"
+    l15_code, l15_payload = _run_l15_on_packet(packet_path, workspace, pipeline_id)
+    assert l15_code == 0, l15_payload
+
     import L2运行入口
 
     l2_code, l2_payload = _run_entry(
         L2运行入口.main,
         [
             "L2运行入口.py",
-            "--failure-packet",
-            str(packet_path),
+            "--l15-report",
+            l15_payload["report_json"],
             "--run-id",
             f"E2E-{seed}-L2",
             "--out-dir",
             str(workspace / "l2"),
             "--pipeline-run-id",
-            f"E2E-{seed}",
+            pipeline_id,
         ],
     )
     assert l2_code != 0
@@ -411,7 +493,7 @@ def test_l2_fictional_evidence_blocks_l3_entry(monkeypatch, repo_root):
             "--project-harness",
             _setup_harness(workspace, seed).relative_to(repo_root).as_posix(),
             "--pipeline-run-id",
-            f"E2E-{seed}",
+            pipeline_id,
         ],
     )
     assert l3_code != 0

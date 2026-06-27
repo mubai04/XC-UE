@@ -26,6 +26,9 @@ def 确保Harness目录(harness: Path) -> list[Path]:
     missing = [item for item in required if not item.exists()]
     if missing:
         raise 输入错误(f"Project Harness 验证失败：{', '.join(str(item) for item in missing)}")
+    manifest = harness / "project.json"
+    if not manifest.is_file():
+        raise 输入错误(f"Project Harness 验证失败：缺少 project.json：{manifest}")
     return required
 
 

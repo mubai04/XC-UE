@@ -1,0 +1,173 @@
+{
+  "run_id": "TP001-c3314d8b-L3",
+  "输入文件": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-tp001-c3314d8b\\l2\\TP001-c3314d8b-L2.json",
+  "输入修复单数量": 1,
+  "方法声明": "L3工程生成受约束任务包与 DeepSeek 候选正文；候选正文仅写入 chapters/_candidates/，不修改正式正文。Project Harness：C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-tp001-c3314d8b\\harness-c3314d8b",
+  "标准校验问题": [],
+  "协议规则摘要": {
+    "状态机步骤数": 8,
+    "权限矩阵项": 4,
+    "任务字段": [
+      "来源层",
+      "来源文件",
+      "ProjectHarness根",
+      "任务类型",
+      "输入材料",
+      "IR输入",
+      "目标文件",
+      "禁止修改文件",
+      "修复方向",
+      "修复产物要求",
+      "回流验收位置",
+      "是否允许改正式正文",
+      "是否需要备份"
+    ],
+    "输出字段": [
+      "执行编号",
+      "执行状态",
+      "实际读取文件",
+      "任务包文件",
+      "分项任务文件",
+      "任务依赖",
+      "约束",
+      "目标文件引用",
+      "修复产物",
+      "复验入口",
+      "待复验问题",
+      "断点记录"
+    ],
+    "执行顺序": [
+      "校验 L2 修复单",
+      "加载 Project Harness",
+      "映射 IR 输入",
+      "生成 L3 任务包",
+      "等待人工或后续执行器",
+      "回流 L1 / L1.5 复验"
+    ],
+    "IR推荐文件数": 8,
+    "候选必备目录": [
+      "chapters/_candidates",
+      "logs"
+    ],
+    "禁止项数": 6
+  },
+  "任务单": [
+    {
+      "执行编号": "L3RUN-TP001-c3314d8b-L3-001",
+      "来源层": "L2-01",
+      "来源文件": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-tp001-c3314d8b\\l2\\TP001-c3314d8b-L2.json",
+      "ProjectHarness根": "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b",
+      "任务类型": "正文扩写任务规划",
+      "输入材料": "正文有效字数低于 gate_rules 功能稿下限 2000。 当前值：17.000。 | 根因：c3314d8b 只有一句无关内容 导致结构链无法识别",
+      "IR输入": [
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/IR/IR-04_事件链.md",
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/IR/IR-05_章节目标表.md"
+      ],
+      "目标文件": "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/chapters/_candidates/TP001-c3314d8b-L3_TASK-001.md",
+      "禁止修改文件": [
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/chapters/ch01.md",
+        "20_L1_闸门层/*",
+        "30_L1.5_路由矩阵层/*",
+        "40_L2_正式能力层/*",
+        "50_L3_执行协议层/*"
+      ],
+      "修复方向": "只保留一条主行动线 / 合并冗余段落",
+      "修复产物要求": "发布稿扩写版",
+      "回流验收位置": "L1-03",
+      "是否允许改正式正文": "否",
+      "是否需要备份": "不适用",
+      "执行状态": "AWAITING_EXECUTOR",
+      "校验问题": [],
+      "状态历史": [
+        {
+          "前状态": "RECEIVED",
+          "后状态": "INPUT_VALIDATED",
+          "触发事件": "任务输入校验通过",
+          "时间": "2026-06-27T13:53:26+08:00",
+          "执行组件": "L3工程.运行",
+          "证据文件": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-tp001-c3314d8b\\l2\\TP001-c3314d8b-L2.json"
+        },
+        {
+          "前状态": "INPUT_VALIDATED",
+          "后状态": "TASK_PLANNED",
+          "触发事件": "任务规划完成",
+          "时间": "2026-06-27T13:53:26+08:00",
+          "执行组件": "L3工程.运行",
+          "证据文件": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-tp001-c3314d8b\\l2\\TP001-c3314d8b-L2.json"
+        },
+        {
+          "前状态": "TASK_PLANNED",
+          "后状态": "CANDIDATE_CREATED",
+          "触发事件": "候选正文写入完成",
+          "时间": "2026-06-27T13:53:27+08:00",
+          "执行组件": "L3工程.候选正文生成",
+          "证据文件": "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/chapters/_candidates/TP001-c3314d8b-L3_TASK-001.md"
+        },
+        {
+          "前状态": "CANDIDATE_CREATED",
+          "后状态": "TASK_PACKAGE_CREATED",
+          "触发事件": "任务包写入完成",
+          "时间": "2026-06-27T13:53:27+08:00",
+          "执行组件": "L3工程.输出生成",
+          "证据文件": "运行记录/未归属运行/第三层/分项任务/L3RUN-TP001-c3314d8b-L3-001.md"
+        },
+        {
+          "前状态": "TASK_PACKAGE_CREATED",
+          "后状态": "AWAITING_EXECUTOR",
+          "触发事件": "等待人工或后续执行器",
+          "时间": "2026-06-27T13:53:27+08:00",
+          "执行组件": "L3工程.输出生成",
+          "证据文件": "运行记录/未归属运行/第三层/分项任务/L3RUN-TP001-c3314d8b-L3-001.md"
+        }
+      ]
+    }
+  ],
+  "执行输出": [
+    {
+      "执行编号": "L3RUN-TP001-c3314d8b-L3-001",
+      "执行状态": "AWAITING_EXECUTOR",
+      "实际读取文件": [
+        "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\运行记录\\pytest-e2e-tp001-c3314d8b\\l2\\TP001-c3314d8b-L2.json",
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/IR/IR-04_事件链.md",
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/IR/IR-05_章节目标表.md"
+      ],
+      "任务包文件": "运行记录/未归属运行/第三层/分项任务/L3RUN-TP001-c3314d8b-L3-001.md",
+      "分项任务文件": "运行记录/未归属运行/第三层/分项任务/L3RUN-TP001-c3314d8b-L3-001.md",
+      "任务依赖": [
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/IR/IR-04_事件链.md",
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/IR/IR-05_章节目标表.md"
+      ],
+      "约束": [
+        "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/chapters/ch01.md",
+        "20_L1_闸门层/*",
+        "30_L1.5_路由矩阵层/*",
+        "40_L2_正式能力层/*",
+        "50_L3_执行协议层/*"
+      ],
+      "目标文件引用": "运行记录/pytest-e2e-tp001-c3314d8b/harness-c3314d8b/chapters/_candidates/TP001-c3314d8b-L3_TASK-001.md",
+      "修复产物": "发布稿扩写版",
+      "复验入口": "L1-03",
+      "待复验问题": "正文有效字数低于 gate_rules 功能稿下限 2000。 当前值：17.000。 | 根因：c3314d8b 只有一句无关内容 导致结构链无法识别",
+      "断点记录": "",
+      "execution_mode": "CANDIDATE_GENERATION",
+      "prose_modified": true,
+      "task_package_created": true,
+      "candidate_created": true,
+      "awaiting_executor": true
+    }
+  ],
+  "阻断任务": [],
+  "protocol_rule_version": "2026-06-25.task-planning-only-01",
+  "schema_version": "xcue.l3-task-bundle/1.0",
+  "pipeline_run_id": "TP001-c3314d8b-L1",
+  "stage_run_id": "TP001-c3314d8b-L1-L3",
+  "status": "AWAITING_EXECUTOR",
+  "状态说明": "等待执行器",
+  "execution_mode": "TASK_PLANNING_ONLY",
+  "prose_modified": false,
+  "task_package_created": true,
+  "candidate_created": true,
+  "awaiting_executor": true,
+  "input_artifacts": [],
+  "output_artifacts": []
+}

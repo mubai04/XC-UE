@@ -314,6 +314,11 @@
       "target_module": "L2-02",
       "repair_product": "降密度修正稿",
       "return_gate": "L1-03"
+    },
+    "技术护栏失败": {
+      "target_module": "L2-06",
+      "repair_product": "一致性冲突表",
+      "return_gate": "L1-01"
     }
   }
 }

@@ -1,5 +1,6 @@
 # CURRENT_SYSTEM_STATUS v0.1
 
+> **DEPRECATED — 请读 `CURRENT_SYSTEM_STATUS.generated.md`（由 `scripts/generate_system_status.py` 生成）。**  
 > 更新：2026-06-16  
 > 用途：防止新对话或 Cursor 误判「L2 未建 / L3 未建」。  
 > 配套：`README_XC-UE_当前结构与真源边界.md`

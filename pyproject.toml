@@ -1,12 +1,17 @@
 [project]
 name = "xc-ue"
 version = "0.0.0"
-description = "XC-UE local engineering workspace"
+description = "XC-UE local engineering workspace (engine runs from repo root)"
 requires-python = ">=3.11"
-dependencies = [
-  "pytest",
+dependencies = []
+
+[project.optional-dependencies]
+runtime = [
   "PyYAML",
   "jsonschema",
+]
+dev = [
+  "pytest",
 ]
 
 [project.scripts]

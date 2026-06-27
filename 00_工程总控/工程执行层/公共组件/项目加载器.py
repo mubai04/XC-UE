@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -25,6 +26,7 @@ class 项目上下文:
     entrypoint: Path
     entrypoint_type: str
     source_scope: str
+    chapter_sequence: tuple[str, ...] = ()
     resolved: bool = True
 
 
@@ -102,6 +104,81 @@ def _读项目清单(path: Path) -> dict[str, Any]:
     return data
 
 
+def _校验章节序列(
+    *,
+    project_root: Path,
+    content_root: Path,
+    chapter_sequence_raw: list[str],
+    manifest_path: Path,
+) -> tuple[str, ...]:
+    if not isinstance(chapter_sequence_raw, list) or any(
+        not isinstance(item, str) or not item for item in chapter_sequence_raw
+    ):
+        raise _项目错误("PROJECT_RESOLUTION_FAILED", "chapter_sequence 必须是字符串数组", path=str(manifest_path))
+
+    content_root_resolved = content_root.resolve()
+    seen: set[str] = set()
+    normalized: list[str] = []
+
+    for raw in chapter_sequence_raw:
+        raw_path = Path(raw)
+        if raw_path.is_absolute():
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                f"chapter_sequence 不允许绝对路径：{raw}",
+                path=str(manifest_path),
+            )
+        if ".." in raw_path.parts:
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                f"chapter_sequence 不允许 ../ 逃逸：{raw}",
+                path=str(manifest_path),
+            )
+
+        candidate = (project_root / raw).resolve()
+        try:
+            candidate = assert_inside_root(content_root_resolved, candidate)
+        except 输入错误 as exc:
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                str(exc),
+                path=str(manifest_path),
+                chapter=raw,
+            ) from exc
+        try:
+            candidate.relative_to(content_root_resolved)
+        except ValueError as exc:
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                f"chapter_sequence 路径不在 content_root 内：{raw}",
+                path=str(manifest_path),
+            ) from exc
+        if not candidate.exists():
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                f"chapter_sequence 文件不存在：{raw}",
+                path=str(manifest_path),
+            )
+        if not candidate.is_file():
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                f"chapter_sequence 必须是文件而非目录：{raw}",
+                path=str(manifest_path),
+            )
+
+        norm_key = os.path.normcase(str(candidate))
+        if norm_key in seen:
+            raise _项目错误(
+                "PROJECT_CHAPTER_SEQUENCE_INVALID",
+                f"chapter_sequence 存在重复项：{raw}",
+                path=str(manifest_path),
+            )
+        seen.add(norm_key)
+        normalized.append(raw)
+
+    return tuple(normalized)
+
+
 def _由清单构造上下文(
     *,
     root: Path,
@@ -160,6 +237,18 @@ def _由清单构造上下文(
     for dirname in required_dirs:
         _校验目录(_解析项目内路径(project_root, dirname), "PROJECT_RESOLUTION_FAILED", f"项目必需目录 {dirname}")
 
+    chapter_sequence: tuple[str, ...] = ()
+    chapter_sequence_raw = manifest.get("chapter_sequence")
+    if chapter_sequence_raw is not None:
+        if not isinstance(chapter_sequence_raw, list):
+            raise _项目错误("PROJECT_RESOLUTION_FAILED", "chapter_sequence 必须是字符串数组", path=str(manifest_path))
+        chapter_sequence = _校验章节序列(
+            project_root=project_root,
+            content_root=content_root,
+            chapter_sequence_raw=chapter_sequence_raw,
+            manifest_path=manifest_path,
+        )
+
     return 项目上下文(
         project_id=manifest_project_id,
         project_root=project_root,
@@ -171,6 +260,7 @@ def _由清单构造上下文(
         entrypoint=entrypoint,
         entrypoint_type=str(entrypoint_type),
         source_scope=source_scope,
+        chapter_sequence=chapter_sequence,
     )
 
 
