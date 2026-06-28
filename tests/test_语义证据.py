@@ -289,6 +289,224 @@ def test_protocol_compliant_does_not_imply_semantic_support():
     assert report.semantic_support is None
 
 
+def _override_dimension(payload: dict, name: str, **fields) -> None:
+    for dim in payload["dimensions"]:
+        if dim["name"] == name:
+            dim.update(fields)
+
+
+@pytest.mark.parametrize(
+    ("dimension", "final_reason"),
+    [
+        ("动机", "他始终想保住职位，因此没有公开主管的异常要求。"),
+        ("动机", "主角目标（积累资历、避免问责）在全章保持一致，无目标漂移或矛盾行为。"),
+        ("冲突", "主管要求继续加班，主角坚持按时离开，双方立场无法同时满足。"),
+        ("读者收益", "设计图从未备案，使大楼的合法性产生新的疑问。"),
+    ],
+)
+def test_具体表达不含预设现象词仍通过(dimension: str, final_reason: str):
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果" and dim["verdict"] == "PASS":
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+    _override_dimension(payload, dimension, final_reason=final_reason)
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok, result.errors
+
+
+def test_动机具体目标表达不含动机二字仍通过():
+    corpus = {"P0001": "原因有两个。第一，他不想暴露自己其实懂。"}
+    payload = _full_payload("原因有两个", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果" and dim["verdict"] == "PASS":
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+    _override_dimension(
+        payload,
+        "动机",
+        final_reason="主角目标（最大化积分、避免暴露）在全章保持一致，无目标漂移或矛盾行为。",
+    )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+
+
+def test_具体行为一致性表达不含预设现象词仍通过():
+    corpus = {"P0001": "他始终想保住职位，因此没有公开主管的异常要求。"}
+    payload = _full_payload("他始终想保住职位", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果" and dim["verdict"] == "PASS":
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+    _override_dimension(
+        payload,
+        "动机",
+        final_reason="他始终想保住职位，因此没有公开主管的异常要求。",
+    )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+
+
+def test_具体原因结果表达不含因果二字仍通过():
+    corpus = {"P0001": "设计图从未备案，使大楼的合法性产生新的疑问。"}
+    payload = _full_payload("设计图从未备案", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果" and dim["verdict"] == "PASS":
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+    _override_dimension(
+        payload,
+        "读者收益",
+        final_reason="设计图从未备案，使大楼的合法性产生新的疑问。",
+    )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+
+
+def test_具体冲突双方表达不含冲突二字仍通过():
+    corpus = {"P0001": "主管要求继续加班，主角坚持按时离开，双方立场无法同时满足。"}
+    payload = _full_payload("主管要求继续加班", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果" and dim["verdict"] == "PASS":
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+    _override_dimension(
+        payload,
+        "冲突",
+        final_reason="主管要求继续加班，主角坚持按时离开，双方立场无法同时满足。",
+    )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+
+
+def test_final_reason具体而analysis_summary简短仍通过():
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果":
+            dim["verdict"] = "PASS"
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+        if dim["name"] == "动机":
+            dim["final_reason"] = "主角目标（积累资历、避免问责）在全章保持一致，无目标漂移或矛盾行为。"
+            dim["analysis_summary"] = "主要优点：成立；主要风险：无明显；最终 PASS。"
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+
+
+def test_analysis_summary具体而final_reason简短仍通过():
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择", target_overall="PASS")
+    for dim in payload["dimensions"]:
+        if dim["name"] == "因果":
+            dim["verdict"] = "PASS"
+            dim["final_reason"] = "起因：异常被察觉；行动：人物做出选择；结果：冲突升级，故判PASS。"
+        if dim["name"] == "动机":
+            dim["final_reason"] = "目标清晰且持续。"
+            dim["analysis_summary"] = (
+                "主要优点：主角坚持保住职位并回避公开对抗；主要风险：无；"
+                "最终选择 PASS 因为主角目标清晰且持续。"
+            )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+
+
+def test_具体文本配合有效证据通过():
+    corpus = {"P0001": "设计图从未备案，使大楼的合法性产生新的疑问。"}
+    payload = _full_payload("设计图从未备案", target_overall="PASS")
+    _override_dimension(
+        payload,
+        "读者收益",
+        final_reason="设计图从未备案，使大楼的合法性产生新的疑问。",
+    )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert result.ok
+    assert len(result.validated_evidence) == 6
+
+
+@pytest.mark.parametrize(
+    "final_reason",
+    [
+        "整体表现良好。",
+        "没有明显问题。",
+        "该维度通过。",
+        "动机方面整体符合要求。",
+        "整体来看表现较好，没有发现明显问题。",
+        "该部分基本完整，可以判定通过。",
+        "本章在这一维度上的处理总体正常。",
+        "相关内容较为合理，满足基本要求。",
+    ],
+)
+def test_通用套话仍阻断(final_reason: str):
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择")
+    for dim in payload["dimensions"]:
+        dim["final_reason"] = final_reason
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("空泛" in e for e in result.errors)
+
+
+def test_长篇通用套话仍阻断():
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择")
+    boilerplate = (
+        "整体来看表现较好，没有发现明显问题；该部分基本完整，可以判定通过；"
+        "本章在这一维度上的处理总体正常；相关内容较为合理，满足基本要求。"
+    )
+    for dim in payload["dimensions"]:
+        dim["final_reason"] = boilerplate
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("空泛" in e for e in result.errors)
+
+
+def test_只有维度名称没有具体内容仍阻断():
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择")
+    _override_dimension(payload, "动机", final_reason="动机维度通过。")
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("空泛" in e for e in result.errors)
+
+
+def test_无有效证据仍阻断():
+    corpus = {"P0001": "真实正文。"}
+    payload = _full_payload("不存在摘句")
+    for dim in payload["dimensions"]:
+        dim["final_reason"] = "主角目标（积累资历、避免问责）在全章保持一致，无目标漂移或矛盾行为。"
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("EXACT_TEXT_NOT_IN_PARAGRAPH" in e or "PARAGRAPH_NOT_FOUND" in e for e in result.errors)
+
+
+def test_业务结论缺失仍阻断():
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择")
+    _override_dimension(
+        payload,
+        "动机",
+        strength_summary="",
+        final_reason="主角目标（积累资历、避免问责）在全章保持一致，无目标漂移或矛盾行为。",
+    )
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("strength_summary 不能为空" in e for e in result.errors)
+
+
+def test_空字符串仍阻断():
+    corpus = {"P0001": "他必须做出选择，否则代价会落在所有人身上。"}
+    payload = _full_payload("他必须做出选择")
+    _override_dimension(payload, "动机", final_reason="")
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("final_reason 不能为空" in e for e in result.errors)
+
+
+def test_证据无效仍优先EVIDENCE_INVALID():
+    corpus = {"P0001": "真实正文。"}
+    payload = _full_payload("不存在摘句")
+    result = 校验语义审计响应(payload, current_paragraphs=corpus)
+    assert not result.ok
+    assert any("EXACT_TEXT_NOT_IN_PARAGRAPH" in e or "PARAGRAPH_NOT_FOUND" in e for e in result.errors)
+    assert not any("空泛" in e for e in result.errors)
+
+
 @pytest.mark.parametrize("path", RUBRIC_SCAN_PATHS)
 def test_rubric_files_do_not_contain_sample_leakage(path: Path):
     text = path.read_text(encoding="utf-8")

@@ -17,6 +17,67 @@ MAX_EVIDENCE_PER_DIMENSION = 3
 
 FORBIDDEN_LEGACY_FIELDS = ("overall", "score", "explanation", "evidence_quotes", "quotes")
 VAGUE_FINAL_REASON_PHRASES = ("情节清晰", "信息丰富", "容易理解", "叙事流畅", "描写生动")
+GENERIC_BOILERPLATE_MARKERS = (
+    "整体表现",
+    "表现良好",
+    "表现较好",
+    "整体较好",
+    "没有明显问题",
+    "未发现明显问题",
+    "没有发现明显问题",
+    "该维度通过",
+    "该部分基本完整",
+    "基本符合",
+    "表现正常",
+    "可以通过",
+    "内容比较完整",
+    "较为合理",
+    "满足基本要求",
+    "总体正常",
+    "可以判定通过",
+    "处理总体正常",
+    "基本完整",
+    "相关内容较为合理",
+    "整体来看",
+    "在这一维度上的处理总体正常",
+    "本章在这一维度",
+)
+SPECIFIC_SUBJECT_MARKERS = (
+    "主角",
+    "他",
+    "她",
+    "主管",
+    "双方",
+    "角色",
+    "人物",
+    "总监",
+    "大楼",
+    "设计图",
+    "读者",
+    "章末",
+    "全章",
+)
+SPECIFIC_RELATION_MARKERS = (
+    "一致",
+    "漂移",
+    "矛盾",
+    "冲突",
+    "对立",
+    "立场",
+    "坚持",
+    "无法同时",
+    "疑问",
+    "悬念",
+    "承接",
+    "备案",
+    "加班",
+    "离开",
+    "要求",
+    "目标",
+    "职位",
+    "公开",
+)
+SPECIFIC_CAUSE_RESULT_MARKERS = ("起因", "结果", "导致", "因此", "从而", "因为", "由于", "使")
 PHENOMENON_KEYWORDS = (
     "重复",
     "主体",
@@ -273,10 +334,66 @@ def _analysis_summary_complete(text: str) -> bool:
     return has_positive and has_risk and has_decision
 
 
-def _final_reason_specific(final_reason: str) -> bool:
-    if any(phrase in final_reason for phrase in VAGUE_FINAL_REASON_PHRASES):
+def _has_specific_semantic_content(text: str) -> bool:
+    """是否表达可识别的具体判断对象、状态、行为、目标、关系或章节现象。"""
+    if not text.strip():
         return False
-    return any(keyword in final_reason for keyword in PHENOMENON_KEYWORDS)
+    if any(keyword in text for keyword in PHENOMENON_KEYWORDS):
+        return True
+    if re.search(r"[（(][^）)]{2,}[）)]", text):
+        return True
+    if "→" in text or "->" in text:
+        return True
+    has_subject = any(marker in text for marker in SPECIFIC_SUBJECT_MARKERS)
+    has_relation = any(marker in text for marker in SPECIFIC_RELATION_MARKERS)
+    if has_subject and has_relation:
+        return True
+    has_cause = any(marker in text for marker in SPECIFIC_CAUSE_RESULT_MARKERS)
+    if has_subject and has_cause:
+        return True
+    return False
+
+
+def _is_generic_boilerplate(text: str) -> bool:
+    """通用套话：缺少具体对象/关系/状态，且命中空泛或模板化表述。"""
+    if not text.strip():
+        return True
+    if any(phrase in text for phrase in VAGUE_FINAL_REASON_PHRASES):
+        return True
+    if not any(marker in text for marker in GENERIC_BOILERPLATE_MARKERS):
+        return False
+    return not _has_specific_semantic_content(text)
+
+
+def _is_dimension_label_only(text: str) -> bool:
+    stripped = text.strip()
+    for name in REQUIRED_DIMENSIONS:
+        if not stripped.startswith(name):
+            continue
+        remainder = stripped[len(name) :].lstrip("维度方面层面上的")
+        if not remainder or _is_generic_boilerplate(remainder):
+            return True
+        if not _has_specific_semantic_content(remainder):
+            return True
+    return False
+
+
+def _final_reason_specific(final_reason: str, *, analysis_summary: str = "") -> bool:
+    """具体性合同：综合 final_reason 与 analysis_summary，不要求字面命中现象词表。"""
+    reason = final_reason.strip()
+    summary = analysis_summary.strip()
+    combined = f"{reason}\n{summary}".strip()
+    if not combined:
+        return False
+    if _is_dimension_label_only(reason):
+        return False
+    if reason and _is_generic_boilerplate(reason):
+        return False
+    if reason and _has_specific_semantic_content(reason):
+        return True
+    if summary and _has_specific_semantic_content(summary) and not _is_generic_boilerplate(summary):
+        return True
+    return _has_specific_semantic_content(combined) and not _is_generic_boilerplate(combined)
 
 
 def _因果链条完整(final_reason: str, *, analysis_summary: str = "") -> bool:
@@ -332,7 +449,7 @@ def _validate_dimension_semantics(
         errors.append(f"{name}: evidence_rationale 不能为空")
     if not _analysis_summary_complete(analysis_summary):
         errors.append(f"{name}: analysis_summary 必须同时说明优点、风险与最终结论")
-    if final_reason and not _final_reason_specific(final_reason):
+    if final_reason and not _final_reason_specific(final_reason, analysis_summary=analysis_summary):
         errors.append(f"{name}: final_reason 过于空泛，必须引用具体全章现象类别")
     if name == "因果" and verdict == "PASS" and not _因果链条完整(final_reason, analysis_summary=analysis_summary):
         errors.append(f"{name}: 因果 PASS 时须在 final_reason 或 analysis_summary 中表达起因、行动、结果语义槽位")

@@ -333,6 +333,6 @@ def test_RR02_ANCHOR_R2_offline_replay():
     assert result.location_failed_dimensions == []
     assert result.anchor_diagnostics == []
     assert all(r["anchor_result"] for r in replay_records)
-    assert not result.ok
-    assert any("动机" in e and "空泛" in e for e in result.errors)
+    assert result.ok
+    assert result.computed_overall == "PASS"
     assert not any("PARAGRAPH_ID_REPAIRED" in w for w in result.warnings)
