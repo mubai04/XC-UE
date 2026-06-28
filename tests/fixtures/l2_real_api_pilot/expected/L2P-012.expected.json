@@ -1,0 +1,23 @@
+{
+  "case_id": "L2P-012",
+  "target_module": "L2-06",
+  "case_type": "B",
+  "expected_issue_present": false,
+  "acceptable_root_causes": [
+    "ALLOWED_CHANGE",
+    "合法状态变化",
+    "时间跨度解释充分"
+  ],
+  "required_evidence_region": [
+    "伤",
+    "痊愈",
+    "数日后"
+  ],
+  "forbidden_diagnoses": [
+    "HARD_CONFLICT",
+    "硬冲突"
+  ],
+  "expected_reroute": true,
+  "minimum_action_requirements": [],
+  "human_notes": "B类：数日后伤愈，不得判硬冲突。"
+}

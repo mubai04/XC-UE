@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 .pytest_cache/
 *.tmp
+
+# XC-UE 本地运行产物
+/运行记录/*
+!/运行记录/README.md

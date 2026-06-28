@@ -1,0 +1,22 @@
+{
+  "case_id": "L2P-010",
+  "target_module": "L2-05",
+  "case_type": "B",
+  "expected_issue_present": false,
+  "acceptable_root_causes": [
+    "体验成立",
+    "文风粗但非本模块"
+  ],
+  "required_evidence_region": [
+    "清点",
+    "补给"
+  ],
+  "forbidden_diagnoses": [
+    "解释腔",
+    "人物语气",
+    "设定压力"
+  ],
+  "expected_reroute": true,
+  "minimum_action_requirements": [],
+  "human_notes": "B类：勿跨域诊断文风。"
+}

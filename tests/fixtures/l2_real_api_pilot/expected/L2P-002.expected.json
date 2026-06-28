@@ -1,0 +1,23 @@
+{
+  "case_id": "L2P-002",
+  "target_module": "L2-01",
+  "case_type": "B",
+  "expected_issue_present": false,
+  "acceptable_root_causes": [
+    "语言可打磨",
+    "节奏可优化",
+    "无结构断裂"
+  ],
+  "required_evidence_region": [
+    "药箱",
+    "涵洞"
+  ],
+  "forbidden_diagnoses": [
+    "主线发散",
+    "因果链断裂",
+    "多路径未剪枝"
+  ],
+  "expected_reroute": true,
+  "minimum_action_requirements": [],
+  "human_notes": "B类：语言粗但因果完整，不应判结构失败。"
+}

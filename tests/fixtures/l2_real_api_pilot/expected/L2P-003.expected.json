@@ -1,0 +1,26 @@
+{
+  "case_id": "L2P-003",
+  "target_module": "L2-02",
+  "case_type": "A",
+  "expected_issue_present": true,
+  "acceptable_root_causes": [
+    "重复套话",
+    "解释腔",
+    "口径僵化",
+    "语气机械"
+  ],
+  "required_evidence_region": [
+    "情况变了"
+  ],
+  "forbidden_diagnoses": [
+    "结构失败",
+    "设定压力",
+    "事实冲突"
+  ],
+  "expected_reroute": false,
+  "minimum_action_requirements": [
+    "具体化陈述",
+    "减少重复"
+  ],
+  "human_notes": "A类：重复同句无信息增量。"
+}

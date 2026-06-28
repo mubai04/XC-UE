@@ -1,0 +1,115 @@
+{
+  "case_id": "L2P-010",
+  "module_id": "L2-05",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T04:05:37.724708+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010"
+  },
+  "raw_response": "{\"id\":\"b2c83ea0-1c51-4a3b-b88d-8344cd6edd61\",\"object\":\"chat.completion\",\"created\":1782619515,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\",\\n      \\\"modification_target\\\": \\\"在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"在清点账本、领取物资、分配物资等任务节点，穿插角色的瞬时情绪反应（如疲惫后的短暂满足、对短缺的担忧），让读者同步感受情绪变化。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"新增后的文本每个任务环节至少有1处角色情绪描写，且情绪与任务推进的节奏匹配，避免长篇静态描写。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 24,\\n      \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON。输入是L2-05模块，failure_type是“E低：即时情绪反馈弱”。我们需要根据提供的阅读阶段、入场承诺、即时奖励、认知负荷、重复信息、结束动量来诊断体验风险。指令说：必须基于这些判断体验风险，不得复述SCREENING_PASS/REJECT或L1状态，不得写‘提高爽点’。输出JSON需要包含root_cause, experience_risks (list of objects with risk_type, location_quote, modification_target), fix_actions, acceptance_criteria, evidence_quotes, needs_reroute.\\n\\n首先，分析给定材料。failure_type是“E低：即时情绪反馈弱”。这意味着情绪反馈不足。但是我们需要基于实际内容判定风险。我们看看reading_stages: 有开头、前段、中段、末段等，但内容似乎自相矛盾？文本摘要里有很多重复的句子，而且有诊断性语言如“不应因语言粗糙改判L2-02”，这似乎是测试案例意图的元描述。然而我们必须按照真实文本处理。\\n\\n重要：模块是L2-05市场体验诊断器，只输出JSON。依据reading_stages等判断体验风险。我们需要找出导致“即时情绪反馈弱”的证据，然后给出风险类型、位置、修改目标等。\\n\\n首先，检查entry_promises：开头承诺是“孙潜要在乱后清点库房”和“他骂骂咧咧推开霉味门，动作粗鲁，但目标清楚：找账本。”这建立了任务目标和角色性格。\\n\\nimmediate_rewards是空列表，说明没有立即奖励。这可能导致情绪反馈弱。\\n\\ncognitive_loads：有两个长句信息堆叠，在段落24和26，都是相同的句子：“余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。”这明显是测试用的元信息，不是真实情节。但作为诊断器，我们把这当作故事的一部分，它增加了认知负荷且没有情绪奖励。\\n\\nrepeat_info：有大量重复短语，比如“清点完成才能领补给”等，这是明显的重复信息，可能导致读者厌烦。\\n\\nending_momentum：摘句同样是那个场景细节收束的句子，没有提供情节推进或情绪高潮，所以结尾动力弱。\\n\\nfailure_evidence：给出一个段落1的引用“孙潜要在乱后清点库房”，这是开场。\\n\\n整体看，这个故事似乎是一个元文本，故意重复和添加诊断语句。但作为诊断器，我们必须从中发现体验风险。即时情绪反馈弱可能是因为情节缺乏情绪瞬间：主角骂骂咧咧，但行为都是任务导向（清点、排队、分配），没有展示内心情绪变化或读者的情感共鸣。即时奖励为空也表明没有在阅读过程中提供小的满足感。结尾只是场景细节，没有收束或情绪释放。\\n\\n所以experience_risks可以有一个是“弃读风险”，因为缺乏情绪反馈，读者可能中途弃读。location_quote可以从文本中找体现情绪薄弱的地方。比如，在补给处排队那段，虽然领到物资，但描述平淡：“补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。”这直接告诉了读者，而不是让读者体验情绪。可以通过修改目标，使情绪反馈即时化。例如，在排队时增加焦急情绪，或领到物资时的短暂欣慰，但原文只是叙述。\\n\\nfix_actions可以建议增加微小的情绪反馈，如角色在清点过程中有小成就感，或在分配物资时得到伤员感激的目光等，以提升即时情绪反馈。\\n\\nacceptance_criteria：验证读者在阅读过程中能感受到连续的情绪波动，而不是纯任务完成。\\n\\nevidence_quotes：可以引用具体的句子来支撑诊断，比如immediate_rewards为空，认知负荷高的句子，重复信息等。\\n\\nneeds_reroute：是否需要转介其他模块？根据规则，L2-05只诊断市场体验风险，如果问题需要其他模块修复，可能设needs_reroute为true。但本案例主要问题在情绪反馈弱，属于L2-05范围，所以可能需要false。但需考虑认知负荷和重复信息也可能由其他模块处理（如L2-04）。但指令没有明确说何时重定向，我们可以保守的设为false。\\n\\nroot_cause：可以总结为“文本注重任务推进而缺乏情绪瞬间的描写，即时奖励缺失导致读者情绪投入低下”。\\n\\n我们构建JSON：\\n\\n{\\n  \\\"root_cause\\\": \\\"文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\",\\n      \\\"modification_target\\\": \\\"在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"在清点账本、领取物资、分配物资等任务节点，穿插角色的瞬时情绪反应（如疲惫后的短暂满足、对短缺的担忧），让读者同步感受情绪变化。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"新增后的文本每个任务环节至少有1处角色情绪描写，且情绪与任务推进的节奏匹配，避免长篇静态描写。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\\"paragraph\\\": 5, \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\\\"},\\n    {\\\"paragraph\\\": 24, \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"}\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n\\n注意：experience_risks可以是列表，这里只列一个，但可能有多个风险。重复信息和认知负荷也可能导致弃读，但主要根因是情绪反馈弱，我们聚焦于此。重复信息可以作为另一个风险，但模块要求基于failure_type诊断，所以我们可能只输出与情绪最相关的风险。但为了全面，可以加入“阅读疲劳”风险，但failure_type指定了情绪反馈弱，所以我们突出即时情绪问题。\\n\\n我们使用原文中非元语言的句子作为location_quote。选择P5:S1，那是正常情节句子。\\n\\nevidence_quotes用来支持诊断，我们引用体现情绪薄弱的句子和认知负荷高的句子。\\n\\n最终输出JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2364,\"completion_tokens\":1779,\"total_tokens\":4143,\"prompt_tokens_details\":{\"cached_tokens\":2304},\"completion_tokens_details\":{\"reasoning_tokens\":1431},\"prompt_cache_hit_tokens\":2304,\"prompt_cache_miss_tokens\":60},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 市场体验修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-05",
+    "输入问题": "L2P-010 R5A pilot | 根因：文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。 | 模块细节：弃读→在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。；认知负担:长句信息堆叠；重复:清点完成才能领补给。",
+    "主失败类型": "E低：即时情绪反馈弱",
+    "次失败类型": "P2",
+    "修复动作": "弃读：在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。 / 入口承诺：在 P1 强化读者预期 / 末段推动力：在 P26 留下可追读问题",
+    "修复产物": "体验已成立",
+    "验收问题": "在「补给处排队漫长，他凭…」读者可感知在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。；首段摘句「孙潜要在乱后清点库房。…」形成可追踪承诺；章末摘句「余下篇幅以场景细节收束：…」驱动继续阅读",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "否",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-05",
+    "规则编号": "P2",
+    "规则依据": "文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。 | 修改范围：阅读阶段局部 | 禁止：核心情节事实",
+    "标准动作": [
+      "弃读：在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。",
+      "入口承诺：在 P1 强化读者预期",
+      "末段推动力：在 P26 留下可追读问题"
+    ],
+    "标准验收": [
+      "在「补给处排队漫长，他凭…」读者可感知在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。",
+      "首段摘句「孙潜要在乱后清点库房。…」形成可追踪承诺",
+      "章末摘句「余下篇幅以场景细节收束：…」驱动继续阅读"
+    ],
+    "rule_id": "L2-05:P2",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 5,
+        "摘句": "补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。"
+      },
+      {
+        "段落": 24,
+        "摘句": "余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 23591.146199963987,
+  "token_usage": {
+    "prompt_tokens": 2364,
+    "completion_tokens": 1779,
+    "total_tokens": 4143,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1431
+    },
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 60
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"root_cause\": \"文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。\",\n  \"experience_risks\": [\n    {\n      \"risk_type\": \"弃读\",\n      \"location_quote\": \"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\",\n      \"modification_target\": \"在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。\"\n    }\n  ],\n  \"fix_actions\": [\n    \"在清点账本、领取物资、分配物资等任务节点，穿插角色的瞬时情绪反应（如疲惫后的短暂满足、对短缺的担忧），让读者同步感受情绪变化。\"\n  ],\n  \"acceptance_criteria\": [\n    \"新增后的文本每个任务环节至少有1处角色情绪描写，且情绪与任务推进的节奏匹配，避免长篇静态描写。\"\n  ],\n  \"evidence_quotes\": [\n    {\n      \"paragraph\": 5,\n      \"quote\": \"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\"\n    },\n    {\n      \"paragraph\": 24,\n      \"quote\": \"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\"\n    }\n  ],\n  \"needs_reroute\": false\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"b2c83ea0-1c51-4a3b-b88d-8344cd6edd61\",\"object\":\"chat.completion\",\"created\":1782619515,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\",\\n      \\\"modification_target\\\": \\\"在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"在清点账本、领取物资、分配物资等任务节点，穿插角色的瞬时情绪反应（如疲惫后的短暂满足、对短缺的担忧），让读者同步感受情绪变化。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"新增后的文本每个任务环节至少有1处角色情绪描写，且情绪与任务推进的节奏匹配，避免长篇静态描写。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 24,\\n      \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON。输入是L2-05模块，failure_type是“E低：即时情绪反馈弱”。我们需要根据提供的阅读阶段、入场承诺、即时奖励、认知负荷、重复信息、结束动量来诊断体验风险。指令说：必须基于这些判断体验风险，不得复述SCREENING_PASS/REJECT或L1状态，不得写‘提高爽点’。输出JSON需要包含root_cause, experience_risks (list of objects with risk_type, location_quote, modification_target), fix_actions, acceptance_criteria, evidence_quotes, needs_reroute.\\n\\n首先，分析给定材料。failure_type是“E低：即时情绪反馈弱”。这意味着情绪反馈不足。但是我们需要基于实际内容判定风险。我们看看reading_stages: 有开头、前段、中段、末段等，但内容似乎自相矛盾？文本摘要里有很多重复的句子，而且有诊断性语言如“不应因语言粗糙改判L2-02”，这似乎是测试案例意图的元描述。然而我们必须按照真实文本处理。\\n\\n重要：模块是L2-05市场体验诊断器，只输出JSON。依据reading_stages等判断体验风险。我们需要找出导致“即时情绪反馈弱”的证据，然后给出风险类型、位置、修改目标等。\\n\\n首先，检查entry_promises：开头承诺是“孙潜要在乱后清点库房”和“他骂骂咧咧推开霉味门，动作粗鲁，但目标清楚：找账本。”这建立了任务目标和角色性格。\\n\\nimmediate_rewards是空列表，说明没有立即奖励。这可能导致情绪反馈弱。\\n\\ncognitive_loads：有两个长句信息堆叠，在段落24和26，都是相同的句子：“余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。”这明显是测试用的元信息，不是真实情节。但作为诊断器，我们把这当作故事的一部分，它增加了认知负荷且没有情绪奖励。\\n\\nrepeat_info：有大量重复短语，比如“清点完成才能领补给”等，这是明显的重复信息，可能导致读者厌烦。\\n\\nending_momentum：摘句同样是那个场景细节收束的句子，没有提供情节推进或情绪高潮，所以结尾动力弱。\\n\\nfailure_evidence：给出一个段落1的引用“孙潜要在乱后清点库房”，这是开场。\\n\\n整体看，这个故事似乎是一个元文本，故意重复和添加诊断语句。但作为诊断器，我们必须从中发现体验风险。即时情绪反馈弱可能是因为情节缺乏情绪瞬间：主角骂骂咧咧，但行为都是任务导向（清点、排队、分配），没有展示内心情绪变化或读者的情感共鸣。即时奖励为空也表明没有在阅读过程中提供小的满足感。结尾只是场景细节，没有收束或情绪释放。\\n\\n所以experience_risks可以有一个是“弃读风险”，因为缺乏情绪反馈，读者可能中途弃读。location_quote可以从文本中找体现情绪薄弱的地方。比如，在补给处排队那段，虽然领到物资，但描述平淡：“补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。”这直接告诉了读者，而不是让读者体验情绪。可以通过修改目标，使情绪反馈即时化。例如，在排队时增加焦急情绪，或领到物资时的短暂欣慰，但原文只是叙述。\\n\\nfix_actions可以建议增加微小的情绪反馈，如角色在清点过程中有小成就感，或在分配物资时得到伤员感激的目光等，以提升即时情绪反馈。\\n\\nacceptance_criteria：验证读者在阅读过程中能感受到连续的情绪波动，而不是纯任务完成。\\n\\nevidence_quotes：可以引用具体的句子来支撑诊断，比如immediate_rewards为空，认知负荷高的句子，重复信息等。\\n\\nneeds_reroute：是否需要转介其他模块？根据规则，L2-05只诊断市场体验风险，如果问题需要其他模块修复，可能设needs_reroute为true。但本案例主要问题在情绪反馈弱，属于L2-05范围，所以可能需要false。但需考虑认知负荷和重复信息也可能由其他模块处理（如L2-04）。但指令没有明确说何时重定向，我们可以保守的设为false。\\n\\nroot_cause：可以总结为“文本注重任务推进而缺乏情绪瞬间的描写，即时奖励缺失导致读者情绪投入低下”。\\n\\n我们构建JSON：\\n\\n{\\n  \\\"root_cause\\\": \\\"文本以任务推进为叙事核心，未提供即时情绪奖励，导致读者过程中缺乏情感共鸣与满足感。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\",\\n      \\\"modification_target\\\": \\\"在此处加入主角领到物资时的短暂欣慰或忧虑的内心活动，将‘读者知道’的情绪直接通过角色感受传递，增强即时反馈。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"在清点账本、领取物资、分配物资等任务节点，穿插角色的瞬时情绪反应（如疲惫后的短暂满足、对短缺的担忧），让读者同步感受情绪变化。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"新增后的文本每个任务环节至少有1处角色情绪描写，且情绪与任务推进的节奏匹配，避免长篇静态描写。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\\"paragraph\\\": 5, \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\\\"},\\n    {\\\"paragraph\\\": 24, \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"}\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n\\n注意：experience_risks可以是列表，这里只列一个，但可能有多个风险。重复信息和认知负荷也可能导致弃读，但主要根因是情绪反馈弱，我们聚焦于此。重复信息可以作为另一个风险，但模块要求基于failure_type诊断，所以我们可能只输出与情绪最相关的风险。但为了全面，可以加入“阅读疲劳”风险，但failure_type指定了情绪反馈弱，所以我们突出即时情绪问题。\\n\\n我们使用原文中非元语言的句子作为location_quote。选择P5:S1，那是正常情节句子。\\n\\nevidence_quotes用来支持诊断，我们引用体现情绪薄弱的句子和认知负荷高的句子。\\n\\n最终输出JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2364,\"completion_tokens\":1779,\"total_tokens\":4143,\"prompt_tokens_details\":{\"cached_tokens\":2304},\"completion_tokens_details\":{\"reasoning_tokens\":1431},\"prompt_cache_hit_tokens\":2304,\"prompt_cache_miss_tokens\":60},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 23564.240399980918,
+      "token_usage": {
+        "prompt_tokens": 2364,
+        "completion_tokens": 1779,
+        "total_tokens": 4143,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1431
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 60
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

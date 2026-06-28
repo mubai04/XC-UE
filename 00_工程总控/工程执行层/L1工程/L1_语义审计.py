@@ -4,6 +4,7 @@ import json
 import os
 import time
 from dataclasses import asdict, dataclass, field
+from pathlib import Path
 from typing import Any
 
 from DeepSeek客户端 import DeepSeekClient, DeepSeekResult, create_client
@@ -11,6 +12,7 @@ from L1决策角色 import 内容决策角色, 审计阻断角色, 理由_API不
 from L1模型 import 检测项, 证据
 from L1_语义上下文 import 语义上下文
 from L1_语义标尺 import 格式化标尺文本
+from 证据语料 import 构建章节证据语料, 证据语料
 from 语义证据校验 import (
     REQUIRED_DIMENSIONS,
     SCOPE_CURRENT,
@@ -42,8 +44,10 @@ class 审计元数据:
     transport_retry_count: int = 0
     format_retry_count: int = 0
     evidence_retry_count: int = 0
+    evidence_anchor_retry_count: int = 0
     warnings: list[str] = field(default_factory=list)
     context_quality: str = ""
+    debug_capture: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -106,24 +110,45 @@ def _响应结构示例() -> dict[str, Any]:
     return {"dimensions": [_维度结构示例(name) for name in 审计维度]}
 
 
-def _格式化段落块(paragraphs: list, *, scope_label: str) -> str:
-    lines = []
-    for p in paragraphs:
-        pid = p.段落ID or f"P{p.编号:04d}"
-        lines.append(f"[{pid}|{scope_label}] {p.文本}")
-    return "\n\n".join(lines)
+def _格式化语料块(corpus: 证据语料) -> str:
+    return corpus.format_for_prompt()
 
 
-def _构建提示(context: 语义上下文, *, dimension_subset: tuple[str, ...] | None = None) -> list[dict[str, str]]:
+def _代码块证据示例() -> dict[str, Any]:
+    return {
+        "code_block_evidence_correct": {
+            "source_scope": "CURRENT_CHAPTER",
+            "paragraph_id": "P0079",
+            "exact_text": "这座大楼的建筑设计图，在规划局没有备案。",
+            "occurrence_index": 0,
+        },
+        "code_block_evidence_forbidden": {
+            "source_scope": "CURRENT_CHAPTER",
+            "paragraph_id": "P0079",
+            "exact_text": "备案。一次都没有。",
+            "occurrence_index": 0,
+            "forbidden_reason": "原文中两句之间存在换行，删除换行后不再是连续子串",
+        },
+    }
+
+
+def _构建提示(
+    context: 语义上下文,
+    *,
+    current_corpus: 证据语料,
+    prior_corpus: 证据语料 | None,
+    dimension_subset: tuple[str, ...] | None = None,
+) -> list[dict[str, str]]:
     dims = dimension_subset or 审计维度
-    current_block = _格式化段落块(context.current_paragraphs, scope_label=SCOPE_CURRENT)
+    current_block = _格式化语料块(current_corpus)
     prior_block = ""
-    if context.prior_paragraphs:
-        prior_block = _格式化段落块(context.prior_paragraphs, scope_label=SCOPE_PRIOR)
+    if prior_corpus and prior_corpus.paragraphs:
+        prior_block = _格式化语料块(prior_corpus)
     schema = _响应结构示例()
     schema["dimensions"] = [item for item in schema["dimensions"] if item["name"] in dims]
-    total_paragraphs = len(context.current_paragraphs)
+    total_paragraphs = len(current_corpus.paragraphs)
 
+    examples = _代码块证据示例()
     user_parts = [
         f"当前章节标题：{context.current_title}",
         f"当前章共 {total_paragraphs} 个段落。",
@@ -132,8 +157,27 @@ def _构建提示(context: 语义上下文, *, dimension_subset: tuple[str, ...]
         "输出 JSON，不得包含 overall、score、explanation、evidence_quotes。",
         f"JSON 结构示例：\n{json.dumps(schema, ensure_ascii=False)}",
         "evidence.source_scope 只能是 CURRENT_CHAPTER 或 PRIOR_CHAPTER。",
-        "exact_text 必须能在对应 scope 的段落中逐字找到；occurrence_index 表示同 scope 第几次出现，从 0 开始。",
-        "每个维度 evidence 只能返回 1 条代表性证据；evidence 不得单独证明整章结论。",
+        (
+            "证据输出协议："
+            "exact_text 必须是 paragraph_id 所指段落中的逐字连续子串；"
+            "exact_text 不得跨越换行符（不得含 \\n）；"
+            "不得将正文直引号 \" 替换为弯引号 “ ”；"
+            "不得替换标点、空格、大小写或字符形式；"
+            "不得使用省略号截断引文；"
+            "不得复制 Markdown 代码围栏 ```；"
+            "若相关证据位于多行代码块中："
+            "优先选择能够独立支持判断的一条完整单行；"
+            "不得删除换行后将两行拼成一行；"
+            "一条单行不足时，可返回最多 3 条独立 evidence item，"
+            "每条必须分别提供 paragraph_id、exact_text、occurrence_index，且各自为单行子串。"
+        ),
+        f"代码块证据正确示例：\n{json.dumps(examples['code_block_evidence_correct'], ensure_ascii=False)}",
+        (
+            f"代码块证据错误示例（禁止）：\n"
+            f"{json.dumps({k: v for k, v in examples['code_block_evidence_forbidden'].items() if k != 'forbidden_reason'}, ensure_ascii=False)}\n"
+            f"禁止原因：{examples['code_block_evidence_forbidden']['forbidden_reason']}"
+        ),
+        "每个维度 evidence 默认 1 条；代码块场景可选最多 3 条独立单行证据。",
         "章末追读维度的 evidence 必须来自当章最后 20% 段落。",
         f"当前章正文（CURRENT_CHAPTER）：\n{current_block}",
     ]
@@ -175,6 +219,21 @@ def _构建证据修复消息(errors: list[str], dimensions: tuple[str, ...]) ->
         + f"。只需返回 JSON 对象，dimensions 数组仅包含：{', '.join(dimensions)}。"
         "不得包含 overall、score、explanation、evidence_quotes；每个维度 evidence 最多 1 条。"
     )
+
+
+def _构建证据锚定修复消息(dimensions: tuple[str, ...]) -> str:
+    return (
+        "先前证据不是 paragraph_id 对应正文中的逐字连续单行子串。"
+        "请保持原业务判断不变，只重新选择证据。"
+        "不得跨换行符；不得删除换行后拼接；不得改写引号或标点。"
+        "证据位于多行代码块时，请分别引用一条完整单行。"
+        f"只需返回 JSON，dimensions 数组仅包含：{', '.join(dimensions)}。"
+        "不得包含 overall、score、explanation、evidence_quotes；每个维度 evidence 最多 3 条单行。"
+    )
+
+
+def _sanitize_messages_for_debug(messages: list[dict[str, str]]) -> list[dict[str, str]]:
+    return [{"role": m.get("role", ""), "content_length": len(str(m.get("content", "")))} for m in messages]
 
 
 def _合并维度响应(base: dict[str, Any], patch: dict[str, Any], dimension_names: tuple[str, ...]) -> dict[str, Any]:
@@ -224,18 +283,24 @@ def _维度转检测项(dim: dict[str, Any], evidence_by_dim: dict[str, list[已
         severity = "info"
         failure_type = ""
         blocking = False
+        routeable = False
+        route_reason = ""
         role = 内容决策角色
     elif verdict == "REVIEW":
         status = "风险"
         severity = "warning"
         failure_type = f"语义审计-{name}-待复核"
         blocking = True
+        routeable = True
+        route_reason = "L1-SEM 内容维度待复核"
         role = 内容决策角色
     else:
         status = "失败"
         severity = "error"
         failure_type = f"语义审计-{name}不足"
         blocking = True
+        routeable = True
+        route_reason = "L1-SEM 内容维度需修复"
         role = 内容决策角色
 
     return 检测项(
@@ -251,6 +316,9 @@ def _维度转检测项(dim: dict[str, Any], evidence_by_dim: dict[str, list[已
         confidence="MODEL_UNVALIDATED",
         decision_role=role,
         blocking=blocking,
+        routeable=routeable,
+        route_reason=route_reason,
+        source_component="L1-SEM",
         reason_type="",
     )
 
@@ -326,18 +394,42 @@ def 审计(
     context: 语义上下文,
     *,
     client: DeepSeekClient | None = None,
+    capture_debug: bool = False,
+    debug_sink: Path | None = None,
 ) -> 语义审计结果:
     api = client or create_client("L1")
     meta = 审计元数据(context_quality=context.context_quality)
-    messages = _构建提示(context)
+    current_corpus, prior_corpus = 构建章节证据语料(
+        current_paragraphs=context.current_paragraphs,
+        prior_paragraphs=context.prior_paragraphs,
+    )
+    messages = _构建提示(context, current_corpus=current_corpus, prior_corpus=prior_corpus)
     format_retries = _max_retries("XCUE_L1_FORMAT_MAX_RETRIES", 1)
     evidence_retries = _max_retries("XCUE_L1_EVIDENCE_MAX_RETRIES", 1)
 
+    if capture_debug:
+        meta.debug_capture["prompt_corpus"] = {
+            "current": current_corpus.to_debug_dict(),
+            "prior": prior_corpus.to_debug_dict() if prior_corpus else None,
+        }
+        meta.debug_capture["request_messages_meta"] = _sanitize_messages_for_debug(messages)
+
     parsed: dict[str, Any] | None = None
     format_attempt = 0
+    raw_responses: list[dict[str, Any]] = []
 
     while format_attempt <= format_retries:
         result = _call_with_transport_retry(api, messages, meta)
+        if capture_debug:
+            raw_responses.append(
+                {
+                    "phase": "initial" if format_attempt == 0 else f"format_retry_{format_attempt}",
+                    "ok": result.ok,
+                    "error_kind": result.error_kind,
+                    "parsed": result.parsed,
+                    "raw_preview": (result.raw or "")[:4000],
+                }
+            )
         if not result.ok:
             if _可格式重试(result) and format_attempt < format_retries:
                 format_attempt += 1
@@ -372,18 +464,35 @@ def 审计(
     evidence_attempt = 0
     validation = 校验语义审计响应(
         parsed,
-        current_paragraphs=context.current_paragraph_map(),
-        prior_paragraphs=context.prior_paragraph_map(),
+        current_paragraphs=current_corpus.paragraph_map(),
+        prior_paragraphs=prior_corpus.paragraph_map() if prior_corpus else {},
     )
 
     while not validation.ok and evidence_attempt < evidence_retries:
-        failed_dims = tuple(dict.fromkeys(validation.failed_dimensions))
+        anchor_dims = tuple(dict.fromkeys(validation.location_failed_dimensions))
+        failed_dims = anchor_dims or tuple(dict.fromkeys(validation.failed_dimensions))
         if not failed_dims:
             break
         evidence_attempt += 1
         meta.evidence_retry_count = evidence_attempt
-        messages = [*messages, {"role": "user", "content": _构建证据修复消息(validation.errors, failed_dims)}]
+        if anchor_dims:
+            meta.evidence_anchor_retry_count = 1
+            fix_msg = _构建证据锚定修复消息(anchor_dims)
+        else:
+            fix_msg = _构建证据修复消息(validation.errors, failed_dims)
+        messages = [*messages, {"role": "user", "content": fix_msg}]
         result = _call_with_transport_retry(api, messages, meta)
+        if capture_debug:
+            raw_responses.append(
+                {
+                    "phase": f"evidence_retry_{evidence_attempt}",
+                    "anchor_retry": bool(anchor_dims),
+                    "ok": result.ok,
+                    "error_kind": result.error_kind,
+                    "parsed": result.parsed,
+                    "raw_preview": (result.raw or "")[:4000],
+                }
+            )
         if not result.ok:
             if _可格式重试(result) and meta.format_retry_count < format_retries:
                 meta.format_retry_count += 1
@@ -411,9 +520,22 @@ def 审计(
         parsed = _合并维度响应(parsed, patch, failed_dims)
         validation = 校验语义审计响应(
             parsed,
-            current_paragraphs=context.current_paragraph_map(),
-            prior_paragraphs=context.prior_paragraph_map(),
+            current_paragraphs=current_corpus.paragraph_map(),
+            prior_paragraphs=prior_corpus.paragraph_map() if prior_corpus else {},
         )
+
+    if capture_debug:
+        meta.debug_capture["raw_responses"] = raw_responses
+        meta.debug_capture["parsed_final"] = parsed
+        meta.debug_capture["validation"] = {
+            "ok": validation.ok,
+            "errors": validation.errors,
+            "anchor_diagnostics": validation.anchor_diagnostics,
+            "location_failed_dimensions": validation.location_failed_dimensions,
+        }
+        if debug_sink:
+            debug_sink.parent.mkdir(parents=True, exist_ok=True)
+            debug_sink.write_text(json.dumps(meta.debug_capture, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if not validation.ok:
         return 语义审计结果(

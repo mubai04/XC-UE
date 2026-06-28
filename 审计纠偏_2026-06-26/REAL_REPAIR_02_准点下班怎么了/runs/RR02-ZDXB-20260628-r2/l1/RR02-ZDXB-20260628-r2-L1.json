@@ -1,0 +1,935 @@
+{
+  "run_id": "RR02-ZDXB-20260628-r2-L1",
+  "项目": "ZDXB-001",
+  "章节路径": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\70_测试项目\\ZDXB-001_准点下班怎么了\\chapters\\ch01.md",
+  "章节标题": "第1章 准点下班怎么了",
+  "当前字数": 2263,
+  "段落数": 86,
+  "方法声明": "L1 词面闸门仅输出 DIAGNOSTIC 诊断信号；客观硬护栏与 L1-SEM DeepSeek 语义审计承担裁决；API 不可用或证据无效时输出 AUDIT_BLOCKED，不回退词面结论。",
+  "闸门结果": [
+    {
+      "闸门": "L1-00",
+      "判断结果": "HEURISTIC_DIAGNOSTIC",
+      "输入材料": [
+        "L1-01/L1-02/L1-03闸门输出",
+        "结构化 gate_rules.json 校验结果"
+      ],
+      "失败类型": [],
+      "失败位置": [],
+      "是否进入L15": "否",
+      "调用方向": [],
+      "回流验收位置": "L1-00",
+      "最终状态": "HEURISTIC_DIAGNOSTIC",
+      "检测项": [
+        {
+          "闸门": "L1-00",
+          "名称": "统一输出格式",
+          "状态": "检测到接口信号",
+          "说明": "L1-01/L1-02/L1-03 输出字段符合 L1-00 接口。",
+          "证据": [],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-00",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-00",
+          "名称": "L1.5交接条件",
+          "状态": "检测到接口信号",
+          "说明": "失败闸门进入 L1.5，非失败闸门不强行派单。",
+          "证据": [],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-00",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计响应校验",
+          "状态": "失败",
+          "说明": "语义审计响应未通过证据校验：动机: exact_text 无法在 CURRENT_CHAPTER 语料中定位；冲突: exact_text 无法在 CURRENT_CHAPTER 语料中定位；章末追读: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+          "证据": [
+            {
+              "段落": null,
+              "摘句": "动机: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "冲突: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "章末追读: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "error",
+          "失败类型": "语义审计证据无效",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_INVALID",
+          "confidence": "NONE",
+          "decision_role": "AUDIT_BLOCKER",
+          "blocking": true,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "",
+          "reason_type": "EVIDENCE_INVALID"
+        }
+      ],
+      "规则摘要": {
+        "必填字段": [
+          "闸门",
+          "判断结果",
+          "输入材料",
+          "失败类型",
+          "失败位置",
+          "是否进入L15",
+          "调用方向",
+          "回流验收位置",
+          "最终状态"
+        ]
+      }
+    },
+    {
+      "闸门": "L1-01",
+      "判断结果": "HEURISTIC_DIAGNOSTIC",
+      "输入材料": [
+        "章节正文",
+        "L1-01 Markdown标准",
+        "L1-01失败类型",
+        "L1-01启发式信号标准"
+      ],
+      "失败类型": [],
+      "失败位置": [],
+      "是否进入L15": "否",
+      "调用方向": [],
+      "回流验收位置": "L1-01",
+      "最终状态": "HEURISTIC_DIAGNOSTIC",
+      "检测项": [
+        {
+          "闸门": "L1-01",
+          "名称": "有序叙事信号",
+          "状态": "检测到代理信号",
+          "说明": "正文存在入口异常、压力、行动与章末新问题的有序信号；本项只作为机器初筛信号。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "陈敛瞥了一眼小刘的手背——上面有一道没擦干净的血痕，从虎口延到手腕。他记得小刘今天没...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 25,
+              "摘句": "不是他不想迟到——是系统的\"反检测屏障\"需要他人在大楼范围内才能全功率运行。他试过请...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 32,
+              "摘句": "他拿起水杯去接水。茶水间的走廊拐角，他差点跟一个人撞上——前台林栀，手里拿着一个快递...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 61,
+              "摘句": "他没多想。回了自己工位，打开电脑，切到视频网站，戴上耳机。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 64,
+              "摘句": "他不知道陈敛的屏幕上开着一个隐藏窗口——番剧第三集，进度条走了一半。刚才敲的那几行代...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 74,
+              "摘句": "走出大楼的时候，晚风迎面吹过来。他在台阶上站了两秒，然后做了一个他自己也没想到的动作...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-01",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-01",
+          "名称": "主动行动与外部压力信号",
+          "状态": "检测到代理信号",
+          "说明": "主角主动选择或外部代价信号不足；机器未能验证动机与选择的因果关系。",
+          "证据": [
+            {
+              "段落": 78,
+              "摘句": "他站在那看了三秒。正要转身走，手机在口袋里震了一下——不是来电，是系统推送。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 9,
+              "摘句": "原因有两个。第一，他不想暴露自己其实懂。第二——小刘修得越久，系统积分涨得越多。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 11,
+              "摘句": "```【今日收割简报】今日摸鱼时长：7小时48分钟今日收割积分：+1,247本月累计...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 12,
+              "摘句": "陈敛看了看那行\"降低暴露风险\"，心里默默给系统加了一分——还挺专业。但他没打算改，反...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 32,
+              "摘句": "他拿起水杯去接水。茶水间的走廊拐角，他差点跟一个人撞上——前台林栀，手里拿着一个快递...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "warning",
+          "失败类型": "角色失败",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": true,
+          "route_reason": "为L1.5提供领域路由线索",
+          "source_component": "L1-01",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-01",
+          "名称": "创意设定压力",
+          "状态": "检测到代理信号",
+          "说明": "正文能识别出规则、禁忌、代价或玩法压力的启发式信号；不证明创意设定真实成立。",
+          "证据": [
+            {
+              "段落": 9,
+              "摘句": "原因有两个。第一，他不想暴露自己其实懂。第二——小刘修得越久，系统积分涨得越多。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 12,
+              "摘句": "陈敛看了看那行\"降低暴露风险\"，心里默默给系统加了一分——还挺专业。但他没打算改，反...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 17,
+              "摘句": "反正系统已经自动跑了三个月，积分都攒到五位数了。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 25,
+              "摘句": "不是他不想迟到——是系统的\"反检测屏障\"需要他人在大楼范围内才能全功率运行。他试过请...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 29,
+              "摘句": "两点整。他醒了，伸了个懒腰。系统面板自动弹出：",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-01",
+          "reason_type": ""
+        }
+      ],
+      "规则摘要": {
+        "失败类型": [
+          "文风失败",
+          "叙事失败",
+          "角色失败",
+          "创意设定失败",
+          "AI味失败",
+          "技术护栏失败",
+          "输入不足"
+        ],
+        "启发式信号标准": [
+          "输入完整",
+          "技术护栏无重大冲突",
+          "创意设定有明确差异",
+          "角色动机能解释关键选择",
+          "叙事因果没有明显断裂",
+          "语言能承载当前场景",
+          "AI味不影响阅读"
+        ],
+        "诊断失败类型": [
+          "角色失败"
+        ]
+      }
+    },
+    {
+      "闸门": "L1-02",
+      "判断结果": "HEURISTIC_DIAGNOSTIC",
+      "输入材料": [
+        "章节正文",
+        "L1-02 Markdown标准",
+        "L1-01输出结果",
+        "E/V/C公式与阈值"
+      ],
+      "失败类型": [],
+      "失败位置": [],
+      "是否进入L15": "否",
+      "调用方向": [],
+      "回流验收位置": "L1-02",
+      "最终状态": "HEURISTIC_DIAGNOSTIC",
+      "检测项": [
+        {
+          "闸门": "L1-02",
+          "名称": "入口抓手",
+          "状态": "检测到代理信号",
+          "说明": "按 L1-02 入口标准，前八段未给出足够异常、压力、问题或可追对象。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "陈敛瞥了一眼小刘的手背——上面有一道没擦干净的血痕，从虎口延到手腕。他记得小刘今天没...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "warning",
+          "失败类型": "入口弱",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": true,
+          "route_reason": "为L1.5提供领域路由线索",
+          "source_component": "L1-02",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-02",
+          "名称": "E 即时情绪代理信号",
+          "状态": "检测到代理信号",
+          "说明": "E=5/5，达到启发式阈值 3；不等同真实读者情绪。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "陈敛瞥了一眼小刘的手背——上面有一道没擦干净的血痕，从虎口延到手腕。他记得小刘今天没...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 32,
+              "摘句": "他拿起水杯去接水。茶水间的走廊拐角，他差点跟一个人撞上——前台林栀，手里拿着一个快递...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 33,
+              "摘句": "\"啊，抱歉。\"她笑了一下，\"你是技术部的……陈敛？\"",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 56,
+              "摘句": "赵总监愣了一下。这句话的潜台词太明确了——\"我活干完了，不加班有什么问题？\"但作为总...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 72,
+              "摘句": "小刘不在工位上——洗手间的方向传来水龙头开到最大的声音。陈敛看了一眼他的桌面：键盘上...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-02",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-02",
+          "名称": "V 未来价值预期",
+          "状态": "检测到代理信号",
+          "说明": "按标准变量 V 评分 2/5，低于阈值 3；章末或主线没有形成足够下一步期待。",
+          "证据": [
+            {
+              "段落": 74,
+              "摘句": "走出大楼的时候，晚风迎面吹过来。他在台阶上站了两秒，然后做了一个他自己也没想到的动作...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 21,
+              "摘句": "群里立刻弹出一片\"收到\"\"好的赵总\"\"没问题\"。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 25,
+              "摘句": "不是他不想迟到——是系统的\"反检测屏障\"需要他人在大楼范围内才能全功率运行。他试过请...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 39,
+              "摘句": "**\"你的工位位置，是三十二楼最后一个靠窗位。你知道上一个坐这里的人去哪了吗？\"**",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "error",
+          "失败类型": "V低：未来价值预期弱",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": true,
+          "route_reason": "为L1.5提供领域路由线索",
+          "source_component": "L1-02",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-02",
+          "名称": "C 认知成本代理信号",
+          "状态": "检测到代理信号",
+          "说明": "C=2/5，未超过阈值 3。前半章疑似概念/专名 3 个，密集说明段 0 个。",
+          "证据": [],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-02",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-02",
+          "名称": "启发式 I = E × V - C",
+          "状态": "检测到代理信号",
+          "说明": "I = E × V - C；当前启发式 I=5×2-2=8，达到 I≥6；只代表机器初筛特征，不等同读者投入意愿。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "陈敛瞥了一眼小刘的手背——上面有一道没擦干净的血痕，从虎口延到手腕。他记得小刘今天没...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 32,
+              "摘句": "他拿起水杯去接水。茶水间的走廊拐角，他差点跟一个人撞上——前台林栀，手里拿着一个快递...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 74,
+              "摘句": "走出大楼的时候，晚风迎面吹过来。他在台阶上站了两秒，然后做了一个他自己也没想到的动作...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 21,
+              "摘句": "群里立刻弹出一片\"收到\"\"好的赵总\"\"没问题\"。",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-02",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-02",
+          "名称": "章末追读",
+          "状态": "检测到代理信号",
+          "说明": "章末未形成足够明确的新问题、真相压力或下一章理由。",
+          "证据": [],
+          "严重级别": "warning",
+          "失败类型": "章末弱",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": true,
+          "route_reason": "为L1.5提供领域路由线索",
+          "source_component": "L1-02",
+          "reason_type": ""
+        }
+      ],
+      "规则摘要": {
+        "公式": "I = E × V - C",
+        "不足条件": "E × V ≤ C",
+        "阈值": {
+          "E": 3,
+          "V": 3,
+          "C_max": 3,
+          "I_min": 6
+        },
+        "E": 5,
+        "V": 2,
+        "C": 2,
+        "I": 8,
+        "失败类型": [
+          "E低：即时情绪反馈弱",
+          "V低：未来价值预期弱",
+          "C高：认知成本过高",
+          "入口弱",
+          "章末弱",
+          "弃读点明显",
+          "传播点弱",
+          "付费预期弱",
+          "L1-01未通过"
+        ],
+        "启发式信号标准": [
+          "L1-01 已通过",
+          "入口能让读者知道这书卖什么",
+          "E 有至少一个明确即时情绪反馈",
+          "V 有至少一个明确下一章预期",
+          "C 没有压过 E × V",
+          "章末有继续阅读理由",
+          "没有明显高危弃读点"
+        ],
+        "诊断失败类型": [
+          "入口弱",
+          "V低：未来价值预期弱",
+          "章末弱"
+        ]
+      }
+    },
+    {
+      "闸门": "L1-03",
+      "判断结果": "HEURISTIC_DIAGNOSTIC",
+      "输入材料": [
+        "章节正文",
+        "当前字数",
+        "L1-03 Markdown标准"
+      ],
+      "失败类型": [],
+      "失败位置": [],
+      "是否进入L15": "否",
+      "调用方向": [],
+      "回流验收位置": "L1-03",
+      "最终状态": "HEURISTIC_DIAGNOSTIC",
+      "检测项": [
+        {
+          "闸门": "L1-03",
+          "名称": "字数体量代理信号",
+          "状态": "检测到代理信号",
+          "说明": "当前正文约 2263 字落在 L1-03 发布体量 2200-3000；不构成发布授权。",
+          "证据": [],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-03",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-03",
+          "名称": "当章收益代理信号",
+          "状态": "检测到代理信号",
+          "说明": "当章识别到情绪反馈、信息推进、冲突升级或新问题的启发式信号。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "陈敛瞥了一眼小刘的手背——上面有一道没擦干净的血痕，从虎口延到手腕。他记得小刘今天没...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 12,
+              "摘句": "陈敛看了看那行\"降低暴露风险\"，心里默默给系统加了一分——还挺专业。但他没打算改，反...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 33,
+              "摘句": "\"啊，抱歉。\"她笑了一下，\"你是技术部的……陈敛？\"",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 54,
+              "摘句": "\"你的工作……\"赵总监斟酌了一下用词，\"还可以。但你有没有发现，你是全部门下班最早的...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 75,
+              "摘句": "三十二层的全玻璃幕墙在黄昏的天色里反射出一层暗金色的光。大楼里灯火通明，至少还有一半...",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": false,
+          "route_reason": "",
+          "source_component": "L1-03",
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-03",
+          "名称": "章末追读",
+          "状态": "检测到代理信号",
+          "说明": "章末没有制造下一章新变量。",
+          "证据": [],
+          "严重级别": "error",
+          "失败类型": "章末追读弱",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": true,
+          "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+          "confidence": "UNVALIDATED",
+          "decision_role": "DIAGNOSTIC",
+          "blocking": false,
+          "routeable": true,
+          "route_reason": "为L1.5提供领域路由线索",
+          "source_component": "L1-03",
+          "reason_type": ""
+        }
+      ],
+      "规则摘要": {
+        "字数下限": 2200,
+        "字数上限": 3000,
+        "功能稿下限": 2000,
+        "发布前启发式检查表": {
+          "功能锁": "内部能跑",
+          "字数体量": "2200–3000",
+          "当章收益": "至少一项明确收益",
+          "章末追读": "下一章理由明确",
+          "认知成本": "不累、不乱、不密",
+          "投入意愿": "I 足以点下一章",
+          "修改轮次": "≤ 2 轮"
+        },
+        "当章收益项": [
+          "爽感",
+          "反差",
+          "压迫",
+          "惊讶",
+          "情绪释放",
+          "信息推进",
+          "人物变化",
+          "冲突升级",
+          "新问题",
+          "新期待"
+        ],
+        "诊断失败类型": [
+          "章末追读弱"
+        ]
+      }
+    }
+  ],
+  "失败包": [],
+  "路由建议": [],
+  "审计阻断项": [
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计响应校验",
+      "状态": "失败",
+      "说明": "语义审计响应未通过证据校验：动机: exact_text 无法在 CURRENT_CHAPTER 语料中定位；冲突: exact_text 无法在 CURRENT_CHAPTER 语料中定位；章末追读: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+      "证据": [
+        {
+          "段落": null,
+          "摘句": "动机: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        },
+        {
+          "段落": null,
+          "摘句": "冲突: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        },
+        {
+          "段落": null,
+          "摘句": "章末追读: exact_text 无法在 CURRENT_CHAPTER 语料中定位",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计证据无效",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_INVALID",
+      "confidence": "NONE",
+      "decision_role": "AUDIT_BLOCKER",
+      "blocking": true,
+      "routeable": false,
+      "route_reason": "",
+      "source_component": "",
+      "reason_type": "EVIDENCE_INVALID"
+    }
+  ],
+  "schema_version": "xcue.l1-report/1.0",
+  "pipeline_run_id": "RR02-ZDXB-20260628-r2",
+  "stage_run_id": "RR02-ZDXB-20260628-r2-L1",
+  "status": "AUDIT_BLOCKED",
+  "状态说明": "语义审计或输入上下文阻断，未对正文作通过/拒绝裁决",
+  "audit_reason_type": "EVIDENCE_INVALID",
+  "semantic_audit_status": "AUDIT_BLOCKED",
+  "heuristic": true,
+  "publish_authority": false,
+  "human_review_required": true,
+  "validation_status": "VALIDATED",
+  "decision_scope": "AUDIT_BLOCKED",
+  "rule_version": "2026-06-24.a3-l1-01",
+  "signal_strength": "SEMANTIC_WITH_DIAGNOSTIC",
+  "confidence": "MODEL_UNVALIDATED",
+  "known_limitations": [
+    "L1-01/02/03 词面闸门仅输出 DIAGNOSTIC 诊断信号，不参与终态裁决。",
+    "终态由前置质量护栏（HARD_GUARD）与 L1-SEM DeepSeek 语义审计（CONTENT_DECISION）决定。",
+    "API 不可用或证据无效时输出 AUDIT_BLOCKED，不回退词面结论。",
+    "未经过生产数据校准，不具备发布授权能力。"
+  ],
+  "human_review_reasons": [
+    "L1 自动结果只做发布前启发式风险筛查。",
+    "所有通过、退回或复核状态均需要人工确认后才能进入后续发布决策。"
+  ],
+  "forbidden_extrapolations": [
+    "不得据此宣称内部创作成立。",
+    "不得据此宣称读者愿意追读或投入。",
+    "不得据此宣称质量通过、发布锁通过或可发布。"
+  ],
+  "input_artifacts": [],
+  "output_artifacts": []
+}

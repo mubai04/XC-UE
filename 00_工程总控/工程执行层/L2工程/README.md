@@ -2,14 +2,14 @@
 
 本目录把 `40_L2_正式能力层/` 的 Markdown 能力标准转换为 **独立领域模块** 的可运行诊断与修复单工程。
 
-## 结构状态（R4B）
+## 结构状态（R4B + R4C 领域修复）
 
 | 状态 | 说明 |
 |---|---|
 | 路由已接入 | L1.5 → 能力注册表 → 独立入口 |
 | 结构独立 | L2-02～L2-06 各为独立包，含模型/上下文/诊断/校验/修复规划/入口 |
 | mock 集成通过 | 各模块 mock 集成测试与流水线回归通过 |
-| 确定性领域逻辑通过 | 各模块不依赖 mock 的上下文/校验/规划测试通过 |
+| 确定性领域逻辑通过 | 上下文提取/双来源校验/修复规划 + 泛化探针 + 防硬编码扫描 |
 | 真实模型效果 | **尚未独立评估** |
 
 ```text
@@ -19,9 +19,26 @@ L2_04_INDEPENDENT_CAPABILITY = PASSED
 L2_05_INDEPENDENT_CAPABILITY = PASSED
 L2_06_INDEPENDENT_CAPABILITY = PASSED
 L2_SHARED_EXECUTOR_CONFIG_ONLY = ELIMINATED
+
+L2_02_DOMAIN_CAPABILITY = PASSED
+L2_03_DOMAIN_CAPABILITY = PASSED
+L2_04_DOMAIN_CAPABILITY = PASSED
+L2_05_DOMAIN_CAPABILITY = PASSED
+L2_06_DOMAIN_CAPABILITY = PASSED
+R4B_STRUCTURE_REGRESSION = PASSED
+R4C_DETERMINISTIC_GENERALIZATION = PASSED
+R4D_EXTERNAL_COUNTEREXAMPLES = PASSED
+REAL_MODEL_SEMANTIC_EFFECTIVENESS = NOT_TESTED
 ```
 
-禁止写「L2-02～L2-06 语义能力已完全验证」；允许写「已形成独立领域模块，结构与 mock 集成测试通过；真实模型语义效果仍待独立评估。」
+禁止写「L2-02～L2-06 语义能力已完全验证」；允许写「已形成独立领域模块，确定性提取与 mock 集成测试通过；真实模型语义效果仍待独立评估。」
+
+## R4C 领域原则（摘要）
+
+- 所有确定性提取结果带 `source_type/source_path/paragraph/quote`（必要时含 entity/attribute/value/time/negated）
+- 只从正文、前序章节或 IR 真实文本提取；证据不足返回空/`UNKNOWN`/`evidence_insufficient`
+- L2-06 双来源校验按来源索引查找，支持 `HARD_CONFLICT` / `ALLOWED_CHANGE` / `EXPLANATION_INSUFFICIENT` / `EVIDENCE_INSUFFICIENT`
+- 公共层新增：`正文读取.py`、`前序章节.py`、`领域证据.py`、`验收禁止词.py`
 
 ## 目录
 
@@ -56,4 +73,4 @@ python "00_工程总控\工程执行层\统一运行入口.py" --target REPAIR_P
 
 - 不写正式正文（L3 写 `_candidates/`）
 - 不替 L1.5 派单
-- L2-01 路由命中仍阻断
+- L2 `routes.json` 标记为 `DEPRECATED_NOT_ROUTING_AUTHORITY`，生产路由不得读取

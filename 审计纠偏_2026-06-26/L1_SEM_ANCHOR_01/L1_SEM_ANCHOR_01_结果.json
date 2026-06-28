@@ -1,0 +1,19 @@
+{
+  "task": "L1-SEM-ANCHOR-01",
+  "L1_SEM_ANCHOR_REPAIR": "PARTIAL",
+  "REAL_REPAIR_02": "PAUSED",
+  "root_cause_proven": true,
+  "root_causes": [
+    "Unicode curly quotes in exact_text vs straight quotes in corpus (P0054)",
+    "Code block newline merged into single line (P0079: 备案。\\n一次 vs 备案。一次)"
+  ],
+  "unified_corpus": true,
+  "fuzzy_match_used": false,
+  "offline_tests_passed": 34,
+  "real_api_calls": 1,
+  "evidence_anchor_retries": 1,
+  "l1_revalidation_status": "AUDIT_BLOCKED",
+  "failure_packet_count": 0,
+  "routeable_count": 0,
+  "formal_chapter_unchanged": true
+}

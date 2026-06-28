@@ -3,19 +3,19 @@ name: XC-UE R0-R3 整改
 overview: 按审计报告 R0–R3 顺序，先冻结当前证据基线，恢复 TP-001 默认项目运行闭环，将产品形态明确为「仓库工作区执行」并消除误导性 wheel，同步清理过期状态文档并移除评估器样本硬编码，为 golden v2 与语义裁判独立化铺路。
 todos:
   - id: r0-baseline
-    content: 实现 freeze_audit_baseline.py；生成 AUDIT_BASELINE.json（stable_payload→baseline_digest）、FREEZE_RECORD.json、CALIBRATION_PLAN.json、RUNTIME_SNAPSHOT.json
+    content: 实现 冻结审计基线.py；生成 AUDIT_BASELINE.json（stable_payload→baseline_digest）、FREEZE_RECORD.json、CALIBRATION_PLAN.json、RUNTIME_SNAPSHOT.json
     status: completed
   - id: r1-manifest
     content: 为 TP-001 添加 project.json，更新项目说明与 Harness 校验；清理注册表 pytest 别名至 tests/fixtures
     status: completed
   - id: r1-tests
-    content: 新增 test_default_project_tp001.py：loader 验收 + 无 API 阻断 + in-process mock L1→L2→L3 E2E（非 subprocess monkeypatch）
+    content: 新增 test_TP001_默认项目.py：loader 验收 + 无 API 阻断 + in-process mock L1→L2→L3 E2E（非 subprocess monkeypatch）
     status: completed
   - id: r2-workspace
     content: 调整 pyproject.toml（dev 依赖分离、xcue stub exit 2）；README 准确描述 editable install 与统一入口
     status: completed
   - id: r3-eval
-    content: 移除 eval_l1_semantic_golden.py 中 GS-001/GS-005 与 magic run-id；校准改 CALIBRATION_PLAN/CLI 驱动
+    content: 移除 评估_L1_语义金标准.py 中 GS-001/GS-005 与 magic run-id；校准改 CALIBRATION_PLAN/CLI 驱动
     status: completed
   - id: r3-golden
     content: v1 只读（不改 manifest）；新建 l1_semantic_golden_v2 规范（≥10 章，推荐 12）与空壳目录
@@ -24,7 +24,7 @@ todos:
     content: 保留 evidence_semantically_sufficient 兼容字段；新增 evidence_protocol_compliant + semantic_support=null
     status: completed
   - id: r3-status
-    content: generate_system_status.py 生成状态文件（默认不跑 pytest）；与 runtime snapshot 分离；产出 REMEDIATION_RESULT_R0_R3.json
+    content: 生成当前系统状态.py 生成状态文件（默认不跑 pytest）；与 runtime snapshot 分离；产出 REMEDIATION_RESULT_R0_R3.json
     status: completed
 isProject: false
 ---
@@ -41,7 +41,7 @@ isProject: false
 - [`项目注册表.json`](00_工程总控/工程执行层/项目注册表.json) 默认 `TP-001`，但 [`70_测试项目/TP-001_CleanHarness_IR_Runtime/`](70_测试项目/TP-001_CleanHarness_IR_Runtime/) **无** `project.json` → exit 27
 - [`pyproject.toml`](pyproject.toml) wheel 仅含 3 个壳文件，[`xc_ue/cli.py`](src/xc_ue/cli.py) 只有 `--health`/`--version`
 - 根文档仍写 2026-06-16「禁止跑 L1」，与 Phase 2A 现实冲突
-- [`scripts/eval_l1_semantic_golden.py`](scripts/eval_l1_semantic_golden.py) L29/L394–402 硬编码 GS-001/GS-005 与 magic run-id
+- [`脚本/评估_L1_语义金标准.py`](脚本/评估_L1_语义金标准.py) L29/L394–402 硬编码 GS-001/GS-005 与 magic run-id
 
 ```mermaid
 flowchart LR
@@ -71,7 +71,7 @@ flowchart LR
 
 | 产物 | 路径 | 说明 |
 |------|------|------|
-| 基线脚本 | [`scripts/freeze_audit_baseline.py`](scripts/freeze_audit_baseline.py) | 生成 baseline + 辅助冻结记录 |
+| 基线脚本 | [`脚本/冻结审计基线.py`](脚本/冻结审计基线.py) | 生成 baseline + 辅助冻结记录 |
 | 审计基线 | [`审计纠偏_2026-06-26/AUDIT_BASELINE.json`](审计纠偏_2026-06-26/AUDIT_BASELINE.json) | 整改前快照；**R3 不得覆盖** |
 | 运行时快照 | [`审计纠偏_2026-06-26/RUNTIME_SNAPSHOT.json`](审计纠偏_2026-06-26/RUNTIME_SNAPSHOT.json) | pytest 执行结果；**不参与 baseline_digest** |
 | 冻结记录 | [`tests/fixtures/l1_semantic_golden/FREEZE_RECORD.json`](tests/fixtures/l1_semantic_golden/FREEZE_RECORD.json) | `frozen`、`baseline_ref`；**不在 v1 manifest** |
@@ -150,7 +150,7 @@ flowchart LR
 
 ### 4. 分层集成测试（修订 #7、#8）
 
-新建 [`tests/test_default_project_tp001.py`](tests/test_default_project_tp001.py)：
+新建 [`tests/test_TP001_默认项目.py`](tests/test_TP001_默认项目.py)：
 
 | 层级 | 用例 | 断言 |
 |------|------|------|
@@ -164,7 +164,7 @@ flowchart LR
 
 - 根 README：删除「禁止跑 L1」；更新阶段说明
 - INDEX：移除不存在路径引用
-- `CURRENT_SYSTEM_STATUS.md` 顶部 DEPRECATED 横幅
+- `当前系统状态_旧版.md` 顶部 DEPRECATED 横幅
 
 ### R1 验收
 
@@ -172,7 +172,7 @@ flowchart LR
 # smoke：非 exit 27（非 mock E2E 主验收）
 python 00_工程总控/工程执行层/统一运行入口.py --target L1 --project TP-001 --chapter ...
 
-python -m pytest tests/test_default_project_tp001.py -q
+python -m pytest tests/test_TP001_默认项目.py -q
 # → 三层验收分别 pass
 ```
 
@@ -208,7 +208,7 @@ python -m pytest tests/test_default_project_tp001.py -q
 
 **目标**：评估器无样本专属分支；golden v1 已冻结；启动 v2；语义字段诚实命名；状态机器生成。
 
-### 1. 清理 [`scripts/eval_l1_semantic_golden.py`](scripts/eval_l1_semantic_golden.py)
+### 1. 清理 [`脚本/评估_L1_语义金标准.py`](脚本/评估_L1_语义金标准.py)
 
 | 删除/替换 | 替代设计 |
 |-----------|----------|
@@ -240,10 +240,10 @@ python -m pytest tests/test_default_project_tp001.py -q
 
 | 产物 | 路径 | 行为 |
 |------|------|------|
-| 生成状态 | `00_工程总控/CURRENT_SYSTEM_STATUS.generated.md` | 默认 **不主动跑 pytest**；读 baseline / 文件探测 |
+| 生成状态 | `00_工程总控/当前系统状态_自动生成.md` | 默认 **不主动跑 pytest**；读 baseline / 文件探测 |
 | 运行时快照 | 独立文件（如 `RUNTIME_SNAPSHOT.json`） | 可选 `--refresh-tests` 时更新 |
 
-[`scripts/generate_system_status.py`](scripts/generate_system_status.py) 输入：`AUDIT_BASELINE.json`、TP-001 manifest、golden FREEZE_RECORD、git、production_eligible 探测。
+[`脚本/生成当前系统状态.py`](脚本/生成当前系统状态.py) 输入：`AUDIT_BASELINE.json`、TP-001 manifest、golden FREEZE_RECORD、git、production_eligible 探测。
 
 ### 5. R3 完成产物（修订 #14）
 
@@ -254,9 +254,9 @@ python -m pytest tests/test_default_project_tp001.py -q
 
 ### R3 验收
 
-- `grep -r "GS-001\|GS-005" scripts/eval_l1_semantic_golden.py` → 无硬编码 chapter ID（测试/fixture 除外）
-- `python scripts/generate_system_status.py` → 与仓库事实一致（默认不跑 pytest）
-- `python scripts/validate_l1_semantic_golden.py` → `VALIDATION_OK`
+- `grep -r "GS-001\|GS-005" 脚本/评估_L1_语义金标准.py` → 无硬编码 chapter ID（测试/fixture 除外）
+- `python 脚本/生成当前系统状态.py` → 与仓库事实一致（默认不跑 pytest）
+- `python 脚本/校验_L1_语义金标准.py` → `VALIDATION_OK`
 - **不执行**第三次全量真实 API 评估
 - `REMEDIATION_RESULT_R0_R3.json` 存在且 `AUDIT_BASELINE.json` 未被改写
 
@@ -318,7 +318,7 @@ flowchart TD
 
 ### 1. 写文件前采集工作树；排除自身产物
 
-[`scripts/freeze_audit_baseline.py`](scripts/freeze_audit_baseline.py) **必须先**采集 git 状态、diff、未跟踪文件哈希，**再**写入任何产物。从 git 视图精确排除：
+[`脚本/冻结审计基线.py`](脚本/冻结审计基线.py) **必须先**采集 git 状态、diff、未跟踪文件哈希，**再**写入任何产物。从 git 视图精确排除：
 
 - `审计纠偏_2026-06-26/AUDIT_BASELINE.json`
 - `tests/fixtures/l1_semantic_golden/FREEZE_RECORD.json`

@@ -25,7 +25,7 @@ from L1模型 import 正文检测结果
 from L1读取 import 读文本
 from 闸门规则加载 import L1闸门规则路径, 加载闸门规则
 from L15交接 import 生成路由建议
-from 失败包生成 import 分拆阻断项
+from 失败包生成 import 分拆阻断项, 收集全部检测项
 import L1_前置质量护栏
 import L1_00_闸门接口校验
 import L1_01_内部创作检测
@@ -36,7 +36,7 @@ from L1_语义上下文 import 构建语义上下文
 from 退出码 import ExitCode
 from 工程异常 import 工程错误
 from 运行状态 import 状态说明, 审计阻断
-from L1决策角色 import 聚合终态
+from L1决策角色 import 聚合终态, 审计阻断角色
 from 标准加载器 import 候选试验模式, 生产模式
 from 生产资格 import 判定结果转标准字段, 要求生产资格
 from 安全路径 import resolve_inside_root, safe_id
@@ -109,6 +109,11 @@ def main() -> int:
     parser.add_argument("--stage-run-id", default="", help="阶段运行编号。")
     parser.add_argument("--gate-rules", default=None, help="L1 结构化闸门规则 JSON 路径。")
     parser.add_argument("--standard-mode", default=候选试验模式, choices=[生产模式, 候选试验模式], help="标准加载模式。")
+    parser.add_argument(
+        "--capture-semantic-evidence-debug",
+        action="store_true",
+        help="保存 L1-SEM 证据语料与模型原始响应（不含 API Key），默认关闭。",
+    )
     args = parser.parse_args()
 
     try:
@@ -176,16 +181,23 @@ def main() -> int:
         paragraphs=paragraphs,
         project=project_context,
     )
-    semantic = L1_语义审计.审计(semantic_ctx)
+    semantic = L1_语义审计.审计(
+        semantic_ctx,
+        capture_debug=args.capture_semantic_evidence_debug,
+        debug_sink=(out_dir / f"{run_id}_semantic_evidence_debug.json") if args.capture_semantic_evidence_debug else None,
+    )
     l100.检测项.extend(guard_items)
     l100.检测项.extend(semantic.检测项列表)
     gates = [l100, *gates]
-    split = 分拆阻断项(gates)
+    all_items = 收集全部检测项(gates)
+    audit_blockers = [item for item in all_items if item.decision_role == 审计阻断角色]
+    non_audit_items = [item for item in all_items if item.decision_role != 审计阻断角色]
+    final = 聚合终态(semantic, non_audit_items, audit_blockers)
+    status = final.status
+    split = 分拆阻断项(gates, status)
     failure_packet = split.失败包
     audit_blockers = split.审计阻断项
     routes = 生成路由建议(failure_packet, rules.L15路由) if failure_packet else []
-    final = 聚合终态(semantic, failure_packet, audit_blockers)
-    status = final.status
     exit_code = final.exit_code
 
     result = 正文检测结果(

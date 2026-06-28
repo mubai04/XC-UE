@@ -1,0 +1,26 @@
+{
+  "schema_version": "xcue.failure-packet/1.0",
+  "pipeline_run_id": "S2B1-BAD-NOROUTE",
+  "stage_run_id": "STAGE-L1",
+  "status": "SCREENING_REJECT",
+  "failure_count": 1,
+  "blocking_count": 1,
+  "routeable_count": 0,
+  "items": [
+    {
+      "闸门": "L1-01",
+      "名称": "缺routeable",
+      "状态": "失败",
+      "说明": "测试",
+      "证据": [],
+      "严重级别": "error",
+      "失败类型": "文风失败",
+      "候选模块": "",
+      "回流验收位置": "L1-01",
+      "修复方向": "",
+      "decision_role": "DIAGNOSTIC",
+      "blocking": true
+    }
+  ],
+  "extensions": {"chapter_path": "chapters/x.md"}
+}

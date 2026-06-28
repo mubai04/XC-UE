@@ -1,0 +1,16 @@
+{
+  "task": "L1-SEM-ANCHOR-02",
+  "L1_SEM_ANCHOR_REPAIR": "PASSED",
+  "L1_RESULT": "AUDIT_BLOCKED",
+  "anchor_layer_passed": true,
+  "remaining_blocker": "动机: final_reason 过于空泛",
+  "REAL_REPAIR_02": "PAUSED",
+  "REAL_API_CALLS_USED": 1,
+  "FURTHER_API_RETRY": "FORBIDDEN",
+  "evidence_anchor_retries": 0,
+  "failure_packet_count": 0,
+  "routeable_count": 0,
+  "formal_chapter_unchanged": true,
+  "code_block_p0079_anchored": true,
+  "all_dimensions_evidence_located_first_try": true
+}

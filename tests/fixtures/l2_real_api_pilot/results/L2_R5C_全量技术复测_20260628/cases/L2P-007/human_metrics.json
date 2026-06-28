@@ -1,0 +1,19 @@
+{
+  "case_id": "L2P-007",
+  "human_metrics": {
+    "diagnosis_correct": "NOT_REVIEWED",
+    "evidence_relevant": "NOT_REVIEWED",
+    "root_cause_specific": "NOT_REVIEWED",
+    "fix_actions_executable": "NOT_REVIEWED",
+    "acceptance_criteria_testable": "NOT_REVIEWED",
+    "forbidden_scope_respected": "NOT_REVIEWED",
+    "cross_module_overreach": "NOT_REVIEWED",
+    "reroute_correct": "NOT_REVIEWED",
+    "reviewer_notes": ""
+  },
+  "auto_signals": {
+    "forbidden_diagnosis_hits": [],
+    "needs_reroute_flag": "否",
+    "expected_reroute": false
+  }
+}

@@ -1,0 +1,811 @@
+{
+  "prompt_corpus": {
+    "current": {
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_count": 86,
+      "paragraphs": [
+        {
+          "paragraph_id": "P0001",
+          "text_length": 13,
+          "text": "# 第1章 准点下班怎么了"
+        },
+        {
+          "paragraph_id": "P0002",
+          "text_length": 26,
+          "text": "下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。"
+        },
+        {
+          "paragraph_id": "P0003",
+          "text_length": 69,
+          "text": "旁边的工位，小刘正在以肉眼可见的速度衰老。屏幕开着六个窗口，桌上摆着三杯已经凉透的咖啡，眼神介于\"还能再战\"和\"我觉得我需要去医院\"之间。"
+        },
+        {
+          "paragraph_id": "P0004",
+          "text_length": 61,
+          "text": "陈敛瞥了一眼小刘的手背——上面有一道没擦干净的血痕，从虎口延到手腕。他记得小刘今天没切过任何东西。但他没问。不问比较省事。"
+        },
+        {
+          "paragraph_id": "P0005",
+          "text_length": 22,
+          "text": "\"走了？\"小刘抬头，语气里带着一丝不可思议。"
+        },
+        {
+          "paragraph_id": "P0006",
+          "text_length": 22,
+          "text": "\"走了。\"陈敛把卫衣帽子戴上，\"你也早点。\""
+        },
+        {
+          "paragraph_id": "P0007",
+          "text_length": 12,
+          "text": "\"我把这个bug修完。\""
+        },
+        {
+          "paragraph_id": "P0008",
+          "text_length": 55,
+          "text": "陈敛看了一眼他的屏幕——那个bug小刘从下午两点开始修到现在。以陈敛的经验，最多二十分钟能解决。但他不打算说。"
+        },
+        {
+          "paragraph_id": "P0009",
+          "text_length": 40,
+          "text": "原因有两个。第一，他不想暴露自己其实懂。第二——小刘修得越久，系统积分涨得越多。"
+        },
+        {
+          "paragraph_id": "P0010",
+          "text_length": 21,
+          "text": "电梯门关上。他的眼前弹出一个半透明的面板。"
+        },
+        {
+          "paragraph_id": "P0011",
+          "text_length": 97,
+          "text": "```\n【今日收割简报】\n今日摸鱼时长：7小时48分钟\n今日收割积分：+1,247\n本月累计：+16,234\n收割分布：单一来源占比偏高（邻座：37%）\n建议：分散收割源以降低暴露风险。\n```"
+        },
+        {
+          "paragraph_id": "P0012",
+          "text_length": 49,
+          "text": "陈敛看了看那行\"降低暴露风险\"，心里默默给系统加了一分——还挺专业。但他没打算改，反正也没人发现。"
+        },
+        {
+          "paragraph_id": "P0013",
+          "text_length": 96,
+          "text": "电梯下行。他看着面板上那个积分数字，想起了三个月前的那个晚上——躺在床上刷手机，眼前突然弹出这块面板。他关了三次，它弹了四次。第四次他把被子蒙在头上说了一句\"明天再说\"，然后面板回了他四个字。"
+        },
+        {
+          "paragraph_id": "P0014",
+          "text_length": 12,
+          "text": "**\"好的。晚安。\"**"
+        },
+        {
+          "paragraph_id": "P0015",
+          "text_length": 89,
+          "text": "后来他花了一周才搞明白运作逻辑——摸鱼就涨积分，别人加班他也在涨，他什么都不用做。搞明白之后他坐在工位上沉默了五分钟。表情介于\"还有这种好事\"和\"那我这三个月岂不是白活了\"之间。"
+        },
+        {
+          "paragraph_id": "P0016",
+          "text_length": 11,
+          "text": "然后他打开了视频网站。"
+        },
+        {
+          "paragraph_id": "P0017",
+          "text_length": 24,
+          "text": "反正系统已经自动跑了三个月，积分都攒到五位数了。"
+        },
+        {
+          "paragraph_id": "P0018",
+          "text_length": 11,
+          "text": "电梯到了一楼。门打开。"
+        },
+        {
+          "paragraph_id": "P0019",
+          "text_length": 48,
+          "text": "他走出大楼，夕阳落在对面写字楼的玻璃幕墙上，反射出一片金色的光。手机震动。部门群消息——赵总监："
+        },
+        {
+          "paragraph_id": "P0020",
+          "text_length": 31,
+          "text": "\"@所有人 今晚加个班，下周的项目方案要赶出来。食堂有晚餐。\""
+        },
+        {
+          "paragraph_id": "P0021",
+          "text_length": 24,
+          "text": "群里立刻弹出一片\"收到\"\"好的赵总\"\"没问题\"。"
+        },
+        {
+          "paragraph_id": "P0022",
+          "text_length": 33,
+          "text": "陈敛打了三个字：\"家有急事。\"发完把手机揣回兜里，走向新城轨道站。"
+        },
+        {
+          "paragraph_id": "P0023",
+          "text_length": 3,
+          "text": "---"
+        },
+        {
+          "paragraph_id": "P0024",
+          "text_length": 17,
+          "text": "第二天上午，陈敛准时出现在工位上。"
+        },
+        {
+          "paragraph_id": "P0025",
+          "text_length": 88,
+          "text": "不是他不想迟到——是系统的\"反检测屏障\"需要他人在大楼范围内才能全功率运行。他试过请假在家，那天的积分只有平时的三分之一。从那以后他每天都来。不是为了上班，是为了\"信号满格\"。"
+        },
+        {
+          "paragraph_id": "P0026",
+          "text_length": 10,
+          "text": "十一点半。午休时间。"
+        },
+        {
+          "paragraph_id": "P0027",
+          "text_length": 62,
+          "text": "陈敛把椅背调到最大角度，卫衣帽子往脸上一拉，开始睡觉。旁边的键盘声密集得像机关枪——小刘在赶一份没人催的方案，敲得眼冒金星。"
+        },
+        {
+          "paragraph_id": "P0028",
+          "text_length": 8,
+          "text": "陈敛睡得很安稳。"
+        },
+        {
+          "paragraph_id": "P0029",
+          "text_length": 23,
+          "text": "两点整。他醒了，伸了个懒腰。系统面板自动弹出："
+        },
+        {
+          "paragraph_id": "P0030",
+          "text_length": 54,
+          "text": "```\n午休时段收割积分：+623\n主要来源：邻座（+412）\n次要来源：同楼层未知目标（+211）\n```"
+        },
+        {
+          "paragraph_id": "P0031",
+          "text_length": 25,
+          "text": "他打了个哈欠，关掉面板。不错。睡个觉又收了六百多。"
+        },
+        {
+          "paragraph_id": "P0032",
+          "text_length": 45,
+          "text": "他拿起水杯去接水。茶水间的走廊拐角，他差点跟一个人撞上——前台林栀，手里拿着一个快递信封。"
+        },
+        {
+          "paragraph_id": "P0033",
+          "text_length": 26,
+          "text": "\"啊，抱歉。\"她笑了一下，\"你是技术部的……陈敛？\""
+        },
+        {
+          "paragraph_id": "P0034",
+          "text_length": 4,
+          "text": "\"嗯。\""
+        },
+        {
+          "paragraph_id": "P0035",
+          "text_length": 23,
+          "text": "\"有你的快递。我正想送上去。\"她把信封递给他。"
+        },
+        {
+          "paragraph_id": "P0036",
+          "text_length": 36,
+          "text": "陈敛接过来看了一眼——发件人空白，寄件地址空白。他翻了翻，里面是一张纸。"
+        },
+        {
+          "paragraph_id": "P0037",
+          "text_length": 21,
+          "text": "他没当着她的面拆。点头说了声谢，走回工位。"
+        },
+        {
+          "paragraph_id": "P0038",
+          "text_length": 31,
+          "text": "坐下来之后他拆开信封，里面是一张A4纸，上面只有一行打印体字："
+        },
+        {
+          "paragraph_id": "P0039",
+          "text_length": 42,
+          "text": "**\"你的工位位置，是三十二楼最后一个靠窗位。你知道上一个坐这里的人去哪了吗？\"**"
+        },
+        {
+          "paragraph_id": "P0040",
+          "text_length": 16,
+          "text": "没有署名。没有日期。没有寄件人。"
+        },
+        {
+          "paragraph_id": "P0041",
+          "text_length": 12,
+          "text": "陈敛盯着那行字看了十秒。"
+        },
+        {
+          "paragraph_id": "P0042",
+          "text_length": 25,
+          "text": "\"上一个坐这里的人，\"他自言自语，\"关我什么事。\""
+        },
+        {
+          "paragraph_id": "P0043",
+          "text_length": 16,
+          "text": "他把纸折好塞回信封，扔进抽屉里。"
+        },
+        {
+          "paragraph_id": "P0044",
+          "text_length": 12,
+          "text": "但他又看了那个抽屉一眼。"
+        },
+        {
+          "paragraph_id": "P0045",
+          "text_length": 25,
+          "text": "他拿出手机，想给系统打字：\"你知道这是谁送的吗？\""
+        },
+        {
+          "paragraph_id": "P0046",
+          "text_length": 27,
+          "text": "字还没打完，他删了。他不想让系统知道他有点在意这件事。"
+        },
+        {
+          "paragraph_id": "P0047",
+          "text_length": 29,
+          "text": "下午三点。赵总监的纸条来了——\"小陈，到我办公室来一趟。\""
+        },
+        {
+          "paragraph_id": "P0048",
+          "text_length": 13,
+          "text": "陈敛把纸条揉成一团，起身。"
+        },
+        {
+          "paragraph_id": "P0049",
+          "text_length": 71,
+          "text": "赵总监办公室在三十二楼尽头，落地窗，视野很好。陈敛进去的时候，赵总监正坐在办公桌后面，表情介于\"我要跟你谈谈\"和\"其实我也没什么好说的\"之间。"
+        },
+        {
+          "paragraph_id": "P0050",
+          "text_length": 4,
+          "text": "\"坐。\""
+        },
+        {
+          "paragraph_id": "P0051",
+          "text_length": 5,
+          "text": "陈敛坐下。"
+        },
+        {
+          "paragraph_id": "P0052",
+          "text_length": 15,
+          "text": "\"小陈啊，你来公司三个月了。\""
+        },
+        {
+          "paragraph_id": "P0053",
+          "text_length": 4,
+          "text": "\"嗯。\""
+        },
+        {
+          "paragraph_id": "P0054",
+          "text_length": 44,
+          "text": "\"你的工作……\"赵总监斟酌了一下用词，\"还可以。但你有没有发现，你是全部门下班最早的？\""
+        },
+        {
+          "paragraph_id": "P0055",
+          "text_length": 8,
+          "text": "\"我活干完了。\""
+        },
+        {
+          "paragraph_id": "P0056",
+          "text_length": 70,
+          "text": "赵总监愣了一下。这句话的潜台词太明确了——\"我活干完了，不加班有什么问题？\"但作为总监，他不能接这个话，因为接了就等于承认\"不加班是对的\"。"
+        },
+        {
+          "paragraph_id": "P0057",
+          "text_length": 43,
+          "text": "\"我不是说你不能下班。我是说——年轻人嘛，多花点时间在工作上，对你以后的晋升有好处。\""
+        },
+        {
+          "paragraph_id": "P0058",
+          "text_length": 19,
+          "text": "陈敛点了点头：\"好的赵总，我记住了。\""
+        },
+        {
+          "paragraph_id": "P0059",
+          "text_length": 11,
+          "text": "他站起来，走出办公室。"
+        },
+        {
+          "paragraph_id": "P0060",
+          "text_length": 71,
+          "text": "回工位的路上他路过赵总监桌上的台历——翻到六月那页。他无意间扫了一眼，某一个日期上画着一个很轻的铅笔圈。不是会议标注，不是截止日。就是一个圈。"
+        },
+        {
+          "paragraph_id": "P0061",
+          "text_length": 29,
+          "text": "他没多想。回了自己工位，打开电脑，切到视频网站，戴上耳机。"
+        },
+        {
+          "paragraph_id": "P0062",
+          "text_length": 25,
+          "text": "工位旁边的亚克力立牌：\"代码调试中——请勿打扰。\""
+        },
+        {
+          "paragraph_id": "P0063",
+          "text_length": 31,
+          "text": "赵总监从办公室门口路过，看到陈敛在认真敲代码，满意地点了点头。"
+        },
+        {
+          "paragraph_id": "P0064",
+          "text_length": 70,
+          "text": "他不知道陈敛的屏幕上开着一个隐藏窗口——番剧第三集，进度条走了一半。刚才敲的那几行代码是他两天前就写好的，现在只是复制粘贴。快捷键按得飞起。"
+        },
+        {
+          "paragraph_id": "P0065",
+          "text_length": 15,
+          "text": "下午五点半。系统弹了一条消息。"
+        },
+        {
+          "paragraph_id": "P0066",
+          "text_length": 58,
+          "text": "```\n【预估：今日总收割量可达 2,000+ 积分】\n主要得益于部门集体加班氛围。\n建议宿主保持当前状态。\n```"
+        },
+        {
+          "paragraph_id": "P0067",
+          "text_length": 31,
+          "text": "陈敛打字回复：\"能不能不要每次弹窗都带建议？我知道该怎么做。\""
+        },
+        {
+          "paragraph_id": "P0068",
+          "text_length": 11,
+          "text": "系统沉默了大约三秒——"
+        },
+        {
+          "paragraph_id": "P0069",
+          "text_length": 26,
+          "text": "```\n【已记录。】\n【下次减少建议频率。】\n```"
+        },
+        {
+          "paragraph_id": "P0070",
+          "text_length": 18,
+          "text": "陈敛觉得这个系统有时候还挺好说话的。"
+        },
+        {
+          "paragraph_id": "P0071",
+          "text_length": 18,
+          "text": "下午六点整。关电脑，拿工牌，站起来。"
+        },
+        {
+          "paragraph_id": "P0072",
+          "text_length": 60,
+          "text": "小刘不在工位上——洗手间的方向传来水龙头开到最大的声音。陈敛看了一眼他的桌面：键盘上搁着一板止痛药，锡纸板被抠了两个洞。"
+        },
+        {
+          "paragraph_id": "P0073",
+          "text_length": 12,
+          "text": "他停顿了一秒。然后走了。"
+        },
+        {
+          "paragraph_id": "P0074",
+          "text_length": 58,
+          "text": "走出大楼的时候，晚风迎面吹过来。他在台阶上站了两秒，然后做了一个他自己也没想到的动作——他回头，看了一眼身后的大楼。"
+        },
+        {
+          "paragraph_id": "P0075",
+          "text_length": 92,
+          "text": "三十二层的全玻璃幕墙在黄昏的天色里反射出一层暗金色的光。大楼里灯火通明，至少还有一半楼层亮着。他之前从来没仔细看过这栋楼的轮廓。现在认真地看了一眼——他发现了一个所有人都忽略了的事情。"
+        },
+        {
+          "paragraph_id": "P0076",
+          "text_length": 16,
+          "text": "这栋楼的横截面，不是一个正方形。"
+        },
+        {
+          "paragraph_id": "P0077",
+          "text_length": 15,
+          "text": "是一个不规则的**八角形**。"
+        },
+        {
+          "paragraph_id": "P0078",
+          "text_length": 38,
+          "text": "他站在那看了三秒。正要转身走，手机在口袋里震了一下——不是来电，是系统推送。"
+        },
+        {
+          "paragraph_id": "P0079",
+          "text_length": 42,
+          "text": "```\n【补充数据】\n这座大楼的建筑设计图，在规划局没有备案。\n一次都没有。\n```"
+        },
+        {
+          "paragraph_id": "P0080",
+          "text_length": 10,
+          "text": "陈敛的脚步顿了一下。"
+        },
+        {
+          "paragraph_id": "P0081",
+          "text_length": 8,
+          "text": "然后他继续走了。"
+        },
+        {
+          "paragraph_id": "P0082",
+          "text_length": 17,
+          "text": "\"关我什么事。我又不是规划局的。\""
+        },
+        {
+          "paragraph_id": "P0083",
+          "text_length": 13,
+          "text": "他把手机放回口袋，继续走。"
+        },
+        {
+          "paragraph_id": "P0084",
+          "text_length": 47,
+          "text": "走了十几步，又停下来。他掏出手机——翻到那条推送，截了个图。等反应过来的时候，截图已经存好了。"
+        },
+        {
+          "paragraph_id": "P0085",
+          "text_length": 16,
+          "text": "他看了一眼屏幕。把手机塞回口袋。"
+        },
+        {
+          "paragraph_id": "P0086",
+          "text_length": 6,
+          "text": "\"手快了。\""
+        }
+      ]
+    },
+    "prior": null
+  },
+  "request_messages_meta": [
+    {
+      "role": "system",
+      "content_length": 187
+    },
+    {
+      "role": "user",
+      "content_length": 10127
+    }
+  ],
+  "raw_responses": [
+    {
+      "phase": "initial",
+      "ok": true,
+      "error_kind": "",
+      "parsed": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章事件链条清晰，从陈敛准点下班、系统收割积分、收到匿名信、被总监谈话到发现大楼异常，每一步都有明确的起因和结果。主要风险：局部存在轻微跳跃（如匿名信来源未交代），但不破坏主线因果。最终选择PASS因为整章因果链完整可追踪。",
+            "strength_summary": "事件顺序连贯，每个行动都有合理的前因后果。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章事件增量明确，起因（准点下班）→行动（摸鱼、收信、谈话、观察大楼）→结果（发现大楼异常），链条连续，无重复或主体切换问题。",
+            "evidence": [
+              {
+                "paragraph_id": "P0002",
+                "exact_text": "下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "作为起因，引出后续系统收割和冲突。"
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：陈敛的动机（摸鱼赚积分、避免暴露）贯穿全章，行为一致。主要风险：匿名信和系统推送的动机未完全解释，但属于悬念设置，不影响主角动机。最终选择PASS因为主角目标清晰且持续。",
+            "strength_summary": "陈敛的每个行动都服务于摸鱼和隐藏系统，动机稳定。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "主角目标（最大化积分、避免暴露）在全章保持一致，无目标漂移或矛盾行为。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "原因有两个。第一，他不想暴露自己其实懂。第二——小刘修得越久，系统积分涨得越多。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "明确展示主角动机：隐藏能力并利用他人加班赚积分。"
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：存在清晰的冲突——陈敛的摸鱼行为与公司加班文化、总监的期望形成对抗，匿名信和系统提示也制造了潜在威胁。主要风险：冲突强度中等，但持续推动情节。最终选择PASS因为全章有持续的阻力。",
+            "strength_summary": "主角与职场规则、匿名威胁之间的对抗明确。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "冲突贯穿全章：陈敛准点下班与加班文化冲突、总监谈话施加压力、匿名信制造悬念，均有效推动段落。",
+            "evidence": [
+              {
+                "paragraph_id": "P0020",
+                "exact_text": "@所有人 今晚加个班，下周的项目方案要赶出来。食堂有晚餐。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "体现公司加班要求与主角摸鱼动机的冲突。"
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章持续提供新信息——系统机制、匿名信、总监谈话、大楼异常，信息增量充足。主要风险：中段部分内容（如午休收割）稍显重复，但未大面积空转。最终选择PASS因为核心事件和悬念持续更新。",
+            "strength_summary": "事件变化丰富，从系统收割到匿名信再到建筑异常，层层递进。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "全章事件增量明显，无大面积重复或空转，章末抛出大楼未备案的悬念，读者收益高。",
+            "evidence": [
+              {
+                "paragraph_id": "P0079",
+                "exact_text": "这座大楼的建筑设计图，在规划局没有备案。一次都没有。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "章末新悬念，提升读者收益。"
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：人物、场景、对话主体清晰，系统面板格式统一，易于理解。主要风险：无。最终选择PASS因为全章信息层级稳定，无需回读。",
+            "strength_summary": "叙述流畅，主体切换明确，专名和规则解释到位。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "人物、对话、场景切换清晰，系统信息以代码块呈现，无主体混淆或重复规则。",
+            "evidence": [
+              {
+                "paragraph_id": "P0011",
+                "exact_text": "【今日收割简报】今日摸鱼时长：7小时48分钟今日收割积分：+1,247本月累计：+16,234收割分布：单一来源占比偏高（邻座：37%）建议：分散收割源以降低暴露风险。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "系统信息格式统一，降低认知成本。"
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：章末抛出大楼未备案的悬念，以及主角截图行为，形成强烈追读动机。主要风险：无。最终选择PASS因为章末钩子有力且自然。",
+            "strength_summary": "章末悬念（大楼未备案）直接引发读者好奇。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "章末最后20%段落（P0075-P0086）引入新变量（大楼形状异常、无备案），形成明确未解问题，追读动机强。",
+            "evidence": [
+              {
+                "paragraph_id": "P0079",
+                "exact_text": "这座大楼的建筑设计图，在规划局没有备案。一次都没有。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "章末关键悬念，来自最后20%段落。"
+              }
+            ]
+          }
+        ]
+      },
+      "raw_preview": "{\"id\":\"ac4bf23d-b4f0-41c5-a5e0-16817b2b4b6a\",\"object\":\"chat.completion\",\"created\":1782650899,\"model\":\"deepseek-v4-flash\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"dimensions\\\": [\\n    {\\n      \\\"name\\\": \\\"因果\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：全章事件链条清晰，从陈敛准点下班、系统收割积分、收到匿名信、被总监谈话到发现大楼异常，每一步都有明确的起因和结果。主要风险：局部存在轻微跳跃（如匿名信来源未交代），但不破坏主线因果。最终选择PASS因为整章因果链完整可追踪。\\\",\\n      \\\"strength_summary\\\": \\\"事件顺序连贯，每个行动都有合理的前因后果。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"全章事件增量明确，起因（准点下班）→行动（摸鱼、收信、谈话、观察大楼）→结果（发现大楼异常），链条连续，无重复或主体切换问题。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0002\\\",\\n          \\\"exact_text\\\": \\\"下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"作为起因，引出后续系统收割和冲突。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"动机\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：陈敛的动机（摸鱼赚积分、避免暴露）贯穿全章，行为一致。主要风险：匿名信和系统推送的动机未完全解释，但属于悬念设置，不影响主角动机。最终选择PASS因为主角目标清晰且持续。\\\",\\n      \\\"strength_summary\\\": \\\"陈敛的每个行动都服务于摸鱼和隐藏系统，动机稳定。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"主角目标（最大化积分、避免暴露）在全章保持一致，无目标漂移或矛盾行为。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0009\\\",\\n          \\\"exact_text\\\": \\\"原因有两个。第一，他不想暴露自己其实懂。第二——小刘修得越久，系统积分涨得越多。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"明确展示主角动机：隐藏能力并利用他人加班赚积分。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"冲突\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：存在清晰的冲突——陈敛的摸鱼行为与公司加班文化、总监的期望形成对抗，匿名信和系统提示也制造了潜在威胁。主要风险：冲突强度中等，但持续推动情节。最终选择PASS因为全章有持续的阻力。\\\",\\n      \\\"strength_summary\\\": \\\"主角与职场规则、匿名威胁之间的对抗明确。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"冲突贯穿全章：陈敛准点下班与加班文化冲突、总监谈话施加压力、匿名信制造悬念，均有效推动段落。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0020\\\",\\n          \\\"exact_text\\\": \\\"@所有人 今晚加个班，下周的项目方案要赶出来。食堂有晚餐。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"体现公司加班要求与主角摸鱼动机的冲突。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"读者收益\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：全章持续提供新信息——系统机制、匿名信、总监谈话、大楼异常，信息增量充足。主要风险：中段部分内容（如午休收割）稍显重复，但未大面积空转。最终选择PASS因为核心事件和悬念持续更新。\\\",\\n      \\\"strength_summary\\\": \\\"事件变化丰富，从系统收割到匿名信再到建筑异常，层层递进。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"全章事件增量明显，无大面积重复或空转，章末抛出大楼未备案的悬念，读者收益高。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0079\\\",\\n          \\\"exact_text\\\": \\\"这座大楼的建筑设计图，在规划局没有备案。一次都没有。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"章末新悬念，提升读者收益。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"认知成本\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：人物、场景、对话主体清晰，系统面板格式统一，易于理解。主要风险：无。最终选择PASS因为全章信息层级稳定，无需回读。\\\",\\n      \\\"strength_summary\\\": \\\"叙述流畅，主体切换明确，专名和规则解释到位。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"人物、对话、场景切换清晰，系统信息以代码块呈现，无主体混淆或重复规则。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0011\\\",\\n          \\\"exact_text\\\": \\\"【今日收割简报】今日摸鱼时长：7小时48分钟今日收割积分：+1,247本月累计：+16,234收割分布：单一来源占比偏高（邻座：37%）建议：分散收割源以降低暴露风险。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"系统信息格式统一，降低认知成本。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"章末追读\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：章末抛出大楼未备案的悬念，以及主角截图行为，形成强烈追读动机。主要风险：无。最终选择PASS因为章末钩子有力且自然。\\\",\\n      \\\"strength_summary\\\": \\\"章末悬念（大楼未备案）直接引发读者好奇。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"章末最后20%段落（P0075-P0086）引入新变量（大楼形状异常、无备案），形成明确未解问题，追读动机强。\\\",\\n      \\\"e"
+    },
+    {
+      "phase": "evidence_retry_1",
+      "anchor_retry": true,
+      "ok": true,
+      "error_kind": "",
+      "parsed": {
+        "dimensions": [
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章持续提供新的事件变化和悬念，包括系统设定揭示、匿名信、总监谈话、大楼异常等，信息增量充足。主要风险：中后段部分内容（如系统弹窗建议）略有重复，但未影响整体推进。最终选择 PASS 因为事件增量持续，中后段未大面积重复已兑现内容。",
+            "strength_summary": "全章从系统收割、匿名信、总监谈话到发现大楼异常，事件链完整且不断推进。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "事件增量持续：系统设定（P0011）、匿名信（P0039）、总监谈话（P0054）、大楼异常（P0079）等新信息不断出现，中后段无大面积重复。",
+            "evidence": [
+              {
+                "paragraph_id": "P0011",
+                "exact_text": "【今日收割简报】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "展示系统核心机制，提供新信息。"
+              },
+              {
+                "paragraph_id": "P0039",
+                "exact_text": "你的工位位置，是三十二楼最后一个靠窗位。你知道上一个坐这里的人去哪了吗？",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "引入悬念，增加读者收益。"
+              },
+              {
+                "paragraph_id": "P0079",
+                "exact_text": "这座大楼的建筑设计图，在规划局没有备案。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "章末新悬念，提升追读动力。"
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：人物、对话主体、场景清晰，系统面板与正文区分明确，无主体切换不清或规则重复。主要风险：系统弹窗出现多次，但格式一致，不影响理解。最终选择 PASS 因为全章信息层级稳定，读者无需回读。",
+            "strength_summary": "人物对话和场景切换自然，系统面板以代码块形式呈现，易于区分。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "主体切换清晰：陈敛、小刘、林栀、赵总监等人物出场明确，对话主体可辨；系统面板格式统一，无规则重复或载体频繁切换。",
+            "evidence": [
+              {
+                "paragraph_id": "P0002",
+                "exact_text": "下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "开篇明确主角和动作，场景清晰。"
+              },
+              {
+                "paragraph_id": "P0010",
+                "exact_text": "电梯门关上。他的眼前弹出一个半透明的面板。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "系统面板引入自然，格式一致。"
+              },
+              {
+                "paragraph_id": "P0049",
+                "exact_text": "赵总监办公室在三十二楼尽头，落地窗，视野很好。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "场景描述简洁，主体明确。"
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：章末形成明确的新问题——大楼设计图未备案，且主角截图行为暗示在意，悬念有力。主要风险：无。最终选择 PASS 因为章末钩子与前文自然衔接，追读动机充足。",
+            "strength_summary": "章末揭示大楼未备案，主角截图，悬念强烈。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "章末承接：P0079-P0086 揭示大楼设计图未备案，主角截图，形成新悬念，与前文匿名信、总监谈话等线索呼应，追读动机充足。",
+            "evidence": [
+              {
+                "paragraph_id": "P0079",
+                "exact_text": "这座大楼的建筑设计图，在规划局没有备案。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "章末核心悬念，直接推动追读。"
+              },
+              {
+                "paragraph_id": "P0084",
+                "exact_text": "他掏出手机——翻到那条推送，截了个图。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "主角行为暗示在意，强化悬念。"
+              }
+            ]
+          }
+        ]
+      },
+      "raw_preview": "{\"id\":\"e3bab69c-8e61-4e69-8678-8e7d9dc0c400\",\"object\":\"chat.completion\",\"created\":1782650915,\"model\":\"deepseek-v4-flash\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"dimensions\\\": [\\n    {\\n      \\\"name\\\": \\\"读者收益\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：全章持续提供新的事件变化和悬念，包括系统设定揭示、匿名信、总监谈话、大楼异常等，信息增量充足。主要风险：中后段部分内容（如系统弹窗建议）略有重复，但未影响整体推进。最终选择 PASS 因为事件增量持续，中后段未大面积重复已兑现内容。\\\",\\n      \\\"strength_summary\\\": \\\"全章从系统收割、匿名信、总监谈话到发现大楼异常，事件链完整且不断推进。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"事件增量持续：系统设定（P0011）、匿名信（P0039）、总监谈话（P0054）、大楼异常（P0079）等新信息不断出现，中后段无大面积重复。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0011\\\",\\n          \\\"exact_text\\\": \\\"【今日收割简报】\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"展示系统核心机制，提供新信息。\\\"\\n        },\\n        {\\n          \\\"paragraph_id\\\": \\\"P0039\\\",\\n          \\\"exact_text\\\": \\\"你的工位位置，是三十二楼最后一个靠窗位。你知道上一个坐这里的人去哪了吗？\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"引入悬念，增加读者收益。\\\"\\n        },\\n        {\\n          \\\"paragraph_id\\\": \\\"P0079\\\",\\n          \\\"exact_text\\\": \\\"这座大楼的建筑设计图，在规划局没有备案。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"章末新悬念，提升追读动力。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"认知成本\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：人物、对话主体、场景清晰，系统面板与正文区分明确，无主体切换不清或规则重复。主要风险：系统弹窗出现多次，但格式一致，不影响理解。最终选择 PASS 因为全章信息层级稳定，读者无需回读。\\\",\\n      \\\"strength_summary\\\": \\\"人物对话和场景切换自然，系统面板以代码块形式呈现，易于区分。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"主体切换清晰：陈敛、小刘、林栀、赵总监等人物出场明确，对话主体可辨；系统面板格式统一，无规则重复或载体频繁切换。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0002\\\",\\n          \\\"exact_text\\\": \\\"下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"开篇明确主角和动作，场景清晰。\\\"\\n        },\\n        {\\n          \\\"paragraph_id\\\": \\\"P0010\\\",\\n          \\\"exact_text\\\": \\\"电梯门关上。他的眼前弹出一个半透明的面板。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"系统面板引入自然，格式一致。\\\"\\n        },\\n        {\\n          \\\"paragraph_id\\\": \\\"P0049\\\",\\n          \\\"exact_text\\\": \\\"赵总监办公室在三十二楼尽头，落地窗，视野很好。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"场景描述简洁，主体明确。\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"name\\\": \\\"章末追读\\\",\\n      \\\"verdict\\\": \\\"PASS\\\",\\n      \\\"analysis_summary\\\": \\\"主要优点：章末形成明确的新问题——大楼设计图未备案，且主角截图行为暗示在意，悬念有力。主要风险：无。最终选择 PASS 因为章末钩子与前文自然衔接，追读动机充足。\\\",\\n      \\\"strength_summary\\\": \\\"章末揭示大楼未备案，主角截图，悬念强烈。\\\",\\n      \\\"risk_summary\\\": \\\"未发现足以降级的全章性风险。\\\",\\n      \\\"final_reason\\\": \\\"章末承接：P0079-P0086 揭示大楼设计图未备案，主角截图，形成新悬念，与前文匿名信、总监谈话等线索呼应，追读动机充足。\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"paragraph_id\\\": \\\"P0079\\\",\\n          \\\"exact_text\\\": \\\"这座大楼的建筑设计图，在规划局没有备案。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"章末核心悬念，直接推动追读。\\\"\\n        },\\n        {\\n          \\\"paragraph_id\\\": \\\"P0084\\\",\\n          \\\"exact_text\\\": \\\"他掏出手机——翻到那条推送，截了个图。\\\",\\n          \\\"source_scope\\\": \\\"CURRENT_CHAPTER\\\",\\n          \\\"occurrence_index\\\": 0,\\n          \\\"evidence_rationale\\\": \\\"主角行为暗示在意，强化悬念。\\\"\\n        }\\n      ]\\n    }\\n  ]\\n}\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":5297,\"completion_tokens\":1178,\"total_tokens\":6475,\"prompt_tokens_details\":{\"cached_tokens\":5120},\"prompt_cache_hit_tokens\":5120,\"prompt_cache_miss_tokens\":177},\"system_fingerprint\":\"fp_8b330d02d0_prod0820_fp8_kvcache_20260402\"}"
+    }
+  ],
+  "parsed_final": {
+    "dimensions": [
+      {
+        "name": "因果",
+        "verdict": "PASS",
+        "analysis_summary": "主要优点：全章事件链条清晰，从陈敛准点下班、系统收割积分、收到匿名信、被总监谈话到发现大楼异常，每一步都有明确的起因和结果。主要风险：局部存在轻微跳跃（如匿名信来源未交代），但不破坏主线因果。最终选择PASS因为整章因果链完整可追踪。",
+        "strength_summary": "事件顺序连贯，每个行动都有合理的前因后果。",
+        "risk_summary": "未发现足以降级的全章性风险。",
+        "final_reason": "全章事件增量明确，起因（准点下班）→行动（摸鱼、收信、谈话、观察大楼）→结果（发现大楼异常），链条连续，无重复或主体切换问题。",
+        "evidence": [
+          {
+            "paragraph_id": "P0002",
+            "exact_text": "下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "作为起因，引出后续系统收割和冲突。"
+          }
+        ]
+      },
+      {
+        "name": "动机",
+        "verdict": "PASS",
+        "analysis_summary": "主要优点：陈敛的动机（摸鱼赚积分、避免暴露）贯穿全章，行为一致。主要风险：匿名信和系统推送的动机未完全解释，但属于悬念设置，不影响主角动机。最终选择PASS因为主角目标清晰且持续。",
+        "strength_summary": "陈敛的每个行动都服务于摸鱼和隐藏系统，动机稳定。",
+        "risk_summary": "未发现足以降级的全章性风险。",
+        "final_reason": "主角目标（最大化积分、避免暴露）在全章保持一致，无目标漂移或矛盾行为。",
+        "evidence": [
+          {
+            "paragraph_id": "P0009",
+            "exact_text": "原因有两个。第一，他不想暴露自己其实懂。第二——小刘修得越久，系统积分涨得越多。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "明确展示主角动机：隐藏能力并利用他人加班赚积分。"
+          }
+        ]
+      },
+      {
+        "name": "冲突",
+        "verdict": "PASS",
+        "analysis_summary": "主要优点：存在清晰的冲突——陈敛的摸鱼行为与公司加班文化、总监的期望形成对抗，匿名信和系统提示也制造了潜在威胁。主要风险：冲突强度中等，但持续推动情节。最终选择PASS因为全章有持续的阻力。",
+        "strength_summary": "主角与职场规则、匿名威胁之间的对抗明确。",
+        "risk_summary": "未发现足以降级的全章性风险。",
+        "final_reason": "冲突贯穿全章：陈敛准点下班与加班文化冲突、总监谈话施加压力、匿名信制造悬念，均有效推动段落。",
+        "evidence": [
+          {
+            "paragraph_id": "P0020",
+            "exact_text": "@所有人 今晚加个班，下周的项目方案要赶出来。食堂有晚餐。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "体现公司加班要求与主角摸鱼动机的冲突。"
+          }
+        ]
+      },
+      {
+        "name": "读者收益",
+        "verdict": "PASS",
+        "analysis_summary": "主要优点：全章持续提供新的事件变化和悬念，包括系统设定揭示、匿名信、总监谈话、大楼异常等，信息增量充足。主要风险：中后段部分内容（如系统弹窗建议）略有重复，但未影响整体推进。最终选择 PASS 因为事件增量持续，中后段未大面积重复已兑现内容。",
+        "strength_summary": "全章从系统收割、匿名信、总监谈话到发现大楼异常，事件链完整且不断推进。",
+        "risk_summary": "未发现足以降级的全章性风险。",
+        "final_reason": "事件增量持续：系统设定（P0011）、匿名信（P0039）、总监谈话（P0054）、大楼异常（P0079）等新信息不断出现，中后段无大面积重复。",
+        "evidence": [
+          {
+            "paragraph_id": "P0011",
+            "exact_text": "【今日收割简报】",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "展示系统核心机制，提供新信息。"
+          },
+          {
+            "paragraph_id": "P0039",
+            "exact_text": "你的工位位置，是三十二楼最后一个靠窗位。你知道上一个坐这里的人去哪了吗？",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "引入悬念，增加读者收益。"
+          },
+          {
+            "paragraph_id": "P0079",
+            "exact_text": "这座大楼的建筑设计图，在规划局没有备案。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "章末新悬念，提升追读动力。"
+          }
+        ]
+      },
+      {
+        "name": "认知成本",
+        "verdict": "PASS",
+        "analysis_summary": "主要优点：人物、对话主体、场景清晰，系统面板与正文区分明确，无主体切换不清或规则重复。主要风险：系统弹窗出现多次，但格式一致，不影响理解。最终选择 PASS 因为全章信息层级稳定，读者无需回读。",
+        "strength_summary": "人物对话和场景切换自然，系统面板以代码块形式呈现，易于区分。",
+        "risk_summary": "未发现足以降级的全章性风险。",
+        "final_reason": "主体切换清晰：陈敛、小刘、林栀、赵总监等人物出场明确，对话主体可辨；系统面板格式统一，无规则重复或载体频繁切换。",
+        "evidence": [
+          {
+            "paragraph_id": "P0002",
+            "exact_text": "下午六点整。陈敛关掉IDE，拿起桌上的工牌，站起来。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "开篇明确主角和动作，场景清晰。"
+          },
+          {
+            "paragraph_id": "P0010",
+            "exact_text": "电梯门关上。他的眼前弹出一个半透明的面板。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "系统面板引入自然，格式一致。"
+          },
+          {
+            "paragraph_id": "P0049",
+            "exact_text": "赵总监办公室在三十二楼尽头，落地窗，视野很好。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "场景描述简洁，主体明确。"
+          }
+        ]
+      },
+      {
+        "name": "章末追读",
+        "verdict": "PASS",
+        "analysis_summary": "主要优点：章末形成明确的新问题——大楼设计图未备案，且主角截图行为暗示在意，悬念有力。主要风险：无。最终选择 PASS 因为章末钩子与前文自然衔接，追读动机充足。",
+        "strength_summary": "章末揭示大楼未备案，主角截图，悬念强烈。",
+        "risk_summary": "未发现足以降级的全章性风险。",
+        "final_reason": "章末承接：P0079-P0086 揭示大楼设计图未备案，主角截图，形成新悬念，与前文匿名信、总监谈话等线索呼应，追读动机充足。",
+        "evidence": [
+          {
+            "paragraph_id": "P0079",
+            "exact_text": "这座大楼的建筑设计图，在规划局没有备案。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "章末核心悬念，直接推动追读。"
+          },
+          {
+            "paragraph_id": "P0084",
+            "exact_text": "他掏出手机——翻到那条推送，截了个图。",
+            "source_scope": "CURRENT_CHAPTER",
+            "occurrence_index": 0,
+            "evidence_rationale": "主角行为暗示在意，强化悬念。"
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "ok": false,
+    "errors": [
+      "动机: final_reason 过于空泛，必须引用具体全章现象类别"
+    ],
+    "anchor_diagnostics": [],
+    "location_failed_dimensions": []
+  }
+}

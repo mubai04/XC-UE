@@ -1,0 +1,18 @@
+{
+  "run_id": "L2_R5B_协议修复定向复测_20260628",
+  "started_at": "2026-06-28T03:41:45.380825+00:00",
+  "model": "deepseek-v4-pro",
+  "max_tokens": 8192,
+  "request_timeout_seconds": 180.0,
+  "requested_temperature": 0.2,
+  "effective_temperature": null,
+  "temperature_status": "IGNORED_IN_THINKING_MODE",
+  "thinking_enabled": true,
+  "reasoning_effort": "high",
+  "manifest": "L2_R5A_REAL_API_PILOT",
+  "r5_phase": "R5B",
+  "production_code_modified": true,
+  "entered_l3": false,
+  "modified_formal_chapters": false,
+  "modified_r0_baseline": false
+}

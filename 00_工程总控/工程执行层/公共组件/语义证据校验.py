@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from typing import Any
+
+from 证据语料 import 规范化证据文本
 
 REQUIRED_DIMENSIONS = ("因果", "动机", "冲突", "读者收益", "认知成本", "章末追读")
 ALLOWED_VERDICTS = frozenset({"PASS", "FAIL", "REVIEW"})
@@ -10,7 +13,7 @@ SCOPE_CURRENT = "CURRENT_CHAPTER"
 SCOPE_PRIOR = "PRIOR_CHAPTER"
 ALLOWED_SCOPES = frozenset({SCOPE_CURRENT, SCOPE_PRIOR})
 PARAGRAPH_ID_PATTERN = re.compile(r"^P\d{4}$")
-MAX_EVIDENCE_PER_DIMENSION = 1
+MAX_EVIDENCE_PER_DIMENSION = 3
 
 FORBIDDEN_LEGACY_FIELDS = ("overall", "score", "explanation", "evidence_quotes", "quotes")
 VAGUE_FINAL_REASON_PHRASES = ("情节清晰", "信息丰富", "容易理解", "叙事流畅", "描写生动")
@@ -78,6 +81,8 @@ class 证据校验结果:
     computed_overall: str = ""
     failed_dimensions: list[str] = field(default_factory=list)
     dimension_reports: list[维度校验报告] = field(default_factory=list)
+    anchor_diagnostics: list[dict[str, Any]] = field(default_factory=list)
+    location_failed_dimensions: list[str] = field(default_factory=list)
 
 
 def 计算整体结论(verdicts: list[str]) -> str:
@@ -93,19 +98,79 @@ def 段落ID合法(paragraph_id: str) -> bool:
     return bool(PARAGRAPH_ID_PATTERN.match(paragraph_id))
 
 
+def 规范化摘句(text: str) -> str:
+    return 规范化证据文本(text)
+
+
+def exact_text含省略号(exact_text: str) -> bool:
+    return "..." in exact_text or "…" in exact_text or "。。。" in exact_text
+
+
+def 校验exact_text协议(exact_text: str) -> str | None:
+    if not exact_text or not exact_text.strip():
+        return "exact_text 不能为空"
+    if exact_text含省略号(exact_text):
+        return "exact_text 不得包含省略号或截断标记"
+    if "\n" in exact_text:
+        return "exact_text 不得跨越换行符（请摘单行）"
+    if "\n\n" in exact_text:
+        return "exact_text 不得跨段拼接（含空行）"
+    return None
+
+
 def 定位摘句(text: str, exact_text: str, occurrence_index: int = 0) -> tuple[int, int] | None:
-    if not exact_text:
+    protocol_err = 校验exact_text协议(exact_text)
+    if protocol_err:
+        return None
+    norm_text = 规范化摘句(text)
+    norm_exact = 规范化摘句(exact_text)
+    if not norm_exact:
         return None
     start = 0
     found = 0
     while True:
-        idx = text.find(exact_text, start)
+        idx = norm_text.find(norm_exact, start)
         if idx < 0:
             return None
         if found == occurrence_index:
-            return idx, idx + len(exact_text)
+            return idx, idx + len(norm_exact)
         found += 1
         start = idx + 1
+
+
+def 收集锚定诊断(
+    *,
+    dimension: str,
+    paragraph_id: str,
+    exact_text: str,
+    source_scope: str,
+    occurrence_index: int,
+    corpus: dict[str, str],
+) -> dict[str, Any]:
+    """诊断锚定失败，不含业务结论。"""
+    info: dict[str, Any] = {
+        "dimension": dimension,
+        "paragraph_id": paragraph_id,
+        "exact_text_length": len(exact_text),
+        "exact_text_preview": exact_text[:120],
+        "source_scope": source_scope,
+        "occurrence_index": occurrence_index,
+        "protocol_error": 校验exact_text协议(exact_text),
+    }
+    if paragraph_id in corpus:
+        para = corpus[paragraph_id]
+        info["paragraph_text_length"] = len(para)
+        span = 定位摘句(para, exact_text, occurrence_index)
+        info["in_declared_paragraph"] = span is not None
+    else:
+        info["in_declared_paragraph"] = False
+        info["paragraph_id_missing"] = True
+    matches = _collect_scope_matches(corpus, exact_text)
+    info["scope_match_count"] = len(matches)
+    info["scope_matches"] = [
+        {"paragraph_id": pid, "start": s, "end": e} for pid, s, e in matches[:5]
+    ]
+    return info
 
 
 def _legacy_paragraph_number(paragraph_id: str) -> int | None:
@@ -127,17 +192,26 @@ def _last_twenty_percent_ids(corpus: dict[str, str]) -> set[str]:
 
 
 def _collect_scope_matches(corpus: dict[str, str], exact_text: str) -> list[tuple[str, int, int]]:
+    if 校验exact_text协议(exact_text):
+        return []
     matches: list[tuple[str, int, int]] = []
     for paragraph_id in _sorted_paragraph_ids(corpus):
         text = corpus[paragraph_id]
-        start = 0
+        occ = 0
         while True:
-            idx = text.find(exact_text, start)
-            if idx < 0:
+            found = 定位摘句(text, exact_text, occ)
+            if found is None:
                 break
-            matches.append((paragraph_id, idx, idx + len(exact_text)))
-            start = idx + 1
+            matches.append((paragraph_id, found[0], found[1]))
+            occ += 1
     return matches
+
+
+def _paragraph_occurrence_count(text: str, exact_text: str) -> int:
+    count = 0
+    while 定位摘句(text, exact_text, count) is not None:
+        count += 1
+    return count
 
 
 def _resolve_evidence(
@@ -149,71 +223,44 @@ def _resolve_evidence(
     occurrence_index: int,
     corpus: dict[str, str],
 ) -> tuple[已校验证据 | None, str | None, str | None]:
-    if paragraph_id in corpus:
-        span = 定位摘句(corpus[paragraph_id], exact_text, occurrence_index)
-        if span is not None:
-            start_offset, end_offset = span
-            return (
-                已校验证据(
-                    dimension=dimension,
-                    paragraph_id=paragraph_id,
-                    exact_text=exact_text,
-                    source_scope=source_scope,
-                    occurrence_index=occurrence_index,
-                    start_offset=start_offset,
-                    end_offset=end_offset,
-                    legacy_paragraph=_legacy_paragraph_number(paragraph_id),
-                    repaired=False,
-                ),
-                None,
-                None,
-            )
+    """严格位置合同：仅在指定 paragraph_id 段内校验，不得全章搜索后自动修复。"""
+    if paragraph_id not in corpus:
+        return (
+            None,
+            f"{dimension}: PARAGRAPH_NOT_FOUND {paragraph_id} 不在 {source_scope} 语料中",
+            None,
+        )
 
-    matches = _collect_scope_matches(corpus, exact_text)
-    if not matches:
-        return (None, f"{dimension}: exact_text 无法在 {source_scope} 语料中定位", None)
-    if len(matches) == 1:
-        resolved_id, start_offset, end_offset = matches[0]
-        warning = f"{dimension}: PARAGRAPH_ID_REPAIRED {paragraph_id} -> {resolved_id}"
+    para_text = corpus[paragraph_id]
+    span = 定位摘句(para_text, exact_text, occurrence_index)
+    if span is not None:
+        start_offset, end_offset = span
         return (
             已校验证据(
                 dimension=dimension,
-                paragraph_id=resolved_id,
+                paragraph_id=paragraph_id,
                 exact_text=exact_text,
                 source_scope=source_scope,
-                occurrence_index=0,
+                occurrence_index=occurrence_index,
                 start_offset=start_offset,
                 end_offset=end_offset,
-                legacy_paragraph=_legacy_paragraph_number(resolved_id),
-                repaired=True,
+                legacy_paragraph=_legacy_paragraph_number(paragraph_id),
+                repaired=False,
             ),
             None,
-            warning,
+            None,
         )
-    if occurrence_index < 0 or occurrence_index >= len(matches):
+
+    if _paragraph_occurrence_count(para_text, exact_text) == 0:
         return (
             None,
-            f"{dimension}: exact_text 在 {source_scope} 多处匹配，occurrence_index={occurrence_index} 越界",
+            f"{dimension}: EXACT_TEXT_NOT_IN_PARAGRAPH {paragraph_id}",
             None,
         )
-    resolved_id, start_offset, end_offset = matches[occurrence_index]
-    warning = None
-    if resolved_id != paragraph_id:
-        warning = f"{dimension}: PARAGRAPH_ID_REPAIRED {paragraph_id} -> {resolved_id}"
     return (
-        已校验证据(
-            dimension=dimension,
-            paragraph_id=resolved_id,
-            exact_text=exact_text,
-            source_scope=source_scope,
-            occurrence_index=occurrence_index,
-            start_offset=start_offset,
-            end_offset=end_offset,
-            legacy_paragraph=_legacy_paragraph_number(resolved_id),
-            repaired=warning is not None,
-        ),
         None,
-        warning,
+        f"{dimension}: OCCURRENCE_INDEX_INVALID occurrence_index={occurrence_index} 在 {paragraph_id} 中越界",
+        None,
     )
 
 
@@ -232,8 +279,16 @@ def _final_reason_specific(final_reason: str) -> bool:
     return any(keyword in final_reason for keyword in PHENOMENON_KEYWORDS)
 
 
-def _因果链条完整(final_reason: str) -> bool:
-    return all(token in final_reason for token in ("起因", "行动", "结果"))
+def _因果链条完整(final_reason: str, *, analysis_summary: str = "") -> bool:
+    """语义槽位检查：不再要求 final_reason 字面含「行动」等固定词（避免误阻断）。"""
+    combined = f"{final_reason}\n{analysis_summary}"
+    has_cause = any(t in combined for t in ("起因", "因", "由于", "因为"))
+    has_result = any(t in combined for t in ("结果", "导致", "因此", "从而"))
+    has_action = any(
+        t in combined
+        for t in ("行动", "选择", "推进", "发生", "做出", "采取", "→", "然后", "随后", "接着")
+    )
+    return has_cause and has_action and has_result
 
 
 def _reject_legacy_fields(parsed: dict[str, Any]) -> list[str]:
@@ -279,8 +334,8 @@ def _validate_dimension_semantics(
         errors.append(f"{name}: analysis_summary 必须同时说明优点、风险与最终结论")
     if final_reason and not _final_reason_specific(final_reason):
         errors.append(f"{name}: final_reason 过于空泛，必须引用具体全章现象类别")
-    if name == "因果" and verdict == "PASS" and not _因果链条完整(final_reason):
-        errors.append(f"{name}: 因果 PASS 时 final_reason 必须包含起因、行动、结果")
+    if name == "因果" and verdict == "PASS" and not _因果链条完整(final_reason, analysis_summary=analysis_summary):
+        errors.append(f"{name}: 因果 PASS 时须在 final_reason 或 analysis_summary 中表达起因、行动、结果语义槽位")
     if name == "章末追读" and resolved is not None:
         last_ids = _last_twenty_percent_ids(current_paragraphs)
         if resolved.paragraph_id not in last_ids:
@@ -316,7 +371,9 @@ def 校验语义审计响应(
     validated: list[已校验证据] = []
     verdicts: list[str] = []
     failed_dimensions: list[str] = []
+    location_failed_dimensions: list[str] = []
     dimension_reports: list[维度校验报告] = []
+    anchor_diagnostics: list[dict[str, Any]] = []
 
     for dim in dimensions:
         if not isinstance(dim, dict):
@@ -344,28 +401,46 @@ def 校验语义审计响应(
         elif len(evidence_items) > MAX_EVIDENCE_PER_DIMENSION:
             errors.append(f"{name}: evidence 最多 {MAX_EVIDENCE_PER_DIMENSION} 条")
         else:
-            item = evidence_items[0]
-            if not isinstance(item, dict):
-                errors.append(f"{name}: evidence[0] 必须是对象")
-            else:
+            corpus_base = current_paragraphs
+            dim_resolved: list[已校验证据] = []
+            for idx, item in enumerate(evidence_items):
+                label = f"evidence[{idx}]"
+                if not isinstance(item, dict):
+                    errors.append(f"{name}: {label} 必须是对象")
+                    continue
                 paragraph_id = str(item.get("paragraph_id", "")).strip()
                 exact_text = str(item.get("exact_text", ""))
                 source_scope = str(item.get("source_scope", SCOPE_CURRENT)).strip()
                 occurrence_raw = item.get("occurrence_index", 0)
-                evidence_rationale = str(item.get("evidence_rationale", "")).strip()
+                item_rationale = str(item.get("evidence_rationale", "")).strip()
+                if idx == 0:
+                    evidence_rationale = item_rationale
                 if not 段落ID合法(paragraph_id):
-                    errors.append(f"{name}: evidence[0] paragraph_id 必须是 P0001 格式")
+                    errors.append(f"{name}: {label} paragraph_id 必须是 P0001 格式")
                 elif not exact_text:
-                    errors.append(f"{name}: evidence[0] exact_text 不能为空")
+                    errors.append(f"{name}: {label} exact_text 不能为空")
+                elif (proto_err := 校验exact_text协议(exact_text)):
+                    errors.append(f"{name}: {proto_err}")
+                    location_failed_dimensions.append(name)
+                    anchor_diagnostics.append(
+                        收集锚定诊断(
+                            dimension=name,
+                            paragraph_id=paragraph_id if 段落ID合法(paragraph_id) else "",
+                            exact_text=exact_text,
+                            source_scope=source_scope if source_scope in ALLOWED_SCOPES else SCOPE_CURRENT,
+                            occurrence_index=int(occurrence_raw) if isinstance(occurrence_raw, int) else 0,
+                            corpus=current_paragraphs if source_scope != SCOPE_PRIOR else prior,
+                        )
+                    )
                 elif source_scope not in ALLOWED_SCOPES:
-                    errors.append(f"{name}: evidence[0] source_scope 非法")
+                    errors.append(f"{name}: {label} source_scope 非法")
                 elif isinstance(occurrence_raw, bool) or not isinstance(occurrence_raw, int) or occurrence_raw < 0:
-                    errors.append(f"{name}: evidence[0] occurrence_index 必须是非负整数")
+                    errors.append(f"{name}: {label} occurrence_index 必须是非负整数")
                 elif source_scope == SCOPE_PRIOR and not prior:
-                    errors.append(f"{name}: evidence[0] 引用 PRIOR_CHAPTER 但无前章语料")
+                    errors.append(f"{name}: {label} 引用 PRIOR_CHAPTER 但无前章语料")
                 else:
                     corpus = current_paragraphs if source_scope == SCOPE_CURRENT else prior
-                    resolved, err, warn = _resolve_evidence(
+                    item_resolved, err, warn = _resolve_evidence(
                         dimension=name,
                         paragraph_id=paragraph_id,
                         exact_text=exact_text,
@@ -375,15 +450,27 @@ def 校验语义审计响应(
                     )
                     if err:
                         errors.append(err)
+                        location_failed_dimensions.append(name)
+                        anchor_diagnostics.append(
+                            收集锚定诊断(
+                                dimension=name,
+                                paragraph_id=paragraph_id,
+                                exact_text=exact_text,
+                                source_scope=source_scope,
+                                occurrence_index=occurrence_raw,
+                                corpus=corpus,
+                            )
+                        )
                     else:
-                        location_valid = True
-                        if warn:
-                            warnings.append(warn)
-                        assert resolved is not None
-                        resolved.evidence_rationale = evidence_rationale
-                        validated.append(resolved)
-                        if analysis_summary == exact_text:
-                            warnings.append(f"{name}: analysis_summary 与 exact_text 相同，建议分离解读与摘句")
+                        assert item_resolved is not None
+                        item_resolved.evidence_rationale = item_rationale
+                        dim_resolved.append(item_resolved)
+                        validated.append(item_resolved)
+            if dim_resolved:
+                resolved = dim_resolved[0]
+                location_valid = True
+                if analysis_summary == dim_resolved[0].exact_text:
+                    warnings.append(f"{name}: analysis_summary 与 exact_text 相同，建议分离解读与摘句")
 
         semantic_errors, sufficient = _validate_dimension_semantics(
             name,
@@ -423,10 +510,12 @@ def 校验语义审计响应(
         computed_overall=computed,
         failed_dimensions=failed_dimensions,
         dimension_reports=dimension_reports,
+        anchor_diagnostics=anchor_diagnostics,
+        location_failed_dimensions=list(dict.fromkeys(location_failed_dimensions)),
     )
 
 
 def 摘句在正文中(quote: str, source_text: str) -> bool:
     if not quote or not quote.strip():
         return False
-    return quote in source_text
+    return 定位摘句(source_text, quote, 0) is not None

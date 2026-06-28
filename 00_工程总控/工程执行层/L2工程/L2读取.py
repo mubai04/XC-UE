@@ -39,6 +39,10 @@ def L2路由规则路径(root: Path) -> Path:
     return root / "00_工程总控" / "工程执行层" / "L2工程" / "routes.json"
 
 
+def L2输入边界规则路径(root: Path) -> Path:
+    return root / "00_工程总控" / "工程执行层" / "L2工程" / "L2输入边界规则.json"
+
+
 def 读L2标准(root: Path, standard_mode: str = 生产模式) -> dict[str, str]:
     texts, _records = 读L2标准与记录(root, standard_mode)
     return texts
@@ -55,11 +59,16 @@ def 最新L1失败包(root: Path) -> Path:
 @dataclass
 class 失败包元数据:
     chapter_path: str = ""
+    status: str = ""
+    blocking_count: int = 0
+    routeable_count: int = 0
 
 
 def _解析失败项(raw_items: list) -> list[失败输入]:
     items: list[失败输入] = []
     for item in raw_items:
+        if "routeable" not in item:
+            raise ValueError("失败包 item 缺少 routeable 字段，拒绝静默猜测路由语义")
         evidence = [证据(e.get("段落"), e.get("摘句", "")) for e in item.get("证据", [])]
         items.append(
             失败输入(
@@ -73,6 +82,11 @@ def _解析失败项(raw_items: list) -> list[失败输入]:
                 候选模块=item.get("候选模块", ""),
                 回流验收位置=item.get("回流验收位置", ""),
                 修复方向=item.get("修复方向", ""),
+                routeable=bool(item.get("routeable")),
+                route_reason=str(item.get("route_reason", "")),
+                source_component=str(item.get("source_component", "")),
+                decision_role=str(item.get("decision_role", "")),
+                blocking=bool(item.get("blocking", False)),
             )
         )
     return items
@@ -81,11 +95,19 @@ def _解析失败项(raw_items: list) -> list[失败输入]:
 def 读失败包完整(path: Path) -> tuple[list[失败输入], 失败包元数据]:
     raw = json.loads(读文本(path))
     if isinstance(raw, list):
-        return _解析失败项(raw), 失败包元数据()
+        raise ValueError("失败包必须为结构化对象，不接受裸数组")
     items = _解析失败项(raw.get("items", []))
     extensions = raw.get("extensions") or {}
     chapter_path = str(extensions.get("chapter_path", "")).strip()
-    return items, 失败包元数据(chapter_path=chapter_path)
+    status = str(raw.get("status", "")).strip()
+    blocking_count = int(raw.get("blocking_count", 0))
+    routeable_count = int(raw.get("routeable_count", 0))
+    return items, 失败包元数据(
+        chapter_path=chapter_path,
+        status=status,
+        blocking_count=blocking_count,
+        routeable_count=routeable_count,
+    )
 
 
 def 读失败包(path: Path) -> list[失败输入]:

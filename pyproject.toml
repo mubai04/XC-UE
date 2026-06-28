@@ -7,11 +7,12 @@ dependencies = []
 
 [project.optional-dependencies]
 runtime = [
-  "PyYAML",
-  "jsonschema",
+  "PyYAML>=6.0.2,<7",
+  "jsonschema>=4.23.0,<5",
+  "referencing>=0.35.0,<1",
 ]
 dev = [
-  "pytest",
+  "pytest>=8.0,<9",
 ]
 
 [project.scripts]

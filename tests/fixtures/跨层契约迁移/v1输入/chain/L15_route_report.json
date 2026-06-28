@@ -1,0 +1,22 @@
+{
+  "schema_version": "xcue.l15-route-report/1.0",
+  "run_id": "L15-S2B1-DEMO",
+  "pipeline_run_id": "S2B1-PIPE-DEMO",
+  "stage_run_id": "STAGE-L15",
+  "source_failure_packet": "运行记录/S2B1/L1_failure_packet.json",
+  "primary_failure": {
+    "闸门": "L1-01",
+    "名称": "句式重复",
+    "失败类型": "文风失败",
+    "说明": "相邻段落句式模板重复。"
+  },
+  "secondary_failures": [],
+  "target_module": "L2-02",
+  "repair_product": "文风语言修复单",
+  "return_gate": "L1-01",
+  "route_rule_id": "L15-R002",
+  "route_rule_version": "xcue.l15-routing-rules/1.0",
+  "final_status": "ROUTED",
+  "blockers": [],
+  "routing_basis": "文风语言问题进入 L2-02"
+}

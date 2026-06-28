@@ -1,0 +1,13 @@
+{
+  "执行状态": "CANDIDATE_WRITTEN",
+  "正式正文是否修改": false,
+  "回流状态": "AWAITING_L1",
+  "候选产物": [
+    {
+      "相对路径": "candidates/demo_patch.md",
+      "是否存在": true,
+      "来源修复单编号": "PLACEHOLDER"
+    }
+  ],
+  "错误列表": []
+}

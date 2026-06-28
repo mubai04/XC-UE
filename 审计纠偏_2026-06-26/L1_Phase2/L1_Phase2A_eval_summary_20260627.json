@@ -1,0 +1,1379 @@
+{
+  "generated_at": "2026-06-27T12:50:38",
+  "phase": "2A",
+  "evaluation_kind": "FIRST_REAL_API_RUN",
+  "pilot_status": "PILOT_REJECTED",
+  "pilot_reasons": [
+    "GS-001: REVIEW 章超出 acceptance_range（实际 AUDIT_BLOCKED）",
+    "GS-001: 非输入损坏章节出现 AUDIT_BLOCKED",
+    "GS-002: 非输入损坏章节出现 AUDIT_BLOCKED",
+    "GS-004: 非输入损坏章节出现 AUDIT_BLOCKED",
+    "GS-005: 非输入损坏章节出现 AUDIT_BLOCKED"
+  ],
+  "metrics": {
+    "first_pass_evidence_valid_rate": 0.0,
+    "eventual_evidence_valid_rate": 0.2,
+    "evidence_retry_rate": 1.0,
+    "transport_retry_rate": 0.0,
+    "format_retry_rate": 0.0,
+    "audit_blocked_rate": 0.8,
+    "overall_agreement": 0.2,
+    "dimension_agreement": 1.0
+  },
+  "chapter_results": [
+    {
+      "chapter_id": "GS-001",
+      "scenario_tag": "debatable_review",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "debatable_review"
+      ],
+      "expected_overall": "REVIEW",
+      "actual_overall": "AUDIT_BLOCKED",
+      "first_pass_evidence_valid": false,
+      "eventual_evidence_valid": false,
+      "evidence_retry_count": 1,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": true,
+      "overall_agreement": false,
+      "dimension_agreement": 1.0,
+      "hard_pass": false,
+      "hard_fail": false,
+      "review_ok": false,
+      "dimension_details": [
+        {
+          "dimension": "语义审计响应校验",
+          "expected": "FAIL",
+          "actual": "FAIL",
+          "allowed": [
+            "FAIL"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [
+        "因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0025 中按 occurrence_index 定位",
+        "因果: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0043 中按 occurrence_index 定位",
+        "动机: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0072 中按 occurrence_index 定位",
+        "动机: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0074 中按 occurrence_index 定位",
+        "认知成本: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0061 中按 occurrence_index 定位",
+        "认知成本: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0068 中按 occurrence_index 定位",
+        "章末追读: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0101 中按 occurrence_index 定位"
+      ],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章清晰展示了谣言传播的因果链：剑痴拒绝收徒并评价李子夜有剑仙之姿，引发谣言，最终传到秦婀娜耳中，促使她前来收徒。",
+            "evidence": [
+              {
+                "paragraph_id": "P0025",
+                "exact_text": "剑痴说，李家儿郎有剑仙之姿，我之愚剑，不配为其师。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0043",
+                "exact_text": "一人造谣,三人成狼,五人成虎，短短三个月，由渝州城为中心蔓延开来的谣言，越传越离谱",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "李子夜想习武但无天赋，父亲李百万为儿子前途，与剑痴合谋散布谣言，吸引秦婀娜前来收徒。",
+            "evidence": [
+              {
+                "paragraph_id": "P0072",
+                "exact_text": "李百万听到邋遢老者的问题，笑着回答道，“当然不会。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0074",
+                "exact_text": "张邋遢拿起酒壶喝了一口酒，道，“你让我做的事我已经做了，信与不信，我管不着。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章冲突在于李子夜渴望习武却无天赋，与父亲合谋欺骗秦婀娜，同时外界谣言与真相形成反差。",
+            "evidence": [
+              {
+                "paragraph_id": "P0077",
+                "exact_text": "李百万闻言，看着湖中凉亭内的独子，面露忧愁之色，道，“老张，你说我这儿子真的没有武道的天赋吗？”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0078",
+                "exact_text": "“没有。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得新奇感：主角穿越者身份暗示（发明香水、琉璃等），以及主角无武道天赋却靠智谋和财富布局的反套路设定。",
+            "evidence": [
+              {
+                "paragraph_id": "P0053",
+                "exact_text": "香水，琉璃，镜子，肥皂，十余年间，一件件新奇却大受欢迎的商品在李家各地的铺子出现",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0055",
+                "exact_text": "这都是因为小公子的出世。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章信息密度适中，人物关系清晰，谣言与真相的对比容易理解，无复杂设定。",
+            "evidence": [
+              {
+                "paragraph_id": "P0061",
+                "exact_text": "少年就是如今名震渝州城甚至整个大商皇朝的李子夜。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0068",
+                "exact_text": "如果说李子夜的形象多多少少还能找出一些贵公子的气质，那李百万便是纯粹无比的暴发户。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末以李子夜和父亲的对话收尾，暗示将用金钱收买秦婀娜，留下悬念，吸引读者继续阅读。",
+            "evidence": [
+              {
+                "paragraph_id": "P0101",
+                "exact_text": "李子夜眼神忧郁地看着湖面，道，“有钱能使鬼推磨，老张不就妥协了吗，那老秦来了，要什么我们给什么，不行就拿金山银山砸，不信她不心动。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 1,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计响应校验",
+          "状态": "失败",
+          "说明": "语义审计响应未通过证据校验：因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0025 中按 occurrence_index 定位；因果: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0043 中按 occurrence_index 定位；动机: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0072 中按 occurrence_index 定位；动机: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0074 中按 occurrence_index 定位；认知成本: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0061 中按 occurrence_index 定位",
+          "证据": [
+            {
+              "段落": null,
+              "摘句": "因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0025 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "因果: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0043 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "动机: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0072 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "error",
+          "失败类型": "语义审计证据无效",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_INVALID",
+          "confidence": "NONE",
+          "decision_role": "AUDIT_BLOCKER",
+          "blocking": true,
+          "reason_type": "EVIDENCE_INVALID"
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-002",
+      "scenario_tag": "clear_pass",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "clear_pass"
+      ],
+      "expected_overall": "PASS",
+      "actual_overall": "AUDIT_BLOCKED",
+      "first_pass_evidence_valid": false,
+      "eventual_evidence_valid": false,
+      "evidence_retry_count": 1,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": true,
+      "overall_agreement": false,
+      "dimension_agreement": 1.0,
+      "hard_pass": true,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "语义审计响应校验",
+          "expected": "FAIL",
+          "actual": "FAIL",
+          "allowed": [
+            "FAIL"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [
+        "冲突: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0060 中按 occurrence_index 定位",
+        "读者收益: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0053 中按 occurrence_index 定位",
+        "章末追读: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0101 中按 occurrence_index 定位",
+        "章末追读: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0102 中按 occurrence_index 定位"
+      ],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章展示了乾元子因需要人血喂养青铜蛤蟆而杀死猴七的因果链，动机明确。",
+            "evidence": [
+              {
+                "paragraph_id": "P0096",
+                "exact_text": "乾元子低头看着那倒在血泊中徒弟，恶狠狠将其踢飞，才又掏出几个白面馒头，蘸着地上人血，用来喂棺老爷。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "乾元子杀猴七的动机明确：需要人血喂养青铜蛤蟆，且猴七曾私下怂恿逃跑，乾元子可能察觉。",
+            "evidence": [
+              {
+                "paragraph_id": "P0098",
+                "exact_text": "还有就是，这荒郊野岭的，可找不到人血喂棺老爷，就先拿你抵数吧。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章冲突明显：乾元子与弟子间的压迫与反抗，猴七试图逃跑被乾元子杀害，李十五等人隐忍。",
+            "evidence": [
+              {
+                "paragraph_id": "P0060",
+                "exact_text": "悄声道:“十五，好机会啊，逃不逃？”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0095",
+                "exact_text": "随着刀光一闪，没有丝毫征兆的，猴七眼神凝固，血腥味瞬间扑鼻。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "本章揭示了乾元子寻找种仙观的荒诞目的，以及李十五穿越者的身份，增加了世界观和悬念，读者获得信息增量。",
+            "evidence": [
+              {
+                "paragraph_id": "P0025",
+                "exact_text": "在那观中，则有一方奇土。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0053",
+                "exact_text": "事实上，他并不算这方世界原住民，至少灵魂不算。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章信息密度适中，人物关系清晰，情节易懂，没有复杂设定，认知成本低。",
+            "evidence": [
+              {
+                "paragraph_id": "P0004",
+                "exact_text": "李十五一身破烂道袍，打着双赤脚，脚踝处上了副磨得蹭光的铁链子，双目无神，满身疲气。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末出现神秘道观，悬念强烈，吸引读者继续阅读下一章。",
+            "evidence": [
+              {
+                "paragraph_id": "P0101",
+                "exact_text": "在这如墨泼洒般的夜中，几里之外，一座模糊不清道观，好似介于真实和虚幻之间。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0102",
+                "exact_text": "正，缓缓露出踪迹。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 1,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计响应校验",
+          "状态": "失败",
+          "说明": "语义审计响应未通过证据校验：冲突: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0060 中按 occurrence_index 定位；读者收益: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0053 中按 occurrence_index 定位；章末追读: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0101 中按 occurrence_index 定位；章末追读: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0102 中按 occurrence_index 定位",
+          "证据": [
+            {
+              "段落": null,
+              "摘句": "冲突: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0060 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "读者收益: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0053 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "章末追读: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0101 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "error",
+          "失败类型": "语义审计证据无效",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_INVALID",
+          "confidence": "NONE",
+          "decision_role": "AUDIT_BLOCKER",
+          "blocking": true,
+          "reason_type": "EVIDENCE_INVALID"
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-003",
+      "scenario_tag": "clear_pass",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "clear_pass"
+      ],
+      "expected_overall": "PASS",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": false,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 1,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": true,
+      "dimension_agreement": 1.0,
+      "hard_pass": true,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "动机",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "冲突",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章展示了主角林恩穿越到诡秘异世界两年后觉醒系统，系统将日常任务具象化为任务奖励，因果关系清晰：老师命令→系统任务→执行→奖励。",
+            "evidence": [
+              {
+                "paragraph_id": "P0015",
+                "exact_text": "但就在这个时候，他的脑海突然响起了一个冰冷的合成音。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0016",
+                "exact_text": "【叮！您的老师血锯狂人向你发布任务：开门营业，将魂灯挂在门口，完成任务奖励：骷髅币x10，基础经验x5，纯净的人血x100毫升。】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "主角林恩的动机明确：为了生存必须服从老师命令，同时系统奖励驱动他完成任务。例如，不立刻行动就会死，以及系统奖励骷髅币和经验。",
+            "evidence": [
+              {
+                "paragraph_id": "P0020",
+                "exact_text": "如果不按照他老师的命令立刻行动，他就会死。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0016",
+                "exact_text": "【叮！您的老师血锯狂人向你发布任务：开门营业，将魂灯挂在门口，完成任务奖励：骷髅币x10，基础经验x5，纯净的人血x100毫升。】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章存在多重冲突：主角与外部危险环境的冲突（黑暗吞噬、诡秘生物），与老师权威的潜在冲突（不听话会被肢解），以及与系统任务的互动。",
+            "evidence": [
+              {
+                "paragraph_id": "P0006",
+                "exact_text": "离开大门十米之后，外面的黑暗会吞噬你。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0095",
+                "exact_text": "而不听话的伙计，早就已经被他师父肢解之后，投喂给了这个小宝贝。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得了世界观设定（诡秘异世界、药剂店日常）、主角生存法则、系统功能等新信息，满足好奇心并期待后续发展。",
+            "evidence": [
+              {
+                "paragraph_id": "P0002",
+                "exact_text": "【这是一个诡秘的异世界。】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0003",
+                "exact_text": "【吸血鬼，狼人，科技，魔药，鬼怪，生化人，占卜，傀儡，只要是你能想到的所有的可怖元素，这个世界都有。】",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章信息密度适中，通过主角视角逐步揭示世界观和系统，没有复杂术语或跳跃逻辑，读者容易理解。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "破旧的桌子前，林恩拿着羽毛笔，就着灯火。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0019",
+                "exact_text": "难道说自己穿越到这个世界两年之后，终于也觉醒出了金手指？",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末主角尝试与系统交互，系统面板出现，留下悬念：系统具体功能是什么？后续任务如何？吸引读者继续阅读。",
+            "evidence": [
+              {
+                "paragraph_id": "P0097",
+                "exact_text": "“系统？”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0098",
+                "exact_text": "而也就是在下一刻，林恩的眼前倏然出现了一个面板。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 1,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "本章展示了主角林恩穿越到诡秘异世界两年后觉醒系统，系统将日常任务具象化为任务奖励，因果关系清晰：老师命令→系统任务→执行→奖励。",
+          "证据": [
+            {
+              "段落": 15,
+              "摘句": "但就在这个时候，他的脑海突然响起了一个冰冷的合成音。",
+              "段落ID": "P0015",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 34,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 16,
+              "摘句": "【叮！您的老师血锯狂人向你发布任务：开门营业，将魂灯挂在门口，完成任务奖励：骷髅币x10，基础经验x5，纯净的人血x100毫升。】",
+              "段落ID": "P0016",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 73,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "主角林恩的动机明确：为了生存必须服从老师命令，同时系统奖励驱动他完成任务。例如，不立刻行动就会死，以及系统奖励骷髅币和经验。",
+          "证据": [
+            {
+              "段落": 20,
+              "摘句": "如果不按照他老师的命令立刻行动，他就会死。",
+              "段落ID": "P0020",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 24,
+              "end_offset": 45,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 16,
+              "摘句": "【叮！您的老师血锯狂人向你发布任务：开门营业，将魂灯挂在门口，完成任务奖励：骷髅币x10，基础经验x5，纯净的人血x100毫升。】",
+              "段落ID": "P0016",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 73,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "本章存在多重冲突：主角与外部危险环境的冲突（黑暗吞噬、诡秘生物），与老师权威的潜在冲突（不听话会被肢解），以及与系统任务的互动。",
+          "证据": [
+            {
+              "段落": 6,
+              "摘句": "离开大门十米之后，外面的黑暗会吞噬你。",
+              "段落ID": "P0006",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 9,
+              "end_offset": 28,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 95,
+              "摘句": "而不听话的伙计，早就已经被他师父肢解之后，投喂给了这个小宝贝。",
+              "段落ID": "P0095",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 47,
+              "end_offset": 78,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "读者获得了世界观设定（诡秘异世界、药剂店日常）、主角生存法则、系统功能等新信息，满足好奇心并期待后续发展。",
+          "证据": [
+            {
+              "段落": 2,
+              "摘句": "【这是一个诡秘的异世界。】",
+              "段落ID": "P0002",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 21,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 3,
+              "摘句": "【吸血鬼，狼人，科技，魔药，鬼怪，生化人，占卜，傀儡，只要是你能想到的所有的可怖元素，这个世界都有。】",
+              "段落ID": "P0003",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 59,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "本章信息密度适中，通过主角视角逐步揭示世界观和系统，没有复杂术语或跳跃逻辑，读者容易理解。",
+          "证据": [
+            {
+              "段落": 9,
+              "摘句": "破旧的桌子前，林恩拿着羽毛笔，就着灯火。",
+              "段落ID": "P0009",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 28,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 19,
+              "摘句": "难道说自己穿越到这个世界两年之后，终于也觉醒出了金手指？",
+              "段落ID": "P0019",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 36,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "章末主角尝试与系统交互，系统面板出现，留下悬念：系统具体功能是什么？后续任务如何？吸引读者继续阅读。",
+          "证据": [
+            {
+              "段落": 97,
+              "摘句": "“系统？”",
+              "段落ID": "P0097",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 13,
+              "occurrence_index": 0
+            },
+            {
+              "段落": 98,
+              "摘句": "而也就是在下一刻，林恩的眼前倏然出现了一个面板。",
+              "段落ID": "P0098",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 8,
+              "end_offset": 32,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-004",
+      "scenario_tag": "low_lexical_good_narrative",
+      "secondary_scenario_tags": [],
+      "scenario_tags": [
+        "low_lexical_good_narrative"
+      ],
+      "expected_overall": "PASS",
+      "actual_overall": "AUDIT_BLOCKED",
+      "first_pass_evidence_valid": false,
+      "eventual_evidence_valid": false,
+      "evidence_retry_count": 1,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": true,
+      "overall_agreement": false,
+      "dimension_agreement": 1.0,
+      "hard_pass": true,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "语义审计响应校验",
+          "expected": "FAIL",
+          "actual": "FAIL",
+          "allowed": [
+            "FAIL"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [
+        "因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0002 中按 occurrence_index 定位",
+        "因果: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0008 中按 occurrence_index 定位",
+        "因果: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0015 中按 occurrence_index 定位",
+        "因果: evidence[3] exact_text 无法在 CURRENT_CHAPTER/P0018 中按 occurrence_index 定位",
+        "因果: evidence[4] exact_text 无法在 CURRENT_CHAPTER/P0022 中按 occurrence_index 定位",
+        "因果: evidence[5] exact_text 无法在 CURRENT_CHAPTER/P0027 中按 occurrence_index 定位",
+        "动机: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0004 中按 occurrence_index 定位",
+        "动机: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0011 中按 occurrence_index 定位",
+        "冲突: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0008 中按 occurrence_index 定位",
+        "冲突: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0024 中按 occurrence_index 定位",
+        "冲突: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0027 中按 occurrence_index 定位",
+        "读者收益: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0012 中按 occurrence_index 定位",
+        "读者收益: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0027 中按 occurrence_index 定位",
+        "认知成本: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0015 中按 occurrence_index 定位",
+        "认知成本: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0018 中按 occurrence_index 定位",
+        "章末追读: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0027 中按 occurrence_index 定位",
+        "章末追读: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0030 中按 occurrence_index 定位",
+        "章末追读: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0031 中按 occurrence_index 定位"
+      ],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "本章展示了许临渊因灵石不足面临扣粮困境，通过灰线能力影响秤杆，最终成功过秤，但灰线变长带来代价，因果链完整。",
+            "evidence": [
+              {
+                "paragraph_id": "P0002",
+                "exact_text": "许临渊站在后排，袖里只有三枚灵石。其中一枚缺了角，放上秤，分量要少半块。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0008",
+                "exact_text": "马执事看了他一眼：“少半块。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0015",
+                "exact_text": "灰从指腹落下，很细，贴着铜盘爬向秤杆。没有风，灰却沿着刻度向前移了半格。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0018",
+                "exact_text": "铜盘里仍是三枚灵石，缺角也还在。可秤尾已经落到那条齐整的刻线。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0022",
+                "exact_text": "许临渊收回手。右肋像被细针穿过，呼吸跟着短了一截。他把袖口压住，没让灰落到案上。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0027",
+                "exact_text": "许临渊走到坪边才停下。肋下的灰线比早晨长了一寸，末端弯成一个小钩。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "许临渊因灵石不足面临扣粮和冬衣被卖的困境，为通过灵石过秤而使用灰线能力，动机明确。",
+            "evidence": [
+              {
+                "paragraph_id": "P0004",
+                "exact_text": "许临渊把布袋攥紧。灶房这个月扣了两回粮，再补半块，他得把冬衣卖掉。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0011",
+                "exact_text": "一枚灵石足够他在灶房熬三个月。许临渊望着那支笔，右肋下的灰线慢慢发热。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "本章存在许临渊与灵石不足的生存冲突，以及他使用灰线能力作弊后可能被发现的潜在冲突，同时灰线带来的疼痛也构成内在冲突。",
+            "evidence": [
+              {
+                "paragraph_id": "P0008",
+                "exact_text": "马执事看了他一眼：“少半块。”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0024",
+                "exact_text": "他离开队伍时，马六从旁边凑过来：“刚才秤杆……”",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0027",
+                "exact_text": "许临渊走到坪边才停下。肋下的灰线比早晨长了一寸，末端弯成一个小钩。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "本章揭示了许临渊的灰线能力及其代价，增加了神秘感和悬念，读者获得关于主角特殊能力和世界规则的新信息。",
+            "evidence": [
+              {
+                "paragraph_id": "P0012",
+                "exact_text": "那道灰线是昨夜留下的。灶房的铁锁锈死时，他摸过锁舌，指尖落下一层灰，锁舌轻了半钱。片刻后，胸口疼了整整一夜。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0027",
+                "exact_text": "许临渊走到坪边才停下。肋下的灰线比早晨长了一寸，末端弯成一个小钩。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "本章情节清晰，灰线能力通过具体动作和后果展现，没有复杂设定或术语，认知成本低。",
+            "evidence": [
+              {
+                "paragraph_id": "P0015",
+                "exact_text": "灰从指腹落下，很细，贴着铜盘爬向秤杆。没有风，灰却沿着刻度向前移了半格。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0018",
+                "exact_text": "铜盘里仍是三枚灵石，缺角也还在。可秤尾已经落到那条齐整的刻线。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末留下灰线变长、疼痛加剧的悬念，以及许临渊知道少掉的半块并未补齐的暗示，吸引读者继续阅读下一章。",
+            "evidence": [
+              {
+                "paragraph_id": "P0027",
+                "exact_text": "许临渊走到坪边才停下。肋下的灰线比早晨长了一寸，末端弯成一个小钩。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0030",
+                "exact_text": "许临渊知道，今日少掉的半块并没有凭空补齐。它只是从秤上挪到了别处。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0031",
+                "exact_text": "灰线贴着皮肉发热，像在替谁记着数。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 1,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计响应校验",
+          "状态": "失败",
+          "说明": "语义审计响应未通过证据校验：因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0002 中按 occurrence_index 定位；因果: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0008 中按 occurrence_index 定位；因果: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0015 中按 occurrence_index 定位；因果: evidence[3] exact_text 无法在 CURRENT_CHAPTER/P0018 中按 occurrence_index 定位；因果: evidence[4] exact_text 无法在 CURRENT_CHAPTER/P0022 中按 occurrence_index 定位",
+          "证据": [
+            {
+              "段落": null,
+              "摘句": "因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0002 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "因果: evidence[1] exact_text 无法在 CURRENT_CHAPTER/P0008 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "因果: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0015 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "error",
+          "失败类型": "语义审计证据无效",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_INVALID",
+          "confidence": "NONE",
+          "decision_role": "AUDIT_BLOCKER",
+          "blocking": true,
+          "reason_type": "EVIDENCE_INVALID"
+        }
+      ]
+    },
+    {
+      "chapter_id": "GS-005",
+      "scenario_tag": "high_lexical_bad_narrative",
+      "secondary_scenario_tags": [
+        "clear_fail"
+      ],
+      "scenario_tags": [
+        "clear_fail",
+        "high_lexical_bad_narrative"
+      ],
+      "expected_overall": "FAIL",
+      "actual_overall": "AUDIT_BLOCKED",
+      "first_pass_evidence_valid": false,
+      "eventual_evidence_valid": false,
+      "evidence_retry_count": 1,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": true,
+      "overall_agreement": false,
+      "dimension_agreement": 1.0,
+      "hard_pass": false,
+      "hard_fail": true,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "语义审计响应校验",
+          "expected": "FAIL",
+          "actual": "FAIL",
+          "allowed": [
+            "FAIL"
+          ],
+          "agreement": true
+        }
+      ],
+      "errors": [
+        "因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0003 中按 occurrence_index 定位",
+        "因果: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0031 中按 occurrence_index 定位",
+        "读者收益: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0005 中按 occurrence_index 定位",
+        "认知成本: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0005 中按 occurrence_index 定位"
+      ],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "路满因炒粉摊被掀而借运，借运后王磊绕圈、路满生意好转，因果链完整。",
+            "evidence": [
+              {
+                "paragraph_id": "P0003",
+                "exact_text": "我炒粉摊被人掀了！我要借运！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0018",
+                "exact_text": "借运生效·24h",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0031",
+                "exact_text": "三十七单……一天顶我上个月……",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "路满动机明确：报复王磊；贺按动机清晰：经营当铺、遵守规则。",
+            "evidence": [
+              {
+                "paragraph_id": "P0009",
+                "exact_text": "我要借一天运。让他倒霉。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0011",
+                "exact_text": "我不管。我就要他今天倒霉！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0035",
+                "exact_text": "连续关门。霉账每日×1.5。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "路满与王磊的冲突贯穿全章，借运引发王磊绕圈闹剧，冲突外显。",
+            "evidence": [
+              {
+                "paragraph_id": "P0015",
+                "exact_text": "王磊——有人借运砸你——二十四小时——门外骂回来：谁他妈——路满你孙子——",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0019",
+                "exact_text": "门外王磊声音变调：我队列呢？！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0063",
+                "exact_text": "王磊还在绕，保安喊。你再转我开罚单！王磊在护栏喊。我控制不了腿！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "读者获得借运规则、角色性格、世界观设定等信息，情节有趣。",
+            "evidence": [
+              {
+                "paragraph_id": "P0005",
+                "exact_text": "贺按：谁借谁还，二十四小时。别念第七条，按了才响。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0016",
+                "exact_text": "好运二十四小时归你。霉运按合同走。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0017",
+                "exact_text": "门楣看见没，好运自负，自负俩字。就是别指望我兜底。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "情节线性推进，对话清晰，借运规则逐步揭示，无复杂设定。",
+            "evidence": [
+              {
+                "paragraph_id": "P0005",
+                "exact_text": "贺按：谁借谁还，二十四小时。别念第七条，按了才响。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0012",
+                "exact_text": "偿还方写谁，谁倒霉，写错了。倒霉的还是你，别问我。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0033",
+                "exact_text": "贺按：算你借到了。偿还方写王磊，没写你。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "章末留下悬念：贺按自己名字出现在账本上，且计算器显示+8，暗示后续发展。",
+            "evidence": [
+              {
+                "paragraph_id": "P0086",
+                "exact_text": "账本待核旁，又多一行极淡小字：待核·贺按？",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0096",
+                "exact_text": "计算器角落浮一行绿字，绿得短，短得像第一口赢。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              },
+              {
+                "paragraph_id": "P0097",
+                "exact_text": "首日接待 · +8",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 1,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计响应校验",
+          "状态": "失败",
+          "说明": "语义审计响应未通过证据校验：因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0003 中按 occurrence_index 定位；因果: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0031 中按 occurrence_index 定位；读者收益: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0005 中按 occurrence_index 定位；认知成本: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0005 中按 occurrence_index 定位",
+          "证据": [
+            {
+              "段落": null,
+              "摘句": "因果: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0003 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "因果: evidence[2] exact_text 无法在 CURRENT_CHAPTER/P0031 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            },
+            {
+              "段落": null,
+              "摘句": "读者收益: evidence[0] exact_text 无法在 CURRENT_CHAPTER/P0005 中按 occurrence_index 定位",
+              "段落ID": "",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": null,
+              "end_offset": null,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "error",
+          "失败类型": "语义审计证据无效",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_INVALID",
+          "confidence": "NONE",
+          "decision_role": "AUDIT_BLOCKER",
+          "blocking": true,
+          "reason_type": "EVIDENCE_INVALID"
+        }
+      ]
+    }
+  ],
+  "scenario_tags_present": [
+    "clear_fail",
+    "clear_pass",
+    "debatable_review",
+    "high_lexical_bad_narrative",
+    "low_lexical_good_narrative"
+  ],
+  "run_id": "L1_Phase2A_FIRST_REAL_API_20260627_124854"
+}

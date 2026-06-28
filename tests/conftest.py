@@ -13,8 +13,9 @@ L1 = EXEC / "L1工程"
 L2 = EXEC / "L2工程"
 L3 = EXEC / "L3工程"
 L15 = EXEC / "L1.5工程"
+RUNLIB = PUBLIC / "跨层契约运行库"
 
-for path in (EXEC, PUBLIC, L1, L2, L3, L15):
+for path in (EXEC, PUBLIC, L1, L2, L3, L15, RUNLIB):
     text = str(path)
     if text not in sys.path:
         sys.path.insert(0, text)
@@ -198,6 +199,134 @@ def semantic_audit_payload(
     return {"dimensions": dimensions}
 
 
+def l2_06_v2_payload(
+    ctx,
+    *,
+    classification: str = "HARD_CONFLICT",
+    pair_index: int = 0,
+    swap_ids: bool = False,
+    reason: str = "测试冲突",
+    repair_direction: str = "对齐事实",
+    source_a_fact_id: str | None = None,
+    source_b_fact_id: str | None = None,
+    fact_pair_id: str | None = None,
+) -> dict:
+    from 事实索引 import CONSISTENCY_RESPONSE_SCHEMA
+
+    if not ctx.indexed_fact_pairs and classification != "EVIDENCE_INSUFFICIENT":
+        raise AssertionError("缺少 indexed_fact_pairs")
+    if classification == "EVIDENCE_INSUFFICIENT":
+        fact_id = source_a_fact_id or next(iter(ctx.索引事实表), "")
+        return {
+            "response_schema_version": CONSISTENCY_RESPONSE_SCHEMA,
+            "root_cause": "证据不足",
+            "consistency_conflicts": [
+                {
+                    "source_a_fact_id": fact_id,
+                    "classification": "EVIDENCE_INSUFFICIENT",
+                    "reason": reason,
+                }
+            ],
+            "fix_actions": ["补证据"],
+            "acceptance_criteria": ["双来源"],
+            "evidence_quotes": [],
+            "needs_reroute": False,
+        }
+    pair = ctx.indexed_fact_pairs[pair_index]
+    sa = source_a_fact_id or pair["source_a_fact_id"]
+    sb = source_b_fact_id or pair["source_b_fact_id"]
+    if swap_ids:
+        sa, sb = sb, sa
+    fa = ctx.索引事实表[sa]
+    return {
+        "response_schema_version": CONSISTENCY_RESPONSE_SCHEMA,
+        "root_cause": "事实状态冲突",
+        "consistency_conflicts": [
+            {
+                "fact_pair_id": fact_pair_id or pair["fact_pair_id"],
+                "source_a_fact_id": sa,
+                "source_b_fact_id": sb,
+                "classification": classification,
+                "reason": reason,
+                "repair_direction": repair_direction,
+            }
+        ],
+        "fix_actions": ["统一事实"],
+        "acceptance_criteria": ["无冲突"],
+        "evidence_quotes": [{"paragraph": fa.段落 or 1, "quote": fa.摘句}],
+        "needs_reroute": False,
+    }
+
+
+def l2_04_v2_payload(
+    ctx,
+    *,
+    problem_type: str = "RULE_DOES_NOT_PRESS_CHOICE",
+    wrong_source_type: str | None = None,
+    bad_evidence_id: str | None = None,
+) -> dict:
+    from 证据索引 import (
+        ROLE_CHAPTER_ACTION,
+        ROLE_CHAPTER_META,
+        SETTING_RESPONSE_SCHEMA,
+        SOURCE_CHAPTER,
+        SOURCE_IR,
+        SOURCE_PROJECT_RULE,
+    )
+
+    rule_ids = [
+        eid
+        for eid, e in ctx.证据表.items()
+        if e.source_type in (SOURCE_PROJECT_RULE, SOURCE_IR)
+    ]
+    action_ids = [
+        eid
+        for eid, e in ctx.证据表.items()
+        if e.source_type == SOURCE_CHAPTER and e.source_role in (ROLE_CHAPTER_ACTION, ROLE_CHAPTER_META)
+    ]
+    if not rule_ids or not action_ids:
+        raise AssertionError("缺少规则或章节行为证据索引")
+    rule_id = rule_ids[0]
+    action_id = action_ids[0]
+    if bad_evidence_id:
+        rule_id = bad_evidence_id
+    pressure_ids = [rule_id, action_id]
+    if wrong_source_type == SOURCE_CHAPTER and rule_id in ctx.证据表:
+        pressure_ids = [action_id, action_id]
+    ev_quote = action_id
+    return {
+        "response_schema_version": SETTING_RESPONSE_SCHEMA,
+        "root_cause": "设定未逼迫当下选择",
+        "setting_pressure_points": [
+            {
+                "setting": "木牌规则",
+                "problem_type": problem_type,
+                "evidence_ids": pressure_ids,
+                "analysis": "规则存在但章节未迫使人物承担取舍",
+                "repair_direction": "迫使角色在保留记忆与取牌之间作出选择",
+            }
+        ],
+        "differentiation_points": [
+            {
+                "description": "代价仅停留在设定层",
+                "contrast_with_convention": "常规会在现场激活代价",
+                "evidence_ids": [action_id],
+            }
+        ],
+        "sustainable_variants": [
+            {
+                "variant": "记忆代价反复兑现",
+                "repeatable_mechanism": "每次触及阈限即流失记忆",
+                "evidence_ids": [rule_id],
+            }
+        ],
+        "fix_actions": ["在取牌时描写记忆流失"],
+        "acceptance_criteria": ["读者感知选择压力"],
+        "evidence_quotes": [{"evidence_id": ev_quote}],
+        "needs_reroute": False,
+    }
+
+
 def make_semantic_context(text: str):
     from L1_语义上下文 import CONTEXT_NONE, 语义上下文
     from 正文切分 import 切段, 清理正文
@@ -210,3 +339,57 @@ def make_semantic_context(text: str):
         current_paragraphs=paragraphs,
         current_body=body,
     )
+
+
+def failure_packet_item(
+    gate: str,
+    failure_type: str,
+    *,
+    routeable: bool = True,
+    blocking: bool = False,
+    decision_role: str = "DIAGNOSTIC",
+    source_component: str | None = None,
+    severity: str = "error",
+    quote: str = "测试摘句",
+) -> dict:
+    return {
+        "闸门": gate,
+        "名称": "测试项",
+        "状态": "失败",
+        "说明": f"测试 {failure_type}",
+        "证据": [{"段落": 1, "摘句": quote}],
+        "严重级别": severity,
+        "失败类型": failure_type,
+        "候选模块": "",
+        "回流验收位置": gate,
+        "修复方向": "测试修复方向",
+        "decision_role": decision_role,
+        "blocking": blocking,
+        "routeable": routeable,
+        "route_reason": "为L1.5提供领域路由线索" if routeable else "",
+        "source_component": source_component or gate,
+        "reason_type": "",
+    }
+
+
+def failure_packet_payload(
+    chapter_path: str | Path,
+    items: list[dict],
+    *,
+    status: str = "SCREENING_REJECT",
+    pipeline_run_id: str = "TEST-PIPE",
+    stage_run_id: str = "TEST-STAGE",
+) -> dict:
+    blocking_count = sum(1 for item in items if item.get("blocking"))
+    routeable_count = sum(1 for item in items if item.get("routeable"))
+    return {
+        "schema_version": "xcue.failure-packet/1.0",
+        "pipeline_run_id": pipeline_run_id,
+        "stage_run_id": stage_run_id,
+        "status": status,
+        "failure_count": len(items),
+        "blocking_count": blocking_count,
+        "routeable_count": routeable_count,
+        "items": items,
+        "extensions": {"chapter_path": str(chapter_path), "publish_authority": False},
+    }

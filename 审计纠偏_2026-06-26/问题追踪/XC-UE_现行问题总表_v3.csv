@@ -1,0 +1,51 @@
+issue_id,original_issue_id,title,category,evidence,previous_conclusion,corrected_conclusion,severity,status,affected_files,verification_method,notes,phase1_update
+V3-001,P0-01,默认项目 TP-001 缺少 project.json,工程入口,项目注册表.json default TP-001; 70_测试项目无 project.json; CLI exit 27,复现确认,CONFIRMED：零配置 L1 仍失败,P0,CONFIRMED,项目注册表.json; 公共组件/项目加载器.py,git HEAD 目录列举 + CLI 运行,,未在本阶段处理
+V3-002,P0-02,production_eligible 闸门关闭,生产策略,生产资格.py + 规则 JSON status=candidate,复现确认,WITHDRAWN 作为代码缺陷；CONFIRMED 为 intentional 生产否决,P0,MODIFIED,公共组件/生产资格.py,读源码 + PRODUCTION 模式退出 26,,Phase 1 未开放 production_eligible
+V3-003,P0-03,乱码样本与 L1 词面/语义分裂,L1 决策链,l1_adversarial_result.json 无 L1-SEM; 全链复跑 L1-03 PASS 但 final REJECT,乱码通过最终 L1,MODIFIED：词面子闸可通过；完整链 SEM FAIL→REJECT,P0,VERIFIED_CLOSED,L1运行入口.py; L1_语义审计.py; L1决策角色.py,Phase 1 全链 + test_l1_decision_authority,2026-06-27 冻结 9f13877；词面不再参与终态裁决,2026-06-27
+V3-004,P0-04,L2-02~06 五文件哈希相同,L2 能力,五文件 SHA256 124392FA… 相同,五种语义能力不存在,WITHDRAWN 哈希论断；MODIFIED：配置契约分化的静态执行器 D,P0,MODIFIED,L2_02~06.py; ability_rules.json,文件哈希 + 静态生成 5 份修复单,,未在本阶段处理
+V3-005,P0-04-N,L2-02~06 未调用 DeepSeek 语义诊断,L2 能力,仅 L2_01 调用 chat_json; 02~06 共用 生成标准修复单,五种能力 P0-04,CONFIRMED：设计分层缺 API 但契约 ability_rules 已分化,P1,CONFIRMED,L2_01_叙事结构能力.py; 标准修复单.py,源码能力矩阵,,未在本阶段处理
+V3-006,P0-05,L2 修复产物与 L3 执行器映射,L2-L3 契约,gate_rules repair_product 自由文本; L3 将 修复产物要求 注入 prompt,契约错位,MODIFIED：契约不完整而非冲突,P1,MODIFIED,输出生成.py; 候选正文生成.py; L3-00.md,读文档 + Schema + 源码,,未在本阶段处理
+V3-007,P0-06,L3 历史产物 Schema 无效,Schema 治理,整合包 schema_validation 样本,3/3 无效,NEEDS_MORE_EVIDENCE：未在本工作区全量扫描,P0,NEEDS_MORE_EVIDENCE,结构定义/第三层*.json,整合包 baseline validate,,未在本阶段处理
+V3-008,P0-07,L3 候选极短正文可过检,L3 质量,候选正文生成.py 无 min length,14 字 ok=true,CONFIRMED,P0,CONFIRMED,候选正文生成.py L118-129,读源码; 候选 mock API 测试,,未在本阶段处理
+V3-009,P0-08,自动 L1→L2→L3→L1 闭环缺失,架构,无流水线编排; 各阶段独立 CLI,通路=0,CONFIRMED 闭环缺失；WITHDRAWN 不等于脚本不会理解小说,P0,MODIFIED,N/A（缺编排层）,架构核查 + 运行记录,,未在本阶段处理
+V3-010,P0-09,pytest 冷启动稳定性,测试,整合包 pytest_full_preimport,标准 pytest 需 jsonschema,MODIFIED：本机 51 passed/1.57s；连续两次稳定,P1,NEEDS_MORE_EVIDENCE,pyproject.toml,本地 pytest -q 两次,,Phase 1 测试扩展至 51 项
+V3-011,P1-01,L3 报告顶层状态口径,L3 状态,L3报告 status vs output.execution_mode,顶层矛盾,CONFIRMED 口径混用；典型 AWAITING 与候选已写应区分,P1,MODIFIED,L3运行入口.py; L3报告.py,读状态机 + 输出样例,,未在本阶段处理
+V3-012,P1-02,L3 报告输入路径血缘,L3 血缘,输出生成.py L73-77 未回填 pipeline_run_id,报告缺 pipeline_run_id,CONFIRMED,P1,CONFIRMED,输出生成.py,源码,,未在本阶段处理
+V3-013,P1-03,L1 状态枚举漂移,Schema,L1 报告 HUMAN_REVIEW_REQUIRED; Schema status 四值,4/5 L1 有效,MODIFIED：Phase 1 增加 AUDIT_BLOCKED 与 semantic_audit_status,P1,MODIFIED,L1报告.py; 第一层报告结构.json,Schema 校验 + 51 项测试,2026-06-27 冻结,2026-06-27
+V3-014,P1-04,阶段 validate-before-write 缺失,Schema,L1/L2/L3 写报告前统一校验,缺统一校验,MODIFIED：L1 已实现写前 Schema 校验,P1,MODIFIED,L1报告.py; L2报告.py; L3报告.py,源码; L1 测试 validation_status=VALIDATED,L1 部分关闭；L2/L3 仍开放,2026-06-27
+V3-015,P1-05,无统一流水线编排,架构,xcue CLI 仅子进程分发,无分发器,CONFIRMED,P1,CONFIRMED,src/xc_ue/cli.py,源码,,未在本阶段处理
+V3-016,P1-06,子进程无 timeout,运行治理,统一入口 subprocess,可能挂死,NEEDS_MORE_EVIDENCE：本任务未跑 CLI,P1,NEEDS_MORE_EVIDENCE,src/xc_ue/,读 CLI 源码,,未在本阶段处理
+V3-017,P1-07,业务未接入 xc_ue,入口,src/xc_ue 仅 health,python -m xc_ue 不驱动 L1/2/3,CONFIRMED,P1,CONFIRMED,src/xc_ue/,目录结构,,未在本阶段处理
+V3-018,P1-08,sys.path 注入,工程结构,各模块 sys.path.insert,模块级耦合,CONFIRMED,P1,CONFIRMED,L1/L2/L3 运行入口.py,rg sys.path,,未在本阶段处理
+V3-019,P1-09,测试正文迎合关键词,测试质量,tests 正文含触发词,可能误导真实小说,CONFIRMED,P1,CONFIRMED,tests/,读测试夹具,,Phase 2 需真实语料集
+V3-020,P1-10,E2E 不验证 L1 语义链,E2E,test_e2e_pipeline 曾跳过语义,不验证修复有效,MODIFIED：已覆盖 AUDIT_BLOCKED 与 failure_packet 分离,P1,MODIFIED,tests/test_e2e_pipeline.py,读测试,,2026-06-27
+V3-021,P1-11,测试污染运行记录,运行治理,运行入口 默认未隔离路径,污染运行记录,CONFIRMED,P1,CONFIRMED,运行入口.py; 运行记录/,git status; test_l1_entry_writes_only_to_out_dir,,未在本阶段处理
+V3-022,P1-12,L2 路由最长关键字,L2 路由,L2_99 最长关键字匹配,failure_type 决定路由,CONFIRMED,P1,CONFIRMED,L2_99_接口判断.py; routes.json,源码,,未在本阶段处理
+V3-023,P1-13,L2 zip 静默截断,L2 质量,修复单生成 zip 打包,静默截尾,NEEDS_MORE_EVIDENCE,P1,NEEDS_MORE_EVIDENCE,L2工程/修复单生成.py,读源码未在本任务复现,,未在本阶段处理
+V3-024,P1-14,能力规则非空执行, L2 规则,能力校验.py 字段检查,未执行能力,CONFIRMED,P1,CONFIRMED,能力校验.py,源码,,未在本阶段处理
+V3-025,P1-15,公共组件僵尸模块,公共组件,协议规则/日志记录校验/运行血缘 等无入站,僵尸代码,CONFIRMED,P2,CONFIRMED,公共组件/,import 图,,未在本阶段处理
+V3-026,P1-16,无真实项目样章,测试资产,TP-001 占位; TP-002 已删,样章不足,CONFIRMED,P1,CONFIRMED,70_测试项目/,目录 + git,,Phase 2 需冻结真实章节集
+V3-027,P1-17,历史报告绝对路径,报告治理,运行记录含 C:\Users,绝对路径,NEEDS_MORE_EVIDENCE 于 HEAD 下不多,P2,NEEDS_MORE_EVIDENCE,L1报告.py 等,抽样运行记录,,未在本阶段处理
+V3-028,P1-18,候选重复一级标题,L3 输出,候选正文生成包装 # title,重复标题,NEEDS_MORE_EVIDENCE,P2,NEEDS_MORE_EVIDENCE,候选正文生成.py L131,读源码,,未在本阶段处理
+V3-029,P1-19,DeepSeek 客户端重试,API,DeepSeek客户端.py,缺重试策略,NEEDS_MORE_EVIDENCE,P1,NEEDS_MORE_EVIDENCE,DeepSeek客户端.py,读源码,,Phase 2 范围
+V3-030,P1-20,原子写入锁,工程,原子写入.py,锁策略,NEEDS_MORE_EVIDENCE,P2,NEEDS_MORE_EVIDENCE,原子写入.py,读源码,,未在本阶段处理
+V3-031,P1-21,Schema 血缘与哈希漂移,治理,Schema sha256 vs 报告血缘未联动,双治理,NEEDS_MORE_EVIDENCE,P2,NEEDS_MORE_EVIDENCE,结构定义/,读 Schema,,未在本阶段处理
+V3-032,P1-22,状态文档已脱节,文档,CURRENT_SYSTEM_STATUS vs 代码,文档过时,CONFIRMED,P2,CONFIRMED,00_工程总控/CURRENT_SYSTEM_STATUS.md,读文档,,未在本阶段处理
+V3-033,P1-23,L3 复制比例检测过宽,L3 质量,候选正文生成 以 body in source,98.94% 自抄,CONFIRMED,P1,CONFIRMED,候选正文生成.py L126-129,读源码 + 对抗样本,,未在本阶段处理
+V3-034,P2-01,公共组件僵尸模块,公共组件,同 P1-15,僵尸,CONFIRMED,P2,CONFIRMED,公共组件/,import 图,,未在本阶段处理
+V3-035,P2-02,入口函数过长,可维护性,L1/L2/L3 main 过长,过长,CONFIRMED,P2,CONFIRMED,各运行入口.py,wc -l,,未在本阶段处理
+V3-036,P2-03,宽泛 except Exception,错误处理,多处 except Exception,压制错误,NEEDS_MORE_EVIDENCE,P2,NEEDS_MORE_EVIDENCE,多文件,rg 统计,,未在本阶段处理
+V3-037,P2-04,Markdown 与 JSON 双真源,规则治理,闸门标准解析,双真源风险,NEEDS_MORE_EVIDENCE,P2,NEEDS_MORE_EVIDENCE,闸门规则加载.py,读规则,,未在本阶段处理
+V3-038,P2-05,包版本 0.0.0,发布,pyproject.toml version,无法语义化发布,CONFIRMED,P2,CONFIRMED,pyproject.toml,读文件,,未在本阶段处理
+V3-039,P2-06,仓库体积与快照,治理,.venv/运行记录等,体积膨胀,CONFIRMED,P2,CONFIRMED,仓库清单,目录列举,,未在本阶段处理
+V3-040,P2-07,测试分层不清,测试,pytest markers,分层弱,NEEDS_MORE_EVIDENCE,P2,NEEDS_MORE_EVIDENCE,pyproject.toml,读配置,,未在本阶段处理
+V3-041,P2-08,jsonschema FormatChecker 成本,性能/测试,结构校验 RFC 检查,耗 CPU,NEEDS_MORE_EVIDENCE：本机未瓶颈,P2,NEEDS_MORE_EVIDENCE,jsonschema 依赖,本地 pytest 1.57s,,未在本阶段处理
+V3-042,NEW-01,L1-SEM 失败无 L15/L2 路由,L1 路由,gate_rules 无 语义审计 类,语义失败未对齐,MODIFIED：CONTENT_DECISION 仍可按 failure_type 路由；AUDIT_BLOCKER 不得路由,P1,MODIFIED,gate_rules.json; L15交接.py; 失败包生成.py,Phase 1 分拆 + 测试,,2026-06-27
+V3-043,NEW-02,L1-03 SCREENING_PASS 易被误读为终态,文档/输出,旧对抗脚本止于 L1-03,易误读,MODIFIED：词面闸 HEURISTIC_DIAGNOSTIC；终态由 L1-SEM + 护栏决定,P2,VERIFIED_CLOSED,L1_03; L1运行入口; 20_L1_闸门层,Phase 1 文档 + 测试,,2026-06-27
+V3-044,NEW-03,L3 diff/变更摘要未实现,L3 协议,L3-00 第7 vs 代码,设计未落地,CONFIRMED 设计未落地,P2,CONFIRMED,L3-00; 输出生成.py,读设计对照,,未在本阶段处理
+V3-P1-001,PHASE1-01,词面规则参与最终裁决,L1 决策权,L1-01/02/03 曾产出 error 并进入失败包,词面可决定 SCREENING_REJECT,Phase 1：词面仅 DIAGNOSTIC；终态由 L1-SEM + HARD_GUARD,P0,VERIFIED_CLOSED,L1_01~03; L1决策角色.py; L1运行入口.py,51 项测试 + tag 9f13877,冻结 l1-phase1-freeze-20260627,2026-06-27
+V3-P1-002,PHASE1-02,API 失败被当成正文失败,L1 故障隔离,旧聚合：API error → SCREENING_REJECT,DeepSeek 超时等同正文差,Phase 1：AUDIT_BLOCKED + audit_blockers 分离,P0,VERIFIED_CLOSED,L1决策角色.py; L1_语义审计.py; L1报告.py,test_api_unavailable_audit_blocked; 组合态矩阵,不得路由 L2,2026-06-27
+V3-P1-003,PHASE1-03,AUDIT_BLOCKER 进入正文失败包,L1 产物,失败包 blocking=true 全收,API 错误进入 failure_packet,Phase 1：分拆 failure_packet / audit_blockers,P0,VERIFIED_CLOSED,失败包生成.py; 失败包结构.json; 审计阻断项结构.json,test_split_failure_packet_excludes_audit_blockers,,2026-06-27
+V3-P1-004,PHASE1-04,HARD_GUARD 被 API 阻断遮蔽,L1 优先级,旧聚合先判 AUDIT_BLOCKER,20 字正文 + API 超时 → AUDIT_BLOCKED,Phase 1：HARD_GUARD 优先；另记 semantic_audit_status,P0,VERIFIED_CLOSED,L1决策角色.py,test_guard_fail_and_api_blocked_prefers_reject_with_semantic_flag,,2026-06-27
+V3-P1-005,PHASE1-05,L1-SEM 证据协议质量,L1 语义协议,语义证据校验.py 仅 quote 子串匹配,证据协议偏弱,决策架构已修复 ≠ 证据协议已验收,P1,PHASE2_OPEN,L1_语义审计.py; 语义证据校验.py,FakeClient 测试通过; 无真实章节集,进入 L1 Phase 2,Phase 2
+V3-P1-006,PHASE1-06,L1 语义诊断真实准确率,L1 业务效果,51 项测试验证工程状态,DeepSeek 判断正确,NEEDS_REAL_DATA：需真实语料 + 人工一致率,P0,NEEDS_REAL_DATA,L1_语义审计.py; tests/,pytest 通过不代表语义准确,最薄弱剩余假设,Phase 2

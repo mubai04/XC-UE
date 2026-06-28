@@ -1,0 +1,111 @@
+{
+  "case_id": "L2P-012",
+  "module_id": "L2-06",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:45:57.010113+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-012\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-012"
+  },
+  "raw_response": "{\"id\":\"603b0837-9a52-466f-afba-bc9f0e1e2185\",\"object\":\"chat.completion\",\"created\":1782618333,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"元叙述事实对均确认变化具有叙事桥梁，无互斥声明。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0004\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0008\\\",\\n      \\\"classification\\\": \\\"ALLOWED_CHANGE\\\",\\n      \\\"reason\\\": \\\"两个事实分别说明同一变化具备桥梁（时间跨度、治疗说明、动作恢复），值内容互补，属于合法状态转移叙述，无硬冲突证据。\\\",\\n      \\\"repair_direction\\\": \\\"无需修复，当前叙述一致性成立。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"保持现状，不采取修复动作。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"变化过程须有明确过渡证据，本对已满足。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"变化有桥梁，不应判硬冲突。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 14,\\n      \\\"quote\\\": \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON。需要分析输入并给出L2-06一致性诊断结果。输入给出了indexed_facts和indexed_fact_pairs。需要针对PAIR-0001进行诊断。PAIR-0001是FACT-0004和FACT-0008的POSSIBLE_CONFLICT，关于“变化”实体，属性“持有”。但看具体事实：FACT-0004：“变化有桥梁，不应判硬冲突。”，值：“桥梁”。FACT-0008：“变化有桥梁：时间跨度、治疗说明、动作从受限到利落。”，值：“桥梁：时间跨度、治疗说明、动作从受限到利落”。这两个事实似乎都是元叙述，不是真正的角色事实。它们可能都是关于故事中变化的说明。可能它们本身不冲突，而是支持变化的证据。\\n\\n再看所有indexed_facts，有很多关于秦屿位置和状态的事实。可能真正冲突在于FACT-0001和FACT-0002/0007等。但给定的配对是PAIR-0001。我们需要根据配对诊断。\\n\\n指令：必须使用xcue.l2-consistency-response/2.0，引用输入中的fact_pair_id。不得自由重命名实体或属性。分类只能是HARD_CONFLICT、EXPLANATION_INSUFFICIENT、ALLOWED_CHANGE、EVIDENCE_INSUFFICIENT。存在时间或状态转移信号时优先ALLOWED_CHANGE或EXPLANATION_INSUFFICIENT，不得直接判HARD_CONFLICT。EVIDENCE_INSUFFICIENT可只引用source_a_fact_id。\\n\\n我们分析FACT-0004和FACT-0008：都是关于同一个实体“变化”，属性“持有”，值一个是“桥梁”，一个是“桥梁：时间跨度、治疗说明、动作从受限到利落”。本质上后者是前者的详细说明，它们是一致的，没有冲突。可能这个配对是POSSIBLE_CONFLICT但实际没有冲突。那么classification应该是什么？可能是ALLOWED_CHANGE？但这里不是状态变化，而是叙述细节补充。也可能是EXPLANATION_INSUFFICIENT？但两者不矛盾。或者因为它们是同一叙述的不同部分，可以视为一致，不需要判冲突。但是诊断器需要输出consistency_conflicts，可能是空数组？但是输出格式要求有consistency_conflicts数组。可能我们需要为每个fact_pair_id提供一个条目。如果判定无冲突，怎么表示？指令说consistency_conflicts通过fact_pair_id引用。可以给出classification为ALLOWED_CHANGE？但ALLOWED_CHANGE适用于状态变化。这里可能更适合判定为无冲突，但指令没有“NO_CONFLICT”分类。可能是EVIDENCE_INSUFFICIENT？但两者都是当前章节的事实，证据充分。\\n\\n检查整个输入：failure_type是“技术护栏失败”，有failure_evidence，但可能是指左臂痊愈等。真正的冲突可能是位置变化（FACT-0001东岸营地 vs FACT-0002西岸）和状态变化（伤处渗血 vs 痊愈）。但这些没有出现在indexed_fact_pairs中。给定的pair是FACT-0004和FACT-0008，可能是个误导。我们需要按给定的pair诊断。\\n\\n再读指令：“必须使用 xcue.l2-consistency-response/2.0：consistency_conflicts 通过 fact_pair_id、source_a_fact_id、source_b_fact_id 引用输入中的 indexed_facts/indexed_fact_pairs。”所以我们必须针对PAIR-0001给出诊断。\\n\\nFACT-0004：“变化有桥梁，不应判硬冲突。”entity: 变化, attribute: 持有, value:桥梁。\\nFACT-0008：“变化有桥梁：时间跨度、治疗说明、动作从受限到利落。”entity: 变化, attribute: 持有, value:桥梁：时间跨度、治疗说明、动作从受限到利落。\\n它们不矛盾，可以合并。没有互斥双声明。因此这不是冲突。那么classification应该是什么？可能的选项：ALLOWED_CHANGE？但这里没有变化，是两个事实都描述了同一个变化的桥梁。或许EXPLANATION_INSUFFICIENT？但解释很充分。可能应该判为NO_CONFLICT，但指令里没有这个分类。再检查分类定义：可能ALLOWED_CHANGE用于描述合法的状态转移，而EXPLANATION_INSUFFICIENT用于解释不足。EVIDENCE_INSUFFICIENT用于证据不足。HARD_CONFLICT是硬冲突。如果既无冲突又有充分证据，可能就不需要报告？但是输出必须包含consistency_conflicts数组。也许可以输出空数组？但指令说“必须使用...consistency_conflicts...”，可能要求至少一个条目？看需求：“如果没有任何冲突，返回一致结论。”但是返回格式里没有专门的一致结论字段。可能输出{\\\"response_schema_version\\\":..., \\\"root_cause\\\": \\\"\\\", \\\"consistency_conflicts\\\": [], ...}。但指令并没有禁止空数组。不过输入给出了一个fact_pair，可能期望至少一个诊断。而且failure_type是技术护栏失败，说明系统应该检测到什么错误，但这里似乎没有错误。也许需要对更隐含的冲突进行诊断，但输入只给了这个pair。\\n\\n检查所有facts，FACT-0006：entity:秦屿左臂, attribute:位置, value:痊愈, time_marker:数日后。这个位置属性“痊愈”是奇怪的，可能是一个错误提取。FACT-0007：entity:他, attribute:位置, value:西岸修补缆绳。这些都是从同一句话提取的。可能实际冲突是位置从东岸营地变成西岸，同时伤从受伤变成痊愈，它们被标记为变化，并且提供了桥梁，所以不应判硬冲突。但配对不是它们。\\n\\n也许PAIR-0001是一个测试，判断系统是否将一致叙述误报为冲突。正确的诊断应该认为没有冲突，分类可能为ALLOWED_CHANGE（因为变化是允许的）？或者EXPLANATION_INSUFFICIENT？我觉得ALLOWED_CHANGE更合适，因为这两个事实都在描述变化的桥梁，它们共同证明变化是允许的，所以不存在冲突。我们可以说：fact_pair_id: PAIR-0001，classification: ALLOWED_CHANGE，reason: 两个事实均说明该变化具有叙事桥梁，值内容互补一致，不存在互斥双声明。repair_direction: 无需修复，或确认一致性。\\n\\n再看输出还需要root_cause, fix_actions, acceptance_criteria, evidence_quotes, needs_reroute。\\n\\n我们需要构造一个合理的JSON。遵循指令。\\n\\n所以，consistency_conflicts数组只有一个元素，对应PAIR-0001。\\n\\nsource_a_fact_id和source_b_fact_id使用配对里的，即FACT-0004和FACT-0008。\\n\\nclassification: ALLOWED_CHANGE。\\n\\nreason: 两个事实均明确指出变化具有桥梁（时间跨度、治疗说明等），叙述上构成合法状态转移，无矛盾。\\n\\nrepair_direction: 无需修复，保持当前叙述。\\n\\nroot_cause: 提取事实对涉及元叙述，实际情节中状态变化已提供过渡说明。\\n\\nfix_actions: 可能为空或说明保持现状。\\n\\nacceptance_criteria: 变化叙述需有迹可循，本对已满足。\\n\\nevidence_quotes: 可引用FACT-0004和FACT-0008的原文，或相关段落。\\n\\nneeds_reroute: false。\\n\\n注意：输入中有多段文字，我们可从中选择evidence_quotes。\\n\\n输出JSON。必须只输出JSON。\\n\\n所以最终输出如下。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2750,\"completion_tokens\":1905,\"total_tokens\":4655,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1607},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":2750},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 系统一致性修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-06",
+    "输入问题": "L2P-012 R5A pilot | 根因：元叙述事实对均确认变化具有叙事桥梁，无互斥声明。 | 模块细节：事实:EXPLANATION_INSUFFICIENT",
+    "主失败类型": "技术护栏失败",
+    "次失败类型": "F03",
+    "修复动作": "变化.持有：补写状态变化桥梁，连接 正文 与 正文",
+    "修复产物": "确认合法变化",
+    "验收问题": "变化.持有 的时间或因果过渡可被读者理解",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "否",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-06",
+    "规则编号": "F03",
+    "规则依据": "元叙述事实对均确认变化具有叙事桥梁，无互斥声明。 | 修改范围：事实陈述与状态 | 禁止：已成立的核心事件",
+    "标准动作": [
+      "变化.持有：补写状态变化桥梁，连接 正文 与 正文"
+    ],
+    "标准验收": [
+      "变化.持有 的时间或因果过渡可被读者理解"
+    ],
+    "rule_id": "L2-06:F03",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 5,
+        "摘句": "变化有桥梁，不应判硬冲突。"
+      },
+      {
+        "段落": 14,
+        "摘句": "变化有桥梁：时间跨度、治疗说明、动作从受限到利落。"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 25176.469199941494,
+  "token_usage": {
+    "prompt_tokens": 2750,
+    "completion_tokens": 1905,
+    "total_tokens": 4655,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1607
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2750
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"response_schema_version\": \"xcue.l2-consistency-response/2.0\",\n  \"root_cause\": \"元叙述事实对均确认变化具有叙事桥梁，无互斥声明。\",\n  \"consistency_conflicts\": [\n    {\n      \"fact_pair_id\": \"PAIR-0001\",\n      \"source_a_fact_id\": \"FACT-0004\",\n      \"source_b_fact_id\": \"FACT-0008\",\n      \"classification\": \"ALLOWED_CHANGE\",\n      \"reason\": \"两个事实分别说明同一变化具备桥梁（时间跨度、治疗说明、动作恢复），值内容互补，属于合法状态转移叙述，无硬冲突证据。\",\n      \"repair_direction\": \"无需修复，当前叙述一致性成立。\"\n    }\n  ],\n  \"fix_actions\": [\n    \"保持现状，不采取修复动作。\"\n  ],\n  \"acceptance_criteria\": [\n    \"变化过程须有明确过渡证据，本对已满足。\"\n  ],\n  \"evidence_quotes\": [\n    {\n      \"paragraph\": 5,\n      \"quote\": \"变化有桥梁，不应判硬冲突。\"\n    },\n    {\n      \"paragraph\": 14,\n      \"quote\": \"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\"\n    }\n  ],\n  \"needs_reroute\": false\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"603b0837-9a52-466f-afba-bc9f0e1e2185\",\"object\":\"chat.completion\",\"created\":1782618333,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"元叙述事实对均确认变化具有叙事桥梁，无互斥声明。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0004\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0008\\\",\\n      \\\"classification\\\": \\\"ALLOWED_CHANGE\\\",\\n      \\\"reason\\\": \\\"两个事实分别说明同一变化具备桥梁（时间跨度、治疗说明、动作恢复），值内容互补，属于合法状态转移叙述，无硬冲突证据。\\\",\\n      \\\"repair_direction\\\": \\\"无需修复，当前叙述一致性成立。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"保持现状，不采取修复动作。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"变化过程须有明确过渡证据，本对已满足。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"变化有桥梁，不应判硬冲突。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 14,\\n      \\\"quote\\\": \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON。需要分析输入并给出L2-06一致性诊断结果。输入给出了indexed_facts和indexed_fact_pairs。需要针对PAIR-0001进行诊断。PAIR-0001是FACT-0004和FACT-0008的POSSIBLE_CONFLICT，关于“变化”实体，属性“持有”。但看具体事实：FACT-0004：“变化有桥梁，不应判硬冲突。”，值：“桥梁”。FACT-0008：“变化有桥梁：时间跨度、治疗说明、动作从受限到利落。”，值：“桥梁：时间跨度、治疗说明、动作从受限到利落”。这两个事实似乎都是元叙述，不是真正的角色事实。它们可能都是关于故事中变化的说明。可能它们本身不冲突，而是支持变化的证据。\\n\\n再看所有indexed_facts，有很多关于秦屿位置和状态的事实。可能真正冲突在于FACT-0001和FACT-0002/0007等。但给定的配对是PAIR-0001。我们需要根据配对诊断。\\n\\n指令：必须使用xcue.l2-consistency-response/2.0，引用输入中的fact_pair_id。不得自由重命名实体或属性。分类只能是HARD_CONFLICT、EXPLANATION_INSUFFICIENT、ALLOWED_CHANGE、EVIDENCE_INSUFFICIENT。存在时间或状态转移信号时优先ALLOWED_CHANGE或EXPLANATION_INSUFFICIENT，不得直接判HARD_CONFLICT。EVIDENCE_INSUFFICIENT可只引用source_a_fact_id。\\n\\n我们分析FACT-0004和FACT-0008：都是关于同一个实体“变化”，属性“持有”，值一个是“桥梁”，一个是“桥梁：时间跨度、治疗说明、动作从受限到利落”。本质上后者是前者的详细说明，它们是一致的，没有冲突。可能这个配对是POSSIBLE_CONFLICT但实际没有冲突。那么classification应该是什么？可能是ALLOWED_CHANGE？但这里不是状态变化，而是叙述细节补充。也可能是EXPLANATION_INSUFFICIENT？但两者不矛盾。或者因为它们是同一叙述的不同部分，可以视为一致，不需要判冲突。但是诊断器需要输出consistency_conflicts，可能是空数组？但是输出格式要求有consistency_conflicts数组。可能我们需要为每个fact_pair_id提供一个条目。如果判定无冲突，怎么表示？指令说consistency_conflicts通过fact_pair_id引用。可以给出classification为ALLOWED_CHANGE？但ALLOWED_CHANGE适用于状态变化。这里可能更适合判定为无冲突，但指令没有“NO_CONFLICT”分类。可能是EVIDENCE_INSUFFICIENT？但两者都是当前章节的事实，证据充分。\\n\\n检查整个输入：failure_type是“技术护栏失败”，有failure_evidence，但可能是指左臂痊愈等。真正的冲突可能是位置变化（FACT-0001东岸营地 vs FACT-0002西岸）和状态变化（伤处渗血 vs 痊愈）。但这些没有出现在indexed_fact_pairs中。给定的pair是FACT-0004和FACT-0008，可能是个误导。我们需要按给定的pair诊断。\\n\\n再读指令：“必须使用 xcue.l2-consistency-response/2.0：consistency_conflicts 通过 fact_pair_id、source_a_fact_id、source_b_fact_id 引用输入中的 indexed_facts/indexed_fact_pairs。”所以我们必须针对PAIR-0001给出诊断。\\n\\nFACT-0004：“变化有桥梁，不应判硬冲突。”entity: 变化, attribute: 持有, value:桥梁。\\nFACT-0008：“变化有桥梁：时间跨度、治疗说明、动作从受限到利落。”entity: 变化, attribute: 持有, value:桥梁：时间跨度、治疗说明、动作从受限到利落。\\n它们不矛盾，可以合并。没有互斥双声明。因此这不是冲突。那么classification应该是什么？可能的选项：ALLOWED_CHANGE？但这里没有变化，是两个事实都描述了同一个变化的桥梁。或许EXPLANATION_INSUFFICIENT？但解释很充分。可能应该判为NO_CONFLICT，但指令里没有这个分类。再检查分类定义：可能ALLOWED_CHANGE用于描述合法的状态转移，而EXPLANATION_INSUFFICIENT用于解释不足。EVIDENCE_INSUFFICIENT用于证据不足。HARD_CONFLICT是硬冲突。如果既无冲突又有充分证据，可能就不需要报告？但是输出必须包含consistency_conflicts数组。也许可以输出空数组？但指令说“必须使用...consistency_conflicts...”，可能要求至少一个条目？看需求：“如果没有任何冲突，返回一致结论。”但是返回格式里没有专门的一致结论字段。可能输出{\\\"response_schema_version\\\":..., \\\"root_cause\\\": \\\"\\\", \\\"consistency_conflicts\\\": [], ...}。但指令并没有禁止空数组。不过输入给出了一个fact_pair，可能期望至少一个诊断。而且failure_type是技术护栏失败，说明系统应该检测到什么错误，但这里似乎没有错误。也许需要对更隐含的冲突进行诊断，但输入只给了这个pair。\\n\\n检查所有facts，FACT-0006：entity:秦屿左臂, attribute:位置, value:痊愈, time_marker:数日后。这个位置属性“痊愈”是奇怪的，可能是一个错误提取。FACT-0007：entity:他, attribute:位置, value:西岸修补缆绳。这些都是从同一句话提取的。可能实际冲突是位置从东岸营地变成西岸，同时伤从受伤变成痊愈，它们被标记为变化，并且提供了桥梁，所以不应判硬冲突。但配对不是它们。\\n\\n也许PAIR-0001是一个测试，判断系统是否将一致叙述误报为冲突。正确的诊断应该认为没有冲突，分类可能为ALLOWED_CHANGE（因为变化是允许的）？或者EXPLANATION_INSUFFICIENT？我觉得ALLOWED_CHANGE更合适，因为这两个事实都在描述变化的桥梁，它们共同证明变化是允许的，所以不存在冲突。我们可以说：fact_pair_id: PAIR-0001，classification: ALLOWED_CHANGE，reason: 两个事实均说明该变化具有叙事桥梁，值内容互补一致，不存在互斥双声明。repair_direction: 无需修复，或确认一致性。\\n\\n再看输出还需要root_cause, fix_actions, acceptance_criteria, evidence_quotes, needs_reroute。\\n\\n我们需要构造一个合理的JSON。遵循指令。\\n\\n所以，consistency_conflicts数组只有一个元素，对应PAIR-0001。\\n\\nsource_a_fact_id和source_b_fact_id使用配对里的，即FACT-0004和FACT-0008。\\n\\nclassification: ALLOWED_CHANGE。\\n\\nreason: 两个事实均明确指出变化具有桥梁（时间跨度、治疗说明等），叙述上构成合法状态转移，无矛盾。\\n\\nrepair_direction: 无需修复，保持当前叙述。\\n\\nroot_cause: 提取事实对涉及元叙述，实际情节中状态变化已提供过渡说明。\\n\\nfix_actions: 可能为空或说明保持现状。\\n\\nacceptance_criteria: 变化叙述需有迹可循，本对已满足。\\n\\nevidence_quotes: 可引用FACT-0004和FACT-0008的原文，或相关段落。\\n\\nneeds_reroute: false。\\n\\n注意：输入中有多段文字，我们可从中选择evidence_quotes。\\n\\n输出JSON。必须只输出JSON。\\n\\n所以最终输出如下。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2750,\"completion_tokens\":1905,\"total_tokens\":4655,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1607},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":2750},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 25164.512699935585,
+      "token_usage": {
+        "prompt_tokens": 2750,
+        "completion_tokens": 1905,
+        "total_tokens": 4655,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1607
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2750
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

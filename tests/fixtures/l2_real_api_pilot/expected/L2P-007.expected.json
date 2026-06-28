@@ -1,0 +1,26 @@
+{
+  "case_id": "L2P-007",
+  "target_module": "L2-04",
+  "case_type": "A",
+  "expected_issue_present": true,
+  "acceptable_root_causes": [
+    "设定未施压",
+    "规则未逼迫选择",
+    "代价未落地"
+  ],
+  "required_evidence_region": [
+    "木牌",
+    "试炼"
+  ],
+  "forbidden_diagnoses": [
+    "设定新奇度",
+    "文风",
+    "事实硬冲突"
+  ],
+  "expected_reroute": false,
+  "minimum_action_requirements": [
+    "加压",
+    "逼迫选择"
+  ],
+  "human_notes": "A类：IR有代价，正文未推动取牌。"
+}

@@ -1,0 +1,153 @@
+{
+  "schema_version": "xcue.l2-chapter-locator/1.0",
+  "review_mode": "SEMI_BLIND",
+  "strict_blind": false,
+  "known_information": [
+    "目标L2模块",
+    "评审案例代号",
+    "case_id映射此前已被用户看到"
+  ],
+  "hidden_information_during_phase_1": [
+    "A/B案例类型",
+    "expected_issue_present",
+    "acceptable_root_causes",
+    "forbidden_diagnoses",
+    "human_notes",
+    "预设业务结论"
+  ],
+  "disclosure_note": "评审者已经看过案例与模块映射，因此本轮不宣称严格盲评。第一阶段仍隐藏案例类型和expected。",
+  "cases": [
+    {
+      "blind_label": "评审案例-01",
+      "case_id": "L2P-010",
+      "module_id": "L2-05",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 835,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-02",
+      "case_id": "L2P-011",
+      "module_id": "L2-06",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-011\\chapters\\chapter.md",
+      "supplementary_paths": "IR/IR-08_状态快照.md, chapters/prior.md",
+      "char_count": 834,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-03",
+      "case_id": "L2P-007",
+      "module_id": "L2-04",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-007\\chapters\\chapter.md",
+      "supplementary_paths": "IR/IR-02_世界约束.md",
+      "char_count": 807,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-04",
+      "case_id": "L2P-003",
+      "module_id": "L2-02",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-003\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 848,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-05",
+      "case_id": "L2P-009",
+      "module_id": "L2-05",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-009\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 816,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-06",
+      "case_id": "L2P-004",
+      "module_id": "L2-02",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-004\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 816,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-07",
+      "case_id": "L2P-005",
+      "module_id": "L2-03",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-005\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 800,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-08",
+      "case_id": "L2P-002",
+      "module_id": "L2-01",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-002\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 876,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-09",
+      "case_id": "L2P-012",
+      "module_id": "L2-06",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-012\\chapters\\chapter.md",
+      "supplementary_paths": "chapters/prior.md",
+      "char_count": 820,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-10",
+      "case_id": "L2P-006",
+      "module_id": "L2-03",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-006\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 848,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-11",
+      "case_id": "L2P-001",
+      "module_id": "L2-01",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-001\\chapters\\chapter.md",
+      "supplementary_paths": "—",
+      "char_count": 865,
+      "read_complete": true,
+      "error": null
+    },
+    {
+      "blind_label": "评审案例-12",
+      "case_id": "L2P-008",
+      "module_id": "L2-04",
+      "chapter_rel": "chapters/chapter.md",
+      "chapter_abs": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-008\\chapters\\chapter.md",
+      "supplementary_paths": "IR/IR-02_世界约束.md",
+      "char_count": 806,
+      "read_complete": true,
+      "error": null
+    }
+  ]
+}

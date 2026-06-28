@@ -40,6 +40,9 @@ class 检测项:
     confidence: str = "UNVALIDATED"
     decision_role: str = "DIAGNOSTIC"
     blocking: bool = False
+    routeable: bool = False
+    route_reason: str = ""
+    source_component: str = ""
     reason_type: str = ""
 
 

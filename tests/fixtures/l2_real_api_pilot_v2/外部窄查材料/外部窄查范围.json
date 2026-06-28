@@ -1,0 +1,126 @@
+{
+  "schema_version": "xcue.l2-v2-external-audit-scope/1.0",
+  "included": [
+    "v2 manifest 与 12 案例正文/failure_item/project",
+    "必要 IR、前序章节、项目规则",
+    "expected（仅第二阶段）",
+    "机械预检报告与空白审查表"
+  ],
+  "excluded": [
+    "v1 模型回答",
+    "R5A/R5B/R5C 模型输出",
+    "旧 R5D 人工评分",
+    "L2 生产代码与提示词"
+  ],
+  "phase_1_order": [
+    {
+      "order": 1,
+      "review_label": "审查案例-01",
+      "case_id": "L2V2-010",
+      "module_id": "L2-05",
+      "phase1_package": "第一阶段_正文审查包/审查案例-01_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-010_预期对照.md",
+      "review_form": "案例审查表/审查案例-01_审查表.json"
+    },
+    {
+      "order": 2,
+      "review_label": "审查案例-02",
+      "case_id": "L2V2-011",
+      "module_id": "L2-06",
+      "phase1_package": "第一阶段_正文审查包/审查案例-02_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-011_预期对照.md",
+      "review_form": "案例审查表/审查案例-02_审查表.json"
+    },
+    {
+      "order": 3,
+      "review_label": "审查案例-03",
+      "case_id": "L2V2-007",
+      "module_id": "L2-04",
+      "phase1_package": "第一阶段_正文审查包/审查案例-03_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-007_预期对照.md",
+      "review_form": "案例审查表/审查案例-03_审查表.json"
+    },
+    {
+      "order": 4,
+      "review_label": "审查案例-04",
+      "case_id": "L2V2-003",
+      "module_id": "L2-02",
+      "phase1_package": "第一阶段_正文审查包/审查案例-04_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-003_预期对照.md",
+      "review_form": "案例审查表/审查案例-04_审查表.json"
+    },
+    {
+      "order": 5,
+      "review_label": "审查案例-05",
+      "case_id": "L2V2-009",
+      "module_id": "L2-05",
+      "phase1_package": "第一阶段_正文审查包/审查案例-05_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-009_预期对照.md",
+      "review_form": "案例审查表/审查案例-05_审查表.json"
+    },
+    {
+      "order": 6,
+      "review_label": "审查案例-06",
+      "case_id": "L2V2-004",
+      "module_id": "L2-02",
+      "phase1_package": "第一阶段_正文审查包/审查案例-06_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-004_预期对照.md",
+      "review_form": "案例审查表/审查案例-06_审查表.json"
+    },
+    {
+      "order": 7,
+      "review_label": "审查案例-07",
+      "case_id": "L2V2-005",
+      "module_id": "L2-03",
+      "phase1_package": "第一阶段_正文审查包/审查案例-07_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-005_预期对照.md",
+      "review_form": "案例审查表/审查案例-07_审查表.json"
+    },
+    {
+      "order": 8,
+      "review_label": "审查案例-08",
+      "case_id": "L2V2-002",
+      "module_id": "L2-01",
+      "phase1_package": "第一阶段_正文审查包/审查案例-08_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-002_预期对照.md",
+      "review_form": "案例审查表/审查案例-08_审查表.json"
+    },
+    {
+      "order": 9,
+      "review_label": "审查案例-09",
+      "case_id": "L2V2-012",
+      "module_id": "L2-06",
+      "phase1_package": "第一阶段_正文审查包/审查案例-09_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-012_预期对照.md",
+      "review_form": "案例审查表/审查案例-09_审查表.json"
+    },
+    {
+      "order": 10,
+      "review_label": "审查案例-10",
+      "case_id": "L2V2-006",
+      "module_id": "L2-03",
+      "phase1_package": "第一阶段_正文审查包/审查案例-10_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-006_预期对照.md",
+      "review_form": "案例审查表/审查案例-10_审查表.json"
+    },
+    {
+      "order": 11,
+      "review_label": "审查案例-11",
+      "case_id": "L2V2-001",
+      "module_id": "L2-01",
+      "phase1_package": "第一阶段_正文审查包/审查案例-11_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-001_预期对照.md",
+      "review_form": "案例审查表/审查案例-11_审查表.json"
+    },
+    {
+      "order": 12,
+      "review_label": "审查案例-12",
+      "case_id": "L2V2-008",
+      "module_id": "L2-04",
+      "phase1_package": "第一阶段_正文审查包/审查案例-12_正文审查包.md",
+      "phase2_package": "第二阶段_预期对照包/L2V2-008_预期对照.md",
+      "review_form": "案例审查表/审查案例-12_审查表.json"
+    }
+  ],
+  "historical_reference_only": "tests/fixtures/l2_real_api_pilot/results/R5D_语料质量审计_20260628"
+}

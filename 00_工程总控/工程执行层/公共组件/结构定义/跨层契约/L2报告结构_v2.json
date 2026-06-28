@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l2-report/v2",
+  "title": "L2 报告 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L2报告编号",
+    "pipeline_run_id",
+    "stage_run_id",
+    "L2报告状态",
+    "来源路由决策编号",
+    "修复单列表",
+    "阻断项",
+    "方法声明"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l2-report/2.0"
+    },
+    "L2报告编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "pipeline_run_id": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "stage_run_id": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "L2报告状态": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PARTIAL_BLOCKED",
+        "MODEL_BLOCKED",
+        "SCHEMA_INVALID",
+        "BLOCKED"
+      ]
+    },
+    "状态说明": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "来源路由决策编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "修复单列表": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/l2-fix-form/v2"
+      }
+    },
+    "阻断项": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+      }
+    },
+    "方法声明": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "input_artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+      },
+      "maxProperties": 50
+    },
+    "output_artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+      },
+      "maxProperties": 50
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

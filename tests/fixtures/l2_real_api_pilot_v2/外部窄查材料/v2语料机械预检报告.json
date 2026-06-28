@@ -1,0 +1,652 @@
+{
+  "schema_version": "xcue.l2-v2-mechanical-precheck/1.0",
+  "generated_at": "2026-06-28T05:01:53.474327+00:00",
+  "dataset_validation_ok": true,
+  "mechanical_validation": "PASSED",
+  "leakage_scan_total": 0,
+  "meta_scan_total": 0,
+  "filler_scan_total": 0,
+  "cross_case_similarity_pairs": 0,
+  "similarity_details": [],
+  "per_case": [
+    {
+      "case_id": "L2V2-001",
+      "module_id": "L2-01",
+      "case_type": "A",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 6,
+          "摘句": "发现自己站在灯塔山观景台上",
+          "quote_found": true,
+          "actual_paragraph": 6,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 2,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-002",
+      "module_id": "L2-01",
+      "case_type": "B",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 2,
+          "摘句": "渡口封了",
+          "quote_found": true,
+          "actual_paragraph": 2,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 2,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-003",
+      "module_id": "L2-02",
+      "case_type": "A",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 4,
+          "摘句": "情况变了",
+          "quote_found": true,
+          "actual_paragraph": 4,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-004",
+      "module_id": "L2-02",
+      "case_type": "B",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 4,
+          "摘句": "北道放行",
+          "quote_found": true,
+          "actual_paragraph": 4,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-005",
+      "module_id": "L2-03",
+      "case_type": "A",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 6,
+          "摘句": "跟紧",
+          "quote_found": true,
+          "actual_paragraph": 6,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-006",
+      "module_id": "L2-03",
+      "case_type": "B",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 2,
+          "摘句": "样本箱扣锁完好",
+          "quote_found": true,
+          "actual_paragraph": 2,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-007",
+      "module_id": "L2-04",
+      "case_type": "A",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 2,
+          "摘句": "却无人上前",
+          "quote_found": true,
+          "actual_paragraph": 2,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-008",
+      "module_id": "L2-04",
+      "case_type": "B",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 2,
+          "摘句": "必须两人同行",
+          "quote_found": true,
+          "actual_paragraph": 2,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-009",
+      "module_id": "L2-05",
+      "case_type": "A",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 4,
+          "摘句": "北渡关闭",
+          "quote_found": true,
+          "actual_paragraph": 4,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-010",
+      "module_id": "L2-05",
+      "case_type": "B",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 2,
+          "摘句": "找账本",
+          "quote_found": true,
+          "actual_paragraph": 2,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 1,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-011",
+      "module_id": "L2-06",
+      "case_type": "A",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 2,
+          "摘句": "已在南码头卸货",
+          "quote_found": true,
+          "actual_paragraph": 2,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 2,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    },
+    {
+      "case_id": "L2V2-012",
+      "module_id": "L2-06",
+      "case_type": "B",
+      "file_integrity_ok": true,
+      "file_errors": [],
+      "evidence_results": [
+        {
+          "段落": 4,
+          "摘句": "左臂已经痊愈",
+          "quote_found": true,
+          "actual_paragraph": 4,
+          "paragraph_match": true
+        }
+      ],
+      "leakage_hit_count": 0,
+      "meta_hit_count": 0,
+      "filler_hit_count": 0,
+      "failure_item_scan_hits": 2,
+      "leakage_hits": [],
+      "meta_hits": [],
+      "filler_hits": [],
+      "purity_review_hints": [
+        "人工核查：A类是否只呈现一个主缺陷，而非堆叠多模块严重问题。",
+        "人工核查：B类正文是否自然成立，而非旁白声明无问题。",
+        "人工核查：目标缺陷是否通过事件表现，而非作者解释。",
+        "人工核查：failure_item 是否仅描述 L1 观测，未完整泄露 L2 根因与修复答案。"
+      ],
+      "mechanical_status": "SCAN_COMPLETE"
+    }
+  ],
+  "dataset_validation": {
+    "dataset_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2",
+    "schema_version": "xcue.l2-real-api-pilot/2.0",
+    "validation_ok": true,
+    "cases": [
+      {
+        "case_id": "L2V2-001",
+        "module_id": "L2-01",
+        "case_type": "A",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-001\\chapters\\chapter.md",
+        "paragraph_count": 16,
+        "char_count": 400,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 6,
+            "摘句": "发现自己站在灯塔山观景台上",
+            "quote_found": true,
+            "actual_paragraph": 6,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-002",
+        "module_id": "L2-01",
+        "case_type": "B",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-002\\chapters\\chapter.md",
+        "paragraph_count": 12,
+        "char_count": 337,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 2,
+            "摘句": "渡口封了",
+            "quote_found": true,
+            "actual_paragraph": 2,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-003",
+        "module_id": "L2-02",
+        "case_type": "A",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-003\\chapters\\chapter.md",
+        "paragraph_count": 12,
+        "char_count": 336,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 4,
+            "摘句": "情况变了",
+            "quote_found": true,
+            "actual_paragraph": 4,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-004",
+        "module_id": "L2-02",
+        "case_type": "B",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-004\\chapters\\chapter.md",
+        "paragraph_count": 12,
+        "char_count": 294,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 4,
+            "摘句": "北道放行",
+            "quote_found": true,
+            "actual_paragraph": 4,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-005",
+        "module_id": "L2-03",
+        "case_type": "A",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-005\\chapters\\chapter.md",
+        "paragraph_count": 12,
+        "char_count": 303,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 6,
+            "摘句": "跟紧",
+            "quote_found": true,
+            "actual_paragraph": 6,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-006",
+        "module_id": "L2-03",
+        "case_type": "B",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-006\\chapters\\chapter.md",
+        "paragraph_count": 12,
+        "char_count": 311,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 2,
+            "摘句": "样本箱扣锁完好",
+            "quote_found": true,
+            "actual_paragraph": 2,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-007",
+        "module_id": "L2-04",
+        "case_type": "A",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-007\\chapters\\chapter.md",
+        "paragraph_count": 10,
+        "char_count": 202,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 2,
+            "摘句": "却无人上前",
+            "quote_found": true,
+            "actual_paragraph": 2,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-008",
+        "module_id": "L2-04",
+        "case_type": "B",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-008\\chapters\\chapter.md",
+        "paragraph_count": 10,
+        "char_count": 221,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 2,
+            "摘句": "必须两人同行",
+            "quote_found": true,
+            "actual_paragraph": 2,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-009",
+        "module_id": "L2-05",
+        "case_type": "A",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-009\\chapters\\chapter.md",
+        "paragraph_count": 10,
+        "char_count": 235,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 4,
+            "摘句": "北渡关闭",
+            "quote_found": true,
+            "actual_paragraph": 4,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-010",
+        "module_id": "L2-05",
+        "case_type": "B",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-010\\chapters\\chapter.md",
+        "paragraph_count": 10,
+        "char_count": 239,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 2,
+            "摘句": "找账本",
+            "quote_found": true,
+            "actual_paragraph": 2,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-011",
+        "module_id": "L2-06",
+        "case_type": "A",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-011\\chapters\\chapter.md",
+        "paragraph_count": 10,
+        "char_count": 220,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 2,
+            "摘句": "已在南码头卸货",
+            "quote_found": true,
+            "actual_paragraph": 2,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      },
+      {
+        "case_id": "L2V2-012",
+        "module_id": "L2-06",
+        "case_type": "B",
+        "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot_v2\\cases\\L2V2-012\\chapters\\chapter.md",
+        "paragraph_count": 10,
+        "char_count": 229,
+        "errors": [],
+        "leakage_hits": [],
+        "meta_hits": [],
+        "filler_hits": [],
+        "evidence_results": [
+          {
+            "段落": 4,
+            "摘句": "左臂已经痊愈",
+            "quote_found": true,
+            "actual_paragraph": 4,
+            "paragraph_match": true
+          }
+        ],
+        "validation_ok": true
+      }
+    ]
+  },
+  "status": {
+    "R5D_V2_MECHANICAL_VALIDATION": "PASSED",
+    "R5D_V2_EXTERNAL_AUDIT_PACKAGE": "READY",
+    "R5D_V2_CORPUS_PACKAGE": "READY",
+    "R5D_V2_EXTERNAL_AUDIT": "PENDING",
+    "L2_REAL_MODEL_EFFECTIVENESS": "NOT_TESTED"
+  },
+  "note": "扫描命中仅记录位置，不自动判定语料无效。最终有效性需外部人工审查。"
+}

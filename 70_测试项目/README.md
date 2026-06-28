@@ -14,4 +14,4 @@ TP-001_CleanHarness_IR_Runtime/
 
 - 测试项目不得反向覆盖 L0 / L1 / L1.5 / L2 / L3 真源
 - 正式项目输入只认各项目内的 `IR/`
-- 详见根目录 `INDEX.md` 与 `50_L3_执行协议层/L3-07_ProjectHarness运行协议_v0.1.2.md`
+- 详见根目录 `项目索引.md` 与 `50_L3_执行协议层/L3-07_ProjectHarness运行协议_v0.1.2.md`

@@ -5,6 +5,7 @@ from pathlib import Path
 
 from L2模型 import 失败输入, 接口判断, 证据
 from L2读取 import 读失败包完整
+from L2输入边界 import 校验L15路由报告
 from L15模型 import 失败快照
 
 
@@ -34,8 +35,9 @@ def 从L15报告提取执行上下文(
     report = 读L15报告(l15_report_path)
     final_status = str(report.get("final_status", ""))
     blockers = [str(item) for item in report.get("blockers", []) if str(item).strip()]
-    if final_status != "ROUTED":
-        return 失败输入("", "", "", "", [], "", "", "", "", ""), "", "", final_status, blockers
+    checked_status, checked_blockers = 校验L15路由报告(report)
+    if checked_status != "ROUTED":
+        return 失败输入("", "", "", "", [], "", "", "", "", ""), "", "", checked_status, checked_blockers or blockers
 
     target_module = str(report.get("target_module", "")).strip()
     primary = report.get("primary_failure") or {}

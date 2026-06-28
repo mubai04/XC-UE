@@ -9,6 +9,8 @@
     "stage_run_id",
     "status",
     "failure_count",
+    "blocking_count",
+    "routeable_count",
     "items"
   ],
   "properties": {
@@ -25,6 +27,16 @@
       "$ref": "#/$defs/l1_status"
     },
     "failure_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "blocking_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "routeable_count": {
       "type": "integer",
       "minimum": 0,
       "maximum": 1000
@@ -51,8 +63,8 @@
       "type": "string",
       "enum": [
         "SCREENING_PASS",
+        "SCREENING_REVIEW",
         "SCREENING_REJECT",
-        "REVIEW_REQUIRED",
         "AUDIT_BLOCKED"
       ]
     },
@@ -139,7 +151,10 @@
         "回流验收位置",
         "修复方向",
         "decision_role",
-        "blocking"
+        "blocking",
+        "routeable",
+        "route_reason",
+        "source_component"
       ],
       "properties": {
         "闸门": {
@@ -198,11 +213,24 @@
           "type": "string",
           "enum": [
             "HARD_GUARD",
-            "CONTENT_DECISION"
+            "CONTENT_DECISION",
+            "DIAGNOSTIC",
+            "AUDIT_BLOCKER"
           ]
         },
         "blocking": {
           "type": "boolean"
+        },
+        "routeable": {
+          "type": "boolean"
+        },
+        "route_reason": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "source_component": {
+          "type": "string",
+          "maxLength": 64
         },
         "reason_type": {
           "type": "string",

@@ -120,6 +120,9 @@ def _硬护栏(名称: str, value: float, failure_type: str, description: str) -
         heuristic=False,
         decision_role=硬护栏角色,
         blocking=True,
+        routeable=False,
+        route_reason="",
+        source_component="L1-00",
         reason_type="",
     )
 

@@ -1,0 +1,48 @@
+{
+  "case_id": "L2P-004",
+  "module_id": "L2-02",
+  "attempt": 2,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:03:50.782885+00:00",
+    "temperature": 0.2,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-004\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-004"
+  },
+  "raw_response": "",
+  "parsed_response": null,
+  "validation_errors": [
+    "L2-02 TIMEOUT: The read operation timed out"
+  ],
+  "repair_form": null,
+  "transport_status": "TRANSPORT_ERROR",
+  "format_status": "SUCCESS",
+  "evidence_status": "FAIL",
+  "duration_ms": 61987.78670001775,
+  "token_usage": {},
+  "error_message": "L2-02 TIMEOUT: The read operation timed out",
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": false,
+      "error": "The read operation timed out",
+      "error_kind": "TIMEOUT",
+      "status_code": null,
+      "content": "",
+      "parsed": null,
+      "raw": "",
+      "duration_ms": 61974.22960004769,
+      "token_usage": {},
+      "hints_applied": [
+        "网络或超时错误，请重试并输出完整 JSON。"
+      ]
+    }
+  ]
+}

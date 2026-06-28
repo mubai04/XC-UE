@@ -9,6 +9,7 @@ from 一致性上下文 import 构造一致性上下文
 from 一致性修复规划 import 模块细节, 规划一致性修复
 from 冲突比对 import 执行冲突比对
 from 双来源校验 import 校验双来源
+from 前序章节 import 解析前序章节
 from 通用错误 import 能力诊断错误
 from 通用证据定位 import 校验通用证据引用
 from 能力标准解析 import 能力规则
@@ -52,7 +53,14 @@ def 安全生成修复单(
         )
         if not resolved.exists():
             raise 能力诊断错误(f"章节不存在：{resolved}", kind="CHAPTER_PATH_MISSING")
-        ctx = 构造一致性上下文(resolved, item, repo_root=repo_root, ir_dir=_resolve_ir(resolved))
+        priors = 解析前序章节(resolved)
+        ctx = 构造一致性上下文(
+            resolved,
+            item,
+            repo_root=repo_root,
+            ir_dir=_resolve_ir(resolved),
+            prior_chapters=priors,
+        )
         parsed, diagnosis = 执行冲突比对(ctx, item, client=client)
         validated, base_errors = 校验通用证据引用(parsed, ctx.正文语料)
         errors = base_errors + 校验双来源(parsed, ctx.正文语料, ctx, diagnosis)

@@ -1,8 +1,0 @@
-{
-  "schema_version": "xcue.l1-golden-freeze-record/1.0",
-  "frozen": true,
-  "baseline_ref": "运行记录/freeze-force-53e0e7db/AUDIT_BASELINE.json",
-  "frozen_at": "2026-06-27T10:43:34.721148+00:00",
-  "freeze_policy_ref": "AUDIT_BASELINE.json.freeze_policy",
-  "notes": "Do not add frozen/baseline_ref to manifest.json. This file is not hashed into golden_v1_hashes (no self-reference)."
-}

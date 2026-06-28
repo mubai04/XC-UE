@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l3-execution-result/v2",
+  "title": "L3 执行结果 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L3执行结果编号",
+    "来源执行任务包编号",
+    "执行状态",
+    "候选产物列表",
+    "未执行任务",
+    "错误列表",
+    "正式正文是否修改",
+    "复验入口",
+    "回流状态"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l3-execution-result/2.0"
+    },
+    "L3执行结果编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源执行任务包编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "执行状态": {
+      "type": "string",
+      "enum": [
+        "PLANNED",
+        "EXECUTING",
+        "CANDIDATE_WRITTEN",
+        "BLOCKED",
+        "FAILED",
+        "COMPLETED"
+      ]
+    },
+    "候选产物列表": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "产物编号",
+          "来源修复单编号",
+          "相对路径",
+          "产物类型",
+          "是否存在",
+          "是否修改正式正文"
+        ],
+        "properties": {
+          "产物编号": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+          },
+          "来源修复单编号": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+          },
+          "相对路径": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+          },
+          "产物类型": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+          },
+          "是否存在": {
+            "type": "boolean"
+          },
+          "是否修改正式正文": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "未执行任务": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+      }
+    },
+    "错误列表": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+      }
+    },
+    "正式正文是否修改": {
+      "type": "boolean"
+    },
+    "复验入口": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#return-gate-reference"
+    },
+    "回流状态": {
+      "type": "string",
+      "enum": [
+        "AWAITING_L1",
+        "AWAITING_L1_5",
+        "AWAITING_L2",
+        "COMPLETED",
+        "BLOCKED"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "run_id": "L2_R5B_全量协议复测_20260628",
+  "stopped_reason": null,
+  "technical": {
+    "per_case": {
+      "L2P-001": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-002": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-003": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-004": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-005": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-006": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-007": {
+        "transport_success": false,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": false,
+        "source_binding_valid": false,
+        "module_validator_passed": false,
+        "repair_form_generated": false,
+        "retry_count": 1,
+        "attempts": 2,
+        "final_status": "EVIDENCE_ERROR"
+      },
+      "L2P-008": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-009": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-010": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-011": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-012": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      }
+    },
+    "exact_quote_forgery": 1,
+    "source_binding_errors": 1,
+    "schema_crashes": 0,
+    "max_consecutive_schema": 0,
+    "technical_protocol_passed": false
+  },
+  "case_count": 12,
+  "status_labels": {
+    "L2_R5B_TARGETED_PROTOCOL": "NOT_RUN",
+    "L2_R5B_FULL_PROTOCOL": "FAILED",
+    "L2_R5B_BUSINESS_PILOT": "NOT_EVALUATED",
+    "L2_REAL_MODEL_EFFECTIVENESS": "NOT_TESTED",
+    "PRODUCTION_ELIGIBLE": false
+  }
+}

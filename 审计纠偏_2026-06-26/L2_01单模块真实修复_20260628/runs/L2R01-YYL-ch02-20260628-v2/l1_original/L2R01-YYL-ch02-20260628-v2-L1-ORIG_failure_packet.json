@@ -1,0 +1,15 @@
+{
+  "schema_version": "xcue.failure-packet/1.0",
+  "pipeline_run_id": "L2R01-YYL-ch02-20260628-v2",
+  "stage_run_id": "L2R01-YYL-ch02-20260628-v2-L1",
+  "status": "SCREENING_PASS",
+  "failure_count": 0,
+  "blocking_count": 0,
+  "routeable_count": 0,
+  "items": [],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\70_测试项目\\YYL-烟雨楼\\chapters\\ch02.md",
+    "audit_reason_type": "",
+    "publish_authority": false
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "schema_version": "xcue.l15-routing-rules/1.0",
+  "authority": "CANONICAL",
+  "scope": "L1.5",
+  "default_unmatched_action": "RETURN_TO_L1",
+  "reserved_failure_types": {
+    "L1-02": [
+      "传播点弱",
+      "付费预期弱"
+    ],
+    "L1-03": [
+      "功能锁失败"
+    ]
+  },
+  "routes": [
+    {
+      "route_id": "L15-R047",
+      "source_gate": "L1-00",
+      "failure_type": "重复窗口过高",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "文风语言修复单",
+      "return_gate": "L1-00",
+      "reason": "L1-00 重复窗口过高属于正文文风语言问题，进入 L2-02"
+    },
+    {
+      "route_id": "L15-R048",
+      "source_gate": "L1-00",
+      "failure_type": "高重复正文",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "文风语言修复单",
+      "return_gate": "L1-00",
+      "reason": "L1-00 高重复正文进入 L2-02"
+    },
+    {
+      "route_id": "L15-R049",
+      "source_gate": "L1-00",
+      "failure_type": "低信息重复正文",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "文风语言修复单",
+      "return_gate": "L1-00",
+      "reason": "L1-00 低信息重复正文进入 L2-02"
+    },
+    {
+      "route_id": "L15-R050",
+      "source_gate": "L1-00",
+      "failure_type": "字数不足",
+      "route_action": "INPUT_REQUIRED",
+      "target_module": null,
+      "repair_product": "补齐后的输入表",
+      "return_gate": "L1-00",
+      "reason": "L1-00 字数不足为输入不完整，需补材料"
+    },
+    {
+      "route_id": "L15-R001",
+      "source_gate": "L1-01",
+      "failure_type": "叙事失败",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-01",
+      "repair_product": "叙事结构修复单",
+      "return_gate": "L1-01",
+      "reason": "叙事结构问题进入 L2-01"
+    },
+    {
+      "route_id": "L15-R002",
+      "source_gate": "L1-01",
+      "failure_type": "文风失败",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "文风语言修复单",
+      "return_gate": "L1-01",
+      "reason": "文风语言问题进入 L2-02"
+    },
+    {
+      "route_id": "L15-R003",
+      "source_gate": "L1-01",
+      "failure_type": "角色失败",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-03",
+      "repair_product": "角色心理修复单",
+      "return_gate": "L1-01",
+      "reason": "角色心理问题进入 L2-03"
+    },
+    {
+      "route_id": "L15-R004",
+      "source_gate": "L1-01",
+      "failure_type": "创意设定失败",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-04",
+      "repair_product": "创意设定修复单",
+      "return_gate": "L1-01",
+      "reason": "创意设定问题进入 L2-04"
+    },
+    {
+      "route_id": "L15-R005",
+      "source_gate": "L1-01",
+      "failure_type": "AI味失败",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "AI味问题清单 / 反胡优化稿",
+      "return_gate": "L1-01",
+      "reason": "AI味与文风语言问题进入 L2-02"
+    },
+    {
+      "route_id": "L15-R006",
+      "source_gate": "L1-01",
+      "failure_type": "技术护栏失败",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "工程技术护栏阻断记录",
+      "return_gate": "L1-01",
+      "reason": "L1-01 技术护栏为工程/真源问题，不进入 L2-06"
+    },
+    {
+      "route_id": "L15-R007",
+      "source_gate": "L1-01",
+      "failure_type": "输入不足",
+      "route_action": "INPUT_REQUIRED",
+      "target_module": null,
+      "repair_product": "补齐后的输入表",
+      "return_gate": "L1-01",
+      "reason": "基础输入不足，需补材料后回 L1-01"
+    },
+    {
+      "route_id": "L15-R008",
+      "source_gate": "L1-01",
+      "failure_type": "语言表达认知负担过高",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "语言表达降负担修正稿",
+      "return_gate": "L1-01",
+      "reason": "句段表达与信息组织负担进入 L2-02（预留类型）"
+    },
+    {
+      "route_id": "L15-R009",
+      "source_gate": "L1-01",
+      "failure_type": "人物状态冲突",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-06",
+      "repair_product": "人物状态一致性修复单",
+      "return_gate": "L1-01",
+      "reason": "故事内部人物状态冲突进入 L2-06"
+    },
+    {
+      "route_id": "L15-R010",
+      "source_gate": "L1-01",
+      "failure_type": "前后事实冲突",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-06",
+      "repair_product": "事实一致性修复单",
+      "return_gate": "L1-01",
+      "reason": "故事内部前后事实冲突进入 L2-06"
+    },
+    {
+      "route_id": "L15-R011",
+      "source_gate": "L1-01",
+      "failure_type": "世界规则继承冲突",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-06",
+      "repair_product": "世界规则继承修复单",
+      "return_gate": "L1-01",
+      "reason": "世界规则继承冲突进入 L2-06"
+    },
+    {
+      "route_id": "L15-R012",
+      "source_gate": "L1-01",
+      "failure_type": "关系与知情范围冲突",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-06",
+      "repair_product": "关系知情范围修复单",
+      "return_gate": "L1-01",
+      "reason": "关系与知情范围冲突进入 L2-06"
+    },
+    {
+      "route_id": "L15-R013",
+      "source_gate": "L1-01",
+      "failure_type": "章节状态回潮",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-06",
+      "repair_product": "章节状态继承修复单",
+      "return_gate": "L1-01",
+      "reason": "章节状态回潮进入 L2-06"
+    },
+    {
+      "route_id": "L15-R014",
+      "source_gate": "L1-02",
+      "failure_type": "E低：即时情绪反馈弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "即时情绪点重构表",
+      "return_gate": "L1-02",
+      "reason": "读者即时情绪反馈弱进入 L2-05"
+    },
+    {
+      "route_id": "L15-R015",
+      "source_gate": "L1-02",
+      "failure_type": "V低：未来价值预期弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "未来预期修正表 / 章末钩子稿",
+      "return_gate": "L1-02",
+      "reason": "读者未来价值预期弱进入 L2-05"
+    },
+    {
+      "route_id": "L15-R016",
+      "source_gate": "L1-02",
+      "failure_type": "C高：认知成本过高",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "认知成本删减表",
+      "return_gate": "L1-02",
+      "reason": "指定阅读窗口内读者处理负担过高，进入 L2-05"
+    },
+    {
+      "route_id": "L15-R017",
+      "source_gate": "L1-02",
+      "failure_type": "入口弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "开头入口修正稿",
+      "return_gate": "L1-02",
+      "reason": "正文入口体验弱进入 L2-05"
+    },
+    {
+      "route_id": "L15-R018",
+      "source_gate": "L1-02",
+      "failure_type": "章末弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "章末追读体验修正稿",
+      "return_gate": "L1-02",
+      "reason": "章末继续阅读动力弱属于读者体验窗口，进入 L2-05"
+    },
+    {
+      "route_id": "L15-R019",
+      "source_gate": "L1-02",
+      "failure_type": "弃读点明显",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "弃读点诊断表",
+      "return_gate": "L1-02",
+      "reason": "正文弃读风险进入 L2-05"
+    },
+    {
+      "route_id": "L15-R020",
+      "source_gate": "L1-02",
+      "failure_type": "传播点弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "传播点修正表",
+      "return_gate": "L1-02",
+      "reason": "正文传播点弱进入 L2-05（非平台运营数据）",
+      "activation_status": "RESERVED_NOT_IMPLEMENTED"
+    },
+    {
+      "route_id": "L15-R021",
+      "source_gate": "L1-02",
+      "failure_type": "付费预期弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "付费预期修正表",
+      "return_gate": "L1-02",
+      "reason": "正文付费预期弱进入 L2-05（非实际收入数据）",
+      "activation_status": "RESERVED_NOT_IMPLEMENTED"
+    },
+    {
+      "route_id": "L15-R022",
+      "source_gate": "L1-02",
+      "failure_type": "L1-01未通过",
+      "route_action": "RETURN_TO_L1",
+      "target_module": null,
+      "repair_product": "L1-01 复验结果",
+      "return_gate": "L1-01",
+      "reason": "前置 L1-01 未通过，回 L1-01"
+    },
+    {
+      "route_id": "L15-R023",
+      "source_gate": "L1-03",
+      "failure_type": "字数不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-01",
+      "repair_product": "发布稿扩写版",
+      "return_gate": "L1-03",
+      "reason": "发布体量不足的结构扩写进入 L2-01"
+    },
+    {
+      "route_id": "L15-R024",
+      "source_gate": "L1-03",
+      "failure_type": "字数超出默认发布体量",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "压缩 / 拆章风险表",
+      "return_gate": "L1-03",
+      "reason": "发布体量超限的语言压缩进入 L2-02"
+    },
+    {
+      "route_id": "L15-R025",
+      "source_gate": "L1-03",
+      "failure_type": "当章收益不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "当章收益修正表",
+      "return_gate": "L1-03",
+      "reason": "当章读者收益不足进入 L2-05"
+    },
+    {
+      "route_id": "L15-R026",
+      "source_gate": "L1-03",
+      "failure_type": "章末追读弱",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "章末追读重写稿",
+      "return_gate": "L1-03",
+      "reason": "章末追读收益弱属于读者体验窗口，进入 L2-05"
+    },
+    {
+      "route_id": "L15-R027",
+      "source_gate": "L1-03",
+      "failure_type": "认知成本过高",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "降密度修正稿",
+      "return_gate": "L1-03",
+      "reason": "发布窗口内表达密度过高进入 L2-02"
+    },
+    {
+      "route_id": "L15-R028",
+      "source_gate": "L1-03",
+      "failure_type": "功能锁失败",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "功能锁工程阻断记录",
+      "return_gate": "L1-03",
+      "reason": "功能锁失败属于工程技术问题，不进入 L2"
+    },
+    {
+      "route_id": "L15-R029",
+      "source_gate": "L1-03",
+      "failure_type": "投入意愿不足",
+      "route_action": "RETURN_TO_L1",
+      "target_module": null,
+      "repair_product": "L1-02 复验结果",
+      "return_gate": "L1-02",
+      "reason": "投入意愿不足回 L1-02"
+    },
+    {
+      "route_id": "L15-R030",
+      "source_gate": "L1-03",
+      "failure_type": "修改超过 2 轮仍不通过",
+      "route_action": "MANUAL_REVIEW",
+      "target_module": null,
+      "repair_product": "结构复查记录",
+      "return_gate": "L1-03",
+      "reason": "修改轮次超限需人工复核"
+    },
+    {
+      "route_id": "L15-R031",
+      "source_gate": "L1-03",
+      "failure_type": "发布锁状态不明",
+      "route_action": "MANUAL_REVIEW",
+      "target_module": null,
+      "repair_product": "完整发布验收表",
+      "return_gate": "L1-03",
+      "reason": "发布锁状态不明需人工复核"
+    },
+    {
+      "route_id": "L15-R032",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计-因果不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-01",
+      "repair_product": "叙事因果修复单",
+      "return_gate": "L1-01",
+      "reason": "语义因果不足进入 L2-01"
+    },
+    {
+      "route_id": "L15-R033",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计-动机不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-03",
+      "repair_product": "角色动机修复单",
+      "return_gate": "L1-01",
+      "reason": "语义动机不足进入 L2-03"
+    },
+    {
+      "route_id": "L15-R034",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计-冲突不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-01",
+      "repair_product": "叙事冲突修复单",
+      "return_gate": "L1-01",
+      "reason": "语义冲突不足进入 L2-01"
+    },
+    {
+      "route_id": "L15-R035",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计-读者收益不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "读者收益修复单",
+      "return_gate": "L1-02",
+      "reason": "语义读者收益不足进入 L2-05"
+    },
+    {
+      "route_id": "L15-R036",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计-认知成本不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-02",
+      "repair_product": "语言表达降负担修正稿",
+      "return_gate": "L1-01",
+      "reason": "语义认知成本为表达组织负担，进入 L2-02"
+    },
+    {
+      "route_id": "L15-R037",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计-章末追读不足",
+      "route_action": "ROUTE_TO_L2",
+      "target_module": "L2-05",
+      "repair_product": "章末追读修复单",
+      "return_gate": "L1-02",
+      "reason": "语义章末追读不足进入 L2-05"
+    },
+    {
+      "route_id": "L15-R038",
+      "source_gate": "L1-SEM",
+      "failure_type": "语义审计不可用",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "语义审计服务阻断记录",
+      "return_gate": "L1-00",
+      "reason": "语义审计服务不可用属于工程技术阻断"
+    },
+    {
+      "route_id": "L15-R039",
+      "source_gate": "L1-00",
+      "failure_type": "路径越界",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "路径安全阻断记录",
+      "return_gate": "L1-00",
+      "reason": "路径越界为工程技术问题"
+    },
+    {
+      "route_id": "L15-R040",
+      "source_gate": "L1-00",
+      "failure_type": "Schema错误",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "Schema阻断记录",
+      "return_gate": "L1-00",
+      "reason": "Schema错误为工程技术问题"
+    },
+    {
+      "route_id": "L15-R041",
+      "source_gate": "L1-00",
+      "failure_type": "API不可用",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "API阻断记录",
+      "return_gate": "L1-00",
+      "reason": "API不可用为工程技术问题"
+    },
+    {
+      "route_id": "L15-R042",
+      "source_gate": "L1-00",
+      "failure_type": "文件缺失",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "文件缺失阻断记录",
+      "return_gate": "L1-00",
+      "reason": "文件缺失为工程技术问题"
+    },
+    {
+      "route_id": "L15-R043",
+      "source_gate": "L1-00",
+      "failure_type": "Markdown污染",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "Markdown污染阻断记录",
+      "return_gate": "L1-00",
+      "reason": "Markdown污染为工程治理问题"
+    },
+    {
+      "route_id": "L15-R044",
+      "source_gate": "L1-00",
+      "failure_type": "真源冲突",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "真源冲突阻断记录",
+      "return_gate": "L1-00",
+      "reason": "真源冲突为工程治理问题"
+    },
+    {
+      "route_id": "L15-R045",
+      "source_gate": "L1-00",
+      "failure_type": "项目加载失败",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "项目加载阻断记录",
+      "return_gate": "L1-00",
+      "reason": "项目加载失败为工程技术问题"
+    },
+    {
+      "route_id": "L15-R046",
+      "source_gate": "L1-00",
+      "failure_type": "输出覆盖风险",
+      "route_action": "BLOCKED_TECHNICAL",
+      "target_module": null,
+      "repair_product": "输出覆盖风险阻断记录",
+      "return_gate": "L1-00",
+      "reason": "输出覆盖风险为工程技术问题"
+    }
+  ]
+}

@@ -22,6 +22,11 @@ class 失败输入:
     候选模块: str
     回流验收位置: str
     修复方向: str
+    routeable: bool = False
+    route_reason: str = ""
+    source_component: str = ""
+    decision_role: str = ""
+    blocking: bool = False
 
 
 @dataclass

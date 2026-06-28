@@ -1,0 +1,92 @@
+{
+  "schema_version": "xcue.l2-real-api-pilot/2.0",
+  "pilot_id": "L2_REAL_API_PILOT_V2",
+  "status": "READY",
+  "case_count": 12,
+  "cases": [
+    {
+      "case_id": "L2V2-001",
+      "target_module": "L2-01",
+      "case_type": "A",
+      "case_dir": "cases/L2V2-001",
+      "v1_ref": "L2P-001"
+    },
+    {
+      "case_id": "L2V2-002",
+      "target_module": "L2-01",
+      "case_type": "B",
+      "case_dir": "cases/L2V2-002",
+      "v1_ref": "L2P-002"
+    },
+    {
+      "case_id": "L2V2-003",
+      "target_module": "L2-02",
+      "case_type": "A",
+      "case_dir": "cases/L2V2-003",
+      "v1_ref": "L2P-003"
+    },
+    {
+      "case_id": "L2V2-004",
+      "target_module": "L2-02",
+      "case_type": "B",
+      "case_dir": "cases/L2V2-004",
+      "v1_ref": "L2P-004"
+    },
+    {
+      "case_id": "L2V2-005",
+      "target_module": "L2-03",
+      "case_type": "A",
+      "case_dir": "cases/L2V2-005",
+      "v1_ref": "L2P-005"
+    },
+    {
+      "case_id": "L2V2-006",
+      "target_module": "L2-03",
+      "case_type": "B",
+      "case_dir": "cases/L2V2-006",
+      "v1_ref": "L2P-006"
+    },
+    {
+      "case_id": "L2V2-007",
+      "target_module": "L2-04",
+      "case_type": "A",
+      "case_dir": "cases/L2V2-007",
+      "v1_ref": "L2P-007"
+    },
+    {
+      "case_id": "L2V2-008",
+      "target_module": "L2-04",
+      "case_type": "B",
+      "case_dir": "cases/L2V2-008",
+      "v1_ref": "L2P-008"
+    },
+    {
+      "case_id": "L2V2-009",
+      "target_module": "L2-05",
+      "case_type": "A",
+      "case_dir": "cases/L2V2-009",
+      "v1_ref": "L2P-009"
+    },
+    {
+      "case_id": "L2V2-010",
+      "target_module": "L2-05",
+      "case_type": "B",
+      "case_dir": "cases/L2V2-010",
+      "v1_ref": "L2P-010"
+    },
+    {
+      "case_id": "L2V2-011",
+      "target_module": "L2-06",
+      "case_type": "A",
+      "case_dir": "cases/L2V2-011",
+      "v1_ref": "L2P-011"
+    },
+    {
+      "case_id": "L2V2-012",
+      "target_module": "L2-06",
+      "case_type": "B",
+      "case_dir": "cases/L2V2-012",
+      "v1_ref": "L2P-012"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "L2P-011",
+  "target_module": "L2-06",
+  "case_type": "A",
+  "expected_issue_present": true,
+  "acceptable_root_causes": [
+    "事实冲突",
+    "位置互斥",
+    "双来源不一致"
+  ],
+  "required_evidence_region": [
+    "城北",
+    "城南",
+    "林泽"
+  ],
+  "forbidden_diagnoses": [
+    "ALLOWED_CHANGE",
+    "文风"
+  ],
+  "expected_reroute": false,
+  "minimum_action_requirements": [
+    "对齐位置事实"
+  ],
+  "human_notes": "A类：同时声明城北与城南，无时间桥梁。"
+}

@@ -8,9 +8,8 @@ from 修复单适配 import 诊断计划转修复单
 from 规则压力诊断 import 执行规则压力诊断
 from 设定上下文 import 构造设定上下文
 from 设定修复规划 import 模块细节, 规划设定修复
-from 设定证据校验 import 校验设定响应
+from 设定证据校验 import 提取校验错误类型, 校验设定响应, 校验设定证据引用
 from 通用错误 import 能力诊断错误
-from 通用证据定位 import 校验通用证据引用
 from 能力标准解析 import 能力规则
 
 MODULE_ID = "L2-04"
@@ -55,15 +54,21 @@ def 安全生成修复单(
             raise 能力诊断错误(f"章节不存在：{resolved}", kind="CHAPTER_PATH_MISSING")
         ctx = 构造设定上下文(resolved, item, repo_root=repo_root, ir_dir=_resolve_ir(resolved, repo_root))
         parsed, diagnosis = 执行规则压力诊断(ctx, item, client=client)
-        validated, base_errors = 校验通用证据引用(parsed, ctx.正文语料)
-        errors = base_errors + 校验设定响应(parsed, ctx.正文语料, diagnosis)
+        validated, base_errors = 校验设定证据引用(parsed, ctx)
+        errors = base_errors + 校验设定响应(parsed, ctx, diagnosis)
         if errors:
-            raise 能力诊断错误("；".join(errors[:6]), kind="EVIDENCE_INVALID")
+            kind = 提取校验错误类型(errors)
+            raise 能力诊断错误("；".join(errors[:6]), kind=kind)
         plan = 规划设定修复(diagnosis, parsed)
         return (
             诊断计划转修复单(
-                item, rules, module_id=MODULE_ID, fix_form_type=FIX_FORM,
-                root_cause=diagnosis.root_cause, validated_quotes=validated, plan=plan,
+                item,
+                rules,
+                module_id=MODULE_ID,
+                fix_form_type=FIX_FORM,
+                root_cause=diagnosis.root_cause,
+                validated_quotes=validated,
+                plan=plan,
                 module_detail=模块细节(diagnosis),
             ),
             None,

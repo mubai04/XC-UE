@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l15-route-decision/v2",
+  "title": "L1.5 路由决策 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L1_5路由决策编号",
+    "来源失败包编号",
+    "主发现引用",
+    "次级发现引用",
+    "路由规则编号",
+    "路由动作",
+    "修复产物类型",
+    "回流闸门",
+    "路由原因",
+    "路由状态"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l15-route-decision/2.0"
+    },
+    "L1_5路由决策编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源失败包编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "主发现引用": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#upstream-reference"
+    },
+    "次级发现引用": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#upstream-reference"
+      }
+    },
+    "路由规则编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "路由动作": {
+      "type": "string",
+      "enum": [
+        "ROUTE_TO_L2",
+        "RETURN_TO_L1",
+        "INPUT_REQUIRED",
+        "MANUAL_REVIEW",
+        "BLOCKED_TECHNICAL",
+        "AUDIT_BLOCKED",
+        "SCREENING_PASS"
+      ]
+    },
+    "目标模块": {
+      "type": "string",
+      "maxLength": 32,
+      "pattern": "^L2-\\d{2}$|^$"
+    },
+    "修复产物类型": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "回流闸门": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#return-gate-reference"
+    },
+    "路由原因": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "路由状态": {
+      "type": "string",
+      "enum": [
+        "ROUTED",
+        "RETURN_TO_L1",
+        "INPUT_REQUIRED",
+        "MANUAL_REVIEW",
+        "BLOCKED_TECHNICAL"
+      ]
+    },
+    "人工复核原因": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "路由规则来源": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#route-rule-source"
+    },
+    "blockers": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "路由状态": {
+            "const": "ROUTED"
+          }
+        },
+        "required": [
+          "路由状态"
+        ]
+      },
+      "then": {
+        "required": [
+          "目标模块"
+        ],
+        "properties": {
+          "目标模块": {
+            "pattern": "^L2-\\d{2}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "路由状态": {
+            "enum": [
+              "RETURN_TO_L1",
+              "INPUT_REQUIRED",
+              "MANUAL_REVIEW",
+              "BLOCKED_TECHNICAL"
+            ]
+          }
+        },
+        "required": [
+          "路由状态"
+        ]
+      },
+      "then": {
+        "properties": {
+          "目标模块": {
+            "const": ""
+          }
+        }
+      }
+    }
+  ]
+}

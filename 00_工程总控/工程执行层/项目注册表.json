@@ -4,6 +4,12 @@
   "projects": {
     "TP-001": {
       "project_root": "70_测试项目/TP-001_CleanHarness_IR_Runtime"
+    },
+    "YYL-001": {
+      "project_root": "70_测试项目/YYL-烟雨楼"
+    },
+    "ZDXB-001": {
+      "project_root": "70_测试项目/ZDXB-001_准点下班怎么了"
     }
   }
 }

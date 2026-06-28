@@ -46,6 +46,8 @@ from L2路径注册 import 注册L2子路径
 
 from L2_L15执行 import 从L15报告提取执行上下文, 读L15报告
 
+from L2输入边界 import 校验正式入口模式, 校验裸章节入口
+
 from L2报告 import 写报告, 拒绝覆盖既有报告
 
 from L2模型 import L2报告
@@ -156,7 +158,9 @@ def main() -> int:
 
     parser.add_argument("--l15-report", default=None, help="L1.5 路由报告 JSON 路径（正式输入）。")
 
-    parser.add_argument("--failure-packet", default=None, help="[deprecated] 旧 L1 failure packet 直连入口。")
+    parser.add_argument("--failure-packet", default=None, help="[LEGACY_EXPLICIT_ONLY] 旧 L1 failure packet 直连入口，非正式流水线。")
+
+    parser.add_argument("--chapter", default=None, help="[拒绝] 章节正文不能单独启动 L2。")
 
     parser.add_argument("--run-id", default=None, help="报告编号。")
 
@@ -176,19 +180,33 @@ def main() -> int:
 
     if not args.l15_report and not args.failure_packet:
 
-        print(json.dumps({"error": "L2 必须提供 --l15-report（正式）或 --failure-packet（deprecated）"}, ensure_ascii=False), file=sys.stderr)
+        print(json.dumps({"error": "L2 必须提供 --l15-report（正式）或 --failure-packet（LEGACY_EXPLICIT_ONLY）"}, ensure_ascii=False), file=sys.stderr)
 
         return int(ExitCode.INPUT_INVALID)
 
 
 
-    deprecated_mode = bool(args.failure_packet and not args.l15_report)
+    try:
+
+        校验裸章节入口(chapter_path=args.chapter, l15_report_path=args.l15_report)
+
+        entry_mode = 校验正式入口模式(l15_report=bool(args.l15_report), failure_packet_only=bool(args.failure_packet and not args.l15_report))
+
+    except 工程错误 as exc:
+
+        打印错误信封(exc, stage="L2", run_id=locals().get("run_id", ""), path="")
+
+        return int(exc.exit_code)
+
+
+
+    deprecated_mode = entry_mode == "LEGACY_EXPLICIT_ONLY"
 
     if deprecated_mode:
 
         warnings.warn(
 
-            "L2 --failure-packet 已 deprecated：正式流水线必须经过 L1.5；此路径不得产生正式执行成功状态。",
+            "L2 --failure-packet 为 LEGACY_EXPLICIT_ONLY：正式流水线必须经过 L1.5 --l15-report；不得自动补造路由报告。",
 
             DeprecationWarning,
 
@@ -198,7 +216,7 @@ def main() -> int:
 
         print(
 
-            "DEPRECATED: --failure-packet bypasses L1.5; formal pipeline must use --l15-report.",
+            "LEGACY_EXPLICIT_ONLY: --failure-packet bypasses L1.5; formal pipeline must use --l15-report.",
 
             file=sys.stderr,
 
@@ -332,7 +350,7 @@ def main() -> int:
 
         if not deprecated_mode
 
-        else "DEPRECATED failure-packet 直连：仅供兼容；不得用于正式流水线。"
+        else "LEGACY_EXPLICIT_ONLY failure-packet 直连：仅供显式兼容；不得用于正式流水线。"
 
     )
 

@@ -1,0 +1,121 @@
+{
+  "case_id": "L2P-009",
+  "module_id": "L2-05",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:50:33.727137+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-009\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-009"
+  },
+  "raw_response": "{\"id\":\"c53755ee-0139-4925-b3e5-519f5a6e90dd\",\"object\":\"chat.completion\",\"created\":1782618612,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\",\\n      \\\"modification_target\\\": \\\"将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。\\\"\\n    },\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"主角在工具间找到备用绳梯，却未改变被困处境。\\\",\\n      \\\"modification_target\\\": \\\"让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"删除重复广播，让巡逻员口述线索：‘北渡因昨夜瘴气封锁，南渡明早开？但船只有一艘’，制造紧迫感。\\\",\\n    \\\"绳梯出现后，主角据此发现渡口高墙可翻，但需众人合力，引发合作/冲突，改变处境。\\\",\\n    \\\"结尾添加新危机：天色全黑时，远处传来非人嘶吼，人群开始骚动，暗示渡口并非安全之地。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"开头三小节内给出北渡关闭的原因或替代方案，避免重复车轱辘话。\\\",\\n    \\\"绳梯出现章节能提供至少一个情节转折（如攀爬尝试、守卫阻挠）。\\\",\\n    \\\"章末有明确悬念或威胁，驱动读者点开下一章。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"公告写：今日不开北渡。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 2,\\n      \\\"quote\\\": \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"中段，主角在工具间找到备用绳梯，却未改变被困处境。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": true\\n}\",\"reasoning_content\":\"我们被要求输出JSON，不要输出其他内容。首先，分析输入数据。failure_type是\\\"E低：即时情绪反馈弱\\\"。我们需要基于reading_stages, entry_promises, immediate_rewards, cognitive_loads, repeat_info, ending_momentum判断体验风险，给出根因、风险、修复动作、验收标准、证据引用，以及是否需要needs_reroute。\\n\\n首先，梳理关键问题：\\n\\n- failure_type: E低：即时情绪反馈弱\\n- reading_stages: 开头、前段、中段、末段。观察到开头1-6段：公告不开北渡，无解释，主角被推搡不知下一步；段落二广播重复关闭；段落三找到绳梯但未改变处境；前段7-13：日暮人群散去，主角仍不知是否改走南渡，章末没有新问题钩住，收束发软；中段14-19：广播再次重复，找到绳梯但未改变；末段20-26：夜色细节，没有新问题，重复场景细节。\\n- entry_promises: 开头承诺了“渡口人群拥挤”、“公告不开北渡”、“无人解释原因，主角不知下一步”，但这是悬念设置，却迟迟没有推进。\\n- immediate_rewards: 两个奖励：1)在开头（position_ratio 0.192）找到备用绳梯，但未改变被困处境；2)中段（0.615）找到绳梯，却未改变被困处境。这两个几乎是重复奖励，且都没有带来实质进展或情绪反馈，奖励无效。\\n- cognitive_loads: 两个长句信息堆叠，位于24和26段，都是场景细节收束，没有推动情节，增加认知负荷。\\n- repeat_info: 大量重复信息：“公告写今日不开北渡”重复，“北渡关闭”重复，“绳梯却未改变被困处境”重复，“日暮人群散去一半”重复，“不知是否改走南渡”重复，以及段落延拓重复。\\n- ending_momentum: 末段只有场景细节收束，没有钩子或悬念，结尾乏力。\\n- failure_evidence: paragraph 1 quote \\\"北渡关闭\\\"。\\n\\n因此，核心问题是：入口承诺了困境之后，没有持续给出有意义的进展或反馈，重复无效信息，奖励无实际作用，结尾无悬念，导致读者情绪反馈弱，体验差。\\n\\n我们需要构造JSON。root_cause应简洁概括问题。experience_risks要列出风险类型、位置、修改目标。fix_actions提出修复动作。acceptance_criteria列出验收条件。evidence_quotes提供证据。needs_reroute判断是否需要重路由，这里很可能需要，因为体验风险高，可能导致弃读。\\n\\nneeds_reroute: true? 评估：阅读中风风险高，有弃读可能，所以需要重路由转向修复。\\n\\n根因：入口困境承诺未得到及时推进和满足，重复信息堆积，奖励无效，结尾无钩子，导致即时情绪反馈弱。\\n\\n风险类型可以设为“弃读风险”，位置引用例如“公告写：今日不开北渡”等。修改目标：将重复信息转化为递进问题，让绳梯带来变化，结尾设置悬念。\\n\\n修复动作：1. 将重复广播和公告转化为新的信息（如关闭原因或替代路线）；2. 让绳梯成为关键道具，引发后续行动；3. 结尾加入新疑问或威胁。\\n\\n验收：读者在阅读中感受到持续的悬念和进展，绳梯出现后改变处境，结尾产生追读欲望。\\n\\nevidence_quotes：可以引用重复信息，如“广播通知：北渡关闭。巡逻员又说：北渡已经关闭。”（重复关闭）、找到绳梯却未改变等。\\n\\n注意输出格式：{\\\"root_cause\\\": \\\"...\\\", \\\"experience_risks\\\": [...], \\\"fix_actions\\\": [...], \\\"acceptance_criteria\\\": [...], \\\"evidence_quotes\\\": [...], \\\"needs_reroute\\\": bool}\\n\\n开始构造。\\n\\nroot_cause: \\\"开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。\\\"\\n\\nexperience_risks: \\n- risk_type: \\\"弃读\\\", location_quote: \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\", modification_target: \\\"将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。\\\"\\n- risk_type: \\\"弃读\\\", location_quote: \\\"主角在工具间找到备用绳梯，却未改变被困处境。\\\", modification_target: \\\"让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。\\\"\\n\\nfix_actions: \\n- \\\"删除重复广播，让巡逻员口述线索：'北渡因昨夜瘴气封锁，南渡明早开？但船只有一艘'，制造紧迫感。\\\"\\n- \\\"绳梯出现后，主角据此发现渡口高墙可翻，但需众人合力，引发合作/冲突，改变处境。\\\"\\n- \\\"结尾添加新危机：天色全黑时，远处传来非人嘶吼，人群开始骚动，暗示渡口并非安全之地。\\\"\\n\\nacceptance_criteria:\\n- \\\"开头三小节内给出北渡关闭的原因或替代方案，避免重复车轱辘话。\\\"\\n- \\\"绳梯出现章节能提供至少一个情节转折（如攀爬尝试、守卫阻挠）。\\\"\\n- \\\"章末有明确悬念或威胁，驱动读者点开下一章。\\\"\\n\\nevidence_quotes: 取几个代表性重复和无效奖励证据。\\n- {\\\"paragraph\\\": 1, \\\"quote\\\": \\\"公告写：今日不开北渡。\\\"}\\n- {\\\"paragraph\\\": 2, \\\"quote\\\": \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\"}\\n- {\\\"paragraph\\\": 5, \\\"quote\\\": \\\"中段，主角在工具间找到备用绳梯，却未改变被困处境。\\\"}\\n\\nneeds_reroute: true，因为需要修复，避免读者流失。\\n\\n最终输出JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2383,\"completion_tokens\":1762,\"total_tokens\":4145,\"prompt_tokens_details\":{\"cached_tokens\":2304},\"completion_tokens_details\":{\"reasoning_tokens\":1281},\"prompt_cache_hit_tokens\":2304,\"prompt_cache_miss_tokens\":79},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 市场体验修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-05",
+    "输入问题": "L2P-009 R5A pilot | 根因：开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。 | 模块细节：弃读→将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。；弃读→让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。；认知负担:长句信息堆叠",
+    "主失败类型": "E低：即时情绪反馈弱",
+    "次失败类型": "P2",
+    "修复动作": "弃读：将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。 / 弃读：让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。 / 入口承诺：在 P1 强化读者预期 / 末段推动力：在 P26 留下可追读问题",
+    "修复产物": "加强钩子",
+    "验收问题": "在「广播通知：北渡关闭。…」读者可感知将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。；在「主角在工具间找到备用…」读者可感知让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。；首段摘句「清晨，渡口人群拥挤。…」形成可追踪承诺；章末摘句「余下篇幅以场景细节收束：…」驱动继续阅读",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "是",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-05",
+    "规则编号": "P2",
+    "规则依据": "开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。 | 修改范围：阅读阶段局部 | 禁止：核心情节事实",
+    "标准动作": [
+      "弃读：将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。",
+      "弃读：让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。",
+      "入口承诺：在 P1 强化读者预期",
+      "末段推动力：在 P26 留下可追读问题"
+    ],
+    "标准验收": [
+      "在「广播通知：北渡关闭。…」读者可感知将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。",
+      "在「主角在工具间找到备用…」读者可感知让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。",
+      "首段摘句「清晨，渡口人群拥挤。…」形成可追踪承诺",
+      "章末摘句「余下篇幅以场景细节收束：…」驱动继续阅读"
+    ],
+    "rule_id": "L2-05:P2",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 1,
+        "摘句": "公告写：今日不开北渡。"
+      },
+      {
+        "段落": 2,
+        "摘句": "广播通知：北渡关闭。巡逻员又说：北渡已经关闭。"
+      },
+      {
+        "段落": 5,
+        "摘句": "中段，主角在工具间找到备用绳梯，却未改变被困处境。"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 22290.599700063467,
+  "token_usage": {
+    "prompt_tokens": 2383,
+    "completion_tokens": 1762,
+    "total_tokens": 4145,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1281
+    },
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 79
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"root_cause\": \"开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。\",\n  \"experience_risks\": [\n    {\n      \"risk_type\": \"弃读\",\n      \"location_quote\": \"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\",\n      \"modification_target\": \"将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。\"\n    },\n    {\n      \"risk_type\": \"弃读\",\n      \"location_quote\": \"主角在工具间找到备用绳梯，却未改变被困处境。\",\n      \"modification_target\": \"让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。\"\n    }\n  ],\n  \"fix_actions\": [\n    \"删除重复广播，让巡逻员口述线索：‘北渡因昨夜瘴气封锁，南渡明早开？但船只有一艘’，制造紧迫感。\",\n    \"绳梯出现后，主角据此发现渡口高墙可翻，但需众人合力，引发合作/冲突，改变处境。\",\n    \"结尾添加新危机：天色全黑时，远处传来非人嘶吼，人群开始骚动，暗示渡口并非安全之地。\"\n  ],\n  \"acceptance_criteria\": [\n    \"开头三小节内给出北渡关闭的原因或替代方案，避免重复车轱辘话。\",\n    \"绳梯出现章节能提供至少一个情节转折（如攀爬尝试、守卫阻挠）。\",\n    \"章末有明确悬念或威胁，驱动读者点开下一章。\"\n  ],\n  \"evidence_quotes\": [\n    {\n      \"paragraph\": 1,\n      \"quote\": \"公告写：今日不开北渡。\"\n    },\n    {\n      \"paragraph\": 2,\n      \"quote\": \"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\"\n    },\n    {\n      \"paragraph\": 5,\n      \"quote\": \"中段，主角在工具间找到备用绳梯，却未改变被困处境。\"\n    }\n  ],\n  \"needs_reroute\": true\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"c53755ee-0139-4925-b3e5-519f5a6e90dd\",\"object\":\"chat.completion\",\"created\":1782618612,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\",\\n      \\\"modification_target\\\": \\\"将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。\\\"\\n    },\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"主角在工具间找到备用绳梯，却未改变被困处境。\\\",\\n      \\\"modification_target\\\": \\\"让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"删除重复广播，让巡逻员口述线索：‘北渡因昨夜瘴气封锁，南渡明早开？但船只有一艘’，制造紧迫感。\\\",\\n    \\\"绳梯出现后，主角据此发现渡口高墙可翻，但需众人合力，引发合作/冲突，改变处境。\\\",\\n    \\\"结尾添加新危机：天色全黑时，远处传来非人嘶吼，人群开始骚动，暗示渡口并非安全之地。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"开头三小节内给出北渡关闭的原因或替代方案，避免重复车轱辘话。\\\",\\n    \\\"绳梯出现章节能提供至少一个情节转折（如攀爬尝试、守卫阻挠）。\\\",\\n    \\\"章末有明确悬念或威胁，驱动读者点开下一章。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"公告写：今日不开北渡。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 2,\\n      \\\"quote\\\": \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"中段，主角在工具间找到备用绳梯，却未改变被困处境。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": true\\n}\",\"reasoning_content\":\"我们被要求输出JSON，不要输出其他内容。首先，分析输入数据。failure_type是\\\"E低：即时情绪反馈弱\\\"。我们需要基于reading_stages, entry_promises, immediate_rewards, cognitive_loads, repeat_info, ending_momentum判断体验风险，给出根因、风险、修复动作、验收标准、证据引用，以及是否需要needs_reroute。\\n\\n首先，梳理关键问题：\\n\\n- failure_type: E低：即时情绪反馈弱\\n- reading_stages: 开头、前段、中段、末段。观察到开头1-6段：公告不开北渡，无解释，主角被推搡不知下一步；段落二广播重复关闭；段落三找到绳梯但未改变处境；前段7-13：日暮人群散去，主角仍不知是否改走南渡，章末没有新问题钩住，收束发软；中段14-19：广播再次重复，找到绳梯但未改变；末段20-26：夜色细节，没有新问题，重复场景细节。\\n- entry_promises: 开头承诺了“渡口人群拥挤”、“公告不开北渡”、“无人解释原因，主角不知下一步”，但这是悬念设置，却迟迟没有推进。\\n- immediate_rewards: 两个奖励：1)在开头（position_ratio 0.192）找到备用绳梯，但未改变被困处境；2)中段（0.615）找到绳梯，却未改变被困处境。这两个几乎是重复奖励，且都没有带来实质进展或情绪反馈，奖励无效。\\n- cognitive_loads: 两个长句信息堆叠，位于24和26段，都是场景细节收束，没有推动情节，增加认知负荷。\\n- repeat_info: 大量重复信息：“公告写今日不开北渡”重复，“北渡关闭”重复，“绳梯却未改变被困处境”重复，“日暮人群散去一半”重复，“不知是否改走南渡”重复，以及段落延拓重复。\\n- ending_momentum: 末段只有场景细节收束，没有钩子或悬念，结尾乏力。\\n- failure_evidence: paragraph 1 quote \\\"北渡关闭\\\"。\\n\\n因此，核心问题是：入口承诺了困境之后，没有持续给出有意义的进展或反馈，重复无效信息，奖励无实际作用，结尾无悬念，导致读者情绪反馈弱，体验差。\\n\\n我们需要构造JSON。root_cause应简洁概括问题。experience_risks要列出风险类型、位置、修改目标。fix_actions提出修复动作。acceptance_criteria列出验收条件。evidence_quotes提供证据。needs_reroute判断是否需要重路由，这里很可能需要，因为体验风险高，可能导致弃读。\\n\\nneeds_reroute: true? 评估：阅读中风风险高，有弃读可能，所以需要重路由转向修复。\\n\\n根因：入口困境承诺未得到及时推进和满足，重复信息堆积，奖励无效，结尾无钩子，导致即时情绪反馈弱。\\n\\n风险类型可以设为“弃读风险”，位置引用例如“公告写：今日不开北渡”等。修改目标：将重复信息转化为递进问题，让绳梯带来变化，结尾设置悬念。\\n\\n修复动作：1. 将重复广播和公告转化为新的信息（如关闭原因或替代路线）；2. 让绳梯成为关键道具，引发后续行动；3. 结尾加入新疑问或威胁。\\n\\n验收：读者在阅读中感受到持续的悬念和进展，绳梯出现后改变处境，结尾产生追读欲望。\\n\\nevidence_quotes：可以引用重复信息，如“广播通知：北渡关闭。巡逻员又说：北渡已经关闭。”（重复关闭）、找到绳梯却未改变等。\\n\\n注意输出格式：{\\\"root_cause\\\": \\\"...\\\", \\\"experience_risks\\\": [...], \\\"fix_actions\\\": [...], \\\"acceptance_criteria\\\": [...], \\\"evidence_quotes\\\": [...], \\\"needs_reroute\\\": bool}\\n\\n开始构造。\\n\\nroot_cause: \\\"开篇困境承诺后，未提供有效进展与即时反馈，关键信息重复堆积，奖励无效，结尾缺乏悬念，导致读者情绪持续低迷。\\\"\\n\\nexperience_risks: \\n- risk_type: \\\"弃读\\\", location_quote: \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\", modification_target: \\\"将重复通知改为揭示关闭原因或提示替代路线，刺激读者好奇。\\\"\\n- risk_type: \\\"弃读\\\", location_quote: \\\"主角在工具间找到备用绳梯，却未改变被困处境。\\\", modification_target: \\\"让绳梯成为破局关键，如发现可攀爬点或引发新冲突，带来即时情绪上升。\\\"\\n\\nfix_actions: \\n- \\\"删除重复广播，让巡逻员口述线索：'北渡因昨夜瘴气封锁，南渡明早开？但船只有一艘'，制造紧迫感。\\\"\\n- \\\"绳梯出现后，主角据此发现渡口高墙可翻，但需众人合力，引发合作/冲突，改变处境。\\\"\\n- \\\"结尾添加新危机：天色全黑时，远处传来非人嘶吼，人群开始骚动，暗示渡口并非安全之地。\\\"\\n\\nacceptance_criteria:\\n- \\\"开头三小节内给出北渡关闭的原因或替代方案，避免重复车轱辘话。\\\"\\n- \\\"绳梯出现章节能提供至少一个情节转折（如攀爬尝试、守卫阻挠）。\\\"\\n- \\\"章末有明确悬念或威胁，驱动读者点开下一章。\\\"\\n\\nevidence_quotes: 取几个代表性重复和无效奖励证据。\\n- {\\\"paragraph\\\": 1, \\\"quote\\\": \\\"公告写：今日不开北渡。\\\"}\\n- {\\\"paragraph\\\": 2, \\\"quote\\\": \\\"广播通知：北渡关闭。巡逻员又说：北渡已经关闭。\\\"}\\n- {\\\"paragraph\\\": 5, \\\"quote\\\": \\\"中段，主角在工具间找到备用绳梯，却未改变被困处境。\\\"}\\n\\nneeds_reroute: true，因为需要修复，避免读者流失。\\n\\n最终输出JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2383,\"completion_tokens\":1762,\"total_tokens\":4145,\"prompt_tokens_details\":{\"cached_tokens\":2304},\"completion_tokens_details\":{\"reasoning_tokens\":1281},\"prompt_cache_hit_tokens\":2304,\"prompt_cache_miss_tokens\":79},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 22267.12169998791,
+      "token_usage": {
+        "prompt_tokens": 2383,
+        "completion_tokens": 1762,
+        "total_tokens": 4145,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1281
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 79
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

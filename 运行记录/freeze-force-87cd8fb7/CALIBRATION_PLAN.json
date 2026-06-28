@@ -1,9 +1,0 @@
-{
-  "schema_version": "xcue.l1-calibration-plan/1.0",
-  "phase": "2A",
-  "calibration_subset": [
-    "GS-001",
-    "GS-005"
-  ],
-  "notes": "Mutable control file — not part of golden_v1_hashes. R3 eval reads calibration_subset from this file, not manifest.json. Does not authorize label or chapter edits."
-}

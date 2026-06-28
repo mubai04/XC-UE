@@ -1,0 +1,35 @@
+{
+  "run_id": "L2R01-YYL-ch02-20260628-v2-L15",
+  "pipeline_run_id": "L2R01-YYL-ch02-20260628-v2",
+  "stage_run_id": "L2R01-YYL-ch02-20260628-v2-L15",
+  "source_failure_packet": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\审计纠偏_2026-06-26\\L2_01单模块真实修复_20260628\\runs\\L2R01-YYL-ch02-20260628-v2\\l1_original\\L2R01-YYL-ch02-20260628-v2-L1-ORIG_failure_packet.json",
+  "primary_failure": {
+    "闸门": "",
+    "名称": "",
+    "失败类型": "",
+    "说明": "",
+    "状态": "失败",
+    "严重级别": "error",
+    "候选模块": "",
+    "回流验收位置": "",
+    "修复方向": "",
+    "证据": []
+  },
+  "secondary_failures": [],
+  "target_module": "",
+  "repair_product": "",
+  "return_gate": "",
+  "route_rule_id": "SCREENING_PASS",
+  "route_rule_version": "xcue.l15-routing-rules/1.0",
+  "final_status": "RETURN_TO_L1",
+  "blockers": [
+    "SCREENING_PASS 不生成内容修复包"
+  ],
+  "routing_basis": "无内容修复项。",
+  "schema_version": "xcue.l15-route-report/1.0",
+  "extensions": {
+    "routing_rules_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\30_L1.5_路由矩阵层\\L1.5_路由规则.json",
+    "routing_rules_schema_version": "xcue.l15-routing-rules/1.0",
+    "route_action": "SCREENING_PASS"
+  }
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 from L2_L15执行 import 构建L15分配判断
-
+from L2输入边界 import 校验模块输入边界, 构建边界阻断判断
 from L2模型 import 失败输入, 接口判断, 修复单
 
 from 能力注册表 import 获取能力入口
@@ -249,7 +249,15 @@ def 执行L15分配模块(
 
         return [], [f"L2 越界改派：{item.候选模块} != {target_module}"], judgement, blocked
 
-
+    boundary = 校验模块输入边界(
+        target_module,
+        item,
+        chapter_path=chapter_path,
+        repo_root=repo_root,
+    )
+    if boundary.action != "OK":
+        blocked.append(构建边界阻断判断(item, target_module, boundary))
+        return [], [boundary.message], judgement, blocked
 
     resolved_chapter = Path(chapter_path) if chapter_path else None
 

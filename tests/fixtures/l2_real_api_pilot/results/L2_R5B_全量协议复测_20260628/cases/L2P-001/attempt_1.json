@@ -1,0 +1,122 @@
+{
+  "case_id": "L2P-001",
+  "module_id": "L2-01",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:46:32.869432+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-001\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-001"
+  },
+  "raw_response": "{\"id\":\"a9246e14-3125-4537-ba0b-06216a909fec\",\"object\":\"chat.completion\",\"created\":1782618369,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"root_cause\\\": \\\"角色从仓库到山顶观测台的移动缺乏任何过渡描写或因果解释，导致仓库线与观测台线空间割裂、事件链断裂，叙事无法收束。\\\",\\\"root_cause_evidence_indices\\\":[0,1,2,3],\\\"fix_actions\\\":[\\\"在侧门场景与观测台场景之间插入至少一个过渡段落，明确交代方照离开仓库、选择路径、移动过程及时间消耗，使空间转换可被读者追踪。\\\",\\\"为记忆缺失设置一个具体原因（如被袭击、药物作用、神秘指令），并在后续情节中以可验证的线索揭示，使“失忆”成为主动叙事元素而非空白跳过。\\\",\\\"重组章节结构，确保仓库的泥印、侧门线索与上山的靴痕形成物理因果链，例如让方照追踪泥印和靴痕上山，将发现观测台的过程与探查行为绑定。\\\"],\\\"acceptance_criteria\\\":[\\\"读者能从文本中连续追溯主角从仓库到观测台的移动路径，不再有跳跃或空白感。\\\",\\\"仓库线（货单、泥印、侧门）与观测台线（望远镜指向城北、信、陌生指令）在事件逻辑上交汇，形成明确的因果关系，而非两条平行未交的线索。\\\"],\\\"evidence_quotes\\\":[{\\\"paragraph\\\":4,\\\"quote\\\":\\\"方照站在山顶观测台，手里攥着一封陌生信。\\\"},{\\\"paragraph\\\":6,\\\"quote\\\":\\\"他不记得何时离开仓库，也不记得谁带他上山。\\\"},{\\\"paragraph\\\":10,\\\"quote\\\":\\\"他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。\\\"},{\\\"paragraph\\\":12,\\\"quote\\\":\\\"没有任何过渡说明他如何抵达。\\\"}],\\\"needs_reroute\\\":false}\",\"reasoning_content\":\"我们被要求输出JSON。需要诊断叙事结构故障。输入是failure_type: \\\"因果不收束\\\"，failure_evidence有一个段落1的quote。chapter_context提供了大量段落，其中段落1是标题“# 段落一”，真正故事从段落2开始。failure_evidence的quote是“方照站在山顶观测台”，在段落4中出现。实际上，input_evidence_status是OK，没有mismatch。\\n\\n我们需要生成root_cause，它基于chapter_context和failure_evidence，不能只重复failure_type。需要evidence_quotes非空，且必须能在输入正文中逐字找到。root_cause_evidence_indices列出依据的evidence_quotes下标。fix_actions具体可执行，acceptance_criteria具体。\\n\\n分析：failure_type是因果不收束，描述是L2P-001 R5A pilot，repair_direction是补因果桥梁。failure_evidence引用段落1 quote \\\"方照站在山顶观测台\\\"，但段落1是标题，实际quote在段落4。可能是个小错误，但输入证据状态OK，我们当作证据quote在段落4中。我们可以在evidence_quotes中使用输入的quote但正确指定段落。输入说paragraph: 1, quote: \\\"方照站在山顶观测台\\\"，但正文中段落4才有。检查input_evidence_mismatches为空，说明系统认为证据匹配。可能它找到了。我们看段落4：\\\"他推开侧门，货架倒塌的声响还在耳边。下一行却写：方照站在山顶观测台，手里攥着一封陌生信。\\\" 确实有\\\"方照站在山顶观测台\\\"。但输入的paragraph标为1，然而在chapter_context.paragraphs中，段落1的text是\\\"# 段落一\\\"，没有这句话。可能input_evidence_status为OK是因为系统处理了。我们最好在evidence_quotes中使用正确的段落号。要求“每条quote必须能在输入正文中逐字找到”，所以我们应该用实际存在的段落。我们可以引用段落4。注意，failure_evidence只给了一个quote，但我们诊断可以引用更多证据。\\n\\n阅读chapter_context的全文：主要问题是方照在仓库追查，然后突然出现在山顶，没有过渡。故事最后提到“他不记得何时离开仓库”，“记忆被剪断”，“没有交汇”，“叙事在地点与时间上都未收束”。所以根因是：叙事中缺乏从仓库到观测台的因果/过渡桥段，导致空间和因果链断裂。\\n\\n我们整理evidence_quotes：至少两条，以支持根因。可以从段落4、6、10、12、16等选取。比如：\\n- 段落4：“方照站在山顶观测台，手里攥着一封陌生信。”（直接证据）\\n- 段落6：“他不记得何时离开仓库，也不记得谁带他上山。”（因果缺失）\\n- 段落10：“他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。”（不收束）\\n- 段落16：“他试图回忆离开仓库的每一步，记忆却像被剪断的胶片：侧门、货架、汽笛，然后直接是冷风扑面。没有任何交通工具或攀爬过程的描写。”（明确缺失）\\n\\n选取3-4个作为evidence_quotes，明确给出段落号和quote，确保能在正文找到。\\n\\nroot_cause_evidence_indices应指向这些quotes的下标。我们将使用0-based数组。\\n\\nroot_cause：一句话，如“主角从仓库到观测台的移动缺乏因果过渡，导致空间与行动链断裂，事件无法收束。” 基于那些证据。\\n\\nfix_actions：具体可执行动作，如：在仓库与观测台之间插入过渡段落，描述方照如何离开仓库、跟随什么线索、采取什么交通方式、沿途遇到什么；或者揭示其记忆丧失的原因并暗示幕后操纵；确保后续情节有明确的因果连接。可以写：“在章节中补充至少一个过渡场景，明确从侧门到山顶的路程，包括地点变化、时间推移和角色动作，使读者理解移动过程”；“添加因果钩子：可让方照发现泥印延伸向上山小径，或收到神秘信号引导，为后续揭示记忆缺失埋下伏笔。”\\n\\nacceptance_criteria：验收标准，如“读者能从文本中明确追溯从仓库到观测台的移动路径，不再有跳跃感”；“叙事中仓库线和观测台线在事件逻辑上交汇，形成连贯的因果链。”\\n\\nneeds_reroute：因为input_evidence_status为OK，所以false。\\n\\n注意输出JSON格式，仅JSON对象。\\n\\n构建JSON。evidence_quotes数组，每个元素有paragraph和quote。我们选择：\\n\\n- 段落4，quote: \\\"方照站在山顶观测台，手里攥着一封陌生信。\\\" （注意，原文是“下一行却写：方照站在山顶观测台，手里攥着一封陌生信。”但quote可以截取部分，只要逐字存在。可以选“方照站在山顶观测台，手里攥着一封陌生信。”确实在段落4中存在。）\\n- 段落6，quote: \\\"他不记得何时离开仓库，也不记得谁带他上山。\\\"\\n- 段落10，quote: \\\"他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。\\\"\\n- 段落16，quote: \\\"他试图回忆离开仓库的每一步，记忆却像被剪断的胶片：侧门、货架、汽笛，然后直接是冷风扑面。没有任何交通工具或攀爬过程的描写。\\\"\\n- 段落12，quote: \\\"守台人缺席，记录簿停在三小时前。方照翻看最后一页，只有一句：别回仓库。没有任何过渡说明他如何抵达。\\\" 这里最后一句“没有任何过渡说明他如何抵达。”在段落12中存在吗？查看段落12：“守台人缺席，记录簿停在三小时前。方照翻看最后一页，只有一句：别回仓库。没有任何过渡说明他如何抵达。” 是的，完整句子。\\n\\n这些都可以。我们选3-4个。根因依据这些证据。root_cause_evidence_indices将这些evidence_quotes的下标全列上。\\n\\nfix_actions写两条以上。\\n\\nacceptance_criteria写两条。\\n\\n最终输出。\\n\\n注意：根因不要直接重复failure_type，而是更具体的文本问题。如：“文本中缺少从仓库到山顶观测台的过渡描写，导致角色位置突变，因果链断裂，仓库线和观测台线未收束。”\\n\\n现在输出JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2323,\"completion_tokens\":1764,\"total_tokens\":4087,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1385},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":2323},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 叙事结构修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-01",
+    "输入问题": "L2P-001 R5A pilot | 根因：角色从仓库到山顶观测台的移动缺乏任何过渡描写或因果解释，导致仓库线与观测台线空间割裂、事件链断裂，叙事无法收束。",
+    "主失败类型": "因果不收束",
+    "次失败类型": "F04",
+    "修复动作": "在侧门场景与观测台场景之间插入至少一个过渡段落，明确交代方照离开仓库、选择路径、移动过程及时间消耗，使空间转换可被读者追踪。 / 为记忆缺失设置一个具体原因（如被袭击、药物作用、神秘指令），并在后续情节中以可验证的线索揭示，使“失忆”成为主动叙事元素而非空白跳过。 / 重组章节结构，确保仓库的泥印、侧门线索与上山的靴痕形成物理因果链，例如让方照追踪泥印和靴痕上山，将发现观测台的过程与探查行为绑定。",
+    "修复产物": "补因果桥梁",
+    "验收问题": "读者能从文本中连续追溯主角从仓库到观测台的移动路径，不再有跳跃或空白感。；仓库线（货单、泥印、侧门）与观测台线（望远镜指向城北、信、陌生指令）在事件逻辑上交汇，形成明确的因果关系，而非两条平行未交的线索。",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "否",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-01",
+    "规则编号": "F04",
+    "规则依据": "角色从仓库到山顶观测台的移动缺乏任何过渡描写或因果解释，导致仓库线与观测台线空间割裂、事件链断裂，叙事无法收束。",
+    "标准动作": [
+      "在侧门场景与观测台场景之间插入至少一个过渡段落，明确交代方照离开仓库、选择路径、移动过程及时间消耗，使空间转换可被读者追踪。",
+      "为记忆缺失设置一个具体原因（如被袭击、药物作用、神秘指令），并在后续情节中以可验证的线索揭示，使“失忆”成为主动叙事元素而非空白跳过。",
+      "重组章节结构，确保仓库的泥印、侧门线索与上山的靴痕形成物理因果链，例如让方照追踪泥印和靴痕上山，将发现观测台的过程与探查行为绑定。"
+    ],
+    "标准验收": [
+      "读者能从文本中连续追溯主角从仓库到观测台的移动路径，不再有跳跃或空白感。",
+      "仓库线（货单、泥印、侧门）与观测台线（望远镜指向城北、信、陌生指令）在事件逻辑上交汇，形成明确的因果关系，而非两条平行未交的线索。"
+    ],
+    "rule_id": "L2-01:F04",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 4,
+        "摘句": "方照站在山顶观测台，手里攥着一封陌生信。"
+      },
+      {
+        "段落": 6,
+        "摘句": "他不记得何时离开仓库，也不记得谁带他上山。"
+      },
+      {
+        "段落": 10,
+        "摘句": "他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。"
+      },
+      {
+        "段落": 12,
+        "摘句": "没有任何过渡说明他如何抵达。"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 25440.31089998316,
+  "token_usage": {
+    "prompt_tokens": 2323,
+    "completion_tokens": 1764,
+    "total_tokens": 4087,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1385
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2323
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\"root_cause\": \"角色从仓库到山顶观测台的移动缺乏任何过渡描写或因果解释，导致仓库线与观测台线空间割裂、事件链断裂，叙事无法收束。\",\"root_cause_evidence_indices\":[0,1,2,3],\"fix_actions\":[\"在侧门场景与观测台场景之间插入至少一个过渡段落，明确交代方照离开仓库、选择路径、移动过程及时间消耗，使空间转换可被读者追踪。\",\"为记忆缺失设置一个具体原因（如被袭击、药物作用、神秘指令），并在后续情节中以可验证的线索揭示，使“失忆”成为主动叙事元素而非空白跳过。\",\"重组章节结构，确保仓库的泥印、侧门线索与上山的靴痕形成物理因果链，例如让方照追踪泥印和靴痕上山，将发现观测台的过程与探查行为绑定。\"],\"acceptance_criteria\":[\"读者能从文本中连续追溯主角从仓库到观测台的移动路径，不再有跳跃或空白感。\",\"仓库线（货单、泥印、侧门）与观测台线（望远镜指向城北、信、陌生指令）在事件逻辑上交汇，形成明确的因果关系，而非两条平行未交的线索。\"],\"evidence_quotes\":[{\"paragraph\":4,\"quote\":\"方照站在山顶观测台，手里攥着一封陌生信。\"},{\"paragraph\":6,\"quote\":\"他不记得何时离开仓库，也不记得谁带他上山。\"},{\"paragraph\":10,\"quote\":\"他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。\"},{\"paragraph\":12,\"quote\":\"没有任何过渡说明他如何抵达。\"}],\"needs_reroute\":false}",
+      "parsed": null,
+      "raw": "{\"id\":\"a9246e14-3125-4537-ba0b-06216a909fec\",\"object\":\"chat.completion\",\"created\":1782618369,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"root_cause\\\": \\\"角色从仓库到山顶观测台的移动缺乏任何过渡描写或因果解释，导致仓库线与观测台线空间割裂、事件链断裂，叙事无法收束。\\\",\\\"root_cause_evidence_indices\\\":[0,1,2,3],\\\"fix_actions\\\":[\\\"在侧门场景与观测台场景之间插入至少一个过渡段落，明确交代方照离开仓库、选择路径、移动过程及时间消耗，使空间转换可被读者追踪。\\\",\\\"为记忆缺失设置一个具体原因（如被袭击、药物作用、神秘指令），并在后续情节中以可验证的线索揭示，使“失忆”成为主动叙事元素而非空白跳过。\\\",\\\"重组章节结构，确保仓库的泥印、侧门线索与上山的靴痕形成物理因果链，例如让方照追踪泥印和靴痕上山，将发现观测台的过程与探查行为绑定。\\\"],\\\"acceptance_criteria\\\":[\\\"读者能从文本中连续追溯主角从仓库到观测台的移动路径，不再有跳跃或空白感。\\\",\\\"仓库线（货单、泥印、侧门）与观测台线（望远镜指向城北、信、陌生指令）在事件逻辑上交汇，形成明确的因果关系，而非两条平行未交的线索。\\\"],\\\"evidence_quotes\\\":[{\\\"paragraph\\\":4,\\\"quote\\\":\\\"方照站在山顶观测台，手里攥着一封陌生信。\\\"},{\\\"paragraph\\\":6,\\\"quote\\\":\\\"他不记得何时离开仓库，也不记得谁带他上山。\\\"},{\\\"paragraph\\\":10,\\\"quote\\\":\\\"他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。\\\"},{\\\"paragraph\\\":12,\\\"quote\\\":\\\"没有任何过渡说明他如何抵达。\\\"}],\\\"needs_reroute\\\":false}\",\"reasoning_content\":\"我们被要求输出JSON。需要诊断叙事结构故障。输入是failure_type: \\\"因果不收束\\\"，failure_evidence有一个段落1的quote。chapter_context提供了大量段落，其中段落1是标题“# 段落一”，真正故事从段落2开始。failure_evidence的quote是“方照站在山顶观测台”，在段落4中出现。实际上，input_evidence_status是OK，没有mismatch。\\n\\n我们需要生成root_cause，它基于chapter_context和failure_evidence，不能只重复failure_type。需要evidence_quotes非空，且必须能在输入正文中逐字找到。root_cause_evidence_indices列出依据的evidence_quotes下标。fix_actions具体可执行，acceptance_criteria具体。\\n\\n分析：failure_type是因果不收束，描述是L2P-001 R5A pilot，repair_direction是补因果桥梁。failure_evidence引用段落1 quote \\\"方照站在山顶观测台\\\"，但段落1是标题，实际quote在段落4。可能是个小错误，但输入证据状态OK，我们当作证据quote在段落4中。我们可以在evidence_quotes中使用输入的quote但正确指定段落。输入说paragraph: 1, quote: \\\"方照站在山顶观测台\\\"，但正文中段落4才有。检查input_evidence_mismatches为空，说明系统认为证据匹配。可能它找到了。我们看段落4：\\\"他推开侧门，货架倒塌的声响还在耳边。下一行却写：方照站在山顶观测台，手里攥着一封陌生信。\\\" 确实有\\\"方照站在山顶观测台\\\"。但输入的paragraph标为1，然而在chapter_context.paragraphs中，段落1的text是\\\"# 段落一\\\"，没有这句话。可能input_evidence_status为OK是因为系统处理了。我们最好在evidence_quotes中使用正确的段落号。要求“每条quote必须能在输入正文中逐字找到”，所以我们应该用实际存在的段落。我们可以引用段落4。注意，failure_evidence只给了一个quote，但我们诊断可以引用更多证据。\\n\\n阅读chapter_context的全文：主要问题是方照在仓库追查，然后突然出现在山顶，没有过渡。故事最后提到“他不记得何时离开仓库”，“记忆被剪断”，“没有交汇”，“叙事在地点与时间上都未收束”。所以根因是：叙事中缺乏从仓库到观测台的因果/过渡桥段，导致空间和因果链断裂。\\n\\n我们整理evidence_quotes：至少两条，以支持根因。可以从段落4、6、10、12、16等选取。比如：\\n- 段落4：“方照站在山顶观测台，手里攥着一封陌生信。”（直接证据）\\n- 段落6：“他不记得何时离开仓库，也不记得谁带他上山。”（因果缺失）\\n- 段落10：“他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。”（不收束）\\n- 段落16：“他试图回忆离开仓库的每一步，记忆却像被剪断的胶片：侧门、货架、汽笛，然后直接是冷风扑面。没有任何交通工具或攀爬过程的描写。”（明确缺失）\\n\\n选取3-4个作为evidence_quotes，明确给出段落号和quote，确保能在正文找到。\\n\\nroot_cause_evidence_indices应指向这些quotes的下标。我们将使用0-based数组。\\n\\nroot_cause：一句话，如“主角从仓库到观测台的移动缺乏因果过渡，导致空间与行动链断裂，事件无法收束。” 基于那些证据。\\n\\nfix_actions：具体可执行动作，如：在仓库与观测台之间插入过渡段落，描述方照如何离开仓库、跟随什么线索、采取什么交通方式、沿途遇到什么；或者揭示其记忆丧失的原因并暗示幕后操纵；确保后续情节有明确的因果连接。可以写：“在章节中补充至少一个过渡场景，明确从侧门到山顶的路程，包括地点变化、时间推移和角色动作，使读者理解移动过程”；“添加因果钩子：可让方照发现泥印延伸向上山小径，或收到神秘信号引导，为后续揭示记忆缺失埋下伏笔。”\\n\\nacceptance_criteria：验收标准，如“读者能从文本中明确追溯从仓库到观测台的移动路径，不再有跳跃感”；“叙事中仓库线和观测台线在事件逻辑上交汇，形成连贯的因果链。”\\n\\nneeds_reroute：因为input_evidence_status为OK，所以false。\\n\\n注意输出JSON格式，仅JSON对象。\\n\\n构建JSON。evidence_quotes数组，每个元素有paragraph和quote。我们选择：\\n\\n- 段落4，quote: \\\"方照站在山顶观测台，手里攥着一封陌生信。\\\" （注意，原文是“下一行却写：方照站在山顶观测台，手里攥着一封陌生信。”但quote可以截取部分，只要逐字存在。可以选“方照站在山顶观测台，手里攥着一封陌生信。”确实在段落4中存在。）\\n- 段落6，quote: \\\"他不记得何时离开仓库，也不记得谁带他上山。\\\"\\n- 段落10，quote: \\\"他原要追货单，现在却要先弄清自己为何在这里。观测台望远镜对准城北，而货单最后记录在城南。两条线没有交汇。\\\"\\n- 段落16，quote: \\\"他试图回忆离开仓库的每一步，记忆却像被剪断的胶片：侧门、货架、汽笛，然后直接是冷风扑面。没有任何交通工具或攀爬过程的描写。\\\"\\n- 段落12，quote: \\\"守台人缺席，记录簿停在三小时前。方照翻看最后一页，只有一句：别回仓库。没有任何过渡说明他如何抵达。\\\" 这里最后一句“没有任何过渡说明他如何抵达。”在段落12中存在吗？查看段落12：“守台人缺席，记录簿停在三小时前。方照翻看最后一页，只有一句：别回仓库。没有任何过渡说明他如何抵达。” 是的，完整句子。\\n\\n这些都可以。我们选3-4个。根因依据这些证据。root_cause_evidence_indices将这些evidence_quotes的下标全列上。\\n\\nfix_actions写两条以上。\\n\\nacceptance_criteria写两条。\\n\\n最终输出。\\n\\n注意：根因不要直接重复failure_type，而是更具体的文本问题。如：“文本中缺少从仓库到山顶观测台的过渡描写，导致角色位置突变，因果链断裂，仓库线和观测台线未收束。”\\n\\n现在输出JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2323,\"completion_tokens\":1764,\"total_tokens\":4087,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1385},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":2323},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 25435.2363999933,
+      "token_usage": {
+        "prompt_tokens": 2323,
+        "completion_tokens": 1764,
+        "total_tokens": 4087,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1385
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2323
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

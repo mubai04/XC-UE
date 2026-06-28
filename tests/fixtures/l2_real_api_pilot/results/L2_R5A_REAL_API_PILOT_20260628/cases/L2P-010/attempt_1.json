@@ -1,0 +1,70 @@
+{
+  "case_id": "L2P-010",
+  "module_id": "L2-05",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:06:52.184568+00:00",
+    "temperature": 0.2,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010"
+  },
+  "raw_response": "{\"id\":\"ae0d69e2-3bf9-49da-bd1e-db774bdb530c\",\"object\":\"chat.completion\",\"created\":1782615992,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"root_cause\\\": \\\"文本在推进主线任务时缺乏即时情绪反馈，且嵌入大量非叙事元话语（如“不应因语言粗糙改判 L2-02”），破坏沉浸感，导致体验低迷。\\\", \\\"experience_risks\\\": [{\\\"risk_type\\\": \\\"弃读——沉浸感破坏\\\", \\\"location_quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\", \\\"modification_target\\\": \\\"删除此句及所有类似自我指涉评论，用具体场景动作或内心反应替代，恢复叙事沉浸。\\\"}, {\\\"risk_type\\\": \\\"弃读——奖励缺失\\\", \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。\\\", \\\"modification_target\\\": \\\"在领取物资时增加角色的情绪反应（如欣慰、紧张缓解）或具体细节，让读者感受到阶段性的成就回报。\\\"}], \\\"fix_actions\\\": [\\\"删除所有包含模块诊断标签（如L2-02、L2-05）的句子和#段落延拓等标记。\\\", \\\"在完成清点、领取物资、分配物资等关键节点加入角色的情绪描写或即时反馈，例如孙潜领到盐时“绷紧的肩膀微微一松”。\\\", \\\"结尾增加一个情绪钩子或悬念，如远处传来异常声响，替代纯场景收束。\\\"], \\\"acceptance_criteria\\\": [\\\"读者连续阅读时不再遇到跳出感强烈的元语言。\\\", \\\"每个任务节点（清点、领补给、分给伤员）均有至少一处角色情绪或感官的即时描写。\\\", \\\"结尾具有向前推动的叙事动力，而非静态场景罗列。\\\"], \\\"evidence_quotes\\\": [{\\\"paragraph\\\": 14, \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\"}, {\\\"paragraph\\\": 9, \\\"quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\"}, {\\\"paragraph\\\": 26, \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"}], \\\"needs_reroute\\\": false}\",\"reasoning_content\":\"我们被要求输出JSON。输入分析了阅读阶段、入口承诺、即时奖励、认知负荷、重复信息、结尾动量等。主要故障类型是“E低：即时情绪反馈弱”。我们需要诊断体验风险，只输出JSON，包含root_cause（体验根因）、experience_risks（弃读风险列表）、fix_actions（修复动作）、acceptance_criteria（验收标准）、evidence_quotes（证据引用），以及needs_reroute（是否需要重新路由到其他模块，默认false）。\\n\\n先分析输入数据：\\n\\n- reading_stages有4个阶段：开头、前段、中段、末段。从摘要看，故事是关于孙潜乱后清点库房，领补给，分物资。有重复信息，比如“清点完成才能领补给”等多次出现。\\n- entry_promises：开头有任务承诺“孙潜要在乱后清点库房”和“找账本”。\\n- immediate_rewards：空。说明没有即时奖励。\\n- cognitive_loads：有长句信息堆叠，出现在段落24和26，都是描述场景细节的收束。\\n- repeat_info：大量重复短语，如“清点完成才能领补给”、“补给处排队漫长他凭清点单领到盐与布”等，甚至有“不应因语言粗糙改判L2-02”、“本例归属L2-05边界体验成立文风非主故障”等自我指涉的重复，还有#段落延拓的重复。这些重复可能增加认知负荷，且缺乏即时反馈。\\n- ending_momentum：结尾是场景细节收束，没有情绪高潮或钩子，显得平淡。\\n- failure_evidence：只有开头“孙潜要在乱后清点库房”，可能作为证据。\\n\\n故障类型是“E低：即时情绪反馈弱”。需要定位风险。\\n\\n可能的体验风险：由于开头承诺了任务，但过程中缺乏即时奖励（immediate_rewards为空），只有重复的信息和认知负荷，读者可能感到乏味而弃读。特别是结尾没有情绪推进，只是场景收束。\\n\\n从重复信息看，有自我指涉的句子（如“不应因语言粗糙改判 L2-02”、“本例归属 L2-05 边界”），这破坏了沉浸感，因为这是元叙述，直接提到了L2-02等模块。这属于体验风险：跳出故事，让读者意识到这是测试文本，不是自然故事。这可能导致读者弃读。虽然L2-05说“文风非主故障”，但自我指涉重复直接暴露了非叙事元素，属于体验风险。\\n\\n所以，root_cause可能是：文本包含大量非叙事元话语和重复信息，缺乏即时的情绪奖励，导致读者失去沉浸感和阅读动力。\\n\\nexperience_risks需要列出弃读风险，包括风险类型、位置引用、修改目标。可以提供多个。\\n\\nfix_actions：修复动作，比如移除自我指涉句子，强化即时奖励，增加情绪反馈。\\n\\nacceptance_criteria：验收标准，比如读者能持续阅读并感受到任务推进和情绪变化。\\n\\nevidence_quotes：从文本中摘录证据。\\n\\nneeds_reroute：可能不需要重路由，因为属于L2-05处理范畴。\\n\\n构造JSON：\\n\\n{\\n  \\\"root_cause\\\": \\\"文本在推进主线任务时缺乏即时情绪反馈，且嵌入大量非叙事元话语（如“不应因语言粗糙改判 L2-02”），破坏沉浸感，导致体验低迷。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读——沉浸感破坏\\\",\\n      \\\"location_quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\",\\n      \\\"modification_target\\\": \\\"删除此句及所有类似自我指涉评论，用具体场景动作或内心反应替代，恢复叙事沉浸。\\\"\\n    },\\n    {\\n      \\\"risk_type\\\": \\\"弃读——奖励缺失\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。\\\",\\n      \\\"modification_target\\\": \\\"在领取物资时增加角色的情绪反应（如欣慰、紧张缓解）或具体细节，让读者感受到阶段性的成就回报。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"删除所有包含模块诊断标签（如L2-02、L2-05）的句子和#段落延拓等标记。\\\",\\n    \\\"在完成清点、领取物资、分配物资等关键节点加入角色的情绪描写或即时反馈，例如孙潜领到盐时‘绷紧的肩膀微微一松’。\\\",\\n    \\\"结尾增加一个情绪钩子或悬念，如远处传来异常声响，替代纯场景收束。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"读者连续阅读时不再遇到跳出感强烈的元语言。\\\",\\n    \\\"每个任务节点（清点、领补给、分给伤员）均有至少一处角色情绪或感官的即时描写。\\\",\\n    \\\"结尾具有向前推动的叙事动力，而非静态场景罗列。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 14,\\n      \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 9,\\n      \\\"quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 26,\\n      \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n\\n注意：要求只输出JSON，不要有其他文本。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2364,\"completion_tokens\":1756,\"total_tokens\":4120,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1248},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":2364},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [
+    "L2-05 EVIDENCE_INVALID: experience_risks[0] risk_type 未归类；experience_risks[1] risk_type 未归类"
+  ],
+  "repair_form": null,
+  "transport_status": "EVIDENCE_ERROR",
+  "format_status": "SUCCESS",
+  "evidence_status": "EVIDENCE_ERROR",
+  "duration_ms": 20739.91409991868,
+  "token_usage": {
+    "prompt_tokens": 2364,
+    "completion_tokens": 1756,
+    "total_tokens": 4120,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1248
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2364
+  },
+  "error_message": "L2-05 EVIDENCE_INVALID: experience_risks[0] risk_type 未归类；experience_risks[1] risk_type 未归类",
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\"root_cause\": \"文本在推进主线任务时缺乏即时情绪反馈，且嵌入大量非叙事元话语（如“不应因语言粗糙改判 L2-02”），破坏沉浸感，导致体验低迷。\", \"experience_risks\": [{\"risk_type\": \"弃读——沉浸感破坏\", \"location_quote\": \"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\", \"modification_target\": \"删除此句及所有类似自我指涉评论，用具体场景动作或内心反应替代，恢复叙事沉浸。\"}, {\"risk_type\": \"弃读——奖励缺失\", \"location_quote\": \"补给处排队漫长，他凭清点单领到盐与布。\", \"modification_target\": \"在领取物资时增加角色的情绪反应（如欣慰、紧张缓解）或具体细节，让读者感受到阶段性的成就回报。\"}], \"fix_actions\": [\"删除所有包含模块诊断标签（如L2-02、L2-05）的句子和#段落延拓等标记。\", \"在完成清点、领取物资、分配物资等关键节点加入角色的情绪描写或即时反馈，例如孙潜领到盐时“绷紧的肩膀微微一松”。\", \"结尾增加一个情绪钩子或悬念，如远处传来异常声响，替代纯场景收束。\"], \"acceptance_criteria\": [\"读者连续阅读时不再遇到跳出感强烈的元语言。\", \"每个任务节点（清点、领补给、分给伤员）均有至少一处角色情绪或感官的即时描写。\", \"结尾具有向前推动的叙事动力，而非静态场景罗列。\"], \"evidence_quotes\": [{\"paragraph\": 14, \"quote\": \"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\"}, {\"paragraph\": 9, \"quote\": \"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\"}, {\"paragraph\": 26, \"quote\": \"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\"}], \"needs_reroute\": false}",
+      "parsed": null,
+      "raw": "{\"id\":\"ae0d69e2-3bf9-49da-bd1e-db774bdb530c\",\"object\":\"chat.completion\",\"created\":1782615992,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"root_cause\\\": \\\"文本在推进主线任务时缺乏即时情绪反馈，且嵌入大量非叙事元话语（如“不应因语言粗糙改判 L2-02”），破坏沉浸感，导致体验低迷。\\\", \\\"experience_risks\\\": [{\\\"risk_type\\\": \\\"弃读——沉浸感破坏\\\", \\\"location_quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\", \\\"modification_target\\\": \\\"删除此句及所有类似自我指涉评论，用具体场景动作或内心反应替代，恢复叙事沉浸。\\\"}, {\\\"risk_type\\\": \\\"弃读——奖励缺失\\\", \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。\\\", \\\"modification_target\\\": \\\"在领取物资时增加角色的情绪反应（如欣慰、紧张缓解）或具体细节，让读者感受到阶段性的成就回报。\\\"}], \\\"fix_actions\\\": [\\\"删除所有包含模块诊断标签（如L2-02、L2-05）的句子和#段落延拓等标记。\\\", \\\"在完成清点、领取物资、分配物资等关键节点加入角色的情绪描写或即时反馈，例如孙潜领到盐时“绷紧的肩膀微微一松”。\\\", \\\"结尾增加一个情绪钩子或悬念，如远处传来异常声响，替代纯场景收束。\\\"], \\\"acceptance_criteria\\\": [\\\"读者连续阅读时不再遇到跳出感强烈的元语言。\\\", \\\"每个任务节点（清点、领补给、分给伤员）均有至少一处角色情绪或感官的即时描写。\\\", \\\"结尾具有向前推动的叙事动力，而非静态场景罗列。\\\"], \\\"evidence_quotes\\\": [{\\\"paragraph\\\": 14, \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\"}, {\\\"paragraph\\\": 9, \\\"quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\"}, {\\\"paragraph\\\": 26, \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"}], \\\"needs_reroute\\\": false}\",\"reasoning_content\":\"我们被要求输出JSON。输入分析了阅读阶段、入口承诺、即时奖励、认知负荷、重复信息、结尾动量等。主要故障类型是“E低：即时情绪反馈弱”。我们需要诊断体验风险，只输出JSON，包含root_cause（体验根因）、experience_risks（弃读风险列表）、fix_actions（修复动作）、acceptance_criteria（验收标准）、evidence_quotes（证据引用），以及needs_reroute（是否需要重新路由到其他模块，默认false）。\\n\\n先分析输入数据：\\n\\n- reading_stages有4个阶段：开头、前段、中段、末段。从摘要看，故事是关于孙潜乱后清点库房，领补给，分物资。有重复信息，比如“清点完成才能领补给”等多次出现。\\n- entry_promises：开头有任务承诺“孙潜要在乱后清点库房”和“找账本”。\\n- immediate_rewards：空。说明没有即时奖励。\\n- cognitive_loads：有长句信息堆叠，出现在段落24和26，都是描述场景细节的收束。\\n- repeat_info：大量重复短语，如“清点完成才能领补给”、“补给处排队漫长他凭清点单领到盐与布”等，甚至有“不应因语言粗糙改判L2-02”、“本例归属L2-05边界体验成立文风非主故障”等自我指涉的重复，还有#段落延拓的重复。这些重复可能增加认知负荷，且缺乏即时反馈。\\n- ending_momentum：结尾是场景细节收束，没有情绪高潮或钩子，显得平淡。\\n- failure_evidence：只有开头“孙潜要在乱后清点库房”，可能作为证据。\\n\\n故障类型是“E低：即时情绪反馈弱”。需要定位风险。\\n\\n可能的体验风险：由于开头承诺了任务，但过程中缺乏即时奖励（immediate_rewards为空），只有重复的信息和认知负荷，读者可能感到乏味而弃读。特别是结尾没有情绪推进，只是场景收束。\\n\\n从重复信息看，有自我指涉的句子（如“不应因语言粗糙改判 L2-02”、“本例归属 L2-05 边界”），这破坏了沉浸感，因为这是元叙述，直接提到了L2-02等模块。这属于体验风险：跳出故事，让读者意识到这是测试文本，不是自然故事。这可能导致读者弃读。虽然L2-05说“文风非主故障”，但自我指涉重复直接暴露了非叙事元素，属于体验风险。\\n\\n所以，root_cause可能是：文本包含大量非叙事元话语和重复信息，缺乏即时的情绪奖励，导致读者失去沉浸感和阅读动力。\\n\\nexperience_risks需要列出弃读风险，包括风险类型、位置引用、修改目标。可以提供多个。\\n\\nfix_actions：修复动作，比如移除自我指涉句子，强化即时奖励，增加情绪反馈。\\n\\nacceptance_criteria：验收标准，比如读者能持续阅读并感受到任务推进和情绪变化。\\n\\nevidence_quotes：从文本中摘录证据。\\n\\nneeds_reroute：可能不需要重路由，因为属于L2-05处理范畴。\\n\\n构造JSON：\\n\\n{\\n  \\\"root_cause\\\": \\\"文本在推进主线任务时缺乏即时情绪反馈，且嵌入大量非叙事元话语（如“不应因语言粗糙改判 L2-02”），破坏沉浸感，导致体验低迷。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读——沉浸感破坏\\\",\\n      \\\"location_quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\",\\n      \\\"modification_target\\\": \\\"删除此句及所有类似自我指涉评论，用具体场景动作或内心反应替代，恢复叙事沉浸。\\\"\\n    },\\n    {\\n      \\\"risk_type\\\": \\\"弃读——奖励缺失\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。\\\",\\n      \\\"modification_target\\\": \\\"在领取物资时增加角色的情绪反应（如欣慰、紧张缓解）或具体细节，让读者感受到阶段性的成就回报。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"删除所有包含模块诊断标签（如L2-02、L2-05）的句子和#段落延拓等标记。\\\",\\n    \\\"在完成清点、领取物资、分配物资等关键节点加入角色的情绪描写或即时反馈，例如孙潜领到盐时‘绷紧的肩膀微微一松’。\\\",\\n    \\\"结尾增加一个情绪钩子或悬念，如远处传来异常声响，替代纯场景收束。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"读者连续阅读时不再遇到跳出感强烈的元语言。\\\",\\n    \\\"每个任务节点（清点、领补给、分给伤员）均有至少一处角色情绪或感官的即时描写。\\\",\\n    \\\"结尾具有向前推动的叙事动力，而非静态场景罗列。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 14,\\n      \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 9,\\n      \\\"quote\\\": \\\"不应因语言粗糙改判 L2-02。本例归属 L2-05 边界：体验成立，文风非主故障。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 26,\\n      \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n\\n注意：要求只输出JSON，不要有其他文本。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2364,\"completion_tokens\":1756,\"total_tokens\":4120,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1248},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":2364},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 20688.76629997976,
+      "token_usage": {
+        "prompt_tokens": 2364,
+        "completion_tokens": 1756,
+        "total_tokens": 4120,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1248
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2364
+      },
+      "hints_applied": []
+    }
+  ]
+}

@@ -11,6 +11,32 @@ class 角色状态:
 
 
 @dataclass
+class 环境事件:
+    event_type: str
+    paragraph: int
+    quote: str
+    affected_characters: list[str] = field(default_factory=list)
+
+
+@dataclass
+class 角色动作记录:
+    character: str
+    action: str
+    paragraph: int
+    quote: str
+    confidence: str = "EXPLICIT"
+
+
+@dataclass
+class 角色结果记录:
+    character: str
+    result: str
+    paragraph: int
+    quote: str
+    confidence: str = "EXPLICIT"
+
+
+@dataclass
 class 触发事件:
     段落: int
     摘句: str
@@ -32,6 +58,7 @@ class 选择:
 
 @dataclass
 class 行为结果:
+    角色: str
     段落: int
     摘句: str
 

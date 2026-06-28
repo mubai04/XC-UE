@@ -1,0 +1,107 @@
+{
+  "case_id": "L2P-011",
+  "module_id": "L2-06",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:51:14.195392+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-011\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-011"
+  },
+  "raw_response": "{\"id\":\"313844ac-1ce4-40e0-99b5-f01b66f4eace\",\"object\":\"chat.completion\",\"created\":1782618653,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0001\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0007\\\",\\n      \\\"classification\\\": \\\"EVIDENCE_INSUFFICIENT\\\",\\n      \\\"reason\\\": \\\"事实并未直接冲突：FACT-0001指出林泽在城北货栈核对封条，FACT-0007（IR状态快照）也确认林泽位于城北货栈当班，两者一致；但正文中另有城南码头卸货的证据（FACT-0002）未被包含在本事实对中，因此缺少冲突性证据来源，无法确认冲突。\\\",\\n      \\\"repair_direction\\\": \\\"需将城南码头事实（FACT-0002）加入冲突检测对，并验证是否存在时间或状态转移的解释。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"扩展事实对生成逻辑，确保同一实体的所有位置变更事实均被配对检查\\\",\\n    \\\"为Fact-0002（林泽已在城南码头卸货）与Fact-0001（林泽在城北货栈核对封条）创建冲突对\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"系统能识别FACT-0001与FACT-0002的位置冲突并标记为HARD_CONFLICT或要求解释\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"林泽已在城南码头卸货\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们按要求输出 JSON。输入中 indexed_fact_pairs 只有 PAIR-0001（FACT-0001 与 FACT-0007）和 PAIR-0002（FACT-0001 与 FACT-0009）。任务描述要求 consistency_conflicts 必须引用这些 fact_pair_id。但是输入中的 FACT-0001 与 FACT-0007 的 entity 是“林泽”，位置分别是“城北货栈核对封条”和“城北货栈当班”，这并不冲突。FACT-0001 与 FACT-0009：“城北货栈核对封条”和“城北货栈”，可能也类似。但冲突应该是 FACT-0001 与 FACT-0002？但 pair 中没有。输入中的 indexed_fact_pairs 只有这两个，所以我们只能使用它们。但分析冲突：FACT-0001 “林泽在城北货栈核对封条”，FACT-0007 “林泽位于城北货栈当班”，值基本一致，不冲突。FACT-0009 “林泽位于城北货栈”，也一致。所以没有冲突？但 failure_evidence 指出“林泽已在城南码头卸货”，这对应 FACT-0002，但 pair 中没有包含 FACT-0002。可能系统预期我们基于 pair 中的事实给出 judgment，但事实不冲突，分类可以是 EVIDENCE_INSUFFICIENT 或 EXPLANATION_INSUFFICIENT。按照要求，存在时间或状态转移信号时优先 ALLOWED_CHANGE 或 EXPLANATION_INSUFFICIENT，不得直接判 HARD_CONFLICT。但这两个 pair 中都没有时间信号？FACT-0001 没有时间标记，FACT-0007 没有，FACT-0009 也没有。但 PRIOR_CHAPTER 的 FACT-0008 有“清晨”，FACT-0009 是 PRIOR_CHAPTER，可能暗示之前的状态，但 PAIR-0002 中 FACT-0009 与 CURRENT_CHAPTER 的 FACT-0001，如果两事实矛盾（一个说城北货栈，一个说城北货栈核对封条，并不矛盾），所以没有冲突。因此，两个 pair 都不是冲突。我们可以判定为 EVIDENCE_INSUFFICIENT，因为没有冲突证据。但输入要求输出 consistency_conflicts，且 classification 只能是 HARD_CONFLICT、EXPLANATION_INSUFFICIENT、ALLOWED_CHANGE、EVIDENCE_INSUFFICIENT。EVIDENCE_INSUFFICIENT 可能适用。但 pair 中的两个事实没有冲突，我们可以在 reason 中说明缺少冲突证据。对于 EVIDENCE_INSUFFICIENT，可只引用 source_a_fact_id，reason 必须说明缺少的来源类型。这里 source_a 是 FACT-0001，source_b 是 FACT-0007 或 FACT-0009。我们可以选取其中一个 pair，分类 EVIDENCE_INSUFFICIENT，reason 说明“无法确认冲突，因为两事实均指向城北货栈，而冲突性证据（城南码头）未包含在本事实对中，且缺少时间冲突证据”。但要求 consistency_conflicts 通过 fact_pair_id 引用输入中的 indexed_fact_pairs。我们可以对 PAIR-0001 和 PAIR-0002 都做判断，但数组中可以放多个？示例中只有一个。我们可以只放一个，对 PAIR-0001 判定 EVIDENCE_INSUFFICIENT。但也可以根据上下文，作者期望发现 FACT-0001 与 FACT-0002 的 HARD_CONFLICT，但因为 pair 列表没有提供，我们只能基于给的 pair。为了遵循指令，我们必须使用给定的 fact_pair_id。因此，对于 PAIR-0001，来源事实没有冲突，判定 EVIDENCE_INSUFFICIENT。注意：EVIDENCE_INSUFFICIENT 可只引用 source_a_fact_id，但这里我们已经有 fact_pair_id 了，可以同时给出 source_a 和 source_b。按要求，输出 JSON。除了冲突数组，还需要 root_cause，fix_actions，acceptance_criteria，evidence_quotes，needs_reroute。我们可以推断 root_cause：正文中同一人物位置出现两个互斥陈述，但事实对中未包含冲突事实，且缺少时间或过渡解释，导致事实一致性无法验证。修复方向可建议系统重新抽取事实对，将 FACT-0002 加入。fix_actions：例如“将城南码头卸货的事实加入冲突对检测”。acceptance_criteria：“成功识别林泽位置冲突”。evidence_quotes：引用冲突语句“林泽已在城南码头卸货”。needs_reroute：false（因为不需要重路由，只是诊断）。根据输出格式，root_cause，consistency_conflicts 数组，fix_actions 数组，acceptance_criteria 数组，evidence_quotes 数组。我们构建 JSON。\\n\\n最终输出：```json\\n{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0001\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0007\\\",\\n      \\\"classification\\\": \\\"EVIDENCE_INSUFFICIENT\\\",\\n      \\\"reason\\\": \\\"事实并未直接冲突：FACT-0001指出林泽在城北货栈核对封条，FACT-0007（IR状态快照）也确认林泽位于城北货栈当班，两者一致；但正文中另有城南码头卸货的证据（FACT-0002）未被包含在本事实对中，因此缺少冲突性证据来源，无法确认冲突。\\\",\\n      \\\"repair_direction\\\": \\\"需将城南码头事实（FACT-0002）加入冲突检测对，并验证是否存在时间或状态转移的解释。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"扩展事实对生成逻辑，确保同一实体的所有位置变更事实均被配对检查\\\",\\n    \\\"为Fact-0002（林泽已在城南码头卸货）与Fact-0001（林泽在城北货栈核对封条）创建冲突对\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"系统能识别FACT-0001与FACT-0002的位置冲突并标记为HARD_CONFLICT或要求解释\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"林泽已在城南码头卸货\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n```\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2536,\"completion_tokens\":1906,\"total_tokens\":4442,\"prompt_tokens_details\":{\"cached_tokens\":2432},\"completion_tokens_details\":{\"reasoning_tokens\":1481},\"prompt_cache_hit_tokens\":2432,\"prompt_cache_miss_tokens\":104},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 系统一致性修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-06",
+    "输入问题": "L2P-011 R5A pilot | 根因：正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。 | 模块细节：事实:EVIDENCE_INSUFFICIENT",
+    "主失败类型": "技术护栏失败",
+    "次失败类型": "F03",
+    "修复动作": "林泽.位置：补充可核对的双来源证据",
+    "修复产物": "统一事实",
+    "验收问题": "林泽.位置 具备正文或 IR/前序章节的摘句证据",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "是",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-06",
+    "规则编号": "F03",
+    "规则依据": "正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。 | 修改范围：事实陈述与状态 | 禁止：已成立的核心事件",
+    "标准动作": [
+      "林泽.位置：补充可核对的双来源证据"
+    ],
+    "标准验收": [
+      "林泽.位置 具备正文或 IR/前序章节的摘句证据"
+    ],
+    "rule_id": "L2-06:F03",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 1,
+        "摘句": "林泽已在城南码头卸货"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 22020.2830999624,
+  "token_usage": {
+    "prompt_tokens": 2536,
+    "completion_tokens": 1906,
+    "total_tokens": 4442,
+    "prompt_tokens_details": {
+      "cached_tokens": 2432
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1481
+    },
+    "prompt_cache_hit_tokens": 2432,
+    "prompt_cache_miss_tokens": 104
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"response_schema_version\": \"xcue.l2-consistency-response/2.0\",\n  \"root_cause\": \"正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。\",\n  \"consistency_conflicts\": [\n    {\n      \"fact_pair_id\": \"PAIR-0001\",\n      \"source_a_fact_id\": \"FACT-0001\",\n      \"source_b_fact_id\": \"FACT-0007\",\n      \"classification\": \"EVIDENCE_INSUFFICIENT\",\n      \"reason\": \"事实并未直接冲突：FACT-0001指出林泽在城北货栈核对封条，FACT-0007（IR状态快照）也确认林泽位于城北货栈当班，两者一致；但正文中另有城南码头卸货的证据（FACT-0002）未被包含在本事实对中，因此缺少冲突性证据来源，无法确认冲突。\",\n      \"repair_direction\": \"需将城南码头事实（FACT-0002）加入冲突检测对，并验证是否存在时间或状态转移的解释。\"\n    }\n  ],\n  \"fix_actions\": [\n    \"扩展事实对生成逻辑，确保同一实体的所有位置变更事实均被配对检查\",\n    \"为Fact-0002（林泽已在城南码头卸货）与Fact-0001（林泽在城北货栈核对封条）创建冲突对\"\n  ],\n  \"acceptance_criteria\": [\n    \"系统能识别FACT-0001与FACT-0002的位置冲突并标记为HARD_CONFLICT或要求解释\"\n  ],\n  \"evidence_quotes\": [\n    {\n      \"paragraph\": 1,\n      \"quote\": \"林泽已在城南码头卸货\"\n    }\n  ],\n  \"needs_reroute\": false\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"313844ac-1ce4-40e0-99b5-f01b66f4eace\",\"object\":\"chat.completion\",\"created\":1782618653,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0001\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0007\\\",\\n      \\\"classification\\\": \\\"EVIDENCE_INSUFFICIENT\\\",\\n      \\\"reason\\\": \\\"事实并未直接冲突：FACT-0001指出林泽在城北货栈核对封条，FACT-0007（IR状态快照）也确认林泽位于城北货栈当班，两者一致；但正文中另有城南码头卸货的证据（FACT-0002）未被包含在本事实对中，因此缺少冲突性证据来源，无法确认冲突。\\\",\\n      \\\"repair_direction\\\": \\\"需将城南码头事实（FACT-0002）加入冲突检测对，并验证是否存在时间或状态转移的解释。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"扩展事实对生成逻辑，确保同一实体的所有位置变更事实均被配对检查\\\",\\n    \\\"为Fact-0002（林泽已在城南码头卸货）与Fact-0001（林泽在城北货栈核对封条）创建冲突对\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"系统能识别FACT-0001与FACT-0002的位置冲突并标记为HARD_CONFLICT或要求解释\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"林泽已在城南码头卸货\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们按要求输出 JSON。输入中 indexed_fact_pairs 只有 PAIR-0001（FACT-0001 与 FACT-0007）和 PAIR-0002（FACT-0001 与 FACT-0009）。任务描述要求 consistency_conflicts 必须引用这些 fact_pair_id。但是输入中的 FACT-0001 与 FACT-0007 的 entity 是“林泽”，位置分别是“城北货栈核对封条”和“城北货栈当班”，这并不冲突。FACT-0001 与 FACT-0009：“城北货栈核对封条”和“城北货栈”，可能也类似。但冲突应该是 FACT-0001 与 FACT-0002？但 pair 中没有。输入中的 indexed_fact_pairs 只有这两个，所以我们只能使用它们。但分析冲突：FACT-0001 “林泽在城北货栈核对封条”，FACT-0007 “林泽位于城北货栈当班”，值基本一致，不冲突。FACT-0009 “林泽位于城北货栈”，也一致。所以没有冲突？但 failure_evidence 指出“林泽已在城南码头卸货”，这对应 FACT-0002，但 pair 中没有包含 FACT-0002。可能系统预期我们基于 pair 中的事实给出 judgment，但事实不冲突，分类可以是 EVIDENCE_INSUFFICIENT 或 EXPLANATION_INSUFFICIENT。按照要求，存在时间或状态转移信号时优先 ALLOWED_CHANGE 或 EXPLANATION_INSUFFICIENT，不得直接判 HARD_CONFLICT。但这两个 pair 中都没有时间信号？FACT-0001 没有时间标记，FACT-0007 没有，FACT-0009 也没有。但 PRIOR_CHAPTER 的 FACT-0008 有“清晨”，FACT-0009 是 PRIOR_CHAPTER，可能暗示之前的状态，但 PAIR-0002 中 FACT-0009 与 CURRENT_CHAPTER 的 FACT-0001，如果两事实矛盾（一个说城北货栈，一个说城北货栈核对封条，并不矛盾），所以没有冲突。因此，两个 pair 都不是冲突。我们可以判定为 EVIDENCE_INSUFFICIENT，因为没有冲突证据。但输入要求输出 consistency_conflicts，且 classification 只能是 HARD_CONFLICT、EXPLANATION_INSUFFICIENT、ALLOWED_CHANGE、EVIDENCE_INSUFFICIENT。EVIDENCE_INSUFFICIENT 可能适用。但 pair 中的两个事实没有冲突，我们可以在 reason 中说明缺少冲突证据。对于 EVIDENCE_INSUFFICIENT，可只引用 source_a_fact_id，reason 必须说明缺少的来源类型。这里 source_a 是 FACT-0001，source_b 是 FACT-0007 或 FACT-0009。我们可以选取其中一个 pair，分类 EVIDENCE_INSUFFICIENT，reason 说明“无法确认冲突，因为两事实均指向城北货栈，而冲突性证据（城南码头）未包含在本事实对中，且缺少时间冲突证据”。但要求 consistency_conflicts 通过 fact_pair_id 引用输入中的 indexed_fact_pairs。我们可以对 PAIR-0001 和 PAIR-0002 都做判断，但数组中可以放多个？示例中只有一个。我们可以只放一个，对 PAIR-0001 判定 EVIDENCE_INSUFFICIENT。但也可以根据上下文，作者期望发现 FACT-0001 与 FACT-0002 的 HARD_CONFLICT，但因为 pair 列表没有提供，我们只能基于给的 pair。为了遵循指令，我们必须使用给定的 fact_pair_id。因此，对于 PAIR-0001，来源事实没有冲突，判定 EVIDENCE_INSUFFICIENT。注意：EVIDENCE_INSUFFICIENT 可只引用 source_a_fact_id，但这里我们已经有 fact_pair_id 了，可以同时给出 source_a 和 source_b。按要求，输出 JSON。除了冲突数组，还需要 root_cause，fix_actions，acceptance_criteria，evidence_quotes，needs_reroute。我们可以推断 root_cause：正文中同一人物位置出现两个互斥陈述，但事实对中未包含冲突事实，且缺少时间或过渡解释，导致事实一致性无法验证。修复方向可建议系统重新抽取事实对，将 FACT-0002 加入。fix_actions：例如“将城南码头卸货的事实加入冲突对检测”。acceptance_criteria：“成功识别林泽位置冲突”。evidence_quotes：引用冲突语句“林泽已在城南码头卸货”。needs_reroute：false（因为不需要重路由，只是诊断）。根据输出格式，root_cause，consistency_conflicts 数组，fix_actions 数组，acceptance_criteria 数组，evidence_quotes 数组。我们构建 JSON。\\n\\n最终输出：```json\\n{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"正文中同时出现林泽在城北货栈核对封条与在城南码头卸货的陈述，但当前检测器中未将城南码头的事实（FACT-0002）纳入冲突对，导致未能识别冲突。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0001\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0007\\\",\\n      \\\"classification\\\": \\\"EVIDENCE_INSUFFICIENT\\\",\\n      \\\"reason\\\": \\\"事实并未直接冲突：FACT-0001指出林泽在城北货栈核对封条，FACT-0007（IR状态快照）也确认林泽位于城北货栈当班，两者一致；但正文中另有城南码头卸货的证据（FACT-0002）未被包含在本事实对中，因此缺少冲突性证据来源，无法确认冲突。\\\",\\n      \\\"repair_direction\\\": \\\"需将城南码头事实（FACT-0002）加入冲突检测对，并验证是否存在时间或状态转移的解释。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"扩展事实对生成逻辑，确保同一实体的所有位置变更事实均被配对检查\\\",\\n    \\\"为Fact-0002（林泽已在城南码头卸货）与Fact-0001（林泽在城北货栈核对封条）创建冲突对\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"系统能识别FACT-0001与FACT-0002的位置冲突并标记为HARD_CONFLICT或要求解释\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"林泽已在城南码头卸货\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n```\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2536,\"completion_tokens\":1906,\"total_tokens\":4442,\"prompt_tokens_details\":{\"cached_tokens\":2432},\"completion_tokens_details\":{\"reasoning_tokens\":1481},\"prompt_cache_hit_tokens\":2432,\"prompt_cache_miss_tokens\":104},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 21928.26299997978,
+      "token_usage": {
+        "prompt_tokens": 2536,
+        "completion_tokens": 1906,
+        "total_tokens": 4442,
+        "prompt_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1481
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 104
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}
