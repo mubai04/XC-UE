@@ -1,0 +1,40 @@
+{
+  "schema_version": "xcue.l3-task-bundle/1.0",
+  "pipeline_run_id": "S2B1-PIPE-DEMO",
+  "stage_run_id": "STAGE-L3",
+  "run_id": "L3-S2B1-DEMO",
+  "status": "AWAITING_EXECUTOR",
+  "输入文件": "运行记录/S2B1/L2_report.json",
+  "输入修复单数量": 1,
+  "方法声明": "L3 任务规划",
+  "标准校验问题": [],
+  "协议规则摘要": {},
+  "protocol_rule_version": "v1",
+  "任务单": [
+    {
+      "执行编号": "TASK-001",
+      "来源层": "L2",
+      "来源文件": "L2_report.json",
+      "ProjectHarness根": "project",
+      "任务类型": "候选生成",
+      "输入材料": [],
+      "IR输入": [],
+      "目标文件": "candidates/demo_patch.md",
+      "禁止修改文件": "chapters/demo_chapter.md",
+      "修复方向": "重写第4段消除句式重复",
+      "修复产物要求": "候选补丁",
+      "回流验收位置": "L1-01",
+      "是否允许改正式正文": "否",
+      "是否需要备份": "是",
+      "执行状态": "TASK_PLANNED",
+      "校验问题": [],
+      "状态历史": []
+    }
+  ],
+  "执行输出": [],
+  "阻断任务": [],
+  "execution_mode": "TASK_PLANNING_ONLY",
+  "prose_modified": false,
+  "task_package_created": true,
+  "awaiting_executor": true
+}

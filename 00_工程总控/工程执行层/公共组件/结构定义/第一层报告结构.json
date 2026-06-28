@@ -41,7 +41,7 @@
       "enum": [
         "SCREENING_PASS",
         "SCREENING_REJECT",
-        "REVIEW_REQUIRED",
+        "SCREENING_REVIEW",
         "AUDIT_BLOCKED"
       ]
     },
@@ -229,6 +229,37 @@
         },
         "摘句": {
           "$ref": "#/$defs/text"
+        },
+        "段落ID": {
+          "$ref": "#/$defs/short_text"
+        },
+        "source_scope": {
+          "type": "string",
+          "enum": [
+            "CURRENT_CHAPTER",
+            "PRIOR_CHAPTER"
+          ]
+        },
+        "start_offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "end_offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "occurrence_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
         }
       }
     },
@@ -247,7 +278,10 @@
         "回流验收位置",
         "修复方向",
         "decision_role",
-        "blocking"
+        "blocking",
+        "routeable",
+        "route_reason",
+        "source_component"
       ],
       "properties": {
         "闸门": {
@@ -319,6 +353,17 @@
         "blocking": {
           "type": "boolean"
         },
+        "routeable": {
+          "type": "boolean"
+        },
+        "route_reason": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "source_component": {
+          "type": "string",
+          "maxLength": 64
+        },
         "reason_type": {
           "type": "string",
           "enum": [
@@ -342,7 +387,8 @@
               "type": "string",
               "enum": [
                 "HARD_GUARD",
-                "CONTENT_DECISION"
+                "CONTENT_DECISION",
+                "DIAGNOSTIC"
               ]
             }
           }
@@ -361,6 +407,17 @@
             },
             "blocking": {
               "const": true
+            },
+            "routeable": {
+              "const": false
+            },
+            "route_reason": {
+              "type": "string",
+              "maxLength": 256
+            },
+            "source_component": {
+              "type": "string",
+              "maxLength": 64
             },
             "reason_type": {
               "type": "string",
@@ -400,7 +457,7 @@
           "enum": [
             "SCREENING_PASS",
             "SCREENING_REJECT",
-            "REVIEW_REQUIRED",
+            "SCREENING_REVIEW",
             "STRUCTURE_SIGNAL_PRESENT",
             "HEURISTIC_DIAGNOSTIC",
             "INTERFACE_SIGNAL_PRESENT",

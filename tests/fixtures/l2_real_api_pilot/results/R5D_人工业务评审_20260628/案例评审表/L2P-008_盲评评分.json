@@ -1,0 +1,20 @@
+{
+  "case_id": "L2P-008",
+  "module_id": "L2-04",
+  "blind_label": "评审案例-12",
+  "review_mode": "SEMI_BLIND",
+  "review_phase": "PHASE_1_SEMI_BLIND",
+  "diagnosis_correct": "NOT_REVIEWED",
+  "evidence_relevant": "NOT_REVIEWED",
+  "root_cause_specific": "NOT_REVIEWED",
+  "fix_actions_executable": "NOT_REVIEWED",
+  "acceptance_criteria_testable": "NOT_REVIEWED",
+  "forbidden_scope_respected": "NOT_REVIEWED",
+  "cross_module_overreach": "NOT_REVIEWED",
+  "reroute_correct": "NOT_REVIEWED",
+  "overall_business_result": "NOT_REVIEWED",
+  "reviewer_notes": "",
+  "decisive_evidence": [],
+  "major_defects": [],
+  "recommended_action": "NOT_REVIEWED"
+}

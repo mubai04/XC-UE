@@ -5,7 +5,7 @@ from typing import Any
 
 from 工程异常 import 工程错误
 from 退出码 import ExitCode
-from 闸门标准解析 import L101规则, L102规则, L103规则, L15路由规则, L1规则
+from 闸门标准解析 import L101规则, L102规则, L103规则, L1规则
 
 
 REQUIRED_SCHEMA = "xcue.l1-gate-rules/1.0"
@@ -37,14 +37,13 @@ def 加载闸门规则(path: Path) -> L1规则:
         L101=_解析L101(gates["L1-01"]),
         L102=_解析L102(gates["L1-02"]),
         L103=_解析L103(gates["L1-03"]),
-        L15路由=_解析L15路由(raw["l15_routes"]),
     )
 
 
 def _校验根结构(raw: Any) -> None:
     if not isinstance(raw, dict):
         raise 闸门规则加载错误("L1 结构化闸门规则根节点必须是对象")
-    for key in ["schema_version", "version", "status", "scope", "gates", "l15_routes"]:
+    for key in ["schema_version", "version", "status", "scope", "gates"]:
         if key not in raw:
             raise 闸门规则加载错误(f"L1 结构化闸门规则缺少字段：{key}")
     if raw["schema_version"] != REQUIRED_SCHEMA:
@@ -55,8 +54,6 @@ def _校验根结构(raw: Any) -> None:
     _非空字符串(raw["scope"], "scope")
     if not isinstance(raw["gates"], dict):
         raise 闸门规则加载错误("L1 结构化闸门规则 gates 必须是对象")
-    if not isinstance(raw["l15_routes"], dict) or not raw["l15_routes"]:
-        raise 闸门规则加载错误("L1 结构化闸门规则 l15_routes 必须是非空对象")
     missing = sorted(REQUIRED_GATES - set(raw["gates"]))
     if missing:
         raise 闸门规则加载错误(f"L1 结构化闸门规则缺少闸门：{'、'.join(missing)}")
@@ -107,28 +104,6 @@ def _解析L103(raw: Any) -> L103规则:
         发布判定表=_字符串字典(raw["publication_checks"], "L1-03.publication_checks"),
         当章收益项=_字符串列表(raw["chapter_benefits"], "L1-03.chapter_benefits"),
     )
-
-
-def _解析L15路由(raw: Any) -> dict[str, L15路由规则]:
-    if not isinstance(raw, dict):
-        raise 闸门规则加载错误("l15_routes 必须是对象")
-    routes: dict[str, L15路由规则] = {}
-    for failure_type, route in raw.items():
-        failure = _非空字符串(failure_type, "l15_routes.failure_type")
-        if not isinstance(route, dict):
-            raise 闸门规则加载错误(f"l15_routes.{failure} 必须是对象")
-        for key in ["target_module", "repair_product", "return_gate"]:
-            if key not in route:
-                raise 闸门规则加载错误(f"l15_routes.{failure} 缺少字段：{key}")
-        target = _非空字符串(route["target_module"], f"l15_routes.{failure}.target_module")
-        if target not in {"L2-01", "L2-02", "L2-03", "L2-04", "L2-05", "L2-06", "回L1-00", "回L1-01", "回L1-02", "回L1-03", "人工复核"}:
-            raise 闸门规则加载错误(f"l15_routes.{failure}.target_module 不在允许范围")
-        routes[failure] = L15路由规则(
-            目标模块=target,
-            修复产物=_非空字符串(route["repair_product"], f"l15_routes.{failure}.repair_product"),
-            回流闸门=_非空字符串(route["return_gate"], f"l15_routes.{failure}.return_gate"),
-        )
-    return routes
 
 
 def _校验闸门(raw: Any, gate: str) -> None:

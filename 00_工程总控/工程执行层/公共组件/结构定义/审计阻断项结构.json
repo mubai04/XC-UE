@@ -29,7 +29,7 @@
         "AUDIT_BLOCKED",
         "SCREENING_REJECT",
         "SCREENING_PASS",
-        "REVIEW_REQUIRED"
+        "SCREENING_REVIEW"
       ]
     },
     "semantic_audit_status": {
@@ -104,6 +104,37 @@
         },
         "摘句": {
           "$ref": "#/$defs/text"
+        },
+        "段落ID": {
+          "$ref": "#/$defs/short_text"
+        },
+        "source_scope": {
+          "type": "string",
+          "enum": [
+            "CURRENT_CHAPTER",
+            "PRIOR_CHAPTER"
+          ]
+        },
+        "start_offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "end_offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "occurrence_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
         }
       }
     },
@@ -123,6 +154,9 @@
         "修复方向",
         "decision_role",
         "blocking",
+        "routeable",
+        "route_reason",
+        "source_component",
         "reason_type"
       ],
       "properties": {
@@ -188,6 +222,17 @@
         },
         "blocking": {
           "const": true
+        },
+        "routeable": {
+          "const": false
+        },
+        "route_reason": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "source_component": {
+          "type": "string",
+          "maxLength": 64
         },
         "reason_type": {
           "type": "string",

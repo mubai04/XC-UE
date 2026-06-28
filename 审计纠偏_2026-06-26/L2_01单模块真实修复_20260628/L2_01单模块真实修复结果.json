@@ -1,0 +1,18 @@
+{
+  "task": "L2-01-REAL-01",
+  "generated_at": "2026-06-28T10:47:00+00:00",
+  "stop_code": "L1_SCREENING_PASS",
+  "business_status": "INVALID_CASE",
+  "project_id": "YYL-001",
+  "chapter_path": "70_测试项目/YYL-烟雨楼/chapters/ch02.md",
+  "formal_chapter_unchanged": true,
+  "l1_status": "SCREENING_PASS",
+  "failure_count": 0,
+  "semantic_audit_status": "PASS",
+  "l15_final_status": "RETURN_TO_L1",
+  "l15_route_rule_id": "SCREENING_PASS",
+  "target_module": "",
+  "real_api_executed": true,
+  "message": "第2章通过 L1 筛查（failure_count=0），无 routeable 结构失败项，不得进入 L2-01 修复链。",
+  "next_step": "需另选 L1 能检出叙事/结构失败且 L1.5 自然路由至 L2-01 的真实章节；不得手改路由或伪造失败包。"
+}

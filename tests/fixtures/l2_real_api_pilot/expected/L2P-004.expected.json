@@ -1,0 +1,22 @@
+{
+  "case_id": "L2P-004",
+  "target_module": "L2-02",
+  "case_type": "B",
+  "expected_issue_present": false,
+  "acceptable_root_causes": [
+    "情节平淡",
+    "语言简洁",
+    "无文风故障"
+  ],
+  "required_evidence_region": [
+    "北道"
+  ],
+  "forbidden_diagnoses": [
+    "解释腔",
+    "人物语气漂移",
+    "重复信息"
+  ],
+  "expected_reroute": true,
+  "minimum_action_requirements": [],
+  "human_notes": "B类：短句直叙不是文风病。"
+}

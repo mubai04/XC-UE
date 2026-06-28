@@ -1,0 +1,116 @@
+{
+  "schema_version": "xcue.l2-input-boundary/1.0",
+  "rule_version": "L2-BND-V2",
+  "production_runtime": "v1",
+  "primary_input": {
+    "required_objects": ["L1_failure_packet", "L1_5_route_report"],
+    "formal_entry_flag": "--l15-report",
+    "description": "L2 唯一合法业务主输入为 L1 失败包 + L1.5 路由决策"
+  },
+  "context_role": "EVIDENCE_AND_REPAIR_CONTEXT",
+  "rejections": {
+    "raw_chapter_only": {
+      "code": "L2_UPSTREAM_PACKAGE_REQUIRED",
+      "message": "章节正文不能单独启动 L2；必须提供 L1.5 路由报告及上游失败包"
+    }
+  },
+  "legacy_entry": {
+    "failure_packet_direct": "LEGACY_EXPLICIT_ONLY",
+    "auto_synthesize_l15": false,
+    "formal_pipeline_allowed": false
+  },
+  "actions": {
+    "input_required": "INPUT_REQUIRED",
+    "misroute": "RETURN_TO_L1_5"
+  },
+  "forbidden_l2_behaviors": [
+    "global_rediagnosis",
+    "direct_reroute_to_module",
+    "direct_text_write",
+    "candidate_text_generation",
+    "modify_l1_failure_packet",
+    "modify_l15_route_result"
+  ],
+  "modules": {
+    "L2-01": {
+      "allow_full_current_chapter": true,
+      "allow_failure_evidence": true,
+      "allow_chapter_order": true,
+      "allow_prior_chapters": "adjacent_fragments_only",
+      "allow_ir": false,
+      "allow_runtime_state": false,
+      "allow_style_constraints": false,
+      "allow_reader_target": false
+    },
+    "L2-02": {
+      "allow_full_current_chapter": true,
+      "allow_failure_evidence": true,
+      "allow_chapter_order": false,
+      "allow_prior_chapters": false,
+      "allow_ir": "constraint_only",
+      "allow_runtime_state": false,
+      "allow_style_constraints": true,
+      "allow_reader_target": false
+    },
+    "L2-03": {
+      "allow_full_current_chapter": true,
+      "allow_failure_evidence": true,
+      "allow_chapter_order": false,
+      "allow_prior_chapters": "related_character_fragments_only",
+      "allow_ir": "related_character_only",
+      "allow_runtime_state": "character_state_only",
+      "allow_style_constraints": false,
+      "allow_reader_target": false
+    },
+    "L2-04": {
+      "allow_full_current_chapter": true,
+      "allow_failure_evidence": true,
+      "allow_chapter_order": false,
+      "allow_prior_chapters": false,
+      "allow_ir": "setting_and_world_only",
+      "allow_runtime_state": "chapter_setting_state_only",
+      "allow_style_constraints": false,
+      "allow_project_rules": true,
+      "allow_reader_target": false
+    },
+    "L2-05": {
+      "allow_full_current_chapter": true,
+      "allow_failure_evidence": true,
+      "allow_chapter_order": false,
+      "allow_prior_chapters": false,
+      "allow_ir": false,
+      "allow_runtime_state": false,
+      "allow_style_constraints": false,
+      "allow_reader_target": true,
+      "allow_reading_window": true,
+      "forbid_external_ops_metrics": true
+    },
+    "L2-06": {
+      "allow_full_current_chapter": true,
+      "allow_failure_evidence": true,
+      "allow_chapter_order": false,
+      "allow_prior_chapters": "related_only",
+      "allow_ir": true,
+      "allow_runtime_state": true,
+      "allow_project_rules": true,
+      "allow_confirmed_story_facts": true,
+      "forbid_engineering_issues": true
+    }
+  },
+  "engineering_failure_types": [
+    "文件路径错误",
+    "API故障",
+    "Schema错误",
+    "Git问题",
+    "项目治理问题",
+    "运行环境问题"
+  ],
+  "external_ops_failure_types": [
+    "投流",
+    "封面点击率",
+    "真实收入",
+    "平台推荐",
+    "广告",
+    "外部运营数据"
+  ]
+}

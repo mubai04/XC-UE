@@ -1,0 +1,117 @@
+{
+  "case_id": "L2P-010",
+  "module_id": "L2-05",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:50:52.169526+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-010"
+  },
+  "raw_response": "{\"id\":\"f6ef5e24-84fe-4aee-b875-dd41c8e67454\",\"object\":\"chat.completion\",\"created\":1782618635,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"即时情绪反馈弱：缺乏小成就奖励与情绪变化，认知负荷高，关键信息重复导致阅读动力持续衰减。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\",\\n      \\\"modification_target\\\": \\\"此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。\\\"\\n    },\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\",\\n      \\\"modification_target\\\": \\\"将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"合并或删除重复信息块：将「补给处排队漫长…」「孙潜把布分给伤员…」「不应因语言粗糙改判…」等重复段落整合为一次出现，避免内容完全重复引发疲惫。\\\",\\n    \\\"在清点、领补给、分物资三个环节各加入一句短暂的情绪微反馈（如一句心理活动、一个微小意外、一个身体反应），让单调任务出现起伏，同时降低认知空泛感。\\\",\\n    \\\"精简认知负荷高的长句：将段落24与26的「余下篇幅以场景细节收束…」改为两个短句，并植入一个具体、可感知的细节，替代抽象场景罗列。\\\",\\n    \\\"在结尾最末句加入一个未完成动作或不确定性线索，使读者产生「接着会发生什么」的疑问，而不是用纯环境描写闭合全章。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"重复信息出现不超过一次，读者在同类句子第二次出现时不会感到厌烦。\\\",\\n    \\\"至少在两处任务进展中能读到角色情绪的微小变化或意外事件，使阅读过程不再完全平铺直叙。\\\",\\n    \\\"结尾段不再超过 40 个字，且最后一句不是环境收束，而是包含行为或悬念。\\\",\\n    \\\"全章认知负荷指数（长句比例）降至 5% 以下。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 24,\\n      \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON，诊断L2-05的市场体验风险。输入给出了failure_type: \\\"E低：即时情绪反馈弱\\\"，但指令说：不得复述 SCREENING_PASS/REJECT 或 L1 状态；不得写‘提高爽点’。\\n\\n我们需要基于reading_stages、entry_promises、immediate_rewards、cognitive_loads、repeat_info、ending_momentum判断体验风险。 输入中immediate_rewards为空，说明没有即时奖励。cognitive_loads有两个长句信息堆叠。repeat_info有多处重复。ending_momentum提到场景细节收束，但没有爽点或钩子。failure_evidence只有paragragh 1的quote。\\n\\n所以分析：体验风险可能为“弃读”，因为即时情绪反馈弱，缺乏奖励，认知负荷高，重复多，结尾没有动力。\\n\\n然后fix_actions要给出具体修改动作，acceptance_criteria验收标准。注意不要写提高爽点，但可能写增加即时反馈等。\\n\\n输出JSON：root_cause, experience_risks（列表，每项risk_type, location_quote, modification_target），fix_actions（字符串列表），acceptance_criteria（字符串列表），evidence_quotes（列表），needs_reroute（布尔）。\\n\\n我们需要基于给定信息构造。root_cause可能描述为“缺少即时情绪反馈与奖励，认知负荷高，重复削弱新鲜感”。experience_risks可能为“弃读”，modification_target是修改某些地方以增加即时奖励或减轻负荷。我们可以选一处重复或长句。\\n\\n根据repeat_info：有很多重复，例如“清点完成才能领补给”重复，“补给处排队漫长...”重复，“孙潜把布分给伤员...”重复等。可能读者觉得无聊，缺乏新信息。cognitive_loads在段落24和26有长句堆叠，读起来累。ending_momentum也是长句场景描述，没有推进剧情。所以风险是弃读。\\n\\n我们给出fix_actions：比如删除或合并重复信息，在关键位置插入小奖励（如主角发现意外线索，情绪变化等），简化结尾长句，增加悬念。但不要提“提高爽点”，可以说“增强即时成就感”。\\n\\nacceptance_criteria：比如读者在重复段落不会感到厌烦，结尾有继续阅读的欲望等。\\n\\nevidence_quotes：可以引用一段重复或长句作为证据。\\n\\n注意，输入中immediate_rewards为空，说明没有奖励。所以需要增加即时奖励。\\n\\n最终输出only JSON，不要其他文字。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2364,\"completion_tokens\":1214,\"total_tokens\":3578,\"prompt_tokens_details\":{\"cached_tokens\":2304},\"completion_tokens_details\":{\"reasoning_tokens\":532},\"prompt_cache_hit_tokens\":2304,\"prompt_cache_miss_tokens\":60},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 市场体验修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-05",
+    "输入问题": "L2P-010 R5A pilot | 根因：即时情绪反馈弱：缺乏小成就奖励与情绪变化，认知负荷高，关键信息重复导致阅读动力持续衰减。 | 模块细节：弃读→此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。；弃读→将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。；认知负担:长句信息堆叠",
+    "主失败类型": "E低：即时情绪反馈弱",
+    "次失败类型": "P2",
+    "修复动作": "弃读：此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。 / 弃读：将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。 / 入口承诺：在 P1 强化读者预期 / 末段推动力：在 P26 留下可追读问题",
+    "修复产物": "体验已成立",
+    "验收问题": "在「补给处排队漫长，他凭…」读者可感知此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。；在「余下篇幅以场景细节收…」读者可感知将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。；首段摘句「孙潜要在乱后清点库房。…」形成可追踪承诺；章末摘句「余下篇幅以场景细节收束：…」驱动继续阅读",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "否",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-05",
+    "规则编号": "P2",
+    "规则依据": "即时情绪反馈弱：缺乏小成就奖励与情绪变化，认知负荷高，关键信息重复导致阅读动力持续衰减。 | 修改范围：阅读阶段局部 | 禁止：核心情节事实",
+    "标准动作": [
+      "弃读：此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。",
+      "弃读：将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。",
+      "入口承诺：在 P1 强化读者预期",
+      "末段推动力：在 P26 留下可追读问题"
+    ],
+    "标准验收": [
+      "在「补给处排队漫长，他凭…」读者可感知此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。",
+      "在「余下篇幅以场景细节收…」读者可感知将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。",
+      "首段摘句「孙潜要在乱后清点库房。…」形成可追踪承诺",
+      "章末摘句「余下篇幅以场景细节收束：…」驱动继续阅读"
+    ],
+    "rule_id": "L2-05:P2",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 5,
+        "摘句": "补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。"
+      },
+      {
+        "段落": 24,
+        "摘句": "余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 18435.573099995963,
+  "token_usage": {
+    "prompt_tokens": 2364,
+    "completion_tokens": 1214,
+    "total_tokens": 3578,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 532
+    },
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 60
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"root_cause\": \"即时情绪反馈弱：缺乏小成就奖励与情绪变化，认知负荷高，关键信息重复导致阅读动力持续衰减。\",\n  \"experience_risks\": [\n    {\n      \"risk_type\": \"弃读\",\n      \"location_quote\": \"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\",\n      \"modification_target\": \"此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。\"\n    },\n    {\n      \"risk_type\": \"弃读\",\n      \"location_quote\": \"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\",\n      \"modification_target\": \"将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。\"\n    }\n  ],\n  \"fix_actions\": [\n    \"合并或删除重复信息块：将「补给处排队漫长…」「孙潜把布分给伤员…」「不应因语言粗糙改判…」等重复段落整合为一次出现，避免内容完全重复引发疲惫。\",\n    \"在清点、领补给、分物资三个环节各加入一句短暂的情绪微反馈（如一句心理活动、一个微小意外、一个身体反应），让单调任务出现起伏，同时降低认知空泛感。\",\n    \"精简认知负荷高的长句：将段落24与26的「余下篇幅以场景细节收束…」改为两个短句，并植入一个具体、可感知的细节，替代抽象场景罗列。\",\n    \"在结尾最末句加入一个未完成动作或不确定性线索，使读者产生「接着会发生什么」的疑问，而不是用纯环境描写闭合全章。\"\n  ],\n  \"acceptance_criteria\": [\n    \"重复信息出现不超过一次，读者在同类句子第二次出现时不会感到厌烦。\",\n    \"至少在两处任务进展中能读到角色情绪的微小变化或意外事件，使阅读过程不再完全平铺直叙。\",\n    \"结尾段不再超过 40 个字，且最后一句不是环境收束，而是包含行为或悬念。\",\n    \"全章认知负荷指数（长句比例）降至 5% 以下。\"\n  ],\n  \"evidence_quotes\": [\n    {\n      \"paragraph\": 5,\n      \"quote\": \"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\"\n    },\n    {\n      \"paragraph\": 24,\n      \"quote\": \"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\"\n    }\n  ],\n  \"needs_reroute\": false\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"f6ef5e24-84fe-4aee-b875-dd41c8e67454\",\"object\":\"chat.completion\",\"created\":1782618635,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"即时情绪反馈弱：缺乏小成就奖励与情绪变化，认知负荷高，关键信息重复导致阅读动力持续衰减。\\\",\\n  \\\"experience_risks\\\": [\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：短缺背景下必须完成清点。\\\",\\n      \\\"modification_target\\\": \\\"此处重复出现两次（段落5与段落14），删去其中一次，并用「领物资时发生意外小插曲」替换，使单调进程出现新鲜意外，同时提供情绪反馈（如紧张后释然）。\\\"\\n    },\\n    {\\n      \\\"risk_type\\\": \\\"弃读\\\",\\n      \\\"location_quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\",\\n      \\\"modification_target\\\": \\\"将两处几乎完全相同的结尾段落合并精简，末尾加入一个非常短小的悬念或未完动作（例如「忽然，远处传来一声闷响，他停下了脚步」），创造继续阅读的最小钩子。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"合并或删除重复信息块：将「补给处排队漫长…」「孙潜把布分给伤员…」「不应因语言粗糙改判…」等重复段落整合为一次出现，避免内容完全重复引发疲惫。\\\",\\n    \\\"在清点、领补给、分物资三个环节各加入一句短暂的情绪微反馈（如一句心理活动、一个微小意外、一个身体反应），让单调任务出现起伏，同时降低认知空泛感。\\\",\\n    \\\"精简认知负荷高的长句：将段落24与26的「余下篇幅以场景细节收束…」改为两个短句，并植入一个具体、可感知的细节，替代抽象场景罗列。\\\",\\n    \\\"在结尾最末句加入一个未完成动作或不确定性线索，使读者产生「接着会发生什么」的疑问，而不是用纯环境描写闭合全章。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"重复信息出现不超过一次，读者在同类句子第二次出现时不会感到厌烦。\\\",\\n    \\\"至少在两处任务进展中能读到角色情绪的微小变化或意外事件，使阅读过程不再完全平铺直叙。\\\",\\n    \\\"结尾段不再超过 40 个字，且最后一句不是环境收束，而是包含行为或悬念。\\\",\\n    \\\"全章认知负荷指数（长句比例）降至 5% 以下。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 5,\\n      \\\"quote\\\": \\\"补给处排队漫长，他凭清点单领到盐与布。读者知道为何忍耐粗口：没有补给，队伍会失控。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 24,\\n      \\\"quote\\\": \\\"余下篇幅以场景细节收束：光线、气味、脚步与停顿被如实记录，不改动本案例核心矛盾，仅供真实 API 试跑读取足够上下文。\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON，诊断L2-05的市场体验风险。输入给出了failure_type: \\\"E低：即时情绪反馈弱\\\"，但指令说：不得复述 SCREENING_PASS/REJECT 或 L1 状态；不得写‘提高爽点’。\\n\\n我们需要基于reading_stages、entry_promises、immediate_rewards、cognitive_loads、repeat_info、ending_momentum判断体验风险。 输入中immediate_rewards为空，说明没有即时奖励。cognitive_loads有两个长句信息堆叠。repeat_info有多处重复。ending_momentum提到场景细节收束，但没有爽点或钩子。failure_evidence只有paragragh 1的quote。\\n\\n所以分析：体验风险可能为“弃读”，因为即时情绪反馈弱，缺乏奖励，认知负荷高，重复多，结尾没有动力。\\n\\n然后fix_actions要给出具体修改动作，acceptance_criteria验收标准。注意不要写提高爽点，但可能写增加即时反馈等。\\n\\n输出JSON：root_cause, experience_risks（列表，每项risk_type, location_quote, modification_target），fix_actions（字符串列表），acceptance_criteria（字符串列表），evidence_quotes（列表），needs_reroute（布尔）。\\n\\n我们需要基于给定信息构造。root_cause可能描述为“缺少即时情绪反馈与奖励，认知负荷高，重复削弱新鲜感”。experience_risks可能为“弃读”，modification_target是修改某些地方以增加即时奖励或减轻负荷。我们可以选一处重复或长句。\\n\\n根据repeat_info：有很多重复，例如“清点完成才能领补给”重复，“补给处排队漫长...”重复，“孙潜把布分给伤员...”重复等。可能读者觉得无聊，缺乏新信息。cognitive_loads在段落24和26有长句堆叠，读起来累。ending_momentum也是长句场景描述，没有推进剧情。所以风险是弃读。\\n\\n我们给出fix_actions：比如删除或合并重复信息，在关键位置插入小奖励（如主角发现意外线索，情绪变化等），简化结尾长句，增加悬念。但不要提“提高爽点”，可以说“增强即时成就感”。\\n\\nacceptance_criteria：比如读者在重复段落不会感到厌烦，结尾有继续阅读的欲望等。\\n\\nevidence_quotes：可以引用一段重复或长句作为证据。\\n\\n注意，输入中immediate_rewards为空，说明没有奖励。所以需要增加即时奖励。\\n\\n最终输出only JSON，不要其他文字。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2364,\"completion_tokens\":1214,\"total_tokens\":3578,\"prompt_tokens_details\":{\"cached_tokens\":2304},\"completion_tokens_details\":{\"reasoning_tokens\":532},\"prompt_cache_hit_tokens\":2304,\"prompt_cache_miss_tokens\":60},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 18394.496700027958,
+      "token_usage": {
+        "prompt_tokens": 2364,
+        "completion_tokens": 1214,
+        "total_tokens": 3578,
+        "prompt_tokens_details": {
+          "cached_tokens": 2304
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 532
+        },
+        "prompt_cache_hit_tokens": 2304,
+        "prompt_cache_miss_tokens": 60
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

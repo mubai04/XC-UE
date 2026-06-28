@@ -1,0 +1,33 @@
+{
+  "run_id": "L2_R5C_L2P007_定向复测_20260628",
+  "stopped_reason": null,
+  "technical": {
+    "per_case": {
+      "L2P-007": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      }
+    },
+    "exact_quote_forgery": 0,
+    "source_binding_errors": 0,
+    "schema_crashes": 0,
+    "max_consecutive_schema": 0,
+    "technical_protocol_passed": true
+  },
+  "case_count": 1,
+  "status_labels": {
+    "L2P_007_TECHNICAL_PROTOCOL": "PASSED",
+    "L2_R5C_FULL_PROTOCOL": "NOT_RUN",
+    "L2_R5C_BUSINESS_PILOT": "NOT_EVALUATED",
+    "L2_REAL_MODEL_EFFECTIVENESS": "NOT_TESTED",
+    "PRODUCTION_ELIGIBLE": false
+  }
+}

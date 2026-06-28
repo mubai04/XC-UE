@@ -1,0 +1,111 @@
+{
+  "case_id": "L2P-012",
+  "module_id": "L2-06",
+  "attempt": 2,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T04:07:02.949046+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-012\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-012"
+  },
+  "raw_response": "{\"id\":\"784059b4-35e7-415c-8ccb-1456d51eff79\",\"object\":\"chat.completion\",\"created\":1782619602,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0004\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0008\\\",\\n      \\\"classification\\\": \\\"ALLOWED_CHANGE\\\",\\n      \\\"reason\\\": \\\"两个事实均指出变化具有桥梁，具体化为时间跨度、治疗说明等，属于同一叙事的补充说明，无事实互斥。\\\",\\n      \\\"repair_direction\\\": \\\"无需修复，保持现有叙述。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\\"确认事实对无冲突，不执行修复。\\\"],\\n  \\\"acceptance_criteria\\\": [\\\"事实对中两事实描述一致，无矛盾。\\\"],\\n  \\\"evidence_quotes\\\": [\\n    { \\\"paragraph\\\": 5, \\\"quote\\\": \\\"变化有桥梁，不应判硬冲突。\\\" },\\n    { \\\"paragraph\\\": 14, \\\"quote\\\": \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\" }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求只输出 JSON。需要根据输入分析一致性。\\n\\n首先，输入有多个事实和一个事实对：PAIR-0001 连接 FACT-0004 和 FACT-0008。需要对这对进行一致性诊断。\\n\\n回顾输入：\\nFACT-0004: entity \\\"变化\\\", attribute \\\"持有\\\", value \\\"桥梁\\\", source_type CURRENT_CHAPTER, paragraph 5, quote \\\"变化有桥梁，不应判硬冲突。\\\"\\nFACT-0008: entity \\\"变化\\\", attribute \\\"持有\\\", value \\\"桥梁：时间跨度、治疗说明、动作从受限到利落\\\", paragraph 14, quote \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\"\\n\\n所以事实对是关于“变化”实体的“持有”属性。但是，从内容看，FACT-0004 和 FACT-0008 都是说“变化有桥梁”，本质上并不矛盾。它们可能是冗余的，但并没有冲突。分类应该是 EVIDENCE_INSUFFICIENT 或其他？但规则说，EVIDENCE_INSUFFICIENT 可只引用一个事实，并说明缺少的来源类型。这里两个事实基本一致，不应该判冲突。所以可能 classification 应该是 ALLOWED_CHANGE 或者 EXPLANATION_INSUFFICIENT？等等，这个事实对是 POSSIBLE_CONFLICT，但实际无明显冲突。\\n\\n更仔细看：FACT-0004 quote: “变化有桥梁，不应判硬冲突。” FACT-0008 quote: “变化有桥梁：时间跨度、治疗说明、动作从受限到利落。” 这两个都是元信息，不是关于故事内实体的真实属性。它们是诊断提示，不是事实性冲突。诊断器应该专注于事实层面的冲突。但是根据输入，fact_pair 已经定义，我们需要对它做出分类。\\n\\n可能的分类：由于两个事实实际上并不冲突，它们是一致的，所以 classification 可能是 EXPLANATION_INSUFFICIENT 或 ALLOWED_CHANGE，但更合适的可能是 ALLOWED_CHANGE，因为“变化有桥梁”暗示状态转移是允许的。\\n\\n但是，事实对中的 entity 是“变化”，attribute 是“持有”，两个值分别是“桥梁”和“桥梁：时间跨度...”。它们其实表达了同一个概念，只是详细程度不同。所以这根本不是冲突，因此应判为 EXPLANATION_INSUFFICIENT 或 EVIDENCE_INSUFFICIENT？实际上，没有冲突，所以不需要一致性冲突。但是输出格式要求 consistency_conflicts 至少有一个条目。或许我们应该指出没有冲突，所以 classification 为 ALLOWED_CHANGE 或类似。\\n\\n注意输出中 classification 只能是 HARD_CONFLICT, EXPLANATION_INSUFFICIENT, ALLOWED_CHANGE, EVIDENCE_INSUFFICIENT。这里没有冲突，且两个事实都来自正文，证据充足，所以可能分类为 ALLOWED_CHANGE（允许的变化）。因为本质上它们是同一个“变化”的不同描述，是叙述中的同一个概念，无需冲突处理。\\n\\n此外，failure_type 是“技术护栏失败”，可能意味着需要诊断失败。但我们基于事实对。\\n\\n考虑 root_cause：可能是“叙事中明确说明变化有桥梁，且两个事实指向同一概念的陈述，不构成事实冲突”。\\n\\nrepair_direction：无需修复，已经一致。\\n\\nfix_actions：可以写“确认事实一致，无需调整”。\\n\\nacceptance_criteria：“事实对中两事实指称相同，无矛盾”。\\n\\nevidence_quotes：可以引用相关段落的 quote，比如 FACT-0004 和 FACT-0008 的 quote。\\n\\nneeds_reroute: false。\\n\\n构建 JSON。注意引用 fact_pair_id 为 PAIR-0001，source_a_fact_id 为 FACT-0004，source_b_fact_id 为 FACT-0008。\\n\\n输出示例结构：\\n\\n{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0004\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0008\\\",\\n      \\\"classification\\\": \\\"ALLOWED_CHANGE\\\",\\n      \\\"reason\\\": \\\"两个事实均指出变化具有桥梁，具体化为时间跨度、治疗说明等，属于同一叙事的补充说明，无事实互斥。\\\",\\n      \\\"repair_direction\\\": \\\"无需修复，保持现有叙述。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\\"确认事实对无冲突，不执行修复。\\\"],\\n  \\\"acceptance_criteria\\\": [\\\"事实对中两事实描述一致，无矛盾。\\\"],\\n  \\\"evidence_quotes\\\": [\\n    {\\\"paragraph\\\": 5, \\\"quote\\\": \\\"变化有桥梁，不应判硬冲突。\\\"},\\n    {\\\"paragraph\\\": 14, \\\"quote\\\": \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\"}\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n\\n注意：输入中 FACT-0004 的 paragraph 是 5，FACT-0008 是 14。所以 evidence_quotes 可以取自这些。\\n\\n这样返回 JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2750,\"completion_tokens\":1393,\"total_tokens\":4143,\"prompt_tokens_details\":{\"cached_tokens\":2688},\"completion_tokens_details\":{\"reasoning_tokens\":1113},\"prompt_cache_hit_tokens\":2688,\"prompt_cache_miss_tokens\":62},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [],
+  "repair_form": {
+    "修复单类型": "L2 系统一致性修复单",
+    "来源闸门": "L1-01",
+    "接收模块": "L2-06",
+    "输入问题": "L2P-012 R5A pilot | 根因：事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。 | 模块细节：事实:EXPLANATION_INSUFFICIENT",
+    "主失败类型": "技术护栏失败",
+    "次失败类型": "F03",
+    "修复动作": "变化.持有：补写状态变化桥梁，连接 正文 与 正文",
+    "修复产物": "确认合法变化",
+    "验收问题": "变化.持有 的时间或因果过渡可被读者理解",
+    "回流位置": "L1-01",
+    "是否需要其他L2辅助": "否",
+    "是否需要回L15重路由": "否",
+    "最终状态": "回原闸门复验",
+    "标准来源": "L2-06",
+    "规则编号": "F03",
+    "规则依据": "事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。 | 修改范围：事实陈述与状态 | 禁止：已成立的核心事件",
+    "标准动作": [
+      "变化.持有：补写状态变化桥梁，连接 正文 与 正文"
+    ],
+    "标准验收": [
+      "变化.持有 的时间或因果过渡可被读者理解"
+    ],
+    "rule_id": "L2-06:F03",
+    "rule_version": "2026-06-24.a3-01",
+    "诊断证据": [
+      {
+        "段落": 5,
+        "摘句": "变化有桥梁，不应判硬冲突。"
+      },
+      {
+        "段落": 14,
+        "摘句": "变化有桥梁：时间跨度、治疗说明、动作从受限到利落。"
+      }
+    ]
+  },
+  "transport_status": "SUCCESS",
+  "format_status": "SUCCESS",
+  "evidence_status": "SUCCESS",
+  "duration_ms": 22008.613399928436,
+  "token_usage": {
+    "prompt_tokens": 2750,
+    "completion_tokens": 1393,
+    "total_tokens": 4143,
+    "prompt_tokens_details": {
+      "cached_tokens": 2688
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1113
+    },
+    "prompt_cache_hit_tokens": 2688,
+    "prompt_cache_miss_tokens": 62
+  },
+  "error_message": null,
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"response_schema_version\": \"xcue.l2-consistency-response/2.0\",\n  \"root_cause\": \"事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。\",\n  \"consistency_conflicts\": [\n    {\n      \"fact_pair_id\": \"PAIR-0001\",\n      \"source_a_fact_id\": \"FACT-0004\",\n      \"source_b_fact_id\": \"FACT-0008\",\n      \"classification\": \"ALLOWED_CHANGE\",\n      \"reason\": \"两个事实均指出变化具有桥梁，具体化为时间跨度、治疗说明等，属于同一叙事的补充说明，无事实互斥。\",\n      \"repair_direction\": \"无需修复，保持现有叙述。\"\n    }\n  ],\n  \"fix_actions\": [\"确认事实对无冲突，不执行修复。\"],\n  \"acceptance_criteria\": [\"事实对中两事实描述一致，无矛盾。\"],\n  \"evidence_quotes\": [\n    { \"paragraph\": 5, \"quote\": \"变化有桥梁，不应判硬冲突。\" },\n    { \"paragraph\": 14, \"quote\": \"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\" }\n  ],\n  \"needs_reroute\": false\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"784059b4-35e7-415c-8ccb-1456d51eff79\",\"object\":\"chat.completion\",\"created\":1782619602,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0004\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0008\\\",\\n      \\\"classification\\\": \\\"ALLOWED_CHANGE\\\",\\n      \\\"reason\\\": \\\"两个事实均指出变化具有桥梁，具体化为时间跨度、治疗说明等，属于同一叙事的补充说明，无事实互斥。\\\",\\n      \\\"repair_direction\\\": \\\"无需修复，保持现有叙述。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\\"确认事实对无冲突，不执行修复。\\\"],\\n  \\\"acceptance_criteria\\\": [\\\"事实对中两事实描述一致，无矛盾。\\\"],\\n  \\\"evidence_quotes\\\": [\\n    { \\\"paragraph\\\": 5, \\\"quote\\\": \\\"变化有桥梁，不应判硬冲突。\\\" },\\n    { \\\"paragraph\\\": 14, \\\"quote\\\": \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\" }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求只输出 JSON。需要根据输入分析一致性。\\n\\n首先，输入有多个事实和一个事实对：PAIR-0001 连接 FACT-0004 和 FACT-0008。需要对这对进行一致性诊断。\\n\\n回顾输入：\\nFACT-0004: entity \\\"变化\\\", attribute \\\"持有\\\", value \\\"桥梁\\\", source_type CURRENT_CHAPTER, paragraph 5, quote \\\"变化有桥梁，不应判硬冲突。\\\"\\nFACT-0008: entity \\\"变化\\\", attribute \\\"持有\\\", value \\\"桥梁：时间跨度、治疗说明、动作从受限到利落\\\", paragraph 14, quote \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\"\\n\\n所以事实对是关于“变化”实体的“持有”属性。但是，从内容看，FACT-0004 和 FACT-0008 都是说“变化有桥梁”，本质上并不矛盾。它们可能是冗余的，但并没有冲突。分类应该是 EVIDENCE_INSUFFICIENT 或其他？但规则说，EVIDENCE_INSUFFICIENT 可只引用一个事实，并说明缺少的来源类型。这里两个事实基本一致，不应该判冲突。所以可能 classification 应该是 ALLOWED_CHANGE 或者 EXPLANATION_INSUFFICIENT？等等，这个事实对是 POSSIBLE_CONFLICT，但实际无明显冲突。\\n\\n更仔细看：FACT-0004 quote: “变化有桥梁，不应判硬冲突。” FACT-0008 quote: “变化有桥梁：时间跨度、治疗说明、动作从受限到利落。” 这两个都是元信息，不是关于故事内实体的真实属性。它们是诊断提示，不是事实性冲突。诊断器应该专注于事实层面的冲突。但是根据输入，fact_pair 已经定义，我们需要对它做出分类。\\n\\n可能的分类：由于两个事实实际上并不冲突，它们是一致的，所以 classification 可能是 EXPLANATION_INSUFFICIENT 或 ALLOWED_CHANGE，但更合适的可能是 ALLOWED_CHANGE，因为“变化有桥梁”暗示状态转移是允许的。\\n\\n但是，事实对中的 entity 是“变化”，attribute 是“持有”，两个值分别是“桥梁”和“桥梁：时间跨度...”。它们其实表达了同一个概念，只是详细程度不同。所以这根本不是冲突，因此应判为 EXPLANATION_INSUFFICIENT 或 EVIDENCE_INSUFFICIENT？实际上，没有冲突，所以不需要一致性冲突。但是输出格式要求 consistency_conflicts 至少有一个条目。或许我们应该指出没有冲突，所以 classification 为 ALLOWED_CHANGE 或类似。\\n\\n注意输出中 classification 只能是 HARD_CONFLICT, EXPLANATION_INSUFFICIENT, ALLOWED_CHANGE, EVIDENCE_INSUFFICIENT。这里没有冲突，且两个事实都来自正文，证据充足，所以可能分类为 ALLOWED_CHANGE（允许的变化）。因为本质上它们是同一个“变化”的不同描述，是叙述中的同一个概念，无需冲突处理。\\n\\n此外，failure_type 是“技术护栏失败”，可能意味着需要诊断失败。但我们基于事实对。\\n\\n考虑 root_cause：可能是“叙事中明确说明变化有桥梁，且两个事实指向同一概念的陈述，不构成事实冲突”。\\n\\nrepair_direction：无需修复，已经一致。\\n\\nfix_actions：可以写“确认事实一致，无需调整”。\\n\\nacceptance_criteria：“事实对中两事实指称相同，无矛盾”。\\n\\nevidence_quotes：可以引用相关段落的 quote，比如 FACT-0004 和 FACT-0008 的 quote。\\n\\nneeds_reroute: false。\\n\\n构建 JSON。注意引用 fact_pair_id 为 PAIR-0001，source_a_fact_id 为 FACT-0004，source_b_fact_id 为 FACT-0008。\\n\\n输出示例结构：\\n\\n{\\n  \\\"response_schema_version\\\": \\\"xcue.l2-consistency-response/2.0\\\",\\n  \\\"root_cause\\\": \\\"事实对未表现实际冲突，两事实均陈述“变化有桥梁”，内容一致。\\\",\\n  \\\"consistency_conflicts\\\": [\\n    {\\n      \\\"fact_pair_id\\\": \\\"PAIR-0001\\\",\\n      \\\"source_a_fact_id\\\": \\\"FACT-0004\\\",\\n      \\\"source_b_fact_id\\\": \\\"FACT-0008\\\",\\n      \\\"classification\\\": \\\"ALLOWED_CHANGE\\\",\\n      \\\"reason\\\": \\\"两个事实均指出变化具有桥梁，具体化为时间跨度、治疗说明等，属于同一叙事的补充说明，无事实互斥。\\\",\\n      \\\"repair_direction\\\": \\\"无需修复，保持现有叙述。\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\\"确认事实对无冲突，不执行修复。\\\"],\\n  \\\"acceptance_criteria\\\": [\\\"事实对中两事实描述一致，无矛盾。\\\"],\\n  \\\"evidence_quotes\\\": [\\n    {\\\"paragraph\\\": 5, \\\"quote\\\": \\\"变化有桥梁，不应判硬冲突。\\\"},\\n    {\\\"paragraph\\\": 14, \\\"quote\\\": \\\"变化有桥梁：时间跨度、治疗说明、动作从受限到利落。\\\"}\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\\n\\n注意：输入中 FACT-0004 的 paragraph 是 5，FACT-0008 是 14。所以 evidence_quotes 可以取自这些。\\n\\n这样返回 JSON。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":2750,\"completion_tokens\":1393,\"total_tokens\":4143,\"prompt_tokens_details\":{\"cached_tokens\":2688},\"completion_tokens_details\":{\"reasoning_tokens\":1113},\"prompt_cache_hit_tokens\":2688,\"prompt_cache_miss_tokens\":62},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 21993.333199992776,
+      "token_usage": {
+        "prompt_tokens": 2750,
+        "completion_tokens": 1393,
+        "total_tokens": 4143,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1113
+        },
+        "prompt_cache_hit_tokens": 2688,
+        "prompt_cache_miss_tokens": 62
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

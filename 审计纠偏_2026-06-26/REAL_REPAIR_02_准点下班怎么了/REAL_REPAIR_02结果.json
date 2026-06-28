@@ -1,0 +1,11 @@
+{
+  "task": "REAL-REPAIR-02",
+  "generated_at": "2026-06-28T12:48:46+00:00",
+  "stop_code": "L1_AUDIT_BLOCKED",
+  "CASE_QUALIFICATION": "PASSED",
+  "L1_RESULT": "AUDIT_BLOCKED",
+  "REPAIR_CHAIN": "NOT_TRIGGERED",
+  "REAL_REPAIR_RESULT": "NOT_EVALUATED",
+  "message": "L1 审计阻断或无失败包。",
+  "real_api_executed": true
+}

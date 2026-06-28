@@ -1,0 +1,144 @@
+﻿diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/CLEANUP_LOG_L2_prebuild.md" "b/00_\345\267\245\347\250\213\346\200\273\346\216\247/L2\346\236\204\345\273\272\345\211\215\346\270\205\347\220\206\350\256\260\345\275\225.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/CLEANUP_LOG_L2_prebuild.md"
+rename to "00_\345\267\245\347\250\213\346\200\273\346\216\247/L2\346\236\204\345\273\272\345\211\215\346\270\205\347\220\206\350\256\260\345\275\225.md"
+diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/SOURCE_POLICY_\345\244\226\351\203\250\350\265\204\346\226\231\346\216\245\345\205\245\350\247\204\345\210\231.md" "b/00_\345\267\245\347\250\213\346\200\273\346\216\247/\345\244\226\351\203\250\346\235\220\346\226\231\346\216\245\345\205\245\350\247\204\345\210\231.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/SOURCE_POLICY_\345\244\226\351\203\250\350\265\204\346\226\231\346\216\245\345\205\245\350\247\204\345\210\231.md"
+rename to "00_\345\267\245\347\250\213\346\200\273\346\216\247/\345\244\226\351\203\250\346\235\220\346\226\231\346\216\245\345\205\245\350\247\204\345\210\231.md"
+diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/CURRENT_SYSTEM_STATUS.generated.md" "b/00_\345\267\245\347\250\213\346\200\273\346\216\247/\345\275\223\345\211\215\347\263\273\347\273\237\347\212\266\346\200\201_\350\207\252\345\212\250\347\224\237\346\210\220.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/CURRENT_SYSTEM_STATUS.generated.md"
+rename to "00_\345\267\245\347\250\213\346\200\273\346\216\247/\345\275\223\345\211\215\347\263\273\347\273\237\347\212\266\346\200\201_\350\207\252\345\212\250\347\224\237\346\210\220.md"
+diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/DIRECTORY_GOVERNANCE_TASKS.md" "b/00_\345\267\245\347\250\213\346\200\273\346\216\247/\347\233\256\345\275\225\346\262\273\347\220\206\344\273\273\345\212\241.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/DIRECTORY_GOVERNANCE_TASKS.md"
+rename to "00_\345\267\245\347\250\213\346\200\273\346\216\247/\347\233\256\345\275\225\346\262\273\347\220\206\344\273\273\345\212\241.md"
+diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/DIRECTORY_GOVERNANCE_v1.md" "b/00_\345\267\245\347\250\213\346\200\273\346\216\247/\347\233\256\345\275\225\346\262\273\347\220\206\350\247\204\350\214\203_v1.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/DIRECTORY_GOVERNANCE_v1.md"
+rename to "00_\345\267\245\347\250\213\346\200\273\346\216\247/\347\233\256\345\275\225\346\262\273\347\220\206\350\247\204\350\214\203_v1.md"
+diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/STRUCTURE_CHECK_v1.md" "b/00_\345\267\245\347\250\213\346\200\273\346\216\247/\347\233\256\345\275\225\347\273\223\346\236\204\346\243\200\346\237\245_v1.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/STRUCTURE_CHECK_v1.md"
+rename to "00_\345\267\245\347\250\213\346\200\273\346\216\247/\347\233\256\345\275\225\347\273\223\346\236\204\346\243\200\346\237\245_v1.md"
+diff --git "a/README_XC-UE_\345\275\223\345\211\215\347\273\223\346\236\204\344\270\216\347\234\237\346\272\220\350\276\271\347\225\214.md" "b/XC-UE_\351\241\271\347\233\256\350\257\264\346\230\216\344\270\216\350\265\204\346\272\220\350\276\271\347\225\214.md"
+similarity index 100%
+rename from "README_XC-UE_\345\275\223\345\211\215\347\273\223\346\236\204\344\270\216\347\234\237\346\272\220\350\276\271\347\225\214.md"
+rename to "XC-UE_\351\241\271\347\233\256\350\257\264\346\230\216\344\270\216\350\265\204\346\272\220\350\276\271\347\225\214.md"
+diff --git a/tests/test_deepseek_client.py "b/tests/test_DeepSeek\345\256\242\346\210\267\347\253\257.py"
+similarity index 100%
+rename from tests/test_deepseek_client.py
+rename to "tests/test_DeepSeek\345\256\242\346\210\267\347\253\257.py"
+diff --git a/tests/test_l15_execution.py "b/tests/test_L1_5_\346\211\247\350\241\214\345\261\202.py"
+similarity index 100%
+rename from tests/test_l15_execution.py
+rename to "tests/test_L1_5_\346\211\247\350\241\214\345\261\202.py"
+diff --git a/tests/test_l1_decision_authority.py "b/tests/test_L1_\345\206\263\347\255\226\346\235\203\345\250\201.py"
+similarity index 100%
+rename from tests/test_l1_decision_authority.py
+rename to "tests/test_L1_\345\206\263\347\255\226\346\235\203\345\250\201.py"
+diff --git a/tests/test_l1_semantic_context.py "b/tests/test_L1_\350\257\255\344\271\211\344\270\212\344\270\213\346\226\207.py"
+similarity index 100%
+rename from tests/test_l1_semantic_context.py
+rename to "tests/test_L1_\350\257\255\344\271\211\344\270\212\344\270\213\346\226\207.py"
+diff --git a/tests/test_l1_semantic_audit.py "b/tests/test_L1_\350\257\255\344\271\211\345\256\241\350\256\241.py"
+similarity index 100%
+rename from tests/test_l1_semantic_audit.py
+rename to "tests/test_L1_\350\257\255\344\271\211\345\256\241\350\256\241.py"
+diff --git a/tests/test_l1_semantic_retry.py "b/tests/test_L1_\350\257\255\344\271\211\351\207\215\350\257\225.py"
+similarity index 100%
+rename from tests/test_l1_semantic_retry.py
+rename to "tests/test_L1_\350\257\255\344\271\211\351\207\215\350\257\225.py"
+diff --git a/tests/test_l2_01_batch.py "b/tests/test_L2_01_\346\211\271\351\207\217.py"
+similarity index 100%
+rename from tests/test_l2_01_batch.py
+rename to "tests/test_L2_01_\346\211\271\351\207\217.py"
+diff --git a/tests/test_l2_02_style_capability.py "b/tests/test_L2_02_\346\226\207\351\243\216\350\257\255\350\250\200\350\203\275\345\212\233.py"
+similarity index 100%
+rename from tests/test_l2_02_style_capability.py
+rename to "tests/test_L2_02_\346\226\207\351\243\216\350\257\255\350\250\200\350\203\275\345\212\233.py"
+diff --git a/tests/test_l2_03_psychology_capability.py "b/tests/test_L2_03_\350\247\222\350\211\262\345\277\203\347\220\206\350\203\275\345\212\233.py"
+similarity index 100%
+rename from tests/test_l2_03_psychology_capability.py
+rename to "tests/test_L2_03_\350\247\222\350\211\262\345\277\203\347\220\206\350\203\275\345\212\233.py"
+diff --git a/tests/test_l2_04_setting_capability.py "b/tests/test_L2_04_\345\210\233\346\204\217\350\256\276\345\256\232\350\203\275\345\212\233.py"
+similarity index 100%
+rename from tests/test_l2_04_setting_capability.py
+rename to "tests/test_L2_04_\345\210\233\346\204\217\350\256\276\345\256\232\350\203\275\345\212\233.py"
+diff --git a/tests/test_l2_05_market_capability.py "b/tests/test_L2_05_\345\270\202\345\234\272\344\275\223\351\252\214\350\203\275\345\212\233.py"
+similarity index 100%
+rename from tests/test_l2_05_market_capability.py
+rename to "tests/test_L2_05_\345\270\202\345\234\272\344\275\223\351\252\214\350\203\275\345\212\233.py"
+diff --git a/tests/test_l2_06_consistency_capability.py "b/tests/test_L2_06_\347\263\273\347\273\237\344\270\200\350\207\264\346\200\247\350\203\275\345\212\233.py"
+similarity index 100%
+rename from tests/test_l2_06_consistency_capability.py
+rename to "tests/test_L2_06_\347\263\273\347\273\237\344\270\200\350\207\264\346\200\247\350\203\275\345\212\233.py"
+diff --git a/tests/test_l2_modules_r4a.py "b/tests/test_L2_R4A_\346\250\241\345\235\227.py"
+similarity index 100%
+rename from tests/test_l2_modules_r4a.py
+rename to "tests/test_L2_R4A_\346\250\241\345\235\227.py"
+diff --git a/tests/test_l2_independent_capabilities.py "b/tests/test_L2_\347\213\254\347\253\213\350\203\275\345\212\233\347\273\223\346\236\204.py"
+similarity index 100%
+rename from tests/test_l2_independent_capabilities.py
+rename to "tests/test_L2_\347\213\254\347\253\213\350\203\275\345\212\233\347\273\223\346\236\204.py"
+diff --git a/tests/test_l3_candidate.py "b/tests/test_L3_\345\200\231\351\200\211.py"
+similarity index 100%
+rename from tests/test_l3_candidate.py
+rename to "tests/test_L3_\345\200\231\351\200\211.py"
+diff --git a/tests/test_repair_pipeline_r4a.py "b/tests/test_R4A_\344\277\256\345\244\215\346\265\201\346\260\264\347\272\277.py"
+similarity index 100%
+rename from tests/test_repair_pipeline_r4a.py
+rename to "tests/test_R4A_\344\277\256\345\244\215\346\265\201\346\260\264\347\272\277.py"
+diff --git a/tests/test_default_project_tp001.py "b/tests/test_TP001_\351\273\230\350\256\244\351\241\271\347\233\256.py"
+similarity index 100%
+rename from tests/test_default_project_tp001.py
+rename to "tests/test_TP001_\351\273\230\350\256\244\351\241\271\347\233\256.py"
+diff --git a/tests/test_freeze_audit_baseline.py "b/tests/test_\345\206\273\347\273\223\345\256\241\350\256\241\345\237\272\347\272\277.py"
+similarity index 100%
+rename from tests/test_freeze_audit_baseline.py
+rename to "tests/test_\345\206\273\347\273\223\345\256\241\350\256\241\345\237\272\347\272\277.py"
+diff --git a/tests/test_governance_sample_ids.py "b/tests/test_\346\262\273\347\220\206\346\240\267\346\234\254ID.py"
+similarity index 100%
+rename from tests/test_governance_sample_ids.py
+rename to "tests/test_\346\262\273\347\220\206\346\240\267\346\234\254ID.py"
+diff --git a/tests/test_e2e_pipeline.py "b/tests/test_\347\253\257\345\210\260\347\253\257\346\265\201\346\260\264\347\272\277.py"
+similarity index 100%
+rename from tests/test_e2e_pipeline.py
+rename to "tests/test_\347\253\257\345\210\260\347\253\257\346\265\201\346\260\264\347\272\277.py"
+diff --git a/tests/test_semantic_evidence.py "b/tests/test_\350\257\255\344\271\211\350\257\201\346\215\256.py"
+similarity index 100%
+rename from tests/test_semantic_evidence.py
+rename to "tests/test_\350\257\255\344\271\211\350\257\201\346\215\256.py"
+diff --git a/tests/test_project_chapter_sequence.py "b/tests/test_\351\241\271\347\233\256\347\253\240\350\212\202\345\272\217\345\210\227.py"
+similarity index 100%
+rename from tests/test_project_chapter_sequence.py
+rename to "tests/test_\351\241\271\347\233\256\347\253\240\350\212\202\345\272\217\345\210\227.py"
+diff --git "a/00_\345\267\245\347\250\213\346\200\273\346\216\247/CURRENT_SYSTEM_STATUS.md" "b/\346\226\207\346\241\243/\351\241\271\347\233\256\346\262\273\347\220\206\345\261\202/\345\216\206\345\217\262/\345\275\223\345\211\215\347\263\273\347\273\237\347\212\266\346\200\201_\346\227\247\347\211\210.md"
+similarity index 100%
+rename from "00_\345\267\245\347\250\213\346\200\273\346\216\247/CURRENT_SYSTEM_STATUS.md"
+rename to "\346\226\207\346\241\243/\351\241\271\347\233\256\346\262\273\347\220\206\345\261\202/\345\216\206\345\217\262/\345\275\223\345\211\215\347\263\273\347\273\237\347\212\266\346\200\201_\346\227\247\347\211\210.md"
+diff --git "a/scripts/\344\277\256\346\224\271\350\257\264\346\230\216.txt" "b/\350\204\232\346\234\254/\344\277\256\346\224\271\350\257\264\346\230\216.txt"
+similarity index 100%
+rename from "scripts/\344\277\256\346\224\271\350\257\264\346\230\216.txt"
+rename to "\350\204\232\346\234\254/\344\277\256\346\224\271\350\257\264\346\230\216.txt"
+diff --git a/scripts/freeze_audit_baseline.py "b/\350\204\232\346\234\254/\345\206\273\347\273\223\345\256\241\350\256\241\345\237\272\347\272\277.py"
+similarity index 100%
+rename from scripts/freeze_audit_baseline.py
+rename to "\350\204\232\346\234\254/\345\206\273\347\273\223\345\256\241\350\256\241\345\237\272\347\272\277.py"
+diff --git a/scripts/validate_l1_semantic_golden.py "b/\350\204\232\346\234\254/\346\240\241\351\252\214_L1_\350\257\255\344\271\211\351\207\221\346\240\207\345\207\206.py"
+similarity index 100%
+rename from scripts/validate_l1_semantic_golden.py
+rename to "\350\204\232\346\234\254/\346\240\241\351\252\214_L1_\350\257\255\344\271\211\351\207\221\346\240\207\345\207\206.py"
+diff --git a/scripts/generate_system_status.py "b/\350\204\232\346\234\254/\347\224\237\346\210\220\345\275\223\345\211\215\347\263\273\347\273\237\347\212\266\346\200\201.py"
+similarity index 100%
+rename from scripts/generate_system_status.py
+rename to "\350\204\232\346\234\254/\347\224\237\346\210\220\345\275\223\345\211\215\347\263\273\347\273\237\347\212\266\346\200\201.py"
+diff --git a/scripts/eval_l1_semantic_golden.py "b/\350\204\232\346\234\254/\350\257\204\344\274\260_L1_\350\257\255\344\271\211\351\207\221\346\240\207\345\207\206.py"
+similarity index 100%
+rename from scripts/eval_l1_semantic_golden.py
+rename to "\350\204\232\346\234\254/\350\257\204\344\274\260_L1_\350\257\255\344\271\211\351\207\221\346\240\207\345\207\206.py"
+diff --git a/INDEX.md "b/\351\241\271\347\233\256\347\264\242\345\274\225.md"
+similarity index 100%
+rename from INDEX.md
+rename to "\351\241\271\347\233\256\347\264\242\345\274\225.md"

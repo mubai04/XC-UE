@@ -1,0 +1,121 @@
+{
+  "scenario_tag": "low_lexical_good_narrative",
+  "expected_overall": "PASS",
+  "acceptance_range": {
+    "overall": [
+      "PASS"
+    ],
+    "dimensions": {
+      "因果": [
+        "PASS"
+      ],
+      "动机": [
+        "PASS"
+      ],
+      "冲突": [
+        "PASS"
+      ],
+      "读者收益": [
+        "PASS"
+      ],
+      "认知成本": [
+        "PASS"
+      ],
+      "章末追读": [
+        "PASS"
+      ]
+    }
+  },
+  "expected_dimensions": {
+    "因果": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "缺半块灵石导致记欠风险，主角动用灰线改变秤杆，获得过秤结果并承担身体成本。"
+    },
+    "动机": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "主角不愿被扣下一月整枚灵石，行动目标明确。"
+    },
+    "冲突": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "资源不足、公开称量和执事记欠构成直接阻力。"
+    },
+    "读者收益": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "本章兑现能力使用方式、即时收益和代价。"
+    },
+    "认知成本": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "信息集中在称量事件与灰线能力，专名和规则负担低。"
+    },
+    "章末追读": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "消失的重量被转移到未知位置，灰线继续记数，形成明确后续风险。"
+    }
+  },
+  "human_evidence": [
+    {
+      "dimension": "冲突",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0003",
+      "exact_text": "其中一枚缺了角，放上秤，分量要少半块。",
+      "occurrence_index": 0,
+      "rationale": "明确资源缺口。"
+    },
+    {
+      "dimension": "动机",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0013",
+      "exact_text": "一枚灵石足够他在灶房熬三个月。",
+      "occurrence_index": 0,
+      "rationale": "解释主角不能接受记欠的原因。"
+    },
+    {
+      "dimension": "因果",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0016",
+      "exact_text": "灰从指腹落下，很细，贴着铜盘爬向秤杆。",
+      "occurrence_index": 0,
+      "rationale": "能力介入称量过程。"
+    },
+    {
+      "dimension": "读者收益",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0023",
+      "exact_text": "右肋像被细针穿过，呼吸跟着短了一截。",
+      "occurrence_index": 0,
+      "rationale": "能力使用带来即时成本。"
+    },
+    {
+      "dimension": "章末追读",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0031",
+      "exact_text": "今日少掉的半块并没有凭空补齐。它只是从秤上挪到了别处。",
+      "occurrence_index": 0,
+      "rationale": "未清偿后果构成下一步悬念。"
+    }
+  ],
+  "unacceptable_misjudgments": [
+    "因为缺少突然、必须、追杀、选择等显式触发词而判FAIL",
+    "忽略灰线介入、秤杆变化和身体疼痛之间的因果链",
+    "把单一称量场景误判为没有冲突和推进"
+  ],
+  "chapter_id": "GS-004"
+}

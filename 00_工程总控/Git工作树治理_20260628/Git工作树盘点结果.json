@@ -1,0 +1,87 @@
+{
+  "branch": "l1-phase2",
+  "repository_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE",
+  "inventory_generated_at": "2026-06-28 13:06:20 UTC",
+  "total_entries": 2627,
+  "staged_entries": 0,
+  "unstaged_entries": 1961,
+  "untracked_entries": 666,
+  "deleted_entries": 1890,
+  "renamed_entries": 0,
+  "conflicted_entries": 0,
+  "categories": {
+    "GOVERNANCE": 66,
+    "未知": 35,
+    "生成状态": 14,
+    "生产代码": 88,
+    "正式定义": 16,
+    "依赖与环境": 6,
+    "兼容入口": 7,
+    "测试": 70,
+    "审计报告": 96,
+    "运行记录": 1854,
+    "Schema与跨层契约": 27,
+    "测试夹具与语料": 159,
+    "API评估结果": 189
+  },
+  "risk_tags": {
+    "HUMAN_DECISION_REQUIRED": 35,
+    "MASS_DELETE": 1890,
+    "STALE_STATUS": 4,
+    "COMPATIBILITY_WRAPPER": 6,
+    "POSSIBLE_ACCIDENTAL_DELETE": 2,
+    "EXPECTED_CLEANUP_CANDIDATE": 1853,
+    "UNTRACKED_GENERATED": 201,
+    "UNTRACKED_SOURCE": 465
+  },
+  "mass_delete_groups": {
+    "00_工程总控/": 7,
+    "根目录文件": 3,
+    "scripts/": 5,
+    "tests/": 22,
+    "运行记录/": 1853
+  },
+  "temporary_files": [
+    {
+      "name": "_t.md",
+      "exists": false,
+      "tracked": false,
+      "suggestion": "HUMAN_REVIEW"
+    },
+    {
+      "name": "_t2.md",
+      "exists": false,
+      "tracked": false,
+      "suggestion": "HUMAN_REVIEW"
+    },
+    {
+      "name": "_tmp_ch.md",
+      "exists": false,
+      "tracked": false,
+      "suggestion": "HUMAN_REVIEW"
+    },
+    {
+      "name": "tmp_psy.md",
+      "exists": false,
+      "tracked": false,
+      "suggestion": "HUMAN_REVIEW"
+    }
+  ],
+  "duplicate_logic_candidates": [],
+  "stale_status_files": [
+    "XC-UE_全量深度盘查报告_2026-06-27.md",
+    "00_工程总控/当前系统状态_自动生成.md",
+    "00_工程总控/目录治理任务.md",
+    "00_工程总控/目录结构检查_v1.md"
+  ],
+  "human_decisions_required": 35,
+  "proposed_commit_batches": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "p1b_ready": false
+}

@@ -1,0 +1,28 @@
+{
+  "case_id": "L2V2-009",
+  "target_module": "L2-05",
+  "case_type": "A",
+  "expected_issue_present": true,
+  "acceptable_root_causes": [
+    "入口弱",
+    "重复兑现",
+    "末段推动力不足",
+    "即时收益弱"
+  ],
+  "required_evidence_region": [
+    "北渡",
+    "关闭"
+  ],
+  "forbidden_diagnoses": [
+    "文风",
+    "语气漂移",
+    "事实硬冲突"
+  ],
+  "expected_reroute": false,
+  "minimum_action_requirements": [
+    "前置冲突",
+    "减少重复",
+    "章末钩子"
+  ],
+  "human_notes": "A类：重复通知+软收束。"
+}

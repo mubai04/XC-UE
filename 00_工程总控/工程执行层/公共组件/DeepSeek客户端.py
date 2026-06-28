@@ -11,6 +11,13 @@ Stage = Literal["L1", "L2", "L3"]
 
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 DEFAULT_TIMEOUT = 60.0
+DEFAULT_L2_REQUEST_TIMEOUT = 180.0
+
+STAGE_REQUEST_TIMEOUT_ENV: dict[str, str] = {
+    "L1": "XCUE_L1_REQUEST_TIMEOUT",
+    "L2": "XCUE_L2_REQUEST_TIMEOUT",
+    "L3": "XCUE_L3_REQUEST_TIMEOUT",
+}
 
 STAGE_MODEL_ENV: dict[str, tuple[str, str]] = {
     "L1": ("XCUE_L1_MODEL", "deepseek-v4-flash"),
@@ -61,10 +68,68 @@ def _resolve_model(stage: str, model: str | None) -> str:
     return resolved
 
 
+def _resolve_request_timeout(stage: str, timeout: float | None) -> float:
+    if timeout is not None:
+        return float(timeout)
+    env_key = STAGE_REQUEST_TIMEOUT_ENV.get(stage.upper(), "")
+    if env_key:
+        raw = os.environ.get(env_key, "").strip()
+        if raw:
+            return float(raw)
+    if stage.upper() == "L2":
+        return DEFAULT_L2_REQUEST_TIMEOUT
+    return DEFAULT_TIMEOUT
+
+
+def _classify_timeout_error(message: str) -> str:
+    text = message.lower()
+    if "read operation timed out" in text or "timed out during read" in text:
+        return "READ_TIMEOUT"
+    if "connect" in text and "timed out" in text:
+        return "CONNECT_TIMEOUT"
+    if "timed out" in text:
+        return "READ_TIMEOUT"
+    return "CONNECTION_ERROR"
+
+
+def _classify_http_error(status: int) -> str:
+    if status in {401, 403}:
+        return "AUTH_ERROR"
+    if status == 402:
+        return "AUTH_ERROR"
+    if status in {400, 422}:
+        return "INVALID_REQUEST"
+    if status == 429:
+        return "RATE_LIMIT"
+    if status >= 500:
+        return "SERVER_ERROR"
+    return "HTTP_ERROR"
+
+
 def _stage_payload_options(stage: str) -> dict[str, Any]:
     if stage == "L1":
         return {"thinking": {"type": "disabled"}}
     return {"thinking": {"type": "enabled"}, "reasoning_effort": "high"}
+
+
+def stage_runtime_config(stage: str, *, requested_temperature: float = 0.2) -> dict[str, Any]:
+    normalized = stage.upper()
+    thinking = normalized != "L1"
+    if thinking:
+        return {
+            "requested_temperature": requested_temperature,
+            "effective_temperature": None,
+            "temperature_status": "IGNORED_IN_THINKING_MODE",
+            "thinking_enabled": True,
+            "reasoning_effort": "high",
+        }
+    return {
+        "requested_temperature": requested_temperature,
+        "effective_temperature": requested_temperature,
+        "temperature_status": "APPLIED",
+        "thinking_enabled": False,
+        "reasoning_effort": None,
+    }
 
 
 def create_client(
@@ -73,18 +138,19 @@ def create_client(
     api_key: str | None = None,
     model: str | None = None,
     base_url: str = DEFAULT_BASE_URL,
-    timeout: float = DEFAULT_TIMEOUT,
+    timeout: float | None = None,
     transport: ChatTransport | None = None,
 ) -> "DeepSeekClient":
     normalized = stage.upper()
     if normalized not in STAGE_MODEL_ENV:
         raise ValueError(f"未知 stage：{stage}，必须是 L1 / L2 / L3")
+    resolved_timeout = _resolve_request_timeout(normalized, timeout)
     return DeepSeekClient(
         stage=normalized,
         model=_resolve_model(normalized, model),
         api_key=api_key,
         base_url=base_url,
-        timeout=timeout,
+        timeout=resolved_timeout,
         transport=transport,
     )
 
@@ -109,8 +175,18 @@ class DeepSeekClient:
         self._api_key = (api_key if api_key is not None else _api_key_from_env()).strip()
         self._base_url = base_url.rstrip("/")
         self._model = str(model).strip()
-        self._timeout = timeout
+        self._timeout = float(timeout)
         self._transport = transport or _default_transport
+
+    @property
+    def request_timeout_seconds(self) -> float:
+        return self._timeout
+
+    def runtime_config(self, *, requested_temperature: float = 0.2) -> dict[str, Any]:
+        cfg = stage_runtime_config(self._stage, requested_temperature=requested_temperature)
+        cfg["model"] = self._model
+        cfg["request_timeout_seconds"] = self._timeout
+        return cfg
 
     @property
     def stage(self) -> str:
@@ -144,18 +220,30 @@ class DeepSeekClient:
         try:
             status, raw = self._transport(url, headers, body, self._timeout)
         except TimeoutError as exc:
-            return DeepSeekResult(ok=False, error=str(exc), error_kind="TIMEOUT", meta={"stage": self._stage})
+            timeout_class = _classify_timeout_error(str(exc))
+            return DeepSeekResult(
+                ok=False,
+                error=str(exc),
+                error_kind="TIMEOUT",
+                meta={"stage": self._stage, "timeout_class": timeout_class},
+            )
         except OSError as exc:
-            return DeepSeekResult(ok=False, error=str(exc), error_kind="NETWORK_ERROR", meta={"stage": self._stage})
+            return DeepSeekResult(
+                ok=False,
+                error=str(exc),
+                error_kind="NETWORK_ERROR",
+                meta={"stage": self._stage, "connection_class": "CONNECTION_ERROR"},
+            )
 
         if status < 200 or status >= 300:
+            http_class = _classify_http_error(status)
             return DeepSeekResult(
                 ok=False,
                 error=raw or f"HTTP {status}",
                 error_kind="HTTP_ERROR",
                 status_code=status,
                 raw=raw,
-                meta={"stage": self._stage},
+                meta={"stage": self._stage, "http_class": http_class},
             )
 
         try:

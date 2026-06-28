@@ -23,7 +23,8 @@ AUDIT_BLOCKERS_SCHEMA = SCHEMA_DIR / "审计阻断项结构.json"
 状态显示 = {
     "SCREENING_PASS": "语义审计通过且未命中阻断项",
     "SCREENING_REJECT": "命中硬护栏或语义审计失败",
-    "REVIEW_REQUIRED": "需要人工复核",
+    "SCREENING_REVIEW": "存在需要人工复核或可选修复的问题",
+    "REVIEW_REQUIRED": "存在需要人工复核或可选修复的问题",
     "AUDIT_BLOCKED": "语义审计或输入上下文阻断，未对正文作通过/拒绝裁决",
     "HUMAN_REVIEW_REQUIRED": "需要人工复核",
     "STRUCTURE_SIGNAL_PRESENT": "检测到结构代理信号",
@@ -81,16 +82,21 @@ def _检测项字典(item) -> dict[str, object]:
 
 
 def _失败包载荷(result: 正文检测结果) -> dict[str, object]:
+    blocking_count = sum(1 for item in result.失败包 if item.blocking)
+    routeable_count = sum(1 for item in result.失败包 if item.routeable)
     return {
         "schema_version": "xcue.failure-packet/1.0",
         "pipeline_run_id": result.pipeline_run_id,
         "stage_run_id": result.stage_run_id,
         "status": result.status,
         "failure_count": len(result.失败包),
+        "blocking_count": blocking_count,
+        "routeable_count": routeable_count,
         "items": [_检测项字典(item) for item in result.失败包],
         "extensions": {
             "chapter_path": result.章节路径,
             "audit_reason_type": result.audit_reason_type,
+            "publish_authority": result.publish_authority,
         },
     }
 
@@ -207,6 +213,9 @@ def 写报告(result: 正文检测结果, out_dir: Path) -> tuple[Path, Path, Pa
                     f"- 候选模块：{item.候选模块 or '回L1.5/人工复核'}",
                     f"- 决策角色：{getattr(item, 'decision_role', '')}",
                     f"- 阻断：{str(getattr(item, 'blocking', False)).lower()}",
+                    f"- 可路由：{str(getattr(item, 'routeable', False)).lower()}",
+                    f"- 路由说明：{getattr(item, 'route_reason', '') or '无'}",
+                    f"- 来源组件：{getattr(item, 'source_component', '') or item.闸门}",
                     f"- 原因类型：{getattr(item, 'reason_type', '') or '无'}",
                     f"- 修复方向：{item.修复方向 or '人工复核'}",
                     f"- 回流验收位置：{item.回流验收位置 or item.闸门}",

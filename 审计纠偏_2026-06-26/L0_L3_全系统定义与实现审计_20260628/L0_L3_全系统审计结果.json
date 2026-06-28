@@ -1,0 +1,149 @@
+{
+  "audit_id": "D-SYS-01",
+  "audit_date": "2026-06-28",
+  "audit_title": "L0-L3全系统定义、实现与评测一致性审计",
+  "superseded_task": "D-L2｜L2正式定义一致性与代码符合性审计",
+  "repository_root": "c:\\Users\\慕白\\OneDrive\\桌面\\XC-UE",
+  "git_branch": "l1-phase2",
+  "working_tree_dirty": true,
+  "cloud_duplicate_roots": 3,
+  "l0_l3_definition_copies_each": 2,
+  "modifications": {
+    "production_code": false,
+    "formal_definitions": false,
+    "tests_fixtures": false,
+    "real_api_called": false,
+    "hash_computed": false
+  },
+  "source_authority": "PARTIAL",
+  "effective_definition_sources": {
+    "architecture_markdown": "10_L0_总图层 through 50_L3_执行协议层",
+    "runtime_implementation": "00_工程总控/工程执行层",
+    "governance": [
+      "XC-UE_项目说明与资源边界.md",
+      "项目索引.md",
+      "00_工程总控/外部材料接入规则.md",
+      "00_工程总控/目录治理规范_v1.md"
+    ],
+    "dynamic_status": "00_工程总控/当前系统状态_自动生成.md",
+    "excluded_as_default_truth": [
+      "99_归档_不要索引",
+      "桌面/小说/XC-UE",
+      "文档/项目治理层/历史/当前系统状态_旧版.md"
+    ]
+  },
+  "layer_status": {
+    "L0": {
+      "definition_status": ["OUTDATED", "CONFLICTED"],
+      "implementation_status": "NOT_IMPLEMENTED",
+      "responsibility": "navigation_and_boundaries"
+    },
+    "L1": {
+      "definition_status": "CANDIDATE",
+      "implementation_status": ["PARTIALLY_CONFORMANT", "OVERREACH"],
+      "responsibility": "problem_discovery_failure_packet"
+    },
+    "L1_5": {
+      "definition_status": ["CANDIDATE", "CONFLICTED"],
+      "implementation_status": "PARTIALLY_CONFORMANT",
+      "responsibility": "routing_primary_failure_selection",
+      "routing_ssot": "gate_rules.json l15_routes"
+    },
+    "L2": {
+      "definition_status": "CANDIDATE",
+      "implementation_status": "PARTIALLY_CONFORMANT",
+      "responsibility": "module_diagnosis_repair_order",
+      "modules": ["L2-01", "L2-02", "L2-03", "L2-04", "L2-05", "L2-06"],
+      "frozen": false
+    },
+    "L3": {
+      "definition_status": "CANDIDATE",
+      "implementation_status": "PARTIALLY_CONFORMANT",
+      "responsibility": "task_planning_optional_candidate_generation",
+      "execution_mode_default": "TASK_PLANNING_ONLY"
+    }
+  },
+  "system_verdicts": {
+    "SOURCE_AUTHORITY": "PARTIAL",
+    "L0_L3_DEFINITION_CONSISTENCY": "CONFLICTS_FOUND",
+    "L0_L3_IMPLEMENTATION_CONFORMANCE": "PARTIAL",
+    "EVALUATION_CONSTRUCT_VALIDITY": "PARTIAL",
+    "REMEDIATION_PLAN_READY": "YES"
+  },
+  "counts": {
+    "source_authority_conflicts": 14,
+    "cross_layer_interface_conflicts": 15,
+    "semantic_field_collisions": 15,
+    "outdated_status_items": 12,
+    "code_overreach_items": 11,
+    "missing_formal_capabilities": 18
+  },
+  "evaluation_evidence": {
+    "retain": {
+      "L1_5_EXECUTABLE": "PASSED",
+      "R4B_STRUCTURE_REGRESSION": "PASSED",
+      "R4C_DETERMINISTIC_GENERALIZATION": "PASSED",
+      "R4D_EXTERNAL_COUNTEREXAMPLES": "PASSED",
+      "FAILURE_PACKET_TO_CANDIDATE_PIPELINE": "PASSED_mock_only",
+      "L2_R5C_TECHNICAL_PROTOCOL": "PASSED",
+      "L2_R5C_interpretation": "真实API调用、Schema、证据绑定及技术链路通过"
+    },
+    "do_not_expand": [
+      "DOMAIN_CAPABILITY=PASSED_as_business_capability",
+      "R5C_as_repair_semantic_validity",
+      "R4A_as_production_ready",
+      "v1_R5D_business_conclusions"
+    ],
+    "R4A": "mock_L1.5_L2_L3_pipeline_structure",
+    "R4B": "L2_module_structure_independent_packages",
+    "R4C": "deterministic_generalization_probes",
+    "R4D": "external_narrow_audit_counterexamples",
+    "R4E": "independent_probes_anti_hardcoding",
+    "R5A": "first_real_api_baseline_fragility",
+    "R5B": "transport_timeout_retry_fixes",
+    "R5C": "v1_12of12_technical_protocol_only",
+    "R5D": "v1_invalid_corpus_paused_v2_pending"
+  },
+  "corpus_usage": {
+    "v1_l2_real_api_pilot": {
+      "path": "tests/fixtures/l2_real_api_pilot",
+      "technical_protocol": "valid_R5C",
+      "business_evaluation": "invalid_12of12_INVALID_REPLACE",
+      "recommended_use": "L2_technical_regression_history_only"
+    },
+    "v2_l2_real_api_pilot": {
+      "path": "tests/fixtures/l2_real_api_pilot_v2",
+      "mechanical_validation": "PASSED",
+      "external_audit": "PENDING",
+      "real_api_run": "NOT_RUN",
+      "recommended_use": "next_R5A_R5C_and_R5D_target_after_narrow_audit"
+    }
+  },
+  "five_fundamental_questions": {
+    "q1_effective_truth_sources": "B_class_markdown_plus_C_class_engineering_plus_A_governance_PARTIAL_due_to_cloud_copies",
+    "q2_layer_responsibilities": "documented_in_layer_status",
+    "q3_markdown_consistency": "CONFLICTS_FOUND",
+    "q4_implementation_gaps": "18_missing_11_overreach_partial_conformance_all_layers",
+    "q5_evaluation_validity": "PARTIAL_R5C_technical_only_v1_business_invalid"
+  },
+  "output_files": [
+    "00_审计范围与方法.md",
+    "01_当前工作区与版本证据.md",
+    "02_真源权限与副本冲突清单.md",
+    "03_L0定义与实现审计.md",
+    "04_L1定义与实现审计.md",
+    "05_L1_5定义与实现审计.md",
+    "06_L2定义与实现审计.md",
+    "07_L3定义与实现审计.md",
+    "08_L0至L3跨层契约矩阵.md",
+    "09_字段语义冲突清单.md",
+    "10_定义过期与状态漂移清单.md",
+    "11_代码越权清单.md",
+    "12_正式能力缺失清单.md",
+    "13_测试与API证据有效性清单.md",
+    "14_v1与v2评测材料用途判定.md",
+    "15_整改前置依赖与优先级.md",
+    "16_全系统最终审计报告.md",
+    "L0_L3_全系统审计结果.json"
+  ]
+}

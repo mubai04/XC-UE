@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l2-fix-form/v2",
+  "title": "L2 修复单 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L2修复单编号",
+    "来源路由决策编号",
+    "来源发现引用",
+    "接收模块",
+    "模块内主问题",
+    "模块内次级问题",
+    "根因",
+    "诊断证据引用",
+    "修复规则",
+    "修复动作",
+    "修复产物类型",
+    "禁止修改范围",
+    "必须保留内容",
+    "验收条件",
+    "回流闸门",
+    "重路由请求",
+    "修复单状态"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l2-fix-form/2.0"
+    },
+    "L2修复单编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源路由决策编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源发现引用": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#upstream-reference"
+    },
+    "接收模块": {
+      "type": "string",
+      "pattern": "^L2-\\d{2}$"
+    },
+    "模块内主问题": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "模块内次级问题": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+      }
+    },
+    "根因": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "诊断证据引用": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#evidence-reference"
+      }
+    },
+    "修复规则": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+      }
+    },
+    "修复动作": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+      }
+    },
+    "修复产物类型": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "禁止修改范围": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+      }
+    },
+    "必须保留内容": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+      }
+    },
+    "验收条件": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+      }
+    },
+    "回流闸门": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#return-gate-reference"
+    },
+    "重路由请求": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "是否请求重路由",
+        "请求原因",
+        "建议问题域",
+        "禁止直接指定新目标模块"
+      ],
+      "properties": {
+        "是否请求重路由": {
+          "type": "boolean"
+        },
+        "请求原因": {
+          "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+        },
+        "建议问题域": {
+          "type": "string",
+          "enum": [
+            "",
+            "叙事",
+            "文风",
+            "角色",
+            "设定",
+            "读者体验",
+            "故事一致性",
+            "工程技术"
+          ]
+        },
+        "禁止直接指定新目标模块": {
+          "const": true
+        }
+      }
+    },
+    "修复单状态": {
+      "type": "string",
+      "enum": [
+        "READY_FOR_L3",
+        "INPUT_REQUIRED",
+        "RETURN_TO_L1_5",
+        "MANUAL_REVIEW",
+        "AUDIT_BLOCKED"
+      ]
+    },
+    "能力规则来源": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#capability-rule-source"
+    },
+    "证据规则来源": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#evidence-rule-source"
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

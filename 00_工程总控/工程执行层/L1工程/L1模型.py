@@ -9,12 +9,18 @@ class 段落:
     编号: int
     文本: str
     字数: int
+    段落ID: str = ""
 
 
 @dataclass
 class 证据:
     段落: int | None
     摘句: str
+    段落ID: str = ""
+    source_scope: str = "CURRENT_CHAPTER"
+    start_offset: int | None = None
+    end_offset: int | None = None
+    occurrence_index: int = 0
 
 
 @dataclass
@@ -34,6 +40,9 @@ class 检测项:
     confidence: str = "UNVALIDATED"
     decision_role: str = "DIAGNOSTIC"
     blocking: bool = False
+    routeable: bool = False
+    route_reason: str = ""
+    source_component: str = ""
     reason_type: str = ""
 
 

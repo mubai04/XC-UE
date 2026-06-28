@@ -1,0 +1,69 @@
+{
+  "run_id": "L2_R5B_协议修复定向复测_20260628",
+  "stopped_reason": null,
+  "technical": {
+    "per_case": {
+      "L2P-002": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      },
+      "L2P-004": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 1,
+        "attempts": 2,
+        "final_status": "SUCCESS"
+      },
+      "L2P-011": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 1,
+        "attempts": 2,
+        "final_status": "SUCCESS"
+      },
+      "L2P-012": {
+        "transport_success": true,
+        "json_valid": true,
+        "schema_valid": true,
+        "exact_quote_valid": true,
+        "source_binding_valid": true,
+        "module_validator_passed": true,
+        "repair_form_generated": true,
+        "retry_count": 0,
+        "attempts": 1,
+        "final_status": "SUCCESS"
+      }
+    },
+    "exact_quote_forgery": 0,
+    "source_binding_errors": 0,
+    "schema_crashes": 0,
+    "max_consecutive_schema": 0,
+    "technical_protocol_passed": true
+  },
+  "case_count": 4,
+  "status_labels": {
+    "L2_R5B_TARGETED_PROTOCOL": "PASSED",
+    "L2_R5B_FULL_PROTOCOL": "NOT_RUN",
+    "L2_R5B_BUSINESS_PILOT": "NOT_EVALUATED",
+    "L2_REAL_MODEL_EFFECTIVENESS": "NOT_TESTED",
+    "PRODUCTION_ELIGIBLE": false
+  }
+}

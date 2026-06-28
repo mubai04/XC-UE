@@ -1,0 +1,193 @@
+{
+  "schema_version": "xcue.remediation-result/1.0",
+  "_historical_path_note": "历史路径记录，不代表当前运行路径。",
+  "generated_at": "2026-06-27T05:54:09+00:00",
+  "verification_generated_at": "2026-06-27T14:30:00+00:00",
+  "remediation_scope": "R0-R3",
+  "pre_remediation_baseline_status": "PRE_REMEDIATION_BASELINE_RECOVERY_REQUIRED",
+  "expected_baseline_digest": "d0ab53ffa934f31bd9e81a716639b78f5dbb35274bdc20926d89dd81ecb431aa",
+  "actual_baseline_digest": "f0c242529a4dd19c07b0ced5b9bcae2b53304c728aba088b4e54ee36f1c9c9c1",
+  "expected_baseline_file_sha256": "CA7099B14330F94637C8F2CC7095224A3FF183D50D422160DACF7BAA0BA798AC",
+  "actual_baseline_file_sha256": "A9D2F020285E336329261B8FDE5ADF8A5D0AF3351D7E4DCAB6222993572F3034",
+  "pre_remediation_baseline_ref": "审计纠偏_2026-06-26/AUDIT_BASELINE.json",
+  "unverified_current_copy": "审计纠偏_2026-06-26/AUDIT_BASELINE.UNVERIFIED_CURRENT.json",
+  "pre_remediation_recovery_search": {
+    "expected_file_sha256_matches_in_repo": 0,
+    "restorable_copy_found": false,
+    "note": "Digest string appears only in REMEDIATION_RESULT and CURRENT_SYSTEM_STATUS.generated.md; no byte-identical AUDIT_BASELINE.json with expected SHA-256."
+  },
+  "post_remediation_git_commit": "c5f25576e50bcf37f539345804649baa6ecae686",
+  "third_real_api_run_executed": false,
+  "overwrite_guard_status": {
+    "implemented": true,
+    "default_run": {
+      "command": "python scripts/freeze_audit_baseline.py --skip-pytest-run",
+      "exit_code": 2,
+      "message": "REFUSE_OVERWRITE",
+      "baseline_file_unchanged": true
+    },
+    "verify_digest": {
+      "command": "python scripts/freeze_audit_baseline.py --verify-digest --skip-pytest-run",
+      "exit_code": 1,
+      "readonly": true,
+      "baseline_file_unchanged": true,
+      "freeze_record_unchanged": true,
+      "calibration_plan_unchanged": true,
+      "note": "VERIFY_FAILED: on-disk baseline_digest f0c2425… differs from recomputed workspace stable_payload 2c614227… (expected drift after R1–R3 edits; not a write)."
+    },
+    "force_regenerate": {
+      "requires_flag": "--force-regenerate",
+      "tested_via": "tests/test_freeze_audit_baseline.py::test_force_regenerate_overwrites_isolated_copy"
+    },
+    "refresh_runtime_only": {
+      "command": "python scripts/freeze_audit_baseline.py --refresh-runtime-only --skip-pytest-run",
+      "exit_code": 0,
+      "writes_only": "审计纠偏_2026-06-26/RUNTIME_SNAPSHOT.json",
+      "baseline_file_unchanged": true
+    },
+    "automated_tests": {
+      "module": "tests/test_freeze_audit_baseline.py",
+      "count": 4,
+      "all_pass": true
+    }
+  },
+  "pytest_result": {
+    "command": "python -m pytest -q",
+    "exit_code": 0,
+    "passed": 89,
+    "summary": "89 passed in 11.00s"
+  },
+  "golden_validation": {
+    "command": "python scripts/validate_l1_semantic_golden.py",
+    "exit_code": 0,
+    "status": "VALIDATION_OK",
+    "chapters": 5
+  },
+  "tp001_project_resolution": {
+    "command": "python -m pytest tests/test_default_project_tp001.py tests/test_project_chapter_sequence.py -q",
+    "exit_code": 0,
+    "passed": 10,
+    "summary": "10 passed in 1.27s",
+    "smoke": {
+      "command": "python 00_工程总控/工程执行层/统一运行入口.py --target L1 --project TP-001 --chapter 70_测试项目/TP-001_CleanHarness_IR_Runtime/chapters/ch01.md --run-id R0R3-FINAL-SMOKE-VERIFY-20260627",
+      "exit_code": 10,
+      "project_identity": "TP-001",
+      "forbidden_absent": [
+        "PROJECT_RESOLUTION_FAILED",
+        "PROJECT_PATH_OUT_OF_SCOPE",
+        "exit 27"
+      ],
+      "note": "SCREENING_REJECT / heuristic path; acceptable business outcome without real API."
+    }
+  },
+  "workspace_only_status": {
+    "pyproject_runtime_extras": ["PyYAML", "jsonschema"],
+    "pyproject_dev_extras": ["pytest"],
+    "pytest_in_default_dependencies": false,
+    "xcue_no_args": {
+      "command": "xcue",
+      "exit_code": 2,
+      "points_to_unified_entry": true
+    },
+    "unified_entry_help": {
+      "command": "python 00_工程总控/工程执行层/统一运行入口.py --help",
+      "exit_code": 0
+    }
+  },
+  "sample_id_scan": {
+    "paths_scanned": [
+      "00_工程总控/工程执行层/L1工程/",
+      "00_工程总控/工程执行层/公共组件/语义证据校验.py",
+      "scripts/eval_l1_semantic_golden.py",
+      "scripts/validate_l1_semantic_golden.py"
+    ],
+    "forbidden_terms": ["GS-001", "GS-005", "李子夜", "贺按", "路满", "王磊", "拍门就结账"],
+    "production_path_hits": 0,
+    "pass": true
+  },
+  "golden_v1_integrity_status": "GOLDEN_V1_BASELINE_COMPARISON_UNAVAILABLE",
+  "golden_v1_observed_against_current_snapshot": {
+    "note": "Informational only; pre-remediation anchor missing so not used for freeze acceptance.",
+    "chapters_mismatch_count": 0,
+    "labels_mismatch_count": 0,
+    "paragraph_maps_mismatch_count": 0,
+    "manifest_mismatch_count": 0,
+    "checked_file_count": 17
+  },
+  "api_archive_integrity_status": "API_ARCHIVE_BASELINE_COMPARISON_UNAVAILABLE",
+  "api_archive_observed_against_current_snapshot": {
+    "note": "Informational only; pre-remediation anchor missing so not used for freeze acceptance.",
+    "indexed_files": 2,
+    "hash_matches": 2,
+    "files": [
+      "审计纠偏_2026-06-26/L1_Phase2/首次真实API评估/L1_Phase2A_FIRST_REAL_API_20260627_124854.json",
+      "审计纠偏_2026-06-26/L1_Phase2/首次真实API评估/L1_Phase2A_PROTOCOL_FIX_20260627.json"
+    ]
+  },
+  "third_api_archive_check": {
+    "new_third_full_real_api_eval_files": 0,
+    "historical_archive_count": 2,
+    "pass": true
+  },
+  "git_hygiene": {
+    "commands": [
+      "git status --porcelain=v1",
+      "git diff --stat",
+      "git diff --cached --stat"
+    ],
+    "porcelain_line_count": 309,
+    "staged_changes": false,
+    "cleaned": {
+      "__pycache__": "none present at scan time",
+      "*.pyc": "none present at scan time",
+      "src/xc_ue.egg-info": "none present at scan time",
+      "temporary_venv": "none present at scan time"
+    },
+    "gitignore_covers_egg_info": true,
+    "note": "Large intentional R0–R3 dirty tree retained; no commit or tag performed."
+  },
+  "remaining_blockers": [
+    "Pre-remediation AUDIT_BASELINE.json not recoverable from repo (expected digest/SHA-256 mismatch; no byte-identical copy found)",
+    "Restore pre-remediation baseline from external backup (e.g. OneDrive file history) before ACCEPTED_FOR_FREEZE",
+    "Current AUDIT_BASELINE.json is post-overwrite integrated candidate snapshot (generated_at 2026-06-27T05:54:09Z)",
+    "L1 semantic reliability not proven by real API",
+    "L2/L3 boundary unification deferred to R4"
+  ],
+  "deferred_to_r4_plus": [
+    "L2 enum routing",
+    "L3 PLAN_ONLY / EXECUTE_CANDIDATE separation",
+    "TP-REAL-001 three-chapter stress test",
+    "production eligibility review"
+  ],
+  "independent_verification": {
+    "status": "PARTIAL_PASS_BASELINE_UNVERIFIED",
+    "verified_at": "2026-06-27T14:30:00+00:00"
+  },
+  "status_labels": {
+    "R0_R3_IMPLEMENTATION": "REPORTED_COMPLETE",
+    "R0_R3_STATUS": "NOT_ACCEPTED_FOR_FREEZE",
+    "R4_ENTRY": "NOT_YET_ALLOWED",
+    "PRODUCTION_ELIGIBLE": false
+  },
+  "acceptance": {
+    "r0_freeze_script_overwrite_guard": true,
+    "r0_runtime_snapshot_refresh_isolated": true,
+    "r1_tp001_project_json": true,
+    "r1_registry_cleaned": true,
+    "r1_chapter_sequence_validation": true,
+    "r1_layered_tests": true,
+    "r2_workspace_only_docs": true,
+    "r2_xcue_stub_exit_2": true,
+    "r3_eval_no_sample_hardcoding": true,
+    "r3_golden_v2_scaffold": true,
+    "r3_semantic_field_rename": true,
+    "r3_no_third_full_api_eval": true
+  },
+  "explicitly_not_done": [
+    "R4 L2/L3 unified routing",
+    "R5 production eligibility",
+    "third full real API evaluation",
+    "golden v1 corpus/label edits",
+    "pre-remediation baseline restoration"
+  ]
+}

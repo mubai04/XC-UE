@@ -5,6 +5,10 @@ import re
 from L1模型 import 段落
 
 
+def 分配段落ID(index: int) -> str:
+    return f"P{index:04d}"
+
+
 def 清理正文(raw: str) -> tuple[str, str]:
     lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
     body: list[str] = []
@@ -31,7 +35,7 @@ def 切段(text: str) -> list[段落]:
     paragraphs: list[段落] = []
     for i, block in enumerate(blocks, start=1):
         clean = re.sub(r"\s+", "", block)
-        paragraphs.append(段落(i, block, len(clean)))
+        paragraphs.append(段落(i, block, len(clean), 分配段落ID(i)))
     return paragraphs
 
 

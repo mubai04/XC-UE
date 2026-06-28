@@ -1,0 +1,209 @@
+{
+  "schema_version": "xcue.failure-packet/1.0",
+  "pipeline_run_id": "R0R3-FINAL-SMOKE-VERIFY-20260627",
+  "stage_run_id": "R0R3-FINAL-SMOKE-VERIFY-20260627-L1",
+  "status": "SCREENING_REJECT",
+  "failure_count": 7,
+  "items": [
+    {
+      "闸门": "L1-00",
+      "名称": "WORD_COUNT_BELOW_FUNCTION_FLOOR",
+      "状态": "失败",
+      "说明": "正文有效字数低于 gate_rules 功能稿下限 2000。 当前值：10.000。",
+      "证据": [
+        {
+          "段落": null,
+          "摘句": "WORD_COUNT_BELOW_FUNCTION_FLOOR=10.000",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "字数不足",
+      "候选模块": "L2-01",
+      "回流验收位置": "L1-03",
+      "修复方向": "发布稿扩写版",
+      "heuristic": false,
+      "signal_strength": "UNRANKED_HEURISTIC_SIGNAL",
+      "confidence": "UNVALIDATED",
+      "decision_role": "HARD_GUARD",
+      "blocking": true,
+      "reason_type": ""
+    },
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计·因果",
+      "状态": "失败",
+      "说明": "主要优点：无；主要风险：全章仅两个段落，第二段正文为占位符，无实际事件链条；最终选择 FAIL 因为缺少起因、行动、结果中的任何一项。",
+      "证据": [
+        {
+          "段落": 2,
+          "摘句": "在这里写第一章正文。",
+          "段落ID": "P0002",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": 0,
+          "end_offset": 10,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计-因果不足",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_MODEL",
+      "confidence": "MODEL_UNVALIDATED",
+      "decision_role": "CONTENT_DECISION",
+      "blocking": true,
+      "reason_type": ""
+    },
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计·动机",
+      "状态": "失败",
+      "说明": "主要优点：无；主要风险：无人物、无目标、无压力；最终选择 FAIL 因为全章无任何人物行动或动机表达。",
+      "证据": [
+        {
+          "段落": 2,
+          "摘句": "在这里写第一章正文。",
+          "段落ID": "P0002",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": 0,
+          "end_offset": 10,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计-动机不足",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_MODEL",
+      "confidence": "MODEL_UNVALIDATED",
+      "decision_role": "CONTENT_DECISION",
+      "blocking": true,
+      "reason_type": ""
+    },
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计·冲突",
+      "状态": "失败",
+      "说明": "主要优点：无；主要风险：全章无任何对抗、阻力或未解问题；最终选择 FAIL 因为冲突维度完全空白。",
+      "证据": [
+        {
+          "段落": 2,
+          "摘句": "在这里写第一章正文。",
+          "段落ID": "P0002",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": 0,
+          "end_offset": 10,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计-冲突不足",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_MODEL",
+      "confidence": "MODEL_UNVALIDATED",
+      "decision_role": "CONTENT_DECISION",
+      "blocking": true,
+      "reason_type": ""
+    },
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计·读者收益",
+      "状态": "失败",
+      "说明": "主要优点：无；主要风险：全章无新事件、无情绪兑现、无悬念；最终选择 FAIL 因为读者收益为零。",
+      "证据": [
+        {
+          "段落": 2,
+          "摘句": "在这里写第一章正文。",
+          "段落ID": "P0002",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": 0,
+          "end_offset": 10,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计-读者收益不足",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_MODEL",
+      "confidence": "MODEL_UNVALIDATED",
+      "decision_role": "CONTENT_DECISION",
+      "blocking": true,
+      "reason_type": ""
+    },
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计·认知成本",
+      "状态": "失败",
+      "说明": "主要优点：无；主要风险：全章无实际内容，但占位符本身造成理解障碍；最终选择 FAIL 因为无法形成有效认知。",
+      "证据": [
+        {
+          "段落": 2,
+          "摘句": "在这里写第一章正文。",
+          "段落ID": "P0002",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": 0,
+          "end_offset": 10,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计-认知成本不足",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_MODEL",
+      "confidence": "MODEL_UNVALIDATED",
+      "decision_role": "CONTENT_DECISION",
+      "blocking": true,
+      "reason_type": ""
+    },
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计·章末追读",
+      "状态": "失败",
+      "说明": "主要优点：无；主要风险：章末无新问题、无未竟后果；最终选择 FAIL 因为章末无任何追读动机。",
+      "证据": [
+        {
+          "段落": 2,
+          "摘句": "在这里写第一章正文。",
+          "段落ID": "P0002",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": 0,
+          "end_offset": 10,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计-章末追读不足",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_MODEL",
+      "confidence": "MODEL_UNVALIDATED",
+      "decision_role": "CONTENT_DECISION",
+      "blocking": true,
+      "reason_type": ""
+    }
+  ],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\70_测试项目\\TP-001_CleanHarness_IR_Runtime\\chapters\\ch01.md",
+    "audit_reason_type": ""
+  }
+}

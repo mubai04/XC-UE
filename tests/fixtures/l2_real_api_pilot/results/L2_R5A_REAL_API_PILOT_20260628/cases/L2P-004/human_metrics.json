@@ -1,0 +1,17 @@
+{
+  "case_id": "L2P-004",
+  "human_metrics": {
+    "diagnosis_correct": "REVIEW",
+    "evidence_relevant": "REVIEW",
+    "root_cause_specific": "REVIEW",
+    "fix_actions_executable": "REVIEW",
+    "acceptance_criteria_testable": "REVIEW",
+    "forbidden_scope_respected": "REVIEW",
+    "cross_module_overreach": "REVIEW",
+    "reroute_correct": "REVIEW"
+  },
+  "auto_signals": {
+    "repair_form_missing": true,
+    "error": "L2-02 TIMEOUT: The read operation timed out"
+  }
+}

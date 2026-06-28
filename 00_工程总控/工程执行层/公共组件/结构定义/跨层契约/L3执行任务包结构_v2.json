@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l3-task-bundle/v2",
+  "title": "L3 执行任务包 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L3执行任务包编号",
+    "来源L2报告编号",
+    "来源修复单编号",
+    "执行模式",
+    "任务列表",
+    "允许写入范围",
+    "禁止写入范围",
+    "候选输出路径",
+    "正式正文保护",
+    "复验入口",
+    "执行状态"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l3-task-bundle/2.0"
+    },
+    "L3执行任务包编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源L2报告编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源修复单编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "执行模式": {
+      "type": "string",
+      "enum": [
+        "TASK_PLANNING_ONLY",
+        "CANDIDATE_GENERATION"
+      ]
+    },
+    "任务列表": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "任务编号",
+          "任务描述",
+          "关联修复单编号"
+        ],
+        "properties": {
+          "任务编号": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+          },
+          "任务描述": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+          },
+          "关联修复单编号": {
+            "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+          },
+          "修复动作引用": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 999
+          }
+        }
+      }
+    },
+    "允许写入范围": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+      }
+    },
+    "禁止写入范围": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+      }
+    },
+    "候选输出路径": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+      }
+    },
+    "正式正文保护": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "正式正文路径",
+        "允许修改"
+      ],
+      "properties": {
+        "正式正文路径": {
+          "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+        },
+        "允许修改": {
+          "const": false
+        }
+      }
+    },
+    "复验入口": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#return-gate-reference"
+    },
+    "执行状态": {
+      "type": "string",
+      "enum": [
+        "PLANNED",
+        "EXECUTING",
+        "CANDIDATE_WRITTEN",
+        "BLOCKED",
+        "FAILED",
+        "COMPLETED"
+      ]
+    },
+    "执行协议来源": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#execution-protocol-source"
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

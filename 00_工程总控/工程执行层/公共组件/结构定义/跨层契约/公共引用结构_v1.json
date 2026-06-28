@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/common-reference/v1",
+  "title": "XC-UE 跨层公共引用结构",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "object_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z_\\-\\u4e00-\\u9fff]+$",
+      "$anchor": "object-id"
+    },
+    "path_text": {
+      "type": "string",
+      "maxLength": 512,
+      "$anchor": "path-text"
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 2000,
+      "$anchor": "text"
+    },
+    "short_text": {
+      "type": "string",
+      "maxLength": 256,
+      "$anchor": "short-text"
+    },
+    "line_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "起始行",
+        "结束行"
+      ],
+      "properties": {
+        "起始行": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "结束行": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      },
+      "$anchor": "line-range"
+    },
+    "evidence_source_type": {
+      "type": "string",
+      "enum": [
+        "CHAPTER",
+        "PRIOR_CHAPTER",
+        "IR",
+        "PROJECT_RULE",
+        "FAILURE_EVIDENCE",
+        "RUNTIME_STATE"
+      ],
+      "$anchor": "evidence-source-type"
+    },
+    "evidence_purpose": {
+      "type": "string",
+      "enum": [
+        "SCREENING",
+        "ROUTING",
+        "DIAGNOSIS",
+        "REPAIR_CONSTRAINT",
+        "ACCEPTANCE",
+        "AUDIT"
+      ],
+      "$anchor": "evidence-purpose"
+    },
+    "evidence_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "证据编号",
+        "来源类型",
+        "来源路径",
+        "段落编号",
+        "行号范围",
+        "逐字摘句",
+        "证据用途"
+      ],
+      "properties": {
+        "证据编号": {
+          "$ref": "#object-id"
+        },
+        "来源类型": {
+          "$ref": "#evidence-source-type"
+        },
+        "来源路径": {
+          "$ref": "#path-text"
+        },
+        "段落编号": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "行号范围": {
+          "$ref": "#line-range"
+        },
+        "逐字摘句": {
+          "$ref": "#text"
+        },
+        "证据用途": {
+          "$ref": "#evidence-purpose"
+        },
+        "段落ID": {
+          "$ref": "#short-text"
+        },
+        "occurrence_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      },
+      "$anchor": "evidence-reference"
+    },
+    "prose_position_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "章节路径",
+        "段落编号",
+        "行号范围"
+      ],
+      "properties": {
+        "章节路径": {
+          "$ref": "#path-text"
+        },
+        "段落编号": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "行号范围": {
+          "$ref": "#line-range"
+        },
+        "段落ID": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "prose-position-reference"
+    },
+    "file_source_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "来源类型",
+        "来源路径"
+      ],
+      "properties": {
+        "来源类型": {
+          "$ref": "#evidence-source-type"
+        },
+        "来源路径": {
+          "$ref": "#path-text"
+        },
+        "规则编号": {
+          "$ref": "#short-text"
+        },
+        "规则版本": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "file-source-reference"
+    },
+    "upstream_object_type": {
+      "type": "string",
+      "enum": [
+        "L1发现项",
+        "L1失败包",
+        "L1_5路由决策",
+        "L2修复单",
+        "L2报告",
+        "L3执行任务包",
+        "L3执行结果"
+      ],
+      "$anchor": "upstream-object-type"
+    },
+    "upstream_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "对象类型",
+        "对象编号"
+      ],
+      "properties": {
+        "对象类型": {
+          "$ref": "#upstream-object-type"
+        },
+        "对象编号": {
+          "$ref": "#object-id"
+        },
+        "显示摘要": {
+          "$ref": "#short-text"
+        },
+        "非权威说明": {
+          "const": "显示摘要不是真源字段；引用编号才是关联真源"
+        }
+      },
+      "$anchor": "upstream-reference"
+    },
+    "return_gate_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "回流闸门"
+      ],
+      "properties": {
+        "回流闸门": {
+          "type": "string",
+          "enum": [
+            "L1-00",
+            "L1-01",
+            "L1-02",
+            "L1-03",
+            "L1-SEM",
+            "L1.5",
+            "L2",
+            "L3"
+          ]
+        },
+        "复验说明": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "return-gate-reference"
+    },
+    "route_rule_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "来源路径",
+        "规则版本"
+      ],
+      "properties": {
+        "来源路径": {
+          "type": "string",
+          "const": "30_L1.5_路由矩阵层/L1.5_路由规则.json"
+        },
+        "规则版本": {
+          "$ref": "#short-text"
+        },
+        "路由规则编号": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "route-rule-source"
+    },
+    "capability_rule_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "来源路径",
+        "规则版本"
+      ],
+      "properties": {
+        "来源路径": {
+          "type": "string",
+          "pattern": "^40_L2_正式能力层/.*ability_rules\\.json$"
+        },
+        "规则版本": {
+          "$ref": "#short-text"
+        },
+        "规则编号": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "capability-rule-source"
+    },
+    "execution_protocol_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "来源路径",
+        "规则版本"
+      ],
+      "properties": {
+        "来源路径": {
+          "type": "string",
+          "pattern": "^50_L3_.*protocol.*"
+        },
+        "规则版本": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "execution-protocol-source"
+    },
+    "evidence_rule_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "来源路径",
+        "规则版本"
+      ],
+      "properties": {
+        "来源路径": {
+          "$ref": "#path-text"
+        },
+        "规则版本": {
+          "$ref": "#short-text"
+        }
+      },
+      "$anchor": "evidence-rule-source"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "xcue.l2-real-api-pilot/1.0",
+  "pilot_id": "L2_R5A_REAL_API_PILOT",
+  "status": "READY",
+  "case_count": 12,
+  "cases": [
+    {"case_id": "L2P-001", "target_module": "L2-01", "case_type": "A", "case_dir": "cases/L2P-001"},
+    {"case_id": "L2P-002", "target_module": "L2-01", "case_type": "B", "case_dir": "cases/L2P-002"},
+    {"case_id": "L2P-003", "target_module": "L2-02", "case_type": "A", "case_dir": "cases/L2P-003"},
+    {"case_id": "L2P-004", "target_module": "L2-02", "case_type": "B", "case_dir": "cases/L2P-004"},
+    {"case_id": "L2P-005", "target_module": "L2-03", "case_type": "A", "case_dir": "cases/L2P-005"},
+    {"case_id": "L2P-006", "target_module": "L2-03", "case_type": "B", "case_dir": "cases/L2P-006"},
+    {"case_id": "L2P-007", "target_module": "L2-04", "case_type": "A", "case_dir": "cases/L2P-007"},
+    {"case_id": "L2P-008", "target_module": "L2-04", "case_type": "B", "case_dir": "cases/L2P-008"},
+    {"case_id": "L2P-009", "target_module": "L2-05", "case_type": "A", "case_dir": "cases/L2P-009"},
+    {"case_id": "L2P-010", "target_module": "L2-05", "case_type": "B", "case_dir": "cases/L2P-010"},
+    {"case_id": "L2P-011", "target_module": "L2-06", "case_type": "A", "case_dir": "cases/L2P-011"},
+    {"case_id": "L2P-012", "target_module": "L2-06", "case_type": "B", "case_dir": "cases/L2P-012"}
+  ]
+}

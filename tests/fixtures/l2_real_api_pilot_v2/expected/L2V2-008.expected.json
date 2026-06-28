@@ -1,0 +1,22 @@
+{
+  "case_id": "L2V2-008",
+  "target_module": "L2-04",
+  "case_type": "B",
+  "expected_issue_present": false,
+  "acceptable_root_causes": [
+    "设定简单但完备",
+    "规则限制代价齐全"
+  ],
+  "required_evidence_region": [
+    "守则",
+    "西闸"
+  ],
+  "forbidden_diagnoses": [
+    "设定压力不足",
+    "规则缺失",
+    "代价缺失"
+  ],
+  "expected_reroute": true,
+  "minimum_action_requirements": [],
+  "human_notes": "B类：平淡但规则/限制/代价均成立。"
+}

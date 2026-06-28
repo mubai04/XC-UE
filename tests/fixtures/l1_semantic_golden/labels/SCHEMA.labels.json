@@ -1,0 +1,36 @@
+{
+  "$schema": "xcue.l1-golden-labels/1.0",
+  "chapter_id": "GS-001",
+  "scenario_tag": "clear_pass",
+  "expected_overall": "PASS",
+  "expected_dimensions": {
+    "因果": "PASS",
+    "动机": "PASS",
+    "冲突": "PASS",
+    "读者收益": "PASS",
+    "认知成本": "PASS",
+    "章末追读": "PASS"
+  },
+  "human_evidence": [
+    {
+      "paragraph_id": "P0001",
+      "exact_text": "示例摘句",
+      "source_scope": "CURRENT_CHAPTER",
+      "occurrence_index": 0,
+      "rationale": "人工判断依据"
+    }
+  ],
+  "acceptance_range": {
+    "overall": ["PASS"],
+    "因果": ["PASS", "REVIEW"],
+    "动机": ["PASS", "REVIEW"],
+    "冲突": ["PASS", "REVIEW"],
+    "读者收益": ["PASS", "REVIEW"],
+    "认知成本": ["PASS", "REVIEW"],
+    "章末追读": ["PASS", "REVIEW"]
+  },
+  "unacceptable_misjudgments": [
+    "明确合格章整体 FAIL"
+  ],
+  "notes": "用户提供真实章节后填写；本文件仅为 schema 示例"
+}

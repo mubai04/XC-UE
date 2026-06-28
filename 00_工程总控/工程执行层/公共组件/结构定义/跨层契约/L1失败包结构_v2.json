@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l1-failure-packet/v2",
+  "title": "L1 失败包 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L1失败包编号",
+    "pipeline_run_id",
+    "stage_run_id",
+    "L1顶层状态",
+    "failure_count",
+    "blocking_count",
+    "routeable_count",
+    "发现项列表"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l1-failure-packet/2.0"
+    },
+    "L1失败包编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "pipeline_run_id": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "stage_run_id": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "L1顶层状态": {
+      "type": "string",
+      "enum": [
+        "SCREENING_PASS",
+        "SCREENING_REVIEW",
+        "SCREENING_REJECT",
+        "AUDIT_BLOCKED"
+      ]
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "blocking_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "routeable_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "发现项列表": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/l1-finding/v2"
+      }
+    },
+    "章节路径": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#path-text"
+    },
+    "publish_authority": {
+      "const": false
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "maxProperties": 50
+    }
+  }
+}

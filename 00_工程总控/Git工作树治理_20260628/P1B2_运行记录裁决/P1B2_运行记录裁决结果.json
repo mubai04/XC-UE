@@ -1,0 +1,23 @@
+{
+  "task": "P1B-2 D-SYS-11",
+  "generated_at": "2026-06-28T09:05:41.727302+00:00",
+  "total": 1853,
+  "counts": {
+    "GENERATED_STATUS_COPY": 36,
+    "GENERATED_REPRODUCIBLE": 1815,
+    "PRESERVE_PERMANENTLY": 2
+  },
+  "status_copy_count": 36,
+  "real_api_evidence_count": 0,
+  "human_review_evidence_count": 2,
+  "preserved_permanently_count": 2,
+  "duplicated_in_canonical_count": 0,
+  "P1B2_RUNTIME_RECORD_AUDIT": "PASSED",
+  "P1B2_EVIDENCE_PRESERVATION": "PASSED",
+  "P1B2_RUNTIME_RECORD_POLICY": "PASSED",
+  "MASS_DELETION_DECISION": "APPROVED_FOR_DEDICATED_CLEANUP_COMMIT",
+  "P1B3_COMMIT_PACKAGING": "PENDING",
+  "files_migrated_count": 2,
+  "archive_dir": "审计纠偏_2026-06-26/运行证据归档_迁出自运行记录/",
+  "pending_review_dir": "审计纠偏_2026-06-26/待裁决运行证据/"
+}

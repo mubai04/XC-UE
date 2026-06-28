@@ -1,0 +1,78 @@
+{
+  "case_id": "L2P-007",
+  "module_id": "L2-04",
+  "attempt": 1,
+  "request_metadata": {
+    "model": "deepseek-v4-pro",
+    "api_call_time": "2026-06-28T03:49:20.694793+00:00",
+    "requested_temperature": 0.2,
+    "effective_temperature": null,
+    "temperature_status": "IGNORED_IN_THINKING_MODE",
+    "thinking_enabled": true,
+    "reasoning_effort": "high",
+    "request_timeout_seconds": 180.0,
+    "max_tokens": 8192,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-007\\chapters\\chapter.md",
+    "harness_root": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\tests\\fixtures\\l2_real_api_pilot\\cases\\L2P-007"
+  },
+  "raw_response": "{\"id\":\"999749ed-673d-4e78-ad62-d00c3fcba92d\",\"object\":\"chat.completion\",\"created\":1782618535,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"设定中入塔需持木牌并失去记忆的代价在正文中未被激活为强制选择压力，导致角色可进可退，冲突悬空。\\\",\\n  \\\"setting_pressure_points\\\": [\\n    {\\n      \\\"rule_or_setting\\\": \\\"IR规则 R-101\\\",\\n      \\\"quote\\\": \\\"入塔需持木牌 | 踏入塔门 | 失去一段记忆 | 遗忘重要之人\\\",\\n      \\\"choice_pressure\\\": \\\"角色若想入塔，必须亲手接受失去一段记忆的代价，并面临遗忘重要之人的风险，迫使其在‘机缘’与‘记忆’间做出痛苦抉择。\\\"\\n    }\\n  ],\\n  \\\"differentiation_points\\\": [\\n    {\\n      \\\"description\\\": \\\"入场代价从常见的物质支付（金币、战力）转向情感与记忆的剥夺，侧重内在冲突与人物关系损伤。\\\",\\n      \\\"contrast_with_convention\\\": \\\"常规试炼或秘境多要求等级、门票或战胜守卫，本设定以‘失去记忆’为闸门，更强调角色牺牲独特性。\\\",\\n      \\\"quote\\\": \\\"失去一段记忆 | 遗忘重要之人\\\"\\n    }\\n  ],\\n  \\\"sustainable_variants\\\": [\\n    {\\n      \\\"variant\\\": \\\"重复记忆代价\\\",\\n      \\\"repeatable_mechanism\\\": \\\"每次入塔需重新持牌，每次失去的记忆可累积，逐渐擦除角色关键人际关系或身份认知，形成‘记忆逐渐剥离’的长期悬念，并引入记忆交易、追忆等支线。\\\",\\n      \\\"quote\\\": \\\"失去一段记忆（触发条件：踏入塔门）\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"在试炼开场明确描写一名角色因不持牌被规则之力直接阻挡，强烈突出‘不入即无’的后果。\\\",\\n    \\\"设计一名角色主动持牌并立即遗忘重要之人，通过周围人的反应或自身异样感凸显记忆缺失的具体冲击。\\\",\\n    \\\"让执事或旁观者提及过往因未持牌而错失机缘、或持牌后痛失所爱的实例，将压力从说明信息转化为角色当下的抉择恐惧。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"正文中至少有一个场景清晰呈现不持牌者被拒之塔外，且该场景直接关联后续剧情。\\\",\\n    \\\"正文中至少有一段情节详细刻画持牌后记忆消失的过程及角色情感反应，且消失的记忆与主线人物关系相关。\\\",\\n    \\\"角色入塔前的选择部分包含一段明确的内心挣扎，直接引用或呼应记忆代价条例。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 3,\\n      \\\"quote\\\": \\\"正文未写：不持牌者不得入塔，也未写持牌代价。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 15,\\n      \\\"quote\\\": \\\"正文未写：不持牌不得入塔，也未写持牌将失去一段记忆。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"仍无具体后果\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON。首先分析输入：module是L2-04，failure_type是“创意设定失败”。text_facts指出正文未写某些内容，ir_facts有IR规则，inferred空，unverified空，entities和limits是关于“不得入塔，也未写持牌代价”等，costs空，failure_evidence说有“仍无具体后果”，chapter_excerpt展示了问题：设定说明充分但选择压力不足。\\n\\n需要输出：root_cause, setting_pressure_points, differentiation_points, sustainable_variants, fix_actions, acceptance_criteria, evidence_quotes, needs_reroute.\\n\\n根据L2-04，应该基于规则/限制/代价与text_facts判断规则压力、differentiation_points、sustainable_variants。不能只是说“加强设定差异”，不能宣判一致性硬冲突。\\n\\n所以，我们需要分析这个失败：创意设定失败，具体是设定中的规则（入塔需持木牌，失去记忆）在正文中没有激活，导致选择压力不足。根因应该是“设定信息存在但未转化为迫使角色做出抉择的压力”。\\n\\nsetting_pressure_points: 应该提取规则或设定要点，指出如何施加压力。例如：入塔需持木牌规则，代价是失去记忆，但正文没有让角色面临实际后果，所以压力悬空。可以引用ir_facts的规则。\\n\\ndifferentiation_points: 描述此设定与其他常见设定相比有何差异或独特性，但这里似乎不是关于差异，而是本应独特但未利用。不过我们仍可描述：持牌代价是失去一段记忆，这与常见的“付费入场”或“战斗资格”不同，但未在正文呈现，所以差异未体现。\\n\\nsustainable_variants: 可重复机制，即如何让这个代价可持续推动故事。例如：每次入塔都要重新持牌，每次失去不同记忆，可形成记忆交易的经济系统等。\\n\\nfix_actions: 具体动作，比如：在正文中插入角色必须选择是否入塔的场景，展示不持牌则无法进入的后果，或呈现某角色失去记忆的具体描写。\\n\\nacceptance_criteria: 如何验收修复，如：读者能明确感知不持牌无法入塔，且持牌后记忆消失的具体表现。\\n\\nevidence_quotes: 从输入中选取证据引文，比如text_facts或chapter_excerpt中的句子。\\n\\nneeds_reroute: 应该是false，因为这是L2-04模块内的创意设定失败，不需要重路由。\\n\\n注意：输出必须只有JSON对象，不要额外解释。\\n\\n我们构建JSON：\\n\\nroot_cause: “设定中入塔需持木牌并失去记忆的代价在正文中未被激活为强制选择压力，导致角色可进可退，冲突悬空。”\\n\\nsetting_pressure_points: 从规则和限制中提取，指出应该施加压力的点。例如：\\n{\\n  \\\"rule_or_setting\\\": \\\"IR规则 R-101：入塔需持木牌，失去一段记忆\\\",\\n  \\\"quote\\\": \\\"持牌者将失去一段记忆（触发条件：踏入塔门）\\\",\\n  \\\"choice_pressure\\\": \\\"角色若想入塔，必须接受失去记忆的代价，并面临遗忘重要之人的风险\\\"\\n}\\n类似针对“未写持牌代价”的点，但压力点应基于现有设定。还有“不得入塔”的限制：不持牌不得入塔，这也应施加禁止，但正文也未执行。所以可以有两个压力点：\\n1. 不得入塔规则：迫使角色若不持牌则被拒之门外，必须在门外做出抉择。\\n2. 记忆代价：持牌则失去记忆，角色需权衡记忆与机缘。\\n\\n由于只有一条IR规则，我们可以做一条压力点，但可以写两条。我们根据limits中的描述“不得入塔，也未写持牌代价”和“持牌将失去一段记忆”，实际上是一个规则的两个方面。所以一个压力点足够。\\n\\ndifferentiation_points: 描述这个设定与常规设定的差异。常规的入场条件可能是付费、等级、试炼等，而这里是失去记忆，更侧重情感代价。描述：“与常规‘支付金币或战利品’的入场条件不同，本设定以失去特定记忆为代价，侧重角色内在冲突与人物关系影响。”但正文未体现，所以这仍是差异点。可以引用IR。\\n\\nsustainable_variants: 如何让这个代价可重复、持续推动剧情？例如：“每次入塔需重新持牌，且失去的记忆具有累积效应，可能逐渐抹除重要人际纽带，形成‘记忆交易’的长期悬念。”引用IR规则中的“失去一段记忆”。\\n\\nfix_actions: 具体修复建议，例如：\\n- 在试炼开场明确展示有人因不持牌被阻挡，或持牌后立刻发生记忆消失事件。\\n- 通过角色对话或内心独白揭示记忆代价的具体内容，让读者感知选择的两难。\\n- 安排一名角色被迫选择并承受后果，作为榜样或威慑。\\n\\nacceptance_criteria: 验收标准，可包含：\\n- 正文中至少有一个场景明确描写不持牌者被拒入塔的后果。\\n- 正文中至少有一段描写持牌后记忆消失的情节，且与角色重要记忆有关。\\n- 角色选择入塔或放弃时有一段内心挣扎的描写，显示代价的真实性。\\n\\nevidence_quotes: 从输入中提取能够证明失败的引文，比如text_facts中的“[P3:S3] 正文未写：不持牌者不得入塔，也未写持牌代价。”和failure_evidence中的“仍无具体后果”，以及ir_facts中的规则。我们取几个。\\n\\nneeds_reroute: false\\n\\n输出JSON。务必严格按格式。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1616,\"completion_tokens\":1861,\"total_tokens\":3477,\"prompt_tokens_details\":{\"cached_tokens\":1536},\"completion_tokens_details\":{\"reasoning_tokens\":1203},\"prompt_cache_hit_tokens\":1536,\"prompt_cache_miss_tokens\":80},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+  "parsed_response": null,
+  "validation_errors": [
+    "L2-04 EVIDENCE_INVALID: setting_pressure_points[0] quote 无法在正文中定位；sustainable_variants[0] quote 无法在正文中定位"
+  ],
+  "repair_form": null,
+  "transport_status": "EVIDENCE_ERROR",
+  "format_status": "SUCCESS",
+  "evidence_status": "EVIDENCE_ERROR",
+  "duration_ms": 25962.965499958955,
+  "token_usage": {
+    "prompt_tokens": 1616,
+    "completion_tokens": 1861,
+    "total_tokens": 3477,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1203
+    },
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 80
+  },
+  "error_message": "L2-04 EVIDENCE_INVALID: setting_pressure_points[0] quote 无法在正文中定位；sustainable_variants[0] quote 无法在正文中定位",
+  "api_calls": [
+    {
+      "messages_roles": [
+        "system",
+        "user"
+      ],
+      "ok": true,
+      "error": "",
+      "error_kind": "",
+      "status_code": null,
+      "content": "{\n  \"root_cause\": \"设定中入塔需持木牌并失去记忆的代价在正文中未被激活为强制选择压力，导致角色可进可退，冲突悬空。\",\n  \"setting_pressure_points\": [\n    {\n      \"rule_or_setting\": \"IR规则 R-101\",\n      \"quote\": \"入塔需持木牌 | 踏入塔门 | 失去一段记忆 | 遗忘重要之人\",\n      \"choice_pressure\": \"角色若想入塔，必须亲手接受失去一段记忆的代价，并面临遗忘重要之人的风险，迫使其在‘机缘’与‘记忆’间做出痛苦抉择。\"\n    }\n  ],\n  \"differentiation_points\": [\n    {\n      \"description\": \"入场代价从常见的物质支付（金币、战力）转向情感与记忆的剥夺，侧重内在冲突与人物关系损伤。\",\n      \"contrast_with_convention\": \"常规试炼或秘境多要求等级、门票或战胜守卫，本设定以‘失去记忆’为闸门，更强调角色牺牲独特性。\",\n      \"quote\": \"失去一段记忆 | 遗忘重要之人\"\n    }\n  ],\n  \"sustainable_variants\": [\n    {\n      \"variant\": \"重复记忆代价\",\n      \"repeatable_mechanism\": \"每次入塔需重新持牌，每次失去的记忆可累积，逐渐擦除角色关键人际关系或身份认知，形成‘记忆逐渐剥离’的长期悬念，并引入记忆交易、追忆等支线。\",\n      \"quote\": \"失去一段记忆（触发条件：踏入塔门）\"\n    }\n  ],\n  \"fix_actions\": [\n    \"在试炼开场明确描写一名角色因不持牌被规则之力直接阻挡，强烈突出‘不入即无’的后果。\",\n    \"设计一名角色主动持牌并立即遗忘重要之人，通过周围人的反应或自身异样感凸显记忆缺失的具体冲击。\",\n    \"让执事或旁观者提及过往因未持牌而错失机缘、或持牌后痛失所爱的实例，将压力从说明信息转化为角色当下的抉择恐惧。\"\n  ],\n  \"acceptance_criteria\": [\n    \"正文中至少有一个场景清晰呈现不持牌者被拒之塔外，且该场景直接关联后续剧情。\",\n    \"正文中至少有一段情节详细刻画持牌后记忆消失的过程及角色情感反应，且消失的记忆与主线人物关系相关。\",\n    \"角色入塔前的选择部分包含一段明确的内心挣扎，直接引用或呼应记忆代价条例。\"\n  ],\n  \"evidence_quotes\": [\n    {\n      \"paragraph\": 3,\n      \"quote\": \"正文未写：不持牌者不得入塔，也未写持牌代价。\"\n    },\n    {\n      \"paragraph\": 15,\n      \"quote\": \"正文未写：不持牌不得入塔，也未写持牌将失去一段记忆。\"\n    },\n    {\n      \"paragraph\": 1,\n      \"quote\": \"仍无具体后果\"\n    }\n  ],\n  \"needs_reroute\": false\n}",
+      "parsed": null,
+      "raw": "{\"id\":\"999749ed-673d-4e78-ad62-d00c3fcba92d\",\"object\":\"chat.completion\",\"created\":1782618535,\"model\":\"deepseek-v4-pro\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"root_cause\\\": \\\"设定中入塔需持木牌并失去记忆的代价在正文中未被激活为强制选择压力，导致角色可进可退，冲突悬空。\\\",\\n  \\\"setting_pressure_points\\\": [\\n    {\\n      \\\"rule_or_setting\\\": \\\"IR规则 R-101\\\",\\n      \\\"quote\\\": \\\"入塔需持木牌 | 踏入塔门 | 失去一段记忆 | 遗忘重要之人\\\",\\n      \\\"choice_pressure\\\": \\\"角色若想入塔，必须亲手接受失去一段记忆的代价，并面临遗忘重要之人的风险，迫使其在‘机缘’与‘记忆’间做出痛苦抉择。\\\"\\n    }\\n  ],\\n  \\\"differentiation_points\\\": [\\n    {\\n      \\\"description\\\": \\\"入场代价从常见的物质支付（金币、战力）转向情感与记忆的剥夺，侧重内在冲突与人物关系损伤。\\\",\\n      \\\"contrast_with_convention\\\": \\\"常规试炼或秘境多要求等级、门票或战胜守卫，本设定以‘失去记忆’为闸门，更强调角色牺牲独特性。\\\",\\n      \\\"quote\\\": \\\"失去一段记忆 | 遗忘重要之人\\\"\\n    }\\n  ],\\n  \\\"sustainable_variants\\\": [\\n    {\\n      \\\"variant\\\": \\\"重复记忆代价\\\",\\n      \\\"repeatable_mechanism\\\": \\\"每次入塔需重新持牌，每次失去的记忆可累积，逐渐擦除角色关键人际关系或身份认知，形成‘记忆逐渐剥离’的长期悬念，并引入记忆交易、追忆等支线。\\\",\\n      \\\"quote\\\": \\\"失去一段记忆（触发条件：踏入塔门）\\\"\\n    }\\n  ],\\n  \\\"fix_actions\\\": [\\n    \\\"在试炼开场明确描写一名角色因不持牌被规则之力直接阻挡，强烈突出‘不入即无’的后果。\\\",\\n    \\\"设计一名角色主动持牌并立即遗忘重要之人，通过周围人的反应或自身异样感凸显记忆缺失的具体冲击。\\\",\\n    \\\"让执事或旁观者提及过往因未持牌而错失机缘、或持牌后痛失所爱的实例，将压力从说明信息转化为角色当下的抉择恐惧。\\\"\\n  ],\\n  \\\"acceptance_criteria\\\": [\\n    \\\"正文中至少有一个场景清晰呈现不持牌者被拒之塔外，且该场景直接关联后续剧情。\\\",\\n    \\\"正文中至少有一段情节详细刻画持牌后记忆消失的过程及角色情感反应，且消失的记忆与主线人物关系相关。\\\",\\n    \\\"角色入塔前的选择部分包含一段明确的内心挣扎，直接引用或呼应记忆代价条例。\\\"\\n  ],\\n  \\\"evidence_quotes\\\": [\\n    {\\n      \\\"paragraph\\\": 3,\\n      \\\"quote\\\": \\\"正文未写：不持牌者不得入塔，也未写持牌代价。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 15,\\n      \\\"quote\\\": \\\"正文未写：不持牌不得入塔，也未写持牌将失去一段记忆。\\\"\\n    },\\n    {\\n      \\\"paragraph\\\": 1,\\n      \\\"quote\\\": \\\"仍无具体后果\\\"\\n    }\\n  ],\\n  \\\"needs_reroute\\\": false\\n}\",\"reasoning_content\":\"我们被要求输出JSON。首先分析输入：module是L2-04，failure_type是“创意设定失败”。text_facts指出正文未写某些内容，ir_facts有IR规则，inferred空，unverified空，entities和limits是关于“不得入塔，也未写持牌代价”等，costs空，failure_evidence说有“仍无具体后果”，chapter_excerpt展示了问题：设定说明充分但选择压力不足。\\n\\n需要输出：root_cause, setting_pressure_points, differentiation_points, sustainable_variants, fix_actions, acceptance_criteria, evidence_quotes, needs_reroute.\\n\\n根据L2-04，应该基于规则/限制/代价与text_facts判断规则压力、differentiation_points、sustainable_variants。不能只是说“加强设定差异”，不能宣判一致性硬冲突。\\n\\n所以，我们需要分析这个失败：创意设定失败，具体是设定中的规则（入塔需持木牌，失去记忆）在正文中没有激活，导致选择压力不足。根因应该是“设定信息存在但未转化为迫使角色做出抉择的压力”。\\n\\nsetting_pressure_points: 应该提取规则或设定要点，指出如何施加压力。例如：入塔需持木牌规则，代价是失去记忆，但正文没有让角色面临实际后果，所以压力悬空。可以引用ir_facts的规则。\\n\\ndifferentiation_points: 描述此设定与其他常见设定相比有何差异或独特性，但这里似乎不是关于差异，而是本应独特但未利用。不过我们仍可描述：持牌代价是失去一段记忆，这与常见的“付费入场”或“战斗资格”不同，但未在正文呈现，所以差异未体现。\\n\\nsustainable_variants: 可重复机制，即如何让这个代价可持续推动故事。例如：每次入塔都要重新持牌，每次失去不同记忆，可形成记忆交易的经济系统等。\\n\\nfix_actions: 具体动作，比如：在正文中插入角色必须选择是否入塔的场景，展示不持牌则无法进入的后果，或呈现某角色失去记忆的具体描写。\\n\\nacceptance_criteria: 如何验收修复，如：读者能明确感知不持牌无法入塔，且持牌后记忆消失的具体表现。\\n\\nevidence_quotes: 从输入中选取证据引文，比如text_facts或chapter_excerpt中的句子。\\n\\nneeds_reroute: 应该是false，因为这是L2-04模块内的创意设定失败，不需要重路由。\\n\\n注意：输出必须只有JSON对象，不要额外解释。\\n\\n我们构建JSON：\\n\\nroot_cause: “设定中入塔需持木牌并失去记忆的代价在正文中未被激活为强制选择压力，导致角色可进可退，冲突悬空。”\\n\\nsetting_pressure_points: 从规则和限制中提取，指出应该施加压力的点。例如：\\n{\\n  \\\"rule_or_setting\\\": \\\"IR规则 R-101：入塔需持木牌，失去一段记忆\\\",\\n  \\\"quote\\\": \\\"持牌者将失去一段记忆（触发条件：踏入塔门）\\\",\\n  \\\"choice_pressure\\\": \\\"角色若想入塔，必须接受失去记忆的代价，并面临遗忘重要之人的风险\\\"\\n}\\n类似针对“未写持牌代价”的点，但压力点应基于现有设定。还有“不得入塔”的限制：不持牌不得入塔，这也应施加禁止，但正文也未执行。所以可以有两个压力点：\\n1. 不得入塔规则：迫使角色若不持牌则被拒之门外，必须在门外做出抉择。\\n2. 记忆代价：持牌则失去记忆，角色需权衡记忆与机缘。\\n\\n由于只有一条IR规则，我们可以做一条压力点，但可以写两条。我们根据limits中的描述“不得入塔，也未写持牌代价”和“持牌将失去一段记忆”，实际上是一个规则的两个方面。所以一个压力点足够。\\n\\ndifferentiation_points: 描述这个设定与常规设定的差异。常规的入场条件可能是付费、等级、试炼等，而这里是失去记忆，更侧重情感代价。描述：“与常规‘支付金币或战利品’的入场条件不同，本设定以失去特定记忆为代价，侧重角色内在冲突与人物关系影响。”但正文未体现，所以这仍是差异点。可以引用IR。\\n\\nsustainable_variants: 如何让这个代价可重复、持续推动剧情？例如：“每次入塔需重新持牌，且失去的记忆具有累积效应，可能逐渐抹除重要人际纽带，形成‘记忆交易’的长期悬念。”引用IR规则中的“失去一段记忆”。\\n\\nfix_actions: 具体修复建议，例如：\\n- 在试炼开场明确展示有人因不持牌被阻挡，或持牌后立刻发生记忆消失事件。\\n- 通过角色对话或内心独白揭示记忆代价的具体内容，让读者感知选择的两难。\\n- 安排一名角色被迫选择并承受后果，作为榜样或威慑。\\n\\nacceptance_criteria: 验收标准，可包含：\\n- 正文中至少有一个场景明确描写不持牌者被拒入塔的后果。\\n- 正文中至少有一段描写持牌后记忆消失的情节，且与角色重要记忆有关。\\n- 角色选择入塔或放弃时有一段内心挣扎的描写，显示代价的真实性。\\n\\nevidence_quotes: 从输入中提取能够证明失败的引文，比如text_facts中的“[P3:S3] 正文未写：不持牌者不得入塔，也未写持牌代价。”和failure_evidence中的“仍无具体后果”，以及ir_facts中的规则。我们取几个。\\n\\nneeds_reroute: false\\n\\n输出JSON。务必严格按格式。\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1616,\"completion_tokens\":1861,\"total_tokens\":3477,\"prompt_tokens_details\":{\"cached_tokens\":1536},\"completion_tokens_details\":{\"reasoning_tokens\":1203},\"prompt_cache_hit_tokens\":1536,\"prompt_cache_miss_tokens\":80},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "duration_ms": 25958.691900013946,
+      "token_usage": {
+        "prompt_tokens": 1616,
+        "completion_tokens": 1861,
+        "total_tokens": 3477,
+        "prompt_tokens_details": {
+          "cached_tokens": 1536
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1203
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 80
+      },
+      "hints_applied": [],
+      "timeout_class": null,
+      "http_class": null,
+      "connection_class": null
+    }
+  ]
+}

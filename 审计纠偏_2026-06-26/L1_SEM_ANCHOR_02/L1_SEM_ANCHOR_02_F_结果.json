@@ -1,0 +1,18 @@
+{
+  "task": "L1-SEM-ANCHOR-02-F",
+  "L1_SEM_ANCHOR_02_CORE": "PASSED",
+  "L1_SEM_ANCHOR_02_ENGINEERING_ACCEPTANCE": "PASSED",
+  "L1_SEM_ANCHOR_02_FREEZE": "ALLOWED",
+  "REAL_REPAIR_02": "PAUSED",
+  "REAL_API_CALLS_USED": 0,
+  "FURTHER_API_RETRY": "FORBIDDEN",
+  "paragraph_id_auto_repair_removed": true,
+  "offline_replay_run_id": "RR02-ANCHOR-R2",
+  "offline_replay_evidence_count": 11,
+  "offline_replay_all_anchored": true,
+  "offline_replay_l1_status": "AUDIT_BLOCKED",
+  "offline_replay_blocker": "动机: final_reason 过于空泛",
+  "directed_tests_passed": 65,
+  "full_pytest_passed": 429,
+  "full_pytest_skipped": 3
+}

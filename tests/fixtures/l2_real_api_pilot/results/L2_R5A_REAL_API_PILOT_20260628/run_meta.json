@@ -1,0 +1,11 @@
+{
+  "run_id": "L2_R5A_REAL_API_PILOT_20260628",
+  "started_at": "2026-06-28T03:00:43.751763+00:00",
+  "model": "deepseek-v4-pro",
+  "max_tokens": 8192,
+  "manifest": "L2_R5A_REAL_API_PILOT",
+  "production_code_modified": false,
+  "entered_l3": false,
+  "modified_formal_chapters": false,
+  "modified_r0_baseline": false
+}

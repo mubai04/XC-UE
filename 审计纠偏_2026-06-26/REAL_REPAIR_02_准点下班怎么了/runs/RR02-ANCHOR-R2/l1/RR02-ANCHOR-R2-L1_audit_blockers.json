@@ -1,0 +1,45 @@
+{
+  "schema_version": "xcue.audit-blockers/1.0",
+  "pipeline_run_id": "RR02-ANCHOR-R2",
+  "stage_run_id": "RR02-ANCHOR-R2-L1",
+  "status": "AUDIT_BLOCKED",
+  "semantic_audit_status": "AUDIT_BLOCKED",
+  "audit_reason_type": "EVIDENCE_INVALID",
+  "blocker_count": 1,
+  "items": [
+    {
+      "闸门": "L1-SEM",
+      "名称": "语义审计响应校验",
+      "状态": "失败",
+      "说明": "语义审计响应未通过证据校验：动机: final_reason 过于空泛，必须引用具体全章现象类别",
+      "证据": [
+        {
+          "段落": null,
+          "摘句": "动机: final_reason 过于空泛，必须引用具体全章现象类别",
+          "段落ID": "",
+          "source_scope": "CURRENT_CHAPTER",
+          "start_offset": null,
+          "end_offset": null,
+          "occurrence_index": 0
+        }
+      ],
+      "严重级别": "error",
+      "失败类型": "语义审计证据无效",
+      "候选模块": "",
+      "回流验收位置": "",
+      "修复方向": "",
+      "heuristic": false,
+      "signal_strength": "SEMANTIC_INVALID",
+      "confidence": "NONE",
+      "decision_role": "AUDIT_BLOCKER",
+      "blocking": true,
+      "routeable": false,
+      "route_reason": "",
+      "source_component": "",
+      "reason_type": "EVIDENCE_INVALID"
+    }
+  ],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\70_测试项目\\ZDXB-001_准点下班怎么了\\chapters\\ch01.md"
+  }
+}

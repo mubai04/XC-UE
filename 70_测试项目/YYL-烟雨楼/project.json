@@ -1,0 +1,10 @@
+{
+  "schema_version": "xcue.project-manifest/1.0",
+  "project_id": "YYL-001",
+  "content_root": "chapters",
+  "default_chapter": "chapters/ch02.md",
+  "entrypoint": "chapters/ch02.md",
+  "entrypoint_type": "project",
+  "required_dirs": ["IR", "runtime"],
+  "chapter_sequence": ["chapters/ch02.md"]
+}

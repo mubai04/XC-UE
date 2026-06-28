@@ -1,0 +1,12 @@
+{
+  "schema_version": "xcue.project-manifest/1.0",
+  "project_id": "L2P-012",
+  "content_root": "chapters",
+  "default_chapter": "chapters/chapter.md",
+  "entrypoint": "chapters/chapter.md",
+  "entrypoint_type": "pilot",
+  "chapter_sequence": [
+    "chapters/prior.md",
+    "chapters/chapter.md"
+  ]
+}

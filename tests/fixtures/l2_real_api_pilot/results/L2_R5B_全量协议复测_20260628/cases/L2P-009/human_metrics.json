@@ -1,0 +1,18 @@
+{
+  "case_id": "L2P-009",
+  "human_metrics": {
+    "diagnosis_correct": "REVIEW",
+    "evidence_relevant": "REVIEW",
+    "root_cause_specific": "REVIEW",
+    "fix_actions_executable": "REVIEW",
+    "acceptance_criteria_testable": "REVIEW",
+    "forbidden_scope_respected": "REVIEW",
+    "cross_module_overreach": "REVIEW",
+    "reroute_correct": "REVIEW"
+  },
+  "auto_signals": {
+    "forbidden_diagnosis_hits": [],
+    "needs_reroute_flag": "是",
+    "expected_reroute": false
+  }
+}

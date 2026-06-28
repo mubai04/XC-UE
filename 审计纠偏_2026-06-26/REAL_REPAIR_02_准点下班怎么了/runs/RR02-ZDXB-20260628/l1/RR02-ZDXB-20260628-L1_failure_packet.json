@@ -1,0 +1,15 @@
+{
+  "schema_version": "xcue.failure-packet/1.0",
+  "pipeline_run_id": "RR02-ZDXB-20260628",
+  "stage_run_id": "RR02-ZDXB-20260628-L1",
+  "status": "AUDIT_BLOCKED",
+  "failure_count": 0,
+  "blocking_count": 0,
+  "routeable_count": 0,
+  "items": [],
+  "extensions": {
+    "chapter_path": "C:\\Users\\慕白\\OneDrive\\桌面\\XC-UE\\70_测试项目\\ZDXB-001_准点下班怎么了\\chapters\\ch01.md",
+    "audit_reason_type": "EVIDENCE_INVALID",
+    "publish_authority": false
+  }
+}

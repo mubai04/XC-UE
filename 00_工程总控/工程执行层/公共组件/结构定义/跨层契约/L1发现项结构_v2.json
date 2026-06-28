@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "xcue://schemas/cross-layer/l1-finding/v2",
+  "title": "L1 发现项 v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "L1发现编号",
+    "来源闸门",
+    "来源组件",
+    "发现名称",
+    "发现状态",
+    "L1问题域",
+    "L1失败类型",
+    "说明",
+    "证据引用",
+    "严重级别",
+    "decision_role",
+    "blocking",
+    "routeable",
+    "route_reason",
+    "候选模块提示",
+    "修复提示",
+    "回流闸门"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "xcue.l1-finding/2.0"
+    },
+    "L1发现编号": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#object-id"
+    },
+    "来源闸门": {
+      "type": "string",
+      "maxLength": 32
+    },
+    "来源组件": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "发现名称": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "发现状态": {
+      "type": "string",
+      "enum": [
+        "成立",
+        "通过",
+        "失败",
+        "风险",
+        "阻断",
+        "检测到接口信号",
+        "检测到代理信号"
+      ]
+    },
+    "L1问题域": {
+      "type": "string",
+      "enum": [
+        "叙事",
+        "文风",
+        "角色",
+        "设定",
+        "读者体验",
+        "故事一致性",
+        "工程技术",
+        "语义审计",
+        "发布准备"
+      ]
+    },
+    "L1失败类型": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "说明": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "证据引用": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 200,
+      "items": {
+        "$ref": "xcue://schemas/cross-layer/common-reference/v1#evidence-reference"
+      }
+    },
+    "严重级别": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "error"
+      ]
+    },
+    "decision_role": {
+      "type": "string",
+      "enum": [
+        "HARD_GUARD",
+        "CONTENT_DECISION",
+        "DIAGNOSTIC",
+        "AUDIT_BLOCKER"
+      ]
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "routeable": {
+      "type": "boolean"
+    },
+    "route_reason": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "候选模块提示": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#short-text"
+    },
+    "修复提示": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#text"
+    },
+    "回流闸门": {
+      "$ref": "xcue://schemas/cross-layer/common-reference/v1#return-gate-reference"
+    },
+    "reason_type": {
+      "type": "string",
+      "enum": [
+        "",
+        "INPUT_INVALID",
+        "API_UNAVAILABLE",
+        "EVIDENCE_INVALID",
+        "SCHEMA_INVALID"
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "L2V2-006",
+  "target_module": "L2-03",
+  "case_type": "B",
+  "expected_issue_present": false,
+  "acceptable_root_causes": [
+    "动机链完整",
+    "收益偏弱但非心理断裂"
+  ],
+  "required_evidence_region": [
+    "样本",
+    "医馆"
+  ],
+  "forbidden_diagnoses": [
+    "动机缺口",
+    "缺恐惧来源",
+    "角色链为空"
+  ],
+  "expected_reroute": true,
+  "minimum_action_requirements": [],
+  "human_notes": "B类：心理链闭合，勿误判为角色失败。"
+}

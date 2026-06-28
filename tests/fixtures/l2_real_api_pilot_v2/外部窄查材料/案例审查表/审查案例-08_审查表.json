@@ -1,0 +1,17 @@
+{
+  "review_case": "审查案例-08",
+  "case_id": "",
+  "module_id": "",
+  "natural_fiction_text": "NOT_REVIEWED",
+  "answer_leakage": "NOT_REVIEWED",
+  "meta_text_contamination": "NOT_REVIEWED",
+  "filler_contamination": "NOT_REVIEWED",
+  "failure_evidence_valid": "NOT_REVIEWED",
+  "target_defect_present": "NOT_REVIEWED",
+  "single_primary_defect": "NOT_REVIEWED",
+  "case_boundary_valid": "NOT_REVIEWED",
+  "expected_separated_from_input": "NOT_REVIEWED",
+  "overall_corpus_result": "NOT_REVIEWED",
+  "decisive_findings": [],
+  "required_action": "NOT_REVIEWED"
+}

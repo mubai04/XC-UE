@@ -1,0 +1,119 @@
+{
+  "scenario_tag": "debatable_review",
+  "expected_overall": "REVIEW",
+  "acceptance_range": {
+    "overall": [
+      "REVIEW"
+    ],
+    "dimensions": {
+      "因果": [
+        "PASS",
+        "REVIEW"
+      ],
+      "动机": [
+        "PASS"
+      ],
+      "冲突": [
+        "PASS",
+        "REVIEW"
+      ],
+      "读者收益": [
+        "PASS",
+        "REVIEW"
+      ],
+      "认知成本": [
+        "REVIEW"
+      ],
+      "章末追读": [
+        "PASS"
+      ]
+    }
+  },
+  "expected_dimensions": {
+    "因果": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "秦仙子收徒、李家造势、主角缺乏武道天赋与准备拜师之间存在可追踪关系，但前半段主要通过传闻间接展开。"
+    },
+    "动机": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "李百万希望解决儿子无法习武的问题；李子夜希望借秦婀娜改变自身处境。"
+    },
+    "冲突": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "传闻中的绝世天才与真实的无武道天赋形成反差，但本章主要冲突尚未正面爆发。"
+    },
+    "读者收益": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "PASS",
+        "REVIEW"
+      ],
+      "rationale": "完成世界、人物反差与拜师目标的揭示，但主角正式出场较晚，前段信息铺陈偏长。"
+    },
+    "认知成本": {
+      "expected_verdict": "REVIEW",
+      "acceptance_range": [
+        "REVIEW"
+      ],
+      "rationale": "开篇集中投放多名天骄、势力、传闻与商业背景，读者需要较长时间才抵达主角核心困境。"
+    },
+    "章末追读": {
+      "expected_verdict": "PASS",
+      "acceptance_range": [
+        "PASS"
+      ],
+      "rationale": "秦婀娜将至，主角准备依靠财富争取拜师，下一步行动明确。"
+    }
+  },
+  "human_evidence": [
+    {
+      "dimension": "因果",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0055",
+      "exact_text": "这都是因为小公子的出世。",
+      "occurrence_index": 0,
+      "rationale": "李家财富跃升与主角能力之间建立原因关系。"
+    },
+    {
+      "dimension": "动机",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0100",
+      "exact_text": "老爹没用，太对不起你，除了钱，什么都给不了你。",
+      "occurrence_index": 0,
+      "rationale": "父亲推动拜师计划的情感动机。"
+    },
+    {
+      "dimension": "冲突",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0078",
+      "exact_text": "“没有。”",
+      "occurrence_index": 0,
+      "rationale": "剑痴明确否定主角的武道天赋，与外界传闻形成反差。"
+    },
+    {
+      "dimension": "章末追读",
+      "source_scope": "CURRENT_CHAPTER",
+      "paragraph_id": "P0102",
+      "exact_text": "不行就拿金山银山砸，不信她不心动。",
+      "occurrence_index": 0,
+      "rationale": "主角提出下一步拜师策略。"
+    }
+  ],
+  "unacceptable_misjudgments": [
+    "只因出现大量天才、剑仙、飞升等词语就判定整体PASS",
+    "忽略外界传闻与主角真实天赋之间的核心反差",
+    "把前半段信息铺陈过长完全忽略，认知成本直接判PASS"
+  ],
+  "chapter_id": "GS-001"
+}

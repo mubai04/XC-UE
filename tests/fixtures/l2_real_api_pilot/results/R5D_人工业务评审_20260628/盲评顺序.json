@@ -1,0 +1,160 @@
+{
+  "schema_version": "xcue.l2-human-review-order/1.0",
+  "generated_at": "2026-06-28T13:32:56.346592+00:00",
+  "source_run_id": "L2_R5C_全量技术复测_20260628",
+  "review_dir": "R5D_人工业务评审_20260628",
+  "review_mode": "SEMI_BLIND",
+  "strict_blind": false,
+  "known_information": [
+    "目标L2模块",
+    "评审案例代号",
+    "case_id映射此前已被用户看到"
+  ],
+  "hidden_information_during_phase_1": [
+    "A/B案例类型",
+    "expected_issue_present",
+    "acceptable_root_causes",
+    "forbidden_diagnoses",
+    "human_notes",
+    "预设业务结论"
+  ],
+  "disclosure_note": "评审者已经看过案例与模块映射，因此本轮不宣称严格盲评。第一阶段仍隐藏案例类型和expected。",
+  "phase_1_name": "半盲独立评审",
+  "phase_2_name": "对照复核",
+  "phase_1_order": [
+    {
+      "order": 1,
+      "blind_label": "评审案例-01",
+      "case_id": "L2P-010",
+      "module_id": "L2-05",
+      "reading_package": "半盲评阅读包/评审案例-01_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-010_盲评评分.json",
+        "phase_2": "案例评审表/L2P-010_评分.json"
+      }
+    },
+    {
+      "order": 2,
+      "blind_label": "评审案例-02",
+      "case_id": "L2P-011",
+      "module_id": "L2-06",
+      "reading_package": "半盲评阅读包/评审案例-02_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-011_盲评评分.json",
+        "phase_2": "案例评审表/L2P-011_评分.json"
+      }
+    },
+    {
+      "order": 3,
+      "blind_label": "评审案例-03",
+      "case_id": "L2P-007",
+      "module_id": "L2-04",
+      "reading_package": "半盲评阅读包/评审案例-03_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-007_盲评评分.json",
+        "phase_2": "案例评审表/L2P-007_评分.json"
+      }
+    },
+    {
+      "order": 4,
+      "blind_label": "评审案例-04",
+      "case_id": "L2P-003",
+      "module_id": "L2-02",
+      "reading_package": "半盲评阅读包/评审案例-04_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-003_盲评评分.json",
+        "phase_2": "案例评审表/L2P-003_评分.json"
+      }
+    },
+    {
+      "order": 5,
+      "blind_label": "评审案例-05",
+      "case_id": "L2P-009",
+      "module_id": "L2-05",
+      "reading_package": "半盲评阅读包/评审案例-05_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-009_盲评评分.json",
+        "phase_2": "案例评审表/L2P-009_评分.json"
+      }
+    },
+    {
+      "order": 6,
+      "blind_label": "评审案例-06",
+      "case_id": "L2P-004",
+      "module_id": "L2-02",
+      "reading_package": "半盲评阅读包/评审案例-06_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-004_盲评评分.json",
+        "phase_2": "案例评审表/L2P-004_评分.json"
+      }
+    },
+    {
+      "order": 7,
+      "blind_label": "评审案例-07",
+      "case_id": "L2P-005",
+      "module_id": "L2-03",
+      "reading_package": "半盲评阅读包/评审案例-07_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-005_盲评评分.json",
+        "phase_2": "案例评审表/L2P-005_评分.json"
+      }
+    },
+    {
+      "order": 8,
+      "blind_label": "评审案例-08",
+      "case_id": "L2P-002",
+      "module_id": "L2-01",
+      "reading_package": "半盲评阅读包/评审案例-08_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-002_盲评评分.json",
+        "phase_2": "案例评审表/L2P-002_评分.json"
+      }
+    },
+    {
+      "order": 9,
+      "blind_label": "评审案例-09",
+      "case_id": "L2P-012",
+      "module_id": "L2-06",
+      "reading_package": "半盲评阅读包/评审案例-09_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-012_盲评评分.json",
+        "phase_2": "案例评审表/L2P-012_评分.json"
+      }
+    },
+    {
+      "order": 10,
+      "blind_label": "评审案例-10",
+      "case_id": "L2P-006",
+      "module_id": "L2-03",
+      "reading_package": "半盲评阅读包/评审案例-10_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-006_盲评评分.json",
+        "phase_2": "案例评审表/L2P-006_评分.json"
+      }
+    },
+    {
+      "order": 11,
+      "blind_label": "评审案例-11",
+      "case_id": "L2P-001",
+      "module_id": "L2-01",
+      "reading_package": "半盲评阅读包/评审案例-11_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-001_盲评评分.json",
+        "phase_2": "案例评审表/L2P-001_评分.json"
+      }
+    },
+    {
+      "order": 12,
+      "blind_label": "评审案例-12",
+      "case_id": "L2P-008",
+      "module_id": "L2-04",
+      "reading_package": "半盲评阅读包/评审案例-12_半盲评阅读包.md",
+      "score_files": {
+        "phase_1": "案例评审表/L2P-008_盲评评分.json",
+        "phase_2": "案例评审表/L2P-008_评分.json"
+      }
+    }
+  ],
+  "note": "历史文件名保留「盲评」字样，实际模式为 SEMI_BLIND。第一阶段仍隐藏 A/B 类型与 expected。",
+  "updated_at": "2026-06-28T13:32:56.348314+00:00"
+}

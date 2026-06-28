@@ -1,0 +1,508 @@
+﻿{
+  "generated_at": "2026-06-27T13:08:05",
+  "phase": "2A.1",
+  "evaluation_kind": "SINGLE_CHAPTER_CALIBRATION",
+  "pilot_status": "MODEL_CALIBRATION_REJECTED",
+  "pilot_reasons": [
+    "GS-005: overall 模型=PASS 不在 acceptance_range=['FAIL']",
+    "GS-005/读者收益: 模型=PASS 人工=FAIL；模型理由=全章事件增量充足：借运生效、王磊绕圈、报警、前夫电话、账本异动、首日接待+8，中后段未重复已兑现内容。；人工理由=核心机制前段已经完成展示，后续多次重复同类规则笑点、评论和问答，新信息效率显著下降。",
+    "GS-005/认知成本: 模型=PASS 人工=FAIL；模型理由=全章主体切换清晰，对话归属明确，专名规则稳定，无需要回读的段落。；人工理由=大量无引号对话、短句跳转、评论、来电、系统文字和街头反馈连续混排，主体边界不稳定。"
+  ],
+  "metrics": {
+    "first_pass_evidence_valid_rate": 0.0,
+    "eventual_evidence_valid_rate": 1.0,
+    "evidence_retry_rate": 1.0,
+    "transport_retry_rate": 0.0,
+    "format_retry_rate": 0.0,
+    "audit_blocked_rate": 0.0,
+    "overall_agreement": 0.0,
+    "dimension_agreement": 0.6666666666666666
+  },
+  "chapter_results": [
+    {
+      "chapter_id": "GS-005",
+      "scenario_tag": "high_lexical_bad_narrative",
+      "secondary_scenario_tags": [
+        "clear_fail"
+      ],
+      "scenario_tags": [
+        "clear_fail",
+        "high_lexical_bad_narrative"
+      ],
+      "expected_overall": "FAIL",
+      "actual_overall": "PASS",
+      "first_pass_evidence_valid": false,
+      "eventual_evidence_valid": true,
+      "evidence_retry_count": 1,
+      "transport_retry_count": 0,
+      "format_retry_count": 0,
+      "audit_blocked": false,
+      "overall_agreement": false,
+      "dimension_agreement": 0.6666666666666666,
+      "hard_pass": false,
+      "hard_fail": false,
+      "review_ok": true,
+      "dimension_details": [
+        {
+          "dimension": "因果",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "借运、签字、生效和王磊受影响存在基本链条，但后半章重复与旁支不断削弱主线。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "路满借运的起因、行动、结果完整可追踪。",
+          "risk_summary": "账本上‘待核·贺按’的出现原因未交代，但属于支线伏笔，未破坏主线因果。",
+          "final_reason": "全章事件增量明确：起因（路满摊被掀）→ 行动（借运、写王磊）→ 结果（王磊绕圈、路满生意好），链条完整，无断点。",
+          "evidence_rationale": "支持因果链条的起因部分，说明路满因摊位被掀而行动。"
+        },
+        {
+          "dimension": "动机",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "路满求生意、贺按维持店铺运行的动机可辨，但主角自身本章核心目标被大量即时插曲稀释。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "路满的动机（报复王磊、挽回生意）贯穿全章，贺按的动机（经营当铺、遵守规则）始终如一。",
+          "risk_summary": "贺按对 uncle 留下的霉账规则动机未解释，但属于背景设定，未影响本章动机一致性。",
+          "final_reason": "路满从开头到结尾始终以报复王磊为目标，贺按始终以规则运营当铺，无目标漂移。",
+          "evidence_rationale": "支持路满动机的强度，明确表达报复意图。"
+        },
+        {
+          "dimension": "冲突",
+          "expected": "PASS",
+          "actual": "PASS",
+          "allowed": [
+            "PASS"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "路满与王磊、合同规则、报警风险和霉账共同提供持续压力。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "冲突从路满上门借运开始，持续到王磊绕圈、报警，最后贺按要求王磊签字，冲突线完整。",
+          "risk_summary": "未发现足以降级的全章性风险",
+          "final_reason": "全章冲突链条清晰：路满因摊位被掀上门借运（起因）→ 贺按执行借运导致王磊绕圈（行动）→ 王磊报警、贺按要求签字（结果），冲突持续且未重复空转。",
+          "evidence_rationale": "支持冲突的起因：路满因摊位被掀上门借运，冲突由此展开。"
+        },
+        {
+          "dimension": "读者收益",
+          "expected": "FAIL",
+          "actual": "PASS",
+          "allowed": [
+            "FAIL",
+            "REVIEW"
+          ],
+          "verdict_agreement": false,
+          "human_rationale": "核心机制前段已经完成展示，后续多次重复同类规则笑点、评论和问答，新信息效率显著下降。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "借运规则兑现（王磊绕圈、路满生意火爆）、新悬念（账本待核·贺按）持续提供读者收益。",
+          "risk_summary": "王磊绕圈场景在段落中重复出现数次，但每次伴随新信息（报警、拍照、评论），未形成空转。",
+          "final_reason": "全章事件增量充足：借运生效、王磊绕圈、报警、前夫电话、账本异动、首日接待+8，中后段未重复已兑现内容。",
+          "evidence_rationale": "支持读者收益中的情绪兑现，路满生意火爆带来爽感。"
+        },
+        {
+          "dimension": "认知成本",
+          "expected": "FAIL",
+          "actual": "PASS",
+          "allowed": [
+            "FAIL"
+          ],
+          "verdict_agreement": false,
+          "human_rationale": "大量无引号对话、短句跳转、评论、来电、系统文字和街头反馈连续混排，主体边界不稳定。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "人物对话主体清晰（贺按、路满、王磊、便利店小哥），场景稳定（当铺、夜市）。",
+          "risk_summary": "P0025-P0026‘静了一瞬’重复出现，但属于修辞，未造成混淆。",
+          "final_reason": "全章主体切换清晰，对话归属明确，专名规则稳定，无需要回读的段落。",
+          "evidence_rationale": "支持认知成本低，对话主体明确，规则清晰。"
+        },
+        {
+          "dimension": "章末追读",
+          "expected": "REVIEW",
+          "actual": "PASS",
+          "allowed": [
+            "PASS",
+            "REVIEW"
+          ],
+          "verdict_agreement": true,
+          "human_rationale": "待核·贺按具有后续价值，但此前出现多次近似收尾，最终钩子被稀释。",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "章末账本出现‘待核·贺按’、首日接待+8，制造新悬念。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "章末最后20%段落（P0086-P0098）形成新问题：账本待核·贺按、首日接待+8，贺按决定继续开门，追读动机明确。",
+          "evidence_rationale": "支持章末追读，新悬念‘待核·贺按’引发读者好奇。"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "raw_api_response": {
+        "dimensions": [
+          {
+            "name": "因果",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章因果链完整，路满因摊位被掀（起因）→ 找贺按借运（行动）→ 王磊绕圈、路满生意火爆（结果），主线清晰。主要风险：局部细节如账本待核·贺按的出现原因未明，但不破坏主线。最终选择 PASS 因为整章事件链条连续，局部跳跃不影响主线因果。",
+            "strength_summary": "路满借运的起因、行动、结果完整可追踪。",
+            "risk_summary": "账本上‘待核·贺按’的出现原因未交代，但属于支线伏笔，未破坏主线因果。",
+            "final_reason": "全章事件增量明确：起因（路满摊被掀）→ 行动（借运、写王磊）→ 结果（王磊绕圈、路满生意好），链条完整，无断点。",
+            "evidence": [
+              {
+                "paragraph_id": "P0004",
+                "exact_text": "门帘外拳头砸木板，震得灰往下掉。开门！我炒粉摊被人掀了！我要借运！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持因果链条的起因部分，说明路满因摊位被掀而行动。"
+              }
+            ]
+          },
+          {
+            "name": "动机",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：路满动机明确（报复王磊、挽回生意），贺按动机一致（经营当铺、遵守规则）。主要风险：贺按对 uncle 留下的霉账规则动机未深挖，但未影响当前章。最终选择 PASS 因为主要人物目标、压力与选择在全章保持一致。",
+            "strength_summary": "路满的动机（报复王磊、挽回生意）贯穿全章，贺按的动机（经营当铺、遵守规则）始终如一。",
+            "risk_summary": "贺按对 uncle 留下的霉账规则动机未解释，但属于背景设定，未影响本章动机一致性。",
+            "final_reason": "路满从开头到结尾始终以报复王磊为目标，贺按始终以规则运营当铺，无目标漂移。",
+            "evidence": [
+              {
+                "paragraph_id": "P0011",
+                "exact_text": "路满嗓门又抬，我不管。我就要他今天倒霉！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持路满动机的强度，明确表达报复意图。"
+              }
+            ]
+          },
+          {
+            "name": "冲突",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章围绕路满与王磊的摊位纠纷展开，冲突清晰持续，从路满上门借运到王磊绕圈、报警威胁，再到贺按介入调解，冲突有起因、发展和余波。主要风险：冲突强度在章末有所下降，但未出现重复空转。最终选择 PASS 因为冲突贯穿全章，推动情节。",
+            "strength_summary": "冲突从路满上门借运开始，持续到王磊绕圈、报警，最后贺按要求王磊签字，冲突线完整。",
+            "risk_summary": "未发现足以降级的全章性风险",
+            "final_reason": "全章冲突链条清晰：路满因摊位被掀上门借运（起因）→ 贺按执行借运导致王磊绕圈（行动）→ 王磊报警、贺按要求签字（结果），冲突持续且未重复空转。",
+            "evidence": [
+              {
+                "paragraph_id": "P0004",
+                "exact_text": "门帘外拳头砸木板，震得灰往下掉。开门！我炒粉摊被人掀了！我要借运！",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持冲突的起因：路满因摊位被掀上门借运，冲突由此展开。"
+              }
+            ]
+          },
+          {
+            "name": "读者收益",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：全章持续提供新事件变化（借运生效、王磊绕圈、报警、前夫电话、账本异动），信息增量充足。主要风险：中后段有少量重复（王磊绕圈描述多次），但未大面积重复已兑现内容。最终选择 PASS 因为核心事件与主要兑现成立，中后段未出现大面积重复空转。",
+            "strength_summary": "借运规则兑现（王磊绕圈、路满生意火爆）、新悬念（账本待核·贺按）持续提供读者收益。",
+            "risk_summary": "王磊绕圈场景在段落中重复出现数次，但每次伴随新信息（报警、拍照、评论），未形成空转。",
+            "final_reason": "全章事件增量充足：借运生效、王磊绕圈、报警、前夫电话、账本异动、首日接待+8，中后段未重复已兑现内容。",
+            "evidence": [
+              {
+                "paragraph_id": "P0031",
+                "exact_text": "锅铲抡得火星直冒，比王磊绕圈还忙。路满又白又笑，手抖。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持读者收益中的情绪兑现，路满生意火爆带来爽感。"
+              }
+            ]
+          },
+          {
+            "name": "认知成本",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：人物、对话主体、场景稳定可辨，专名（借运、偿还方、待核）规则清晰。主要风险：少量短句跳转（如P0025-P0026‘静了一瞬’重复），但未影响理解。最终选择 PASS 因为主线可连续理解，无需回读。",
+            "strength_summary": "人物对话主体清晰（贺按、路满、王磊、便利店小哥），场景稳定（当铺、夜市）。",
+            "risk_summary": "P0025-P0026‘静了一瞬’重复出现，但属于修辞，未造成混淆。",
+            "final_reason": "全章主体切换清晰，对话归属明确，专名规则稳定，无需要回读的段落。",
+            "evidence": [
+              {
+                "paragraph_id": "P0006",
+                "exact_text": "贺按：谁借谁还，二十四小时。别念第七条，按了才响。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持认知成本低，对话主体明确，规则清晰。"
+              }
+            ]
+          },
+          {
+            "name": "章末追读",
+            "verdict": "PASS",
+            "analysis_summary": "主要优点：章末形成明确新问题——账本出现‘待核·贺按’、首日接待+8、贺按决定继续开门，为下一章提供追读理由。主要风险：无。最终选择 PASS 因为章末形成新悬念（账本异动、贺按自身待核）且与前文自然衔接。",
+            "strength_summary": "章末账本出现‘待核·贺按’、首日接待+8，制造新悬念。",
+            "risk_summary": "未发现足以降级的全章性风险。",
+            "final_reason": "章末最后20%段落（P0086-P0098）形成新问题：账本待核·贺按、首日接待+8，贺按决定继续开门，追读动机明确。",
+            "evidence": [
+              {
+                "paragraph_id": "P0086",
+                "exact_text": "账本待核旁，又多一行极淡小字：待核·贺按？贺按盯着看了两秒，把字划淡。",
+                "source_scope": "CURRENT_CHAPTER",
+                "occurrence_index": 0,
+                "evidence_rationale": "支持章末追读，新悬念‘待核·贺按’引发读者好奇。"
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "transport_retry_count": 0,
+        "format_retry_count": 0,
+        "evidence_retry_count": 1,
+        "warnings": [],
+        "context_quality": "NONE"
+      },
+      "dimension_reports": [
+        {
+          "dimension": "因果",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "路满借运的起因、行动、结果完整可追踪。",
+          "risk_summary": "账本上‘待核·贺按’的出现原因未交代，但属于支线伏笔，未破坏主线因果。",
+          "final_reason": "全章事件增量明确：起因（路满摊被掀）→ 行动（借运、写王磊）→ 结果（王磊绕圈、路满生意好），链条完整，无断点。",
+          "evidence_rationale": "支持因果链条的起因部分，说明路满因摊位被掀而行动。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "动机",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "路满的动机（报复王磊、挽回生意）贯穿全章，贺按的动机（经营当铺、遵守规则）始终如一。",
+          "risk_summary": "贺按对 uncle 留下的霉账规则动机未解释，但属于背景设定，未影响本章动机一致性。",
+          "final_reason": "路满从开头到结尾始终以报复王磊为目标，贺按始终以规则运营当铺，无目标漂移。",
+          "evidence_rationale": "支持路满动机的强度，明确表达报复意图。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "冲突",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "冲突从路满上门借运开始，持续到王磊绕圈、报警，最后贺按要求王磊签字，冲突线完整。",
+          "risk_summary": "未发现足以降级的全章性风险",
+          "final_reason": "全章冲突链条清晰：路满因摊位被掀上门借运（起因）→ 贺按执行借运导致王磊绕圈（行动）→ 王磊报警、贺按要求签字（结果），冲突持续且未重复空转。",
+          "evidence_rationale": "支持冲突的起因：路满因摊位被掀上门借运，冲突由此展开。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "读者收益",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "借运规则兑现（王磊绕圈、路满生意火爆）、新悬念（账本待核·贺按）持续提供读者收益。",
+          "risk_summary": "王磊绕圈场景在段落中重复出现数次，但每次伴随新信息（报警、拍照、评论），未形成空转。",
+          "final_reason": "全章事件增量充足：借运生效、王磊绕圈、报警、前夫电话、账本异动、首日接待+8，中后段未重复已兑现内容。",
+          "evidence_rationale": "支持读者收益中的情绪兑现，路满生意火爆带来爽感。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "认知成本",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "人物对话主体清晰（贺按、路满、王磊、便利店小哥），场景稳定（当铺、夜市）。",
+          "risk_summary": "P0025-P0026‘静了一瞬’重复出现，但属于修辞，未造成混淆。",
+          "final_reason": "全章主体切换清晰，对话归属明确，专名规则稳定，无需要回读的段落。",
+          "evidence_rationale": "支持认知成本低，对话主体明确，规则清晰。",
+          "verdict": "PASS"
+        },
+        {
+          "dimension": "章末追读",
+          "evidence_location_valid": true,
+          "evidence_semantically_sufficient": true,
+          "strength_summary": "章末账本出现‘待核·贺按’、首日接待+8，制造新悬念。",
+          "risk_summary": "未发现足以降级的全章性风险。",
+          "final_reason": "章末最后20%段落（P0086-P0098）形成新问题：账本待核·贺按、首日接待+8，贺按决定继续开门，追读动机明确。",
+          "evidence_rationale": "支持章末追读，新悬念‘待核·贺按’引发读者好奇。",
+          "verdict": "PASS"
+        }
+      ],
+      "detection_items": [
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·因果",
+          "状态": "通过",
+          "说明": "主要优点：全章因果链完整，路满因摊位被掀（起因）→ 找贺按借运（行动）→ 王磊绕圈、路满生意火爆（结果），主线清晰。主要风险：局部细节如账本待核·贺按的出现原因未明，但不破坏主线。最终选择 PASS 因为整章事件链条连续，局部跳跃不影响主线因果。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "门帘外拳头砸木板，震得灰往下掉。开门！我炒粉摊被人掀了！我要借运！",
+              "段落ID": "P0004",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 33,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·动机",
+          "状态": "通过",
+          "说明": "主要优点：路满动机明确（报复王磊、挽回生意），贺按动机一致（经营当铺、遵守规则）。主要风险：贺按对 uncle 留下的霉账规则动机未深挖，但未影响当前章。最终选择 PASS 因为主要人物目标、压力与选择在全章保持一致。",
+          "证据": [
+            {
+              "段落": 11,
+              "摘句": "路满嗓门又抬，我不管。我就要他今天倒霉！",
+              "段落ID": "P0011",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 20,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·冲突",
+          "状态": "通过",
+          "说明": "主要优点：全章围绕路满与王磊的摊位纠纷展开，冲突清晰持续，从路满上门借运到王磊绕圈、报警威胁，再到贺按介入调解，冲突有起因、发展和余波。主要风险：冲突强度在章末有所下降，但未出现重复空转。最终选择 PASS 因为冲突贯穿全章，推动情节。",
+          "证据": [
+            {
+              "段落": 4,
+              "摘句": "门帘外拳头砸木板，震得灰往下掉。开门！我炒粉摊被人掀了！我要借运！",
+              "段落ID": "P0004",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 33,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·读者收益",
+          "状态": "通过",
+          "说明": "主要优点：全章持续提供新事件变化（借运生效、王磊绕圈、报警、前夫电话、账本异动），信息增量充足。主要风险：中后段有少量重复（王磊绕圈描述多次），但未大面积重复已兑现内容。最终选择 PASS 因为核心事件与主要兑现成立，中后段未出现大面积重复空转。",
+          "证据": [
+            {
+              "段落": 31,
+              "摘句": "锅铲抡得火星直冒，比王磊绕圈还忙。路满又白又笑，手抖。",
+              "段落ID": "P0031",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 27,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·认知成本",
+          "状态": "通过",
+          "说明": "主要优点：人物、对话主体、场景稳定可辨，专名（借运、偿还方、待核）规则清晰。主要风险：少量短句跳转（如P0025-P0026‘静了一瞬’重复），但未影响理解。最终选择 PASS 因为主线可连续理解，无需回读。",
+          "证据": [
+            {
+              "段落": 6,
+              "摘句": "贺按：谁借谁还，二十四小时。别念第七条，按了才响。",
+              "段落ID": "P0006",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 25,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        },
+        {
+          "闸门": "L1-SEM",
+          "名称": "语义审计·章末追读",
+          "状态": "通过",
+          "说明": "主要优点：章末形成明确新问题——账本出现‘待核·贺按’、首日接待+8、贺按决定继续开门，为下一章提供追读理由。主要风险：无。最终选择 PASS 因为章末形成新悬念（账本异动、贺按自身待核）且与前文自然衔接。",
+          "证据": [
+            {
+              "段落": 86,
+              "摘句": "账本待核旁，又多一行极淡小字：待核·贺按？贺按盯着看了两秒，把字划淡。",
+              "段落ID": "P0086",
+              "source_scope": "CURRENT_CHAPTER",
+              "start_offset": 0,
+              "end_offset": 35,
+              "occurrence_index": 0
+            }
+          ],
+          "严重级别": "info",
+          "失败类型": "",
+          "候选模块": "",
+          "回流验收位置": "",
+          "修复方向": "",
+          "heuristic": false,
+          "signal_strength": "SEMANTIC_MODEL",
+          "confidence": "MODEL_UNVALIDATED",
+          "decision_role": "CONTENT_DECISION",
+          "blocking": false,
+          "reason_type": ""
+        }
+      ]
+    }
+  ],
+  "scenario_tags_present": [
+    "clear_fail",
+    "high_lexical_bad_narrative"
+  ]
+}
+{
+  "chapter_id": "GS-005",
+  "pilot_status": "MODEL_CALIBRATION_REJECTED",
+  "eventual_evidence_valid": true,
+  "audit_blocked": false,
+  "evidence_retry_count": 1,
+  "overall_agreement": false
+}

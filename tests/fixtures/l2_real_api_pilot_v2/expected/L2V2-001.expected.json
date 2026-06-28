@@ -1,0 +1,30 @@
+{
+  "case_id": "L2V2-001",
+  "target_module": "L2-01",
+  "case_type": "A",
+  "expected_issue_present": true,
+  "acceptable_root_causes": [
+    "因果链断裂",
+    "场景跳转无桥梁",
+    "条件链断裂",
+    "路径未收束"
+  ],
+  "required_evidence_region": [
+    "旧仓",
+    "观景台",
+    "货票"
+  ],
+  "forbidden_diagnoses": [
+    "文风",
+    "语气",
+    "市场体验",
+    "设定新奇度不足"
+  ],
+  "expected_reroute": false,
+  "minimum_action_requirements": [
+    "补过渡",
+    "剪枝",
+    "唯一主线"
+  ],
+  "human_notes": "A类：旧仓到灯塔山缺少可成立的转移桥梁。"
+}
