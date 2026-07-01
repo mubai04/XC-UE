@@ -1,0 +1,124 @@
+{
+  "schema_version": "xcue.l1-rebuild-r2-unified-schema/1.0",
+  "group_id": "L1-A",
+  "batch_id": "P0-1BR2AC-LIVE-L1-A",
+  "criterion_results": [
+    {
+      "criterion_id": "A-001",
+      "decision": "PASS",
+      "confidence": 0.95,
+      "claim": "本章有明确叙事目标：通过林默发现旧手机异常、监控录像中物品凭空消失、收到神秘消息等事件，逐步推进悬疑氛围，目标明确且未偏离主线。",
+      "risk_summary": "无显著风险，事件推进清晰。",
+      "supporting_evidence": [
+        {
+          "evidence_id": "ev-a001-001",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0002",
+          "exact_text": "仓库里闷热。他穿的是短袖，胳膊上沾了一层薄灰。他把箱子打开，最上面是一台手机——翻盖机，银灰色外壳，表面有不少划痕。他拿起来掂了掂，按了一下开机键。没反应。",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "引入核心物品（旧手机），开启事件链。"
+        },
+        {
+          "evidence_id": "ev-a001-002",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0044",
+          "exact_text": "画面里的筐子，在他锁门之后，没有任何人碰过、没有任何东西移动过的情况下——里面空了。",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "关键推进：物品凭空消失，强化悬疑。"
+        },
+        {
+          "evidence_id": "ev-a001-003",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0052",
+          "exact_text": "是那台没有通信号的旧翻盖机发来的。头像是一张纯黑的图片。消息内容是：",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "神秘消息出现，目标进一步推进。"
+        }
+      ],
+      "counter_evidence": [],
+      "counter_evidence_assessment": "无反证。",
+      "impact": "正面，章节目标明确且有效推进。",
+      "input_quality": {
+        "mode": "CHAPTER_ONLY",
+        "missing_inputs": [
+          "前章摘要",
+          "IR-05章节目标"
+        ],
+        "confidence_reduced": false
+      }
+    },
+    {
+      "criterion_id": "A-002",
+      "decision": "PASS",
+      "confidence": 0.9,
+      "claim": "主要事件因果链完整：发现旧手机（起因）→ 屏幕异常亮起、收到消息（行动）→ 物品消失、再次收到消息（结果），链条闭合可追踪。",
+      "risk_summary": "无显著风险，因果链清晰。",
+      "supporting_evidence": [
+        {
+          "evidence_id": "ev-a002-001",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0002",
+          "exact_text": "仓库里闷热。他穿的是短袖，胳膊上沾了一层薄灰。他把箱子打开，最上面是一台手机——翻盖机，银灰色外壳，表面有不少划痕。他拿起来掂了掂，按了一下开机键。没反应。",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "起因：发现旧手机。"
+        },
+        {
+          "evidence_id": "ev-a002-002",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0009",
+          "exact_text": "手机屏幕亮了。",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "行动：屏幕异常亮起。"
+        },
+        {
+          "evidence_id": "ev-a002-003",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0044",
+          "exact_text": "画面里的筐子，在他锁门之后，没有任何人碰过、没有任何东西移动过的情况下——里面空了。",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "结果：物品消失。"
+        },
+        {
+          "evidence_id": "ev-a002-004",
+          "evidence_type": "PARAGRAPH_ANCHOR",
+          "source_scope": "chapter",
+          "source_id": "ch01",
+          "paragraph_id": "p0053",
+          "exact_text": "\"新手机好用吗？适应不了那个迅盒的话，加这个：xxxxxxxxx\"",
+          "occurrence_index": 0,
+          "relation": "SUPPORTS",
+          "explanation": "结果：收到神秘消息，链条闭合。"
+        }
+      ],
+      "counter_evidence": [],
+      "counter_evidence_assessment": "无反证。",
+      "impact": "正面，因果链完整。",
+      "input_quality": {
+        "mode": "CHAPTER_ONLY",
+        "missing_inputs": [
+          "前章摘要"
+        ],
+        "confidence_reduced": false
+      }
+    }
+  ],
+  "group_risk_summary": "两个准则均通过，无显著风险。"
+}

@@ -1,0 +1,105 @@
+{
+  "per_criterion": [
+    {
+      "criterion_id": "A-001",
+      "decision": "PASS",
+      "evidence_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-002",
+      "decision": "PASS",
+      "evidence_valid": true,
+      "errors": []
+    }
+  ],
+  "per_evidence": [
+    {
+      "criterion_id": "A-001",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a001-001",
+      "source_id": "ch01",
+      "paragraph_id": "p0002",
+      "exact_text": "仓库里闷热。他穿的是短袖，胳膊上沾了一层薄灰。他把箱子打开，最上面是一台手机——翻盖机，银灰色外壳，表面有不少划痕。他拿起来掂了掂，按了一下开机键。没反应。",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-001",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a001-002",
+      "source_id": "ch01",
+      "paragraph_id": "p0044",
+      "exact_text": "画面里的筐子，在他锁门之后，没有任何人碰过、没有任何东西移动过的情况下——里面空了。",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-001",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a001-003",
+      "source_id": "ch01",
+      "paragraph_id": "p0052",
+      "exact_text": "是那台没有通信号的旧翻盖机发来的。头像是一张纯黑的图片。消息内容是：",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-002",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a002-001",
+      "source_id": "ch01",
+      "paragraph_id": "p0002",
+      "exact_text": "仓库里闷热。他穿的是短袖，胳膊上沾了一层薄灰。他把箱子打开，最上面是一台手机——翻盖机，银灰色外壳，表面有不少划痕。他拿起来掂了掂，按了一下开机键。没反应。",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-002",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a002-002",
+      "source_id": "ch01",
+      "paragraph_id": "p0009",
+      "exact_text": "手机屏幕亮了。",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-002",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a002-003",
+      "source_id": "ch01",
+      "paragraph_id": "p0044",
+      "exact_text": "画面里的筐子，在他锁门之后，没有任何人碰过、没有任何东西移动过的情况下——里面空了。",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    },
+    {
+      "criterion_id": "A-002",
+      "bucket": "supporting_evidence",
+      "evidence_id": "ev-a002-004",
+      "source_id": "ch01",
+      "paragraph_id": "p0053",
+      "exact_text": "\"新手机好用吗？适应不了那个迅盒的话，加这个：xxxxxxxxx\"",
+      "occurrence_index": 0,
+      "source_id_match": true,
+      "evidence_validator_valid": true,
+      "errors": []
+    }
+  ],
+  "valid_evidence_count": 7,
+  "invalid_evidence_count": 0,
+  "passed": true
+}

@@ -1,0 +1,55 @@
+{
+  "expected_source_id": "ch01",
+  "per_evidence": [
+    {
+      "criterion_id": "A-001",
+      "evidence_id": "ev-a001-001",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    },
+    {
+      "criterion_id": "A-001",
+      "evidence_id": "ev-a001-002",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    },
+    {
+      "criterion_id": "A-001",
+      "evidence_id": "ev-a001-003",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    },
+    {
+      "criterion_id": "A-002",
+      "evidence_id": "ev-a002-001",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    },
+    {
+      "criterion_id": "A-002",
+      "evidence_id": "ev-a002-002",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    },
+    {
+      "criterion_id": "A-002",
+      "evidence_id": "ev-a002-003",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    },
+    {
+      "criterion_id": "A-002",
+      "evidence_id": "ev-a002-004",
+      "source_id": "ch01",
+      "expected_source_id": "ch01",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

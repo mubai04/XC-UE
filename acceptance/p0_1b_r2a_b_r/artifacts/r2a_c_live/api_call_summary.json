@@ -1,0 +1,22 @@
+{
+  "run_id": "P0-1BR2AC-LIVE-L1-A",
+  "chapter_id": "ch01",
+  "expected_source_id": "ch01",
+  "formal_paragraph_count": 63,
+  "group_id": "L1-A",
+  "criterion_ids": [
+    "A-001",
+    "A-002"
+  ],
+  "http_requests_used": 1,
+  "retries_used": 0,
+  "model": "deepseek-v4-flash",
+  "response_manually_modified": false,
+  "api_response_validator_pass": true,
+  "r2_schema_pass": true,
+  "criterion_coverage_pass": true,
+  "source_id_validation_pass": true,
+  "evidence_validator_pass": true,
+  "valid_evidence_count": 7,
+  "invalid_evidence_count": 0
+}

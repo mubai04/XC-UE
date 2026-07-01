@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "validation_errors": [],
+  "requested_criterion_ids": [
+    "A-001",
+    "A-002"
+  ],
+  "received_criterion_ids": [
+    "A-001",
+    "A-002"
+  ],
+  "missing_criterion_ids": [],
+  "duplicate_criterion_ids": [],
+  "unexpected_criterion_ids": []
+}
